@@ -6,21 +6,21 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#000;
-	background-color:#fff;
+	background-color:#afc2cb;
 }
 
 
 .navbar {
-	background-color: #5698c1;
+	background-color: #e1f5fe;
 }
 
 .navbar-brand {
-	background-color: #5698c1;
+	background-color: #e1f5fe;
 	font-size: 25px;
 }
 
 .navbar-light .navbar-brand {
-    color: #fff;
+    color: #000;
 }
 
 .navbar-collapse{
@@ -28,15 +28,15 @@ body {
 }
 
 .navbar-light .navbar-toggler {
-	border-color: #fff;
+	border-color: #000;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-     color: #fff; 
+     color: #000; 
 }
 
 .navbar-light .navbar-nav .nav-link {
-	color: #fff; 
+	color: #000; 
 }
 
 
@@ -46,7 +46,7 @@ body {
 }
 
 #navbarDropdown{
-	color: #fff;
+	color: #000;
 }
 
 #navbarDropdown:hover{
@@ -57,39 +57,82 @@ body {
 	color: #000;
 	text-decoration: none;
 	background-color: #fff;
-  }
+}
 
 
 
   
 
 
-  .center-block{
+
+#subtitulo{
+	  margin: auto;
+	 margin-top: 4%; 
+	  font-size: 22px;
+	  text-align: center;
+	  
+}
+
+.center-block{
 	float: none;  
 	height: 300px;
 	background-color: #fff;
 	border-radius: 5px;
 	margin: auto;
-	margin-top: 5%;
-  }
+	margin-top: 7%;
+}
 
-  .center-block2 {
+.center-block2 {
 	  margin: auto;
-	  margin-top: 15%;
-  }
+	  margin-top: 5%;
+}
 
   .sinbordefondo{
 	  border: 0;
 	  width: 100%;
 	  padding: 10px;
 	  border-bottom: double;
+}
+
+
+
+.btn{
+	font-weight: 200;
+}
+
+.btn-primary{
+	float: right;
+	border-color: grey;
+	background-color: grey;
+}
+
+  .btn-group-lg>.btn, .btn-lg {
+	padding: 3;
+	font-size: 1rem;
+	line-height: 0.75;
+}
+
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: green;
+    border-color:green;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: grey;
+  border-color: grey;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem grey;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+	box-shadow: 0 0 0 0.2rem grey;
   }
-
-
-
-
- 
-
 
 
 
@@ -103,8 +146,8 @@ body {
     left: 0%;
     bottom: 0%;
     width: 100%;
-    background-color: #5698c1;
-    color: #fff;
+    background-color: #e1f5fe;
+    color: #000;
     text-align: center;
 }
 
@@ -117,10 +160,10 @@ ul.social-network {
 ul.social-network li {
 	display:inline;
 	margin: 0 10px;
-	color:#fff;
+	color:#000;
 }
 ul.social-network li a {	
-	color:#fff;
+	color:#000;
 	
 }
 
@@ -130,5 +173,5 @@ ul.social-network li a {
 }
 
 .copyright a {
-	color:#fff;
+	color:#000;
 }
