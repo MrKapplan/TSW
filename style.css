@@ -59,27 +59,34 @@ body {
 	background-color: #fff;
 }
 
+.container {
+	margin: auto;
+}
 
-
-  
-
-
+.center-row{
+	margin-left: auto;
+	margin-right: auto;
+}
 
 #subtitulo{
-	  margin: auto;
-	 margin-top: 4%; 
-	  font-size: 22px;
-	  text-align: center;
+	margin: auto;
+	margin-top: 4%; 
+	font-size: 22px;
+	text-align: center;
 	  
 }
 
+
+
 .center-block{
-	float: none;  
-	height: 300px;
+	float: none;
 	background-color: #fff;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: auto;
+	margin-right: auto;
 	border-radius: 5px;
-	margin: auto;
-	margin-top: 7%;
+	padding-bottom: 15px;
 }
 
 .center-block2 {
@@ -87,7 +94,7 @@ body {
 	  margin-top: 5%;
 }
 
-  .sinbordefondo{
+.sinbordefondo{
 	  border: 0;
 	  width: 100%;
 	  padding: 10px;
@@ -138,17 +145,11 @@ body {
 
 
 
-
-
-
 .footer {
-    position: fixed;
-    left: 0%;
-    bottom: 0%;
-    width: 100%;
+	margin: auto;
     background-color: #e1f5fe;
     color: #000;
-    text-align: center;
+    text-align: center; 
 }
 
 ul.social-network {
