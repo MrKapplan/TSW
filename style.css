@@ -6,20 +6,17 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#000;
-	background-color:white;
+	background-color:#ffffff;
 }
-
-
-.navbar {
-	background-color: white;
+header{
+	background-color: #eeeeee;
 }
 
 .navbar-brand {
-	background-color: white;
 	font-size: 25px;
 }
 
-.navbar-light .navbar-brand {
+.navbar-brand {
     color: #000;
 }
 
@@ -27,7 +24,7 @@ body {
 	margin-left: 3%;
 }
 
-.navbar-light .navbar-toggler {
+.navbar-toggler {
 	border-color: #000;
 }
 
@@ -78,6 +75,7 @@ body {
 
 
 
+
 .center-block{
 	float: none;
 	background-color: #fff;
@@ -92,55 +90,31 @@ body {
 .center-block2 {
 	  margin: auto;
 	  margin-top: 5%;
+	  margin-bottom: 7%;
+	  overflow-x: auto;
 }
 
-.sinbordefondo{
-	  border: 0;
-	  width: 100%;
-	  padding: 10px;
-	  border-bottom: double;
-}
-
-
-
-.btn{
-	font-weight: 200;
-}
-
-.btn-primary{
-	float: right;
-	border-color: grey;
-	background-color: grey;
-}
-
-  .btn-group-lg>.btn, .btn-lg {
-	padding: 3;
-	font-size: 1rem;
-	line-height: 0.75;
+td {
+    text-align: center; /* center checkbox horizontally */
+    vertical-align: middle; /* center checkbox vertically */
 }
 
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: green;
-    border-color:green;
+
+.btn {
+	display:inline;
+	margin-top:20px;
+	margin-bottom:10px;
+	padding:8px;
+	font-size:14px;
+	background-color:#eeeeee;
+	color:#000;
+	border:none;
+	border-bottom:3px solid #000;
+	border-radius:0px;
+	float:right;
+	
 }
-
-.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-.show > .btn-primary.dropdown-toggle {
-  background-color: grey;
-  border-color: grey;
-}
-
-.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem grey;
-}
-
-.btn-primary:focus, .btn-primary.focus {
-	box-shadow: 0 0 0 0.2rem grey;
-  }
-
 
 
 
@@ -152,7 +126,7 @@ body {
 	margin: auto;
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
-    background-color: white;
+    background-color: #eeeeee;
     color: #000;
     text-align: center; 
 }
@@ -182,15 +156,9 @@ ul.social-network li a {
 }
 
 
-td {
-    text-align: center; /* center checkbox horizontally */
-    vertical-align: middle; /* center checkbox vertically */
-}
 
-.btn-lg {
-	text-align: center;
-	left: 0;
-}
+
+
 
 
 
@@ -252,3 +220,54 @@ td {
 .checkbox input:checked + .success:after{
 	border-color:#8bc34a;
 }
+
+
+
+
+
+form {
+	font-family:'Roboto', Arial, Helvetica, sans-serif;
+	font-size:14px;
+
+}
+
+
+
+
+legend {
+	font-size:24px;
+	font-weight:bold;
+	border:none;
+	color:#39F;
+}
+
+
+label {
+	display:block;
+	margin-top:8px;
+	margin-left:4px;
+}
+
+
+input {
+	padding:8px;
+	border:2px solid #f2f2f2;
+	border-radius:4px;
+	width: 100%;
+	margin-bottom: 10px;
+	font-size:16px;
+}
+
+
+
+
+input:focus {
+	outline:none;
+}
+
+
+
+
+
+
+
