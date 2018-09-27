@@ -6,7 +6,7 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#000;
-	background-color:#ffffff;
+	background-color:#eeeeee;
 }
 header{
 	background-color: #eeeeee;
@@ -72,9 +72,6 @@ header{
 	text-align: center;
 	  
 }
-
-
-
 
 .center-block{
 	float: none;
@@ -166,9 +163,6 @@ ul.social-network li a {
 
 
 
-
-
-
  @keyframes check {0% {height: 0;width: 0;}
     25% {height: 0;width: 10px;}
     50% {height: 20px;width: 10px;}
@@ -222,7 +216,9 @@ ul.social-network li a {
 }
 
 
-
+td {
+	vertical-align: middle!important;
+}
 
 
 form {
@@ -264,8 +260,6 @@ input {
 input:focus {
 	outline:none;
 }
-
-
 
 
 
