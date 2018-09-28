@@ -8,6 +8,9 @@ body {
 	color:#000;
 	background-color:#eeeeee;
 }
+
+/* HEADER -> NAVBAR */
+
 header{
 	background-color: #eeeeee;
 }
@@ -56,6 +59,10 @@ header{
 	background-color: #fff;
 }
 
+
+
+/* BODY */
+
 .container {
 	margin: auto;
 }
@@ -65,17 +72,10 @@ header{
 	margin-right: auto;
 }
 
-#subtitulo{
-	margin: auto;
-	margin-top: 4%; 
-	font-size: 22px;
-	text-align: center;
-	  
-}
 
 .center-block{
 	float: none;
-	background-color: #fff;
+	background-color: white;
 	margin-top: 7%;
 	margin-bottom: 7%;
 	margin-left: auto;
@@ -91,12 +91,17 @@ header{
 	  overflow-x: auto;
 }
 
-td {
-    text-align: center; /* center checkbox horizontally */
-    vertical-align: middle; /* center checkbox vertically */
+
+#subtitulo{
+	margin: auto;
+	margin-top: 7%; 
+	font-size: 22px;
+	text-align: center;
+	  
 }
 
 
+/* BUTTONS */
 
 .btn {
 	display:inline;
@@ -119,55 +124,7 @@ td {
     border-color: black; /*set the color you want here*/
 }
 
-
-
-
-.footer {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	margin: auto;
-	padding-top: 1.25rem;
-	padding-bottom: 1.25rem;
-    background-color: #eeeeee;
-    color: #000;
-    text-align: center; 
-}
-
-ul.social-network {
-	padding: 0;
-	text-align:center;	
-}
-
-ul.social-network li {
-	display:inline;
-	margin: 0 10px;
-	color:#000;
-}
-ul.social-network li a {	
-	color:#000;
-	
-}
-
-.copyright {
-	text-align:center;
-	color: #000;
-}
-
-.copyright a {
-	color:#000;
-}
-
-
-
-
-
-
-
-
-
-
-
+/* CHECKBOX */
 
  @keyframes check {0% {height: 0;width: 0;}
     25% {height: 0;width: 10px;}
@@ -223,8 +180,10 @@ ul.social-network li a {
 
 
 td {
+	text-align: center; 
 	vertical-align: middle!important;
 }
+
 
 
 form {
@@ -232,9 +191,6 @@ form {
 	font-size:14px;
 
 }
-
-
-
 
 legend {
 	font-size:24px;
@@ -261,12 +217,63 @@ input {
 }
 
 
-
-
 input:focus {
 	outline:none;
 }
 
+input[type=time] {
+	width: auto;
+	text-align: center;
+	border: 0;
+}
+
+
+select{
+	border: 0;
+}
+
+
+
+
+
+
+/* FOOTER */
+
+.footer {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	margin: auto;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+    background-color: #eeeeee;
+    color: #000;
+    text-align: center; 
+}
+
+ul.social-network {
+	padding: 0;
+	text-align:center;	
+}
+
+ul.social-network li {
+	display:inline;
+	margin: 0 10px;
+	color:#000;
+}
+ul.social-network li a {	
+	color:#000;
+	
+}
+
+.copyright {
+	text-align:center;
+	color: #000;
+}
+
+.copyright a {
+	color:#000;
+}
 
 
 
