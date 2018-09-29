@@ -82,6 +82,7 @@ header{
 	margin-right: auto;
 	border-radius: 5px;
 	padding-bottom: 15px;
+	max-width: 75%;
 }
 
 .center-block2 {
@@ -118,11 +119,7 @@ header{
 	
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: black;
-    border-color: black; /*set the color you want here*/
-}
+
 
 /* CHECKBOX */
 
