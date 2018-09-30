@@ -27,31 +27,20 @@
 
     <script language="javascript">
 
-        function deleteRow(tableId) {
-            try {
-                var table = document.getElementById(tableId);
-                var rowCount = table.rows.length;
 
-                for (var i = 0; i < rowCount; i++) {
-                    var row = table.rows[i];
-                    if (table.getElementById("botonAñadir")) {
-                        table.deleteRow(i);
-                        rowCount--;
-                        i--;
-                    }
-                }
-            } catch (e) {
-                alert(e);
-            }
+        function deleteRow(row) {
+            var  i = row.parentNode.parentNode.rowIndex;
+            document.getElementById('dataTable').deleteRow(i);
         }
+
 
         function addRow(tableId) {
 
-            var boton = document.createElement("input");
+            var boton = document.createElement("button");
             boton.type = "button";
-            boton.value = "+";
-            boton.onclick = "addRow('dataTable');";
-            document.getElementById('botonAñadir').appendChild(boton);
+            boton.className = "btn btn-danger";
+            boton.value = "-";
+            boton.onclick = function() {deleteRow(this)};
 
             var selectorDay = document.createElement("select");
             selectorDay.id = 'day';
@@ -328,9 +317,10 @@
 
 
 
-            deleteRow(tableId);
+
+
             var table = document.getElementById(tableId);
-            var rowCount = table.rows.length;
+            var rowCount = table.rows.length - 1;
             var row = table.insertRow(rowCount);
             var cell = row.insertCell(0);
             cell.appendChild(boton);
@@ -470,7 +460,7 @@
                             </tr>
 
                             <tr>
-                                <td><input type="button" id="botonAñadir" value="+" onclick="addRow('dataTable');" /></td>
+                                <td><button type="button" class="btn btn-success" id="botonAñadir" value="+" onclick="addRow('dataTable');"></button></td>
                                 <td><span id="miSelectorDia"></span></td>
                                 <td><span id="miSelectorMes"></span></td>
                                 <td><span id="miSelectorAño"></span></td>
@@ -484,7 +474,7 @@
 
                         </tbody>
                     </table>
-                    <button type="button" class="btn btn-lg btn-primary">Crear</button>
+                    <button type="button" class="btn btn-dark">Crear</button>
                 </div>
             </div>
         </div>
