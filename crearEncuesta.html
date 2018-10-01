@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" href="./favicon.png" />
     <title>¿Tienes un hueco?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -61,14 +62,25 @@
     <div class="container">
         <div class="row center-row">
             <div class="col-lg-6 center-block">
-                <div id="subtitulo">
+                <div id="subtitle">
                     Algunos datos para empezar...
                 </div>
                 <div class="col-lg-12 center-block2">
-                    <form>
-                        <div>
-                            <input type="text" class="inputWithIcon" id="titleSurvey" placeholder="Introduzca el título">
-                            <input type="text" class="inputWithIcon" id="UbicationSurvey" placeholder="Ubicación del evento">
+                    <form method="POST" action="crear">
+                        <div id="requiredInput">
+                            <div class="inputWithIcon inputIconBg">
+                                <input type="text" id="tituloEncuesta" placeholder="Ponle un título">
+                                <i class="fa fa-reorder fa-lg fa-fw" aria-hidden="true"></i>
+                            </div>
+                            <div id=lblBox>
+                                Obligatorio
+                            </div>
+                        </div>
+                        <div id="optionalInput">
+                            <div class="inputWithIcon inputIconBg">
+                                <input type="text" id="ubicacionEncuesta" placeholder="¿Dónde se va a celebrar?">
+                                <i class="fa fa-map-marker fa-lg fa-fw" aria-hidden="true"></i>
+                            </div>
                         </div>
                         <button type="button" class="btn btn-dark">Continuar</button>
                     </form>
