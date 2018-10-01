@@ -130,6 +130,9 @@ header{
 }
 
 
+.font-weight-light{
+  font-size: 10px;
+}
 
 
 
@@ -138,7 +141,7 @@ header{
 
 /* TYPE=TEXT */
 
-input[type=text]{
+input[type=text],[type=password]{
     width:100%;
     border:2px solid #aaa;
     border-radius:4px;
@@ -150,12 +153,8 @@ input[type=text]{
 	height: 10%!important;
   }
   
-  input[type=text]:focus{
-    border-color:dodgerBlue;
-    box-shadow:0 0 8px 0 dodgerBlue;
-  }
-  
-  .inputWithIcon input[type=text]{
+
+  .inputWithIcon input[type=text],[type=password]{
     padding-left:40px;
   }
   
@@ -172,9 +171,6 @@ input[type=text]{
     transition:.3s;
   }
   
-  .inputWithIcon input[type=text]:focus + i{
-    color:dodgerBlue;
-  }
   
   .inputWithIcon.inputIconBg i{
     background-color:#aaa;
@@ -183,15 +179,18 @@ input[type=text]{
     border-radius:4px 0 0 4px;
   }
   
-  .inputWithIcon.inputIconBg input[type=text]:focus + i{
-    color:#fff;
-    background-color:dodgerBlue;
-  }
+ 
 
 
 .fa-lg {
     font-size: 1.6em;
     line-height: 0.84em;
+}
+
+
+#loginInput{
+  width: 50%;
+  margin:auto;
 }
 
 
