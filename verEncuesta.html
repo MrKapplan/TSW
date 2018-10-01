@@ -27,13 +27,75 @@
 
     <script languaje="JavaScript">
 
-        function eliminarElemento(idButton) {
+
+        // function checkboxes(tableId) {
+
+        //     var table = document.getElementById(tableId);
+        //     var rowCount = table.rows.length;
+        //     var count = 0, max = 0;
+
+
+        //     for (var i = 0; i < rowCount - 1; i++) {
+        //         var inputElems = document.getElementsByName("0");
+        //         console.log(inputElems);
+        //         for (var j = 1; j < inputElems.length; j++) {
+        //             if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+        //                 console.log(count);
+        //                 count++;
+        //             }
+        //         }
+
+        //         if (max < count) {
+        //             max = count;
+        //         }
+
+        //         count = 0;
+        //     }
+
+        //     //console.log(max);
+
+        // }
+
+
+        function checkboxes(tableId) {
+
+            var table = document.getElementById(tableId);
+            var rowCount = table.rows.length - 1;
+            var count = 0, max = 0;
+            var inputElems = document.getElementsByTagName("input");
+
+          //  console.log(rowCount);
+            var fila = (inputElems.length - 1) / rowCount;
+
+            for (var j = 1; j < inputElems.length; j++) {
+                if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+                    count++;
+
+                }
+                if (j % rowCount == 0) {
+                    console.log("G");
+                    console.log(max);
+                    if (max < count) {
+                        max = count;
+                    }
+
+                    count = 0;
+                }
+            }
+
+
+        }
+
+
+
+        function removeElement(idButton) {
             button = document.getElementById(idButton);
             if (!button) {
                 alert("El elemento selecionado no existe");
             } else {
                 hh = button.parentNode;
                 hh.removeChild(button);
+                var nestedDiv = document.getElementById('user').innerHTML = "Tú";
 
             }
         }
@@ -58,18 +120,15 @@
 
         }
 
-
-
-
-        function appendColumn(idButton) {
-            var tbl = document.getElementById('dataTable'),
+        function appendColumn(dataTable, idButton) {
+            var tbl = document.getElementById(dataTable),
                 i;
-            
+
             for (i = 1; i < tbl.rows.length; i++) {
                 createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col');
             }
 
-            eliminarElemento(idButton);
+            removeElement(idButton);
         }
 
 
@@ -138,12 +197,12 @@
                                     <th scope="col">Alejandro</th>
                                     <th scope="col">Martín</th>
                                     <th scope="col">Iván</th>
-                                    <th scope="col"><button type="button" id="addCol" class="btn btn-success" value="+"
-                                            onclick="appendColumn('addCol');">+</button></th>
+                                    <th id="user" scope="col"><button type="button" id="addCol" class="btn btn-success"
+                                            value="+" onclick="appendColumn('dataTable','addCol');">+</button></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="table-success">
+                                <tr name="0">
                                     <td>
                                         <div id="ytitle">MAR 27 Sep,</div>
                                         <div id="ysubtitle">10:00 - 11:00</div>
@@ -167,7 +226,7 @@
                                             <span class="success"></span>
                                         </label></td> -->
                                 </tr>
-                                <tr>
+                                <tr name="1">
                                     <td>
                                         <div id="ytitle">MIE 28 Sep,</div>
                                         <div id="ysubtitle">15:00 - 16:00</div>
@@ -192,7 +251,7 @@
                                         </label></td> -->
 
                                 </tr>
-                                <tr>
+                                <tr name="2">
                                     <td>
                                         <div id="ytitle">JUE 29 Sep,</div>
                                         <div id="ysubtitle">16:00 - 17:00</div>
@@ -217,7 +276,7 @@
                                         </label></td>  -->
                                 </tr>
 
-                                <tr>
+                                <tr name="3">
                                     <td>
                                         <div id="ytitle">LUN 01 Oct,</div>
                                         <div id="ysubtitle">09:00 - 10:00</div>
@@ -245,7 +304,7 @@
                             </tbody>
                         </table>
                     </form>
-                    <button type="button" class="btn btn-dark">Continuar</button>
+                    <button type="button" class="btn btn-dark" onclick="checkboxes('dataTable');">Continuar</button>
                 </div>
             </div>
         </div>
