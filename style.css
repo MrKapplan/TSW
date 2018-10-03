@@ -95,6 +95,8 @@ header{
 	  overflow-x: auto;
 }
 
+
+
 #subtitle{
 	margin: auto;
 	margin-top: 7%;
@@ -303,6 +305,17 @@ td {
 #ysubtitle {
 	color:grey;
 	font-size: 12px;
+}
+
+
+/* CALENDAR */
+
+.k-calendar .k-header .k-link {
+	color: black;
+}
+
+.k-calendar .k-header{
+	background-color: #eeee;
 }
 
 

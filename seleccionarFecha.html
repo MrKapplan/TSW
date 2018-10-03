@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -19,324 +20,60 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.3.911/styles/kendo.material.min.css" />
+    <script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.3.911/js/cultures/kendo.culture.es-ES.min.js"></script>
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
 
-
-
-
-    <script language="Javascript">
-
-
-        function deleteRow(row) {
-            var i = row.parentNode.parentNode.rowIndex;
-            document.getElementById('dataTable').deleteRow(i);
-        }
-
-
-        function addRow(tableId) {
-
-            var boton = document.createElement("button");
-            boton.type = "button";
-            boton.className = "btn btn-danger";
-            boton.value = "-";
-            boton.onclick = function () { deleteRow(this) };
-            boton.appendChild(document.createTextNode("-"));
-
-
-            var selectorDay = document.createElement("select");
-            selectorDay.id = 'day';
-            selectorDay.name = 'Selector';
-            document.getElementById('miSelectorDia').appendChild(selectorDay);
-
-            var option = document.createElement("option");
-            option.value = '0';
-            option.appendChild(document.createTextNode('Día'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "01";
-            option.appendChild(document.createTextNode('1'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "02";
-            option.appendChild(document.createTextNode('2'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "03";
-            option.appendChild(document.createTextNode('3'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "04";
-            option.appendChild(document.createTextNode('4'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "05";
-            option.appendChild(document.createTextNode('5'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "06";
-            option.appendChild(document.createTextNode('6'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "07";
-            option.appendChild(document.createTextNode('7'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "08";
-            option.appendChild(document.createTextNode('8'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "09";
-            option.appendChild(document.createTextNode('9'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "10";
-            option.appendChild(document.createTextNode('10'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "11";
-            option.appendChild(document.createTextNode('11'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "12";
-            option.appendChild(document.createTextNode('12'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "13";
-            option.appendChild(document.createTextNode('13'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "14";
-            option.appendChild(document.createTextNode('14'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "15";
-            option.appendChild(document.createTextNode('15'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "16";
-            option.appendChild(document.createTextNode('16'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "17";
-            option.appendChild(document.createTextNode('17'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "18";
-            option.appendChild(document.createTextNode('18'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "19";
-            option.appendChild(document.createTextNode('19'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "20";
-            option.appendChild(document.createTextNode('20'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "21";
-            option.appendChild(document.createTextNode('21'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "22";
-            option.appendChild(document.createTextNode('22'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "23";
-            option.appendChild(document.createTextNode('23'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "24";
-            option.appendChild(document.createTextNode('24'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "25";
-            option.appendChild(document.createTextNode('25'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "26";
-            option.appendChild(document.createTextNode('26'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "27";
-            option.appendChild(document.createTextNode('27'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "28";
-            option.appendChild(document.createTextNode('28'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "29";
-            option.appendChild(document.createTextNode('29'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "30";
-            option.appendChild(document.createTextNode('30'));
-            selectorDay.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "31";
-            option.appendChild(document.createTextNode('31'));
-            selectorDay.appendChild(option);
-
-
-
-            var selectorMonth = document.createElement("select");
-            selectorMonth.id = 'month';
-            selectorMonth.name = 'Selector';
-            document.getElementById('miSelectorMes').appendChild(selectorMonth);
-
-            var option = document.createElement("option");
-            option.value = '0';
-            option.appendChild(document.createTextNode('Mes'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "01";
-            option.appendChild(document.createTextNode('Enero'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "02";
-            option.appendChild(document.createTextNode('Febrero'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "03";
-            option.appendChild(document.createTextNode('Marzo'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "04";
-            option.appendChild(document.createTextNode('Abril'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "05";
-            option.appendChild(document.createTextNode('Mayo'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "06";
-            option.appendChild(document.createTextNode('Junio'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "07";
-            option.appendChild(document.createTextNode('Julio'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "08";
-            option.appendChild(document.createTextNode('Agosto'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "09";
-            option.appendChild(document.createTextNode('Septiembre'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "10";
-            option.appendChild(document.createTextNode('Octubre'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "11";
-            option.appendChild(document.createTextNode('Noviembre'));
-            selectorMonth.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "q2";
-            option.appendChild(document.createTextNode('Diciembre'));
-            selectorMonth.appendChild(option);
-
-
-
-
-            var selectorYear = document.createElement("select");
-            selectorYear.id = 'Selector';
-            selectorYear.name = 'Selector';
-            document.getElementById('miSelectorAño').appendChild(selectorYear);
-
-            var option = document.createElement("option");
-            option.value = '0';
-            option.appendChild(document.createTextNode('Año'));
-            selectorYear.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "2018";
-            option.appendChild(document.createTextNode('2018'));
-            selectorYear.appendChild(option);
-
-            option = document.createElement("option");
-            option.value = "2019";
-            option.appendChild(document.createTextNode('2019'));
-            selectorYear.appendChild(option);
-
-
-
-            var timeStart = document.createElement("input");
-            timeStart.type = "time";
-            timeStart.name = "timeStart";
-            document.getElementById('timeStart').appendChild(timeStart);
-
-
-            var timeEnd = document.createElement("input");
-            timeEnd.type = "time";
-            timeEnd.name = "timeEnd";
-            document.getElementById('timeEnd').appendChild(timeEnd);
-
-
-            var table = document.getElementById(tableId);
-            var rowCount = table.rows.length - 1;
-            var row = table.insertRow(rowCount);
-            var cell = row.insertCell(0);
-            cell.appendChild(boton);
-            var cell1 = row.insertCell(1);
-            cell1.appendChild(selectorDay);
-            var cell2 = row.insertCell(2);
-            cell2.appendChild(selectorMonth);
-            var cell3 = row.insertCell(3);
-            cell3.appendChild(selectorYear);
-            var cell4 = row.insertCell(4);
-            cell4.appendChild(timeStart);
-            var cell5 = row.insertCell(5);
-            cell5.appendChild(timeEnd);
-
-        }
-
+    <script language="JavaScript">
+
+        $(document).ready(function () {
+            //  kendo.culture("es-ES");
+            // create Calendar from div HTML element
+            $("#calendar").kendoCalendar({
+                selectable: "multiple"
+               
+            });
+
+            $("#calendar").on("mousedown", "td", function (e) {
+
+                // get item if the user clicked on an item template
+                var clickedItem = $(e.target).closest("td[role='gridcell']");
+
+                // prevent click event for item elements
+                clickedItem.on("click", function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+
+                if (clickedItem.length > 0) {
+                    var calendar = $("#calendar").getKendoCalendar();
+                    var clickedDateString = clickedItem.children("a")[0].title;
+                    var clickedDate = new Date(clickedDateString);
+
+                    var selectedDates = calendar.selectDates();
+
+                    if (clickedItem.hasClass("k-state-selected")) {
+                        // if date is already selected - remove it from collection
+                        selectedDates = $.grep(selectedDates, function (item, index) {
+                            return clickedDate.getTime() !== item.getTime();
+                        });
+                    } else {
+                        selectedDates.push(clickedDate);
+                    }
+
+                    
+                    calendar.selectDates(selectedDates);
+                }
+            });
+        });
     </script>
 
 
@@ -377,97 +114,23 @@
         </nav>
     </header>
 
+
     <div class="container">
         <div class="row center-row">
             <div class="col-lg-6 center-block">
                 <div id="subtitle">
-                    ¿Qué días estás libre?
+                    Vamos a elegir las fechas
                 </div>
-                <div class="col-lg-12 center-block2">
-                    <table id="dataTable" class="table text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Día</th>
-                                <th scope="col">Mes</th>
-                                <th scope="col">Año</th>
-                                <th scope="col">Inicio</th>
-                                <th scope="col">Fin</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td><select name="day">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
-                                        <option value="13">13</option>
-                                        <option value="14">14</option>
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                    </select></td>
+                <div class="col-lg-12 center-block2Calendar">
+                    <form method="POST" action='Encuesta_Controller.php'>
+                        <div id="example">
+                            <div class="demo-section k-content" style="text-align: center;">
+                                <div id="calendar"></div>
+                            </div>
 
-                                <td><select name="month">
-                                        <option value="1">Enero</option>
-                                        <option value="2">Febrero</option>
-                                        <option value="3">Marzo</option>
-                                        <option value="4">Abril</option>
-                                        <option value="5">Mayo</option>
-                                        <option value="6">Junio</option>
-                                        <option value="7">Julio</option>
-                                        <option value="8">Agosto</option>
-                                        <option value="9">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                    </select></td>
-
-                                <td><select name="year">
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                    </select></td>
-
-                                <td><input type="time" name="timeStart"></td>
-
-                                <td><input type="time" name="timeEnd"></td>
-                            </tr>
-
-                            <tr>
-                                <td><button type="button" class="btn btn-success" id="botonAñadir" value="+" onclick="addRow('dataTable');">+</button></td>
-                                <td><span id="miSelectorDia"></span></td>
-                                <td><span id="miSelectorMes"></span></td>
-                                <td><span id="miSelectorAño"></span></td>
-                                <td><span id="timeStart"></span></td>
-                                <td><span id="timeEnd"></span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-dark">Crear</button>
+                            <button type="button" class="btn btn-dark" value=fechas>Continuar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -477,22 +140,22 @@
 
     <!-- FOOTER-->
     <footer class="footer">
-            <div class="sub-footer">
-                <div class="col-lg-12">
-                    <ul class="social-network">
-                        <li><a href="#" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
-                        <li><a href="#" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
-                        <li><a href="#" title="LinkedIn"><i class="fa fa-linkedin fa-1x"></i></a></li>
-                        <li><a href="#" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
-                        <li><a href="#" title="Google Plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-12">
-                    <div class="copyright">
-                        <span>&copy;TienesHueco 2018. Let's do it! By </span><a href="" target="_blank">G25_TSW</a>
-                    </div>
+        <div class="sub-footer">
+            <div class="col-lg-12">
+                <ul class="social-network">
+                    <li><a href="#" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
+                    <li><a href="#" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
+                    <li><a href="#" title="LinkedIn"><i class="fa fa-linkedin fa-1x"></i></a></li>
+                    <li><a href="#" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
+                    <li><a href="#" title="Google Plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="copyright">
+                    <span>&copy;TienesHueco 2018. Let's do it! By </span><a href="" target="_blank">G25_TSW</a>
                 </div>
             </div>
+        </div>
     </footer>
 
 </body>
