@@ -6,17 +6,21 @@ body {
 	font-weight:300;
 	line-height:1.6em;
 	color:#000;
-	background-color:black;
+	background-color:#cfcfcf;
 }
 
 /* HEADER -> NAVBAR */
 
 header{
-	background-color: #eeeeee;
+	background-color: #19e68c;
 }
 
 .navbar-brand {
 	font-size: 25px;
+}
+.nav-link {
+    padding-left:0;
+
 }
 
 .navbar-brand {
@@ -132,6 +136,7 @@ header{
 
 .font-weight-light{
   font-size: 10px;
+  margin-left: 25%;
 }
 
 
@@ -192,6 +197,8 @@ input[type=text],[type=password]{
   width: 50%;
   margin:auto;
 }
+
+
 
 
 /* TYPE=TIME */
@@ -309,7 +316,7 @@ td {
 	width: 100%;
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
-    background-color: #eeeeee;
+    background-color: #19e68c;
     color: #000;
     text-align: center; 
 }
