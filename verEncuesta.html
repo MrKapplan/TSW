@@ -28,70 +28,69 @@
     <script languaje="JavaScript">
 
 
-        // function checkboxes(tableId) {
 
-        //     var table = document.getElementById(tableId);
-        //     var rowCount = table.rows.length;
-        //     var count = 0, max = 0;
+        function maxCheckbox(tableId) {
+            var table = document.getElementById(tableId);
+            var rowCount = table.rows.length - 1;
+            var inputElems = document.getElementsByTagName("input");
+            var count = 0, max = 0;
 
+            var fila = (inputElems.length - 1) / rowCount;
 
-        //     for (var i = 0; i < rowCount - 1; i++) {
-        //         var inputElems = document.getElementsByName("0");
-        //         console.log(inputElems);
-        //         for (var j = 1; j < inputElems.length; j++) {
-        //             if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
-        //                 console.log(count);
-        //                 count++;
-        //             }
-        //         }
+            for (var j = 1; j < inputElems.length; j++) {
+                if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+                    count++;
+                }
+                if (j % fila == 0) {
+                    if (max < count) {
+                        max = count;
+                    }
+                    count = 0;
+                }
+            }
 
-        //         if (max < count) {
-        //             max = count;
-        //         }
-
-        //         count = 0;
-        //     }
-
-        //     //console.log(max);
-
-        // }
-
+            return max;
+        }
 
         function checkboxes(tableId) {
 
             var table = document.getElementById(tableId);
             var rowCount = table.rows.length - 1;
-            var count = 0, max = 0;
             var inputElems = document.getElementsByTagName("input");
-
-          //  console.log(rowCount);
+            var count = 0, max = 0, filaSelected = 0;
+            
             var fila = (inputElems.length - 1) / rowCount;
 
-            
+
             for (var j = 1; j < inputElems.length; j++) {
-                console.log(j);
                 if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
                     count++;
-                    console.log("Count " + count);
-
                 }
-                console.log("Modulo: " + j % rowCount)
                 if (j % fila == 0) {
-                    // console.log("G");
-                    // console.log(max);
                     if (max < count) {
                         max = count;
-                    }
+                        filaSelected = inputElems[j].parentNode.parentNode.parentNode.id;
+                        document.getElementById(filaSelected).setAttribute("class", "table-success");
 
+                    }
                     count = 0;
                 }
             }
 
-console.log(max);
 
         }
 
+        function checkboxRemove(tableId) {
+            var table = document.getElementById(tableId);
+            var fila = document.getElementsByClassName("table-success");
 
+            for (var i = 0; i < fila.length; i++) {
+                document.getElementById(fila[i].id).setAttribute("class", "");
+            }
+
+            checkboxes(tableId);
+
+        }
 
         function removeElement(idButton) {
             button = document.getElementById(idButton);
@@ -142,7 +141,7 @@ console.log(max);
 
 </head>
 
-<body>
+<body onload="checkboxes('dataTable')">
 
     <!-- HEADER -->
     <header>
@@ -180,7 +179,7 @@ console.log(max);
     <div class="container">
         <div class="row center-row">
             <div class="col-lg-6 center-block">
-                
+
                 <div id="subtitle">
                     Reunión de desarrolladores
                 </div>
@@ -197,7 +196,7 @@ console.log(max);
 
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="crear">
-                        <table id="dataTable" class="table text-center">
+                        <table id="dataTable" class="table text-center" onclick="checkboxRemove('dataTable')">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -209,13 +208,17 @@ console.log(max);
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr name="0">
+                                <tr id="0">
                                     <td>
                                         <div id="ytitle">MAR 27 Sep,</div>
                                         <div id="ysubtitle">10:00 - 11:00</div>
                                     </td>
                                     <td><label class="checkbox">
-                                            <input type="checkbox" checked onclick="return false;" />
+                                            <input type="checkbox" onclick="return false;" />
+                                        </label></td>
+
+                                    <td><label class="checkbox">
+                                            <input type="checkbox" class="success" checked onclick="return false;" />
                                             <span class="success"></span>
                                         </label></td>
 
@@ -223,18 +226,8 @@ console.log(max);
                                             <input type="checkbox" checked onclick="return false;" />
                                             <span class="success"></span>
                                         </label></td>
-
-                                    <td><label class="checkbox">
-                                            <input type="checkbox" checked onclick="return false;" />
-                                            <span class="success"></span>
-                                        </label></td>
-
-                                    <!-- <td><label class="checkbox">
-                                            <input type="checkbox" checked />
-                                            <span class="success"></span>
-                                        </label></td> -->
                                 </tr>
-                                <tr name="1">
+                                <tr id="1">
                                     <td>
                                         <div id="ytitle">MIE 28 Sep,</div>
                                         <div id="ysubtitle">15:00 - 16:00</div>
@@ -253,13 +246,8 @@ console.log(max);
                                             <input type="checkbox" onclick="return false;" />
                                         </label></td>
 
-                                    <!-- <td><label class="checkbox">
-                                            <input type="checkbox" />
-                                            <span class="success"></span>
-                                        </label></td> -->
-
                                 </tr>
-                                <tr name="2">
+                                <tr id="2">
                                     <td>
                                         <div id="ytitle">JUE 29 Sep,</div>
                                         <div id="ysubtitle">16:00 - 17:00</div>
@@ -277,14 +265,9 @@ console.log(max);
                                             <input type="checkbox" checked onclick="return false;" />
                                             <span class="success"></span>
                                         </label></td>
-                                    <!-- 
-                                     <td><label class="checkbox">
-                                            <input type="checkbox" />
-                                            <span class="success"></span>
-                                        </label></td>  -->
                                 </tr>
 
-                                <tr name="3">
+                                <tr id="3">
                                     <td>
                                         <div id="ytitle">LUN 01 Oct,</div>
                                         <div id="ysubtitle">09:00 - 10:00</div>
@@ -296,23 +279,16 @@ console.log(max);
 
                                     <td><label class="checkbox">
                                             <input type="checkbox" onclick="return false;" />
-
                                         </label></td>
 
                                     <td><label class="checkbox">
                                             <input type="checkbox" onclick="return false;" />
-
                                         </label></td>
-
-                                    <!-- <td><label class="checkbox">
-                                            <input type="checkbox" />
-                                            <span class="success"></span>
-                                        </label></td> -->
                                 </tr>
                             </tbody>
                         </table>
                     </form>
-                    <button type="button" class="btn btn-dark" onclick="checkboxes('dataTable');">Continuar</button>
+                    <button type="button" class="btn btn-dark">Continuar</button>
                 </div>
             </div>
         </div>
