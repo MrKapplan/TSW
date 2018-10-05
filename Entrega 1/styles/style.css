@@ -319,6 +319,15 @@ td {
 }
 
 
+.k-calendar .k-header .k-state-hover {
+	background-color: #eeee;
+}
+
+
+#inputsFECHA{
+	float: right;
+}
+
 
 
 /* FOOTER */
