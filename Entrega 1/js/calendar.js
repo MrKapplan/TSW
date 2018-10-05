@@ -19,12 +19,32 @@ function removeInputs(idInput) {
 }
 
 
+function addFatherDiv(newElement, idElement, oldElement){
+    var inputDiv = document.createElement(newElement);
+    inputDiv.id = idElement;
+    var divCalendar = document.getElementById(oldElement);
+    parentDiv = divCalendar.parentNode;
+    parentDiv.insertBefore(inputDiv, divCalendar);
+}
+
+
+function addSonDiv(newElement, idElement, oldElement){
+    var inputDiv = document.createElement(newElement);
+    inputDiv.id = idElement;
+   document.getElementById(oldElement).appendChild(inputDiv);
+
+}
+
+
 $(document).ready(function () {
     //  kendo.culture("es-ES");
     // create Calendar from div HTML element
     $("#calendar").kendoCalendar({
         selectable: "multiple"
     });
+
+
+    addFatherDiv("div", "timeContainer", "calendar");
 
     $("#calendar").on("mousedown", "td", function (e) {
 
@@ -37,6 +57,7 @@ $(document).ready(function () {
             e.preventDefault();
         });
 
+        
         if (clickedItem.length > 0) {
             var calendar = $("#calendar").getKendoCalendar();
             var clickedDateString = clickedItem.children("a")[0].title;
@@ -44,6 +65,7 @@ $(document).ready(function () {
 
             var selectedDates = calendar.selectDates();
 
+            
             if (clickedItem.hasClass("k-state-selected")) {
                 // if date is already selected - remove it from collection
                 selectedDates = $.grep(selectedDates, function (item, index) {
@@ -56,6 +78,8 @@ $(document).ready(function () {
             } else {
                 selectedDates.push(clickedDate);
 
+                addSonDiv("div", "inputsFECHA", "timeContainer");
+
                 var startTime = document.createElement("input");
                 startTime.type = "time";
                 startTime.id = clickedDate.toLocaleDateString();
@@ -65,23 +89,12 @@ $(document).ready(function () {
                 endTime.type = "time";
                 endTime.id = clickedDate.toLocaleDateString();
                 document.getElementById('inputsFECHA').appendChild(endTime);
+                
             }
             calendar.selectDates(selectedDates);
         }
     });
     removeDiv('k-footer');
-
-    var nuevoDiv = document.createElement("div");
-    nuevoDiv.id = 'albovy';
-    var oldDiv = document.getElementById('calendar');
-    parentDiv = oldDiv.parentNode;
-
-    // Y ahora lo insertamos
-    //document.getElementById('calendar').insertBefore(oldDiv,nuevoDiv);
-
-    parentDiv.insertBefore(nuevoDiv, oldDiv);
-
-
 });
 
 

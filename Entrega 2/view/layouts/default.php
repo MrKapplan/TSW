@@ -32,13 +32,6 @@ $currentuser = $view->getVariable("currentusername");
 	<?= $view->getFragment("javascript") ?>
 </head>
 
-
-
-
-
-
-
-
 <body>
 	  <!-- HEADER -->
 	  <header>
