@@ -70,6 +70,18 @@ $(document).ready(function () {
         }
     });
     removeDiv('k-footer');
+
+    var nuevoDiv = document.createElement("div");
+    nuevoDiv.id = 'albovy';
+    var oldDiv = document.getElementById('calendar');
+    parentDiv = oldDiv.parentNode;
+
+    // Y ahora lo insertamos
+    //document.getElementById('calendar').insertBefore(oldDiv,nuevoDiv);
+
+    parentDiv.insertBefore(nuevoDiv, oldDiv);
+
+
 });
 
 
