@@ -1,18 +1,19 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css";
 
 body {
-	font-family:'Open Sans', Arial, sans-serif;
+	font-family:'K2D','Open Sans', Arial, sans-serif;
 	font-size:14px;
 	font-weight:300;
 	line-height:1.6em;
 	color:#000;
-	background-color:#cfcfcf;
+	background-color:white;
 }
 
 /* HEADER -> NAVBAR */
 
 header{
-	background-color: #19e68c;
+	background-color: white;
+	border-bottom: 2px solid black;
 }
 
 .navbar-brand {
@@ -85,7 +86,7 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 5px;
-	max-width: 75%;
+	max-width: 80%%;
 }
 
 .center-block2 {
@@ -208,7 +209,7 @@ input[type=text],[type=password]{
 input[type=time] {
 	width: auto;
 	border: 0;
-	margin-left: 25%;
+	
 }
 
 
@@ -216,6 +217,10 @@ input[type=time] {
 
 select{
 	border: 0;
+}
+
+.k-block, .k-content, .k-dropdown .k-input, .k-popup, .k-widget{
+	text-align: inherit!important;
 }
 
 
@@ -285,11 +290,13 @@ select{
 	background-color:#eeee;
 	color:#000;
 	border:none;
-	border-bottom:3px solid #19e68c;
-	border-radius:0px;
+	border-bottom:3px solid #19e6;
+	border-radius:2px;
 	float:right;
 	
 }
+
+
 
 /* FORMS AND TABLE ELEMENTS */
 
@@ -338,7 +345,7 @@ td {
 	width: 100%;
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
-    background-color: #19e68c;
+    background-color: #19e6;
     color: #000;
     text-align: center; 
 }
