@@ -57,24 +57,38 @@
             var table = document.getElementById(tableId);
             var rowCount = table.rows.length - 1;
             var inputElems = document.getElementsByTagName("input");
-            var count = 0, max = 0, filaSelected = 0;
-            
-            var fila = (inputElems.length - 1) / rowCount;
+            var count = 0, max = 0, maxAbs = 0, filaSelected = -1;
+            //console.log(max);
 
+            var fila = (inputElems.length - 1) / rowCount;
 
             for (var j = 1; j < inputElems.length; j++) {
                 if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
                     count++;
                 }
                 if (j % fila == 0) {
-                    if (max < count) {
-                        max = count;
-                        filaSelected = inputElems[j].parentNode.parentNode.parentNode.id;
-                        document.getElementById(filaSelected).setAttribute("class", "table-success");
 
+
+                    if (count > maxAbs) {
+                        max = count;
+                        maxAbs = count;
+                        filaSelected = inputElems[j].parentNode.parentNode.parentNode.id;
+
+                    } else if (count == max) {
+                        max = -1;
                     }
+                 
+
+                    console.log(inputElems[j].parentNode.parentNode.parentNode.id);
+                    console.log("Count: " + count);
+                    console.log("MaxAbs: " + maxAbs);
+                    console.log("Max: " + max);
                     count = 0;
                 }
+            }
+
+            if (filaSelected != -1 && max != -1) {
+                document.getElementById(filaSelected).setAttribute("class", "table-success");
             }
 
 
