@@ -334,7 +334,10 @@ td {
 	float: right;
 }
 
-
+#albovy{
+	float: right;
+	max-width: 20%;
+}
 
 /* FOOTER */
 
