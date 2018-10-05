@@ -330,11 +330,7 @@ td {
 }
 
 
-#inputsFECHA{
-	float: right;
-}
-
-#albovy{
+#timeContainer{
 	float: right;
 	max-width: 20%;
 }

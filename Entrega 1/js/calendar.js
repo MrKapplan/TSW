@@ -13,9 +13,46 @@ function removeInputs(idInput) {
     if (!input) {
         alert("El elemento selecionado no existe");
     } else {
-        hh = input.parentNode;
+         hh = input.parentNode;
         hh.removeChild(input);
+        
     }
+}
+
+
+function addTable(idContainer){
+
+    var table = document.createElement("table");
+    table.id = "idTable";
+    table.className = "table text-center";
+    document.getElementById(idContainer).appendChild(table);
+
+    var thead = document.createElement("thead");
+    thead.id = "thead";
+    document.getElementById(table.id).appendChild(thead);
+
+    var tr = document.createElement("tr");
+    tr.id = "tr";
+    document.getElementById(thead.id).appendChild(tr);
+
+    var th = document.createElement("th");
+    th.scope = "col";
+    document.getElementById(tr.id).appendChild(th);
+
+    var th1 = document.createElement("th");
+    th1.scope = "col";
+    th1.appendChild(document.createTextNode('Hora Inicio'));
+    document.getElementById(tr.id).appendChild(th1);
+   
+    var th2 = document.createElement("th");
+    th2.scope = "col";
+    th2.appendChild(document.createTextNode('Hora Fin'));
+    document.getElementById(tr.id).appendChild(th2);
+   
+    var tbody = document.createElement("tbody");
+    tbody.id = "tbody";
+    document.getElementById(table.id).appendChild(tbody);
+
 }
 
 
@@ -45,6 +82,7 @@ $(document).ready(function () {
 
 
     addFatherDiv("div", "timeContainer", "calendar");
+    addTable("timeContainer");
 
     $("#calendar").on("mousedown", "td", function (e) {
 
@@ -72,23 +110,29 @@ $(document).ready(function () {
                     return clickedDate.getTime() !== item.getTime();
                 });
 
-                removeInputs(clickedDate.toLocaleDateString());
-                removeInputs(clickedDate.toLocaleDateString());
+               // removeInputs(clickedDate.toLocaleDateString());
+                //removeInputs(clickedDate.toLocaleDateString());
+                 removeInputs(clickedDate.toLocaleDateString());
 
             } else {
                 selectedDates.push(clickedDate);
 
-                addSonDiv("div", "inputsFECHA", "timeContainer");
+                
+
+
+
+                ////////DESDE AQUI PARA RELLENAR LA TABLA
+                addSonDiv("div", clickedDate.toLocaleDateString(), "timeContainer");
 
                 var startTime = document.createElement("input");
                 startTime.type = "time";
                 startTime.id = clickedDate.toLocaleDateString();
-                document.getElementById('inputsFECHA').appendChild(startTime);
+                document.getElementById(clickedDate.toLocaleDateString()).appendChild(startTime);
 
                 var endTime = document.createElement("input");
                 endTime.type = "time";
                 endTime.id = clickedDate.toLocaleDateString();
-                document.getElementById('inputsFECHA').appendChild(endTime);
+                document.getElementById(clickedDate.toLocaleDateString()).appendChild(endTime);
                 
             }
             calendar.selectDates(selectedDates);
