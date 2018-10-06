@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS POLL(
   title varchar(225) NOT NULL,
   ubication varchar(225),
   author varchar(25) NOT NULL,
+  link varchar(125) NOT NULL,
   PRIMARY KEY(id),
   FOREIGN KEY (author) REFERENCES USER (username) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -41,23 +42,23 @@ INSERT INTO USER (username, passwd) VALUES
 ('albovy', 'redteamwins'),
 ('ivandd', 'ivan');
 
-INSERT INTO POLL (id, title, ubication, author) VALUES
-(1, 'Ir a comprar el pan', 'Continente', 'mpegea'),
-(2, 'Comida de "ingenieros"', 'Infra', 'albovy'),
-(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea'),
-(4, 'Entrenamiento', 'Estadio Santiago Bernabeu', 'ivandd');
+INSERT INTO POLL (id, title, ubication, author, link) VALUES
+(1, 'Reunión Desarrolladores', 'Despacho 23', 'mpegea', 'https://midominio.com/poll/2bd4ezhtqn9cat7w'),
+(2, 'Comida de "ingenieros"', 'Infra', 'albovy', 'https://midominio.com/poll/jklpde3g4n9dog7w'),
+(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'https://midominio.com/poll/asdfezhttlkcat9w'),
+(4, 'Entrenamiento', 'Estadio Santiago Bernabeu', 'ivandd', 'https://midominio.com/poll/2bd4ezhtqn9cat7o');
 
 INSERT INTO GAP (id, poll_id, date, timeStart, timeEnd) VALUES
-(1,1,'2018-09-27', '10:00', '11:00'),
-(2,1,'2018-09-28', '15:00',' 16:00'),
-(3,1,'2018-09-29', '16:00', '17:00'),
-(4,1,'2018-10-01', '09:00', '10:00');
+(1, 1,'2018-09-27', '10:00', '11:00'),
+(2, 1,'2018-09-28', '15:00',' 16:00'),
+(3, 1,'2018-09-29', '16:00', '17:00'),
+(4, 1,'2018-10-01', '09:00', '10:00');
 
 INSERT INTO USER_SELECTS_GAP (username, gap_id) VALUES
-('albovy',1),
-('albovy',3),
-('albovy',4),
-('ivandd',2),
-('mpegea',2),
-('mpegea',3),
-('mpegea',4);
+('albovy', 2),
+('albovy', 3),
+('albovy', 4),
+('mpegea', 1),
+('mpegea', 2),
+('ivandd', 1),
+('ivandd', 3);

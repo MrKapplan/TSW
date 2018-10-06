@@ -36,7 +36,7 @@ $currentuser = $view->getVariable("currentusername");
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">¿Tienes un hueco?</a>
+            <a class="navbar-brand" href="index.php"><?= i18n("¿Tienes un hueco?")?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -45,21 +45,21 @@ $currentuser = $view->getVariable("currentusername");
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Crear Encuesta</a>
+                        <a class="nav-link" href="index.php?controller=polls&action=add"><?= i18n("AddPoll")?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ver Encuestas</a>
+                        <a class="nav-link" href="index.php?controller=polls&action=index"><?= i18n("SeeMyPolls")?></a>
                     </li>
                 </ul>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Mi Cuenta
+                        <?= i18n("MyAccount")?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Mi Perfil</a>
+                        <a class="dropdown-item" href="index.php?controller=users&action=edit"><?= i18n("MyProfile")?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Salir</a>
+                        <a class="dropdown-item" href="index.php?controller=users&action=logout"><?= i18n("Logout")?></a>
                     </div>
                 </div>
             </div>

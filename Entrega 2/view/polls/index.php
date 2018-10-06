@@ -22,13 +22,13 @@ $view->setVariable("title", "Polls");
                                 <th scope="col"><?= i18n("ubication")?></th>
                                 <th scope="col"><?= i18n("author")?></th>
                                 <th scope="col"> </th>
-														</tr>
+							</tr>
                         </thead>
                         <tbody>
 							<?php foreach ($polls as $poll): ?>
 								<tr>
 									<td>
-										<a href="index.php?controller=poll&action=view&;id=<?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
+										<a href="index.php?controller=polls&action=view&id=<?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
 										</td>
 										
 										<td>
@@ -42,7 +42,7 @@ $view->setVariable("title", "Polls");
 										<td>
 											<?php	
 												if (isset($currentuser) && $currentuser == $poll->getAuthor()->getUsername()): ?>
-													&nbsp;<a href="index.php?controller=poll&amp;action=edit&amp;id=<?= $poll->getId() ?>"><?= i18n("Edit") ?></a>
+													&nbsp;<a href="index.php?controller=polls&action=edit&id=<?= $poll->getId() ?>"><?= i18n("Edit") ?></a>
 
 													<form method="POST "action="index.php?controller=polls&action=delete" id="delete_post_<?= $poll->getId(); ?>
 														<input type="hidden" name="id" value="<?= $poll->getId() ?>">

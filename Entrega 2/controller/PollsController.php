@@ -48,7 +48,7 @@ class PollsController extends BaseController {
 			throw new Exception("no such post with id: ".$pollid);
 		}
 
-		$this->view->setVariable("post", $poll);
+		$this->view->setVariable("poll", $poll);
 		$this->view->render("polls", "view");
 
 	}

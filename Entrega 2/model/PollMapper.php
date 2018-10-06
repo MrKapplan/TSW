@@ -30,18 +30,24 @@ class PollMapper {
 	}
 
 	
-	public function findById($postid){
-		$stmt = $this->db->prepare("SELECT * FROM posts WHERE id=?");
-		$stmt->execute(array($postid));
-		$post = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if($post != null) {
-			return new Post(
-			$post["id"],
-			$post["title"],
-			$post["content"],
-			new User($post["author"]));
+	public function findById($pollid){
+		$stmt = $this->db->prepare("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author, poll.link, user_selects_gap.username, gap.date, gap.timeStart, gap.timeEnd FROM poll, user_selects_gap, gap WHERE poll.id = '$pollid' AND gap.id = user_selects_gap.gap_id");
+		$stmt->execute(array($pollid));
+		$poll = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		if($poll != null) {
+			return new Poll(
+			$poll["id"],
+			$poll["title"],
+			new User($post["author"]),
+			$poll["link"],
+			$poll["username"],
+			$poll["date"],
+			$poll["timeStart"],
+			$poll["timeEnd"]
+		);
 		} else {
+			print("HAAA");
 			return NULL;
 		}
 	}

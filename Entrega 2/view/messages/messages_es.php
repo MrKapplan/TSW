@@ -5,6 +5,11 @@ array(
 	"Login" => "Loguin",
 	"login" => "Entrar",
 	"¿Tienes un hueco?" => "¿Tienes un hueco?",
+	"AddPoll" => "Crear Encuesta",
+	"SeeMyPolls" => "Ver Encuestas",
+	"MyAccount" => "Mi Cuenta",
+	"MyProfile" => "Mi Perfil",
+	"Logout" => "Salir",
 	"Username" => "Usuario",
 	"Password" => "Contraseña",
 	"Not user?" => "Nuevo aquí? ",
@@ -17,6 +22,8 @@ array(
 	"author" => "Autor",
 	"actions" => " ",
 	"Edit" => "Editar",
-	"Delete" => "Eliminar"
+	"Delete" => "Eliminar",
+	"by %s" => "Creada por %s",
+	"At" => "En"
 )
 ?>
