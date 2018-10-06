@@ -1,58 +1,50 @@
 <?php
-//file: controller/PostController.php
+//file: controller/PollsController.php
 
 require_once(__DIR__."/../model/Comment.php");
-require_once(__DIR__."/../model/Post.php");
-require_once(__DIR__."/../model/PostMapper.php");
+require_once(__DIR__."/../model/Poll.php");
+require_once(__DIR__."/../model/PollMapper.php");
 require_once(__DIR__."/../model/User.php");
-
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 /**
-* Class PostsController
+* Class pollsController
 *
-* Controller to make a CRUDL of Posts entities
+* Controller to make a CRUDL of polls entities
 *
 * @author lipido <lipido@gmail.com>
 */
-class PostsController extends BaseController {
+class PollsController extends BaseController {
 
-	/**
-	* Reference to the PostMapper to interact
-	* with the database
-	*
-	* @var PostMapper
-	*/
-	private $postMapper;
+	private $pollMapper;
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->postMapper = new PostMapper();
+		$this->pollMapper = new PollMapper();
 	}
 
 	/**
-	* Action to list posts
+	* Action to list Polls
 	*
-	* Loads all the posts from the database.
+	* Loads all the Polls from the database.
 	* No HTTP parameters are needed.
 	*
 	* The views are:
 	* <ul>
-	* <li>posts/index (via include)</li>
+	* <li>Polls/index (via include)</li>
 	* </ul>
 	*/
 	public function index() {
 
 		// obtain the data from the database
-		$posts = $this->postMapper->findAll();
+		$polls = $this->pollMapper->findAll();
 
 		// put the array containing Post object to the view
-		$this->view->setVariable("posts", $posts);
-
-		// render the view (/view/posts/index.php)
-		$this->view->render("posts", "index");
+		$this->view->setVariable("polls", $polls);
+		// render the view (/view/polls/index.php)
+		$this->view->render("polls", "index");
 	}
 
 	/**
@@ -67,7 +59,7 @@ class PostsController extends BaseController {
 	*
 	* The views are:
 	* <ul>
-	* <li>posts/view: If post is successfully loaded (via include).	Includes these view variables:</li>
+	* <li>polls/view: If post is successfully loaded (via include).	Includes these view variables:</li>
 	* <ul>
 	*	<li>post: The current Post retrieved</li>
 	*	<li>comment: The current Comment instance, empty or
@@ -84,25 +76,25 @@ class PostsController extends BaseController {
 			throw new Exception("id is mandatory");
 		}
 
-		$postid = $_GET["id"];
+		$pollid = $_GET["id"];
 
 		// find the Post object in the database
-		$post = $this->postMapper->findByIdWithComments($postid);
+		$poll = $this->pollMapper->findByIdWithComments($pollid);
 
-		if ($post == NULL) {
-			throw new Exception("no such post with id: ".$postid);
+		if ($poll == NULL) {
+			throw new Exception("no such post with id: ".$pollid);
 		}
 
 		// put the Post object to the view
-		$this->view->setVariable("post", $post);
+		$this->view->setVariable("post", $poll);
 
 		// check if comment is already on the view (for example as flash variable)
 		// if not, put an empty Comment for the view
 		$comment = $this->view->getVariable("comment");
 		$this->view->setVariable("comment", ($comment==NULL)?new Comment():$comment);
 
-		// render the view (/view/posts/view.php)
-		$this->view->render("posts", "view");
+		// render the view (/view/polls/view.php)
+		$this->view->render("polls", "view");
 
 	}
 
@@ -121,9 +113,9 @@ class PostsController extends BaseController {
 	*
 	* The views are:
 	* <ul>
-	* <li>posts/add: If this action is reached via HTTP GET (via include)</li>
-	* <li>posts/index: If post was successfully added (via redirect)</li>
-	* <li>posts/add: If validation fails (via include). Includes these view variables:</li>
+	* <li>polls/add: If this action is reached via HTTP GET (via include)</li>
+	* <li>polls/index: If post was successfully added (via redirect)</li>
+	* <li>polls/add: If validation fails (via include). Includes these view variables:</li>
 	* <ul>
 	*	<li>post: The current Post instance, empty or
 	*	being added (but not validated)</li>
@@ -135,38 +127,38 @@ class PostsController extends BaseController {
 	*/
 	public function add() {
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Adding posts requires login");
+			throw new Exception("Not in session. Adding polls requires login");
 		}
 
-		$post = new Post();
+		$poll = new Post();
 
 		if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
 			// populate the Post object with data form the form
-			$post->setTitle($_POST["title"]);
-			$post->setContent($_POST["content"]);
+			$poll->setTitle($_POST["title"]);
+			$poll->setContent($_POST["content"]);
 
 			// The user of the Post is the currentUser (user in session)
-			$post->setAuthor($this->currentUser);
+			$poll->setAuthor($this->currentUser);
 
 			try {
 				// validate Post object
-				$post->checkIsValidForCreate(); // if it fails, ValidationException
+				$poll->checkIsValidForCreate(); // if it fails, ValidationException
 
 				// save the Post object into the database
-				$this->postMapper->save($post);
+				$this->pollMapper->save($pollid);
 
 				// POST-REDIRECT-GET
-				// Everything OK, we will redirect the user to the list of posts
+				// Everything OK, we will redirect the user to the list of polls
 				// We want to see a message after redirection, so we establish
 				// a "flash" message (which is simply a Session variable) to be
 				// get in the view after redirection.
-				$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully added."),$post ->getTitle()));
+				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
 
 				// perform the redirection. More or less:
-				// header("Location: index.php?controller=posts&action=index")
+				// header("Location: index.php?controller=polls&action=index")
 				// die();
-				$this->view->redirect("posts", "index");
+				$this->view->redirect("polls", "index");
 
 			}catch(ValidationException $ex) {
 				// Get the errors array inside the exepction...
@@ -177,10 +169,10 @@ class PostsController extends BaseController {
 		}
 
 		// Put the Post object visible to the view
-		$this->view->setVariable("post", $post);
+		$this->view->setVariable("post", $pollid);
 
-		// render the view (/view/posts/add.php)
-		$this->view->render("posts", "add");
+		// render the view (/view/polls/add.php)
+		$this->view->render("polls", "add");
 
 	}
 
@@ -201,9 +193,9 @@ class PostsController extends BaseController {
 	*
 	* The views are:
 	* <ul>
-	* <li>posts/edit: If this action is reached via HTTP GET (via include)</li>
-	* <li>posts/index: If post was successfully edited (via redirect)</li>
-	* <li>posts/edit: If validation fails (via include). Includes these view variables:</li>
+	* <li>polls/edit: If this action is reached via HTTP GET (via include)</li>
+	* <li>polls/index: If post was successfully edited (via redirect)</li>
+	* <li>polls/edit: If validation fails (via include). Includes these view variables:</li>
 	* <ul>
 	*	<li>post: The current Post instance, empty or being added (but not validated)</li>
 	*	<li>errors: Array including per-field validation errors</li>
@@ -221,48 +213,48 @@ class PostsController extends BaseController {
 		}
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing posts requires login");
+			throw new Exception("Not in session. Editing polls requires login");
 		}
 
 
 		// Get the Post object from the database
-		$postid = $_REQUEST["id"];
-		$post = $this->postMapper->findById($postid);
+		$pollid = $_REQUEST["id"];
+		$poll = $this->pollMapper->findById($pollid);
 
 		// Does the post exist?
-		if ($post == NULL) {
-			throw new Exception("no such post with id: ".$postid);
+		if ($poll == NULL) {
+			throw new Exception("no such post with id: ".$pollid);
 		}
 
 		// Check if the Post author is the currentUser (in Session)
-		if ($post->getAuthor() != $this->currentUser) {
-			throw new Exception("logged user is not the author of the post id ".$postid);
+		if ($poll->getAuthor() != $this->currentUser) {
+			throw new Exception("logged user is not the author of the post id ".$pollid);
 		}
 
 		if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
 			// populate the Post object with data form the form
-			$post->setTitle($_POST["title"]);
-			$post->setContent($_POST["content"]);
+			$poll->setTitle($_POST["title"]);
+			$poll->setContent($_POST["content"]);
 
 			try {
 				// validate Post object
-				$post->checkIsValidForUpdate(); // if it fails, ValidationException
+				$poll->checkIsValidForUpdate(); // if it fails, ValidationException
 
 				// update the Post object in the database
-				$this->postMapper->update($post);
+				$this->pollMapper->update($poll);
 
 				// POST-REDIRECT-GET
-				// Everything OK, we will redirect the user to the list of posts
+				// Everything OK, we will redirect the user to the list of polls
 				// We want to see a message after redirection, so we establish
 				// a "flash" message (which is simply a Session variable) to be
 				// get in the view after redirection.
-				$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully updated."),$post ->getTitle()));
+				$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully updated."),$poll ->getTitle()));
 
 				// perform the redirection. More or less:
-				// header("Location: index.php?controller=posts&action=index")
+				// header("Location: index.php?controller=polls&action=index")
 				// die();
-				$this->view->redirect("posts", "index");
+				$this->view->redirect("polls", "index");
 
 			}catch(ValidationException $ex) {
 				// Get the errors array inside the exepction...
@@ -273,10 +265,10 @@ class PostsController extends BaseController {
 		}
 
 		// Put the Post object visible to the view
-		$this->view->setVariable("post", $post);
+		$this->view->setVariable("post", $poll);
 
-		// render the view (/view/posts/add.php)
-		$this->view->render("posts", "edit");
+		// render the view (/view/polls/add.php)
+		$this->view->render("polls", "edit");
 	}
 
 	/**
@@ -291,7 +283,7 @@ class PostsController extends BaseController {
 	*
 	* The views are:
 	* <ul>
-	* <li>posts/index: If post was successfully deleted (via redirect)</li>
+	* <li>polls/index: If post was successfully deleted (via redirect)</li>
 	* </ul>
 	* @throws Exception if no id was provided
 	* @throws Exception if no user is in session
@@ -304,37 +296,37 @@ class PostsController extends BaseController {
 			throw new Exception("id is mandatory");
 		}
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing posts requires login");
+			throw new Exception("Not in session. Editing polls requires login");
 		}
 		
 		// Get the Post object from the database
-		$postid = $_REQUEST["id"];
-		$post = $this->postMapper->findById($postid);
+		$pollid = $_REQUEST["id"];
+		$poll = $this->pollMapper->findById($pollid);
 
 		// Does the post exist?
-		if ($post == NULL) {
-			throw new Exception("no such post with id: ".$postid);
+		if ($poll == NULL) {
+			throw new Exception("no such post with id: ".$pollid);
 		}
 
 		// Check if the Post author is the currentUser (in Session)
-		if ($post->getAuthor() != $this->currentUser) {
+		if ($poll->getAuthor() != $this->currentUser) {
 			throw new Exception("Post author is not the logged user");
 		}
 
 		// Delete the Post object from the database
-		$this->postMapper->delete($post);
+		$this->pollMapper->delete($poll);
 
 		// POST-REDIRECT-GET
-		// Everything OK, we will redirect the user to the list of posts
+		// Everything OK, we will redirect the user to the list of polls
 		// We want to see a message after redirection, so we establish
 		// a "flash" message (which is simply a Session variable) to be
 		// get in the view after redirection.
-		$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully deleted."),$post ->getTitle()));
+		$this->view->setFlash(sprintf(i18n("Polls \"%s\" successfully deleted."),$poll ->getTitle()));
 
 		// perform the redirection. More or less:
-		// header("Location: index.php?controller=posts&action=index")
+		// header("Location: index.php?controller=polls&action=index")
 		// die();
-		$this->view->redirect("posts", "index");
+		$this->view->redirect("polls", "index");
 
 	}
 }

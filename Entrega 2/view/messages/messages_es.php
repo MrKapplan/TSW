@@ -36,6 +36,21 @@ array(
 	"content is mandatory" => "El contenido es obligatorio",
 	"title is mandatory" => "El título es obligatorio",
 	"author is mandatory" => "El autor es obligatorio",
-	"post is not valid" => "El artículo no es válido"
+	"post is not valid" => "El artículo no es válido",
+
+
+	"Login" => "Loguin",
+	"login" => "Entrar",
+	"¿Tienes un hueco?" => "¿Tienes un hueco?",
+	"Username" => "Usuario",
+	"Password" => "Contraseña",
+	"Not user?" => "Nuevo aquí? ",
+	"Register here!" => "¡Regístrate aquí!",
+	"UsernameAdd" => "Introduzca un username",
+	"PasswdAdd" => "Introduzca una contraseña",
+	"title" => "Título",
+	"ubication" => "Ubicación",
+	"author" => "Autor",
+	"actions" => " "
 )
 ?>

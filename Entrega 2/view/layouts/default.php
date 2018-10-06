@@ -7,14 +7,13 @@ $currentuser = $view->getVariable("currentusername");
 ?><!DOCTYPE html>
 <html>
 <head>
-	<link rel="shortcut icon" href="../img//favicon.png" />
+<link rel="shortcut icon" href="./img/favicon.png" />
 	<title><?= $view->getVariable("title", "no title") ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
 
     <!-- Bootstrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -25,16 +24,17 @@ $currentuser = $view->getVariable("currentusername");
         crossorigin="anonymous"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
+	<!-- enable ji18n() javascript function to translate inside your scripts -->
 	<script src="index.php?controller=language&amp;action=i18njs"></script>
-
 	<?= $view->getFragment("css") ?>
 	<?= $view->getFragment("javascript") ?>
 </head>
 
+
 <body>
-	  <!-- HEADER -->
-	  <header>
+    <!-- HEADER -->
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">¿Tienes un hueco?</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -74,8 +74,8 @@ $currentuser = $view->getVariable("currentusername");
 		<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
 	</main>
 
-
- <footer class="footer">
+	   <!-- FOOTER-->
+    <footer class="footer">
         <div class="container">
             <div class="sub-footer">
                 <div class="row">
@@ -95,11 +95,8 @@ $currentuser = $view->getVariable("currentusername");
                     </div>
                 </div>
             </div>
-		</div>
-		
-		<!-- <?php
-		// include(__DIR__."/language_select_element.php");
-		?> -->
-</footer>
+        </div>
+    </footer>
+
 </body>
 </html>
