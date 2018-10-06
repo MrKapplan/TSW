@@ -34,7 +34,7 @@ class User {
 	}
 
 
-	public function setPassword($passwd) {
+	public function setPasswd($passwd) {
 		$this->passwd = $passwd;
 	}
 
@@ -52,4 +52,17 @@ class User {
 			throw new ValidationException($errors, "user is not valid");
 		}
 	}
+
+
+	public function checkIsValidForUpdate() {
+		$errors = array();
+
+		if (strlen($this->passwd) < 5) {
+			$errors["passwd"] = "Password must be at least 5 characters length";
+		}
+		if (sizeof($errors)>0){
+			throw new ValidationException($errors, "user is not valid");
+		}
+	}
+
 }

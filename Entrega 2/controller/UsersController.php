@@ -1,9 +1,9 @@
 <?php
 
-require_once(__DIR__."/../core/ViewManager.php");
-require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
+require_once(__DIR__."/../core/ViewManager.php");
+require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 
@@ -76,6 +76,7 @@ class UsersController extends BaseController {
 			}
 		}
 
+		
 		// Put the User object visible to the view
 		$this->view->setVariable("user", $user);
 
@@ -83,25 +84,58 @@ class UsersController extends BaseController {
 		$this->view->render("users", "register");
 
 	}
-	
 
-	/**
-	* Action to logout
-	*
-	* This action should be called via GET
-	*
-	* No HTTP parameters are needed.
-	*
-	* The views are:
-	* <ul>
-	* <li>users/login (via redirect)</li>
-	* </ul>
-	*
-	* @return void
-	*/
+
+
+	public function edit() {
+
+		$user = new User();
+		$user->setUsername($_SESSION['currentuser']);
+
+		if (isset($_POST["passwd"])) { // reaching via HTTP Post...
+
+			$user->setPasswd($_POST["passwd"]);
+
+			try {
+				// validate Post object
+				$user->checkIsValidForUpdate(); // if it fails, ValidationException
+				print("GOOOL");
+
+				// update the Post object in the database
+				$this->userMapper->update($user);
+
+				// POST-REDIRECT-GET
+				// Everything OK, we will redirect the user to the list of polls
+				// We want to see a message after redirection, so we establish
+				// a "flash" message (which is simply a Session variable) to be
+				// get in the view after redirection.
+				$this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user ->getUsername()));
+
+				// perform the redirection. More or less:
+				// header("Location: index.php?controller=polls&action=index")
+				// die();
+				$this->view->redirect("polls", "index");
+
+			}catch(ValidationException $ex) {
+				// Get the errors array inside the exepction...
+				$errors = $ex->getErrors();
+				// And put it to the view as "errors" variable
+				$this->view->setVariable("errors", $errors);
+			}
+		}
+
+		$this->view->setLayout("default");
+		// Put the user object visible to the view
+		$this->view->setVariable("user", $user);
+
+		// render the view (/view/user/edit.php)
+		$this->view->render("users", "edit");
+	}
+
+
+	
 	public function logout() {
 		session_destroy();
-
 		$this->view->redirect("users", "login");
 
 	}

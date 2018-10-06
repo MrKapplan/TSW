@@ -3,9 +3,10 @@
 
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
+$view->setVariable("title", "Polls");
 $polls = $view->getVariable("polls");
 $currentuser = $view->getVariable("currentusername");
-$view->setVariable("title", "Polls");
+
 ?>
 
       <div class="container">

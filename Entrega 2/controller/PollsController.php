@@ -1,7 +1,6 @@
 <?php
 //file: controller/PollsController.php
 
-require_once(__DIR__."/../model/Comment.php");
 require_once(__DIR__."/../model/Poll.php");
 require_once(__DIR__."/../model/PollMapper.php");
 require_once(__DIR__."/../model/User.php");
@@ -53,115 +52,59 @@ class PollsController extends BaseController {
 
 	}
 
-	/**
-	* Action to add a new post
-	*
-	* When called via GET, it shows the add form
-	* When called via POST, it adds the post to the
-	* database
-	*
-	* The expected HTTP parameters are:
-	* <ul>
-	* <li>title: Title of the post (via HTTP POST)</li>
-	* <li>content: Content of the post (via HTTP POST)</li>
-	* </ul>
-	*
-	* The views are:
-	* <ul>
-	* <li>polls/add: If this action is reached via HTTP GET (via include)</li>
-	* <li>polls/index: If post was successfully added (via redirect)</li>
-	* <li>polls/add: If validation fails (via include). Includes these view variables:</li>
-	* <ul>
-	*	<li>post: The current Post instance, empty or
-	*	being added (but not validated)</li>
-	*	<li>errors: Array including per-field validation errors</li>
-	* </ul>
-	* </ul>
-	* @throws Exception if no user is in session
-	* @return void
-	*/
-	public function add() {
-		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Adding polls requires login");
-		}
+	
+	// public function add() {
+	// 	if (!isset($this->currentUser)) {
+	// 		throw new Exception("Not in session. Adding polls requires login");
+	// 	}
 
-		$poll = new Post();
+	// 	$poll = new Post();
 
-		if (isset($_POST["submit"])) { // reaching via HTTP Post...
+	// 	if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
-			// populate the Post object with data form the form
-			$poll->setTitle($_POST["title"]);
-			$poll->setContent($_POST["content"]);
+	// 		// populate the Post object with data form the form
+	// 		$poll->setTitle($_POST["title"]);
+	// 		$poll->setContent($_POST["content"]);
 
-			// The user of the Post is the currentUser (user in session)
-			$poll->setAuthor($this->currentUser);
+	// 		// The user of the Post is the currentUser (user in session)
+	// 		$poll->setAuthor($this->currentUser);
 
-			try {
-				// validate Post object
-				$poll->checkIsValidForCreate(); // if it fails, ValidationException
+	// 		try {
+	// 			// validate Post object
+	// 			$poll->checkIsValidForCreate(); // if it fails, ValidationException
 
-				// save the Post object into the database
-				$this->pollMapper->save($pollid);
+	// 			// save the Post object into the database
+	// 			$this->pollMapper->save($pollid);
 
-				// POST-REDIRECT-GET
-				// Everything OK, we will redirect the user to the list of polls
-				// We want to see a message after redirection, so we establish
-				// a "flash" message (which is simply a Session variable) to be
-				// get in the view after redirection.
-				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
+	// 			// POST-REDIRECT-GET
+	// 			// Everything OK, we will redirect the user to the list of polls
+	// 			// We want to see a message after redirection, so we establish
+	// 			// a "flash" message (which is simply a Session variable) to be
+	// 			// get in the view after redirection.
+	// 			$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
 
-				// perform the redirection. More or less:
-				// header("Location: index.php?controller=polls&action=index")
-				// die();
-				$this->view->redirect("polls", "index");
+	// 			// perform the redirection. More or less:
+	// 			// header("Location: index.php?controller=polls&action=index")
+	// 			// die();
+	// 			$this->view->redirect("polls", "index");
 
-			}catch(ValidationException $ex) {
-				// Get the errors array inside the exepction...
-				$errors = $ex->getErrors();
-				// And put it to the view as "errors" variable
-				$this->view->setVariable("errors", $errors);
-			}
-		}
+	// 		}catch(ValidationException $ex) {
+	// 			// Get the errors array inside the exepction...
+	// 			$errors = $ex->getErrors();
+	// 			// And put it to the view as "errors" variable
+	// 			$this->view->setVariable("errors", $errors);
+	// 		}
+	// 	}
 
-		// Put the Post object visible to the view
-		$this->view->setVariable("post", $pollid);
+	// 	// Put the Post object visible to the view
+	// 	$this->view->setVariable("post", $pollid);
 
-		// render the view (/view/polls/add.php)
-		$this->view->render("polls", "add");
+	// 	// render the view (/view/polls/add.php)
+	// 	$this->view->render("polls", "add");
 
-	}
+	// }
 
-	/**
-	* Action to edit a post
-	*
-	* When called via GET, it shows an edit form
-	* including the current data of the Post.
-	* When called via POST, it modifies the post in the
-	* database.
-	*
-	* The expected HTTP parameters are:
-	* <ul>
-	* <li>id: Id of the post (via HTTP POST and GET)</li>
-	* <li>title: Title of the post (via HTTP POST)</li>
-	* <li>content: Content of the post (via HTTP POST)</li>
-	* </ul>
-	*
-	* The views are:
-	* <ul>
-	* <li>polls/edit: If this action is reached via HTTP GET (via include)</li>
-	* <li>polls/index: If post was successfully edited (via redirect)</li>
-	* <li>polls/edit: If validation fails (via include). Includes these view variables:</li>
-	* <ul>
-	*	<li>post: The current Post instance, empty or being added (but not validated)</li>
-	*	<li>errors: Array including per-field validation errors</li>
-	* </ul>
-	* </ul>
-	* @throws Exception if no id was provided
-	* @throws Exception if no user is in session
-	* @throws Exception if there is not any post with the provided id
-	* @throws Exception if the current logged user is not the author of the post
-	* @return void
-	*/
+	
 	public function edit() {
 		if (!isset($_REQUEST["id"])) {
 			throw new Exception("A post id is mandatory");

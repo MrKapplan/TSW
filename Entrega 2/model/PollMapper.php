@@ -40,14 +40,9 @@ class PollMapper {
 			$poll["id"],
 			$poll["title"],
 			new User($post["author"]),
-			$poll["link"],
-			$poll["username"],
-			$poll["date"],
-			$poll["timeStart"],
-			$poll["timeEnd"]
+			$poll["link"]
 		);
 		} else {
-			print("HAAA");
 			return NULL;
 		}
 	}
