@@ -14,29 +14,22 @@ class PollMapper {
 	}
 
 
-	public function findAll() {
-		$stmt = $this->db->query("SELECT * FROM poll, user WHERE user.username = poll.author");
+	public function findAll($user) {
+		
+		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR '$user' = user_selects_gap.username AND user_selects_gap.gap_id = gap.id AND gap.poll_id = poll.id");
 		$polls_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$polls = array();
 
 		foreach ($polls_db as $poll) {
-			$author = new User($poll["username"]);
+			$author = new User($poll["author"]);
 			array_push($polls, new Poll($poll["id"], $poll["title"],  $poll["ubication"], $author));
 		}
 
 		return $polls;
 	}
 
-	/**
-	* Loads a Post from the database given its id
-	*
-	* Note: Comments are not added to the Post
-	*
-	* @throws PDOException if a database error occurs
-	* @return Post The Post instances (without comments). NULL
-	* if the Post is not found
-	*/
+	
 	public function findById($postid){
 		$stmt = $this->db->prepare("SELECT * FROM posts WHERE id=?");
 		$stmt->execute(array($postid));
