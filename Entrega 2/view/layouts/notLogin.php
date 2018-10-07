@@ -1,5 +1,5 @@
 <?php
-//file: view/layouts/welcome.php
+//file: view/layouts/notLogin.php
 
 $view = ViewManager::getInstance();
 

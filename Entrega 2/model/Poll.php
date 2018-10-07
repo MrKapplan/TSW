@@ -10,12 +10,14 @@ class Poll {
 	private $title;
 	private $ubication;
 	private $author;
+	private $link;
 
-	public function __construct($id=NULL, $title=NULL, $ubication=NULL, User $author=NULL) {
+	public function __construct($id=NULL, $title=NULL, $ubication=NULL, User $author=NULL, $link=NULL) {
 		$this->id = $id;
 		$this->title = $title;
 		$this->ubication = $ubication;
 		$this->author = $author;
+		$this->link = $link;
 
 	}
 
@@ -46,6 +48,14 @@ class Poll {
 
 	public function setAuthor(User $author) {
 		$this->author = $author;
+	}
+
+	public function getLink() {
+		return $this->link;
+	}
+
+	public function setLink($link) {
+		$this->linl = $link;
 	}
 
 

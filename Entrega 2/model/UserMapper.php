@@ -34,4 +34,10 @@ class UserMapper {
 			return true;
 		}
 	}
+
+
+	public function update(User $user) {
+		$stmt = $this->db->prepare("UPDATE user set passwd=? where username=?");
+		$stmt->execute(array($user->getPasswd(), $user->getUsername()));
+	}
 }

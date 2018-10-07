@@ -1,9 +1,9 @@
 <?php
 
-require_once(__DIR__."/../core/ViewManager.php");
-require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/UserMapper.php");
+require_once(__DIR__."/../core/ViewManager.php");
+require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 
@@ -16,7 +16,7 @@ class UsersController extends BaseController {
 
 		$this->userMapper = new UserMapper();
 
-		$this->view->setLayout("welcome");
+		$this->view->setLayout("notLogin");
 	}
 
 	public function login() {
@@ -37,31 +37,16 @@ class UsersController extends BaseController {
 
 		$user = new User();
 
-		if (isset($_POST["username"])){ // reaching via HTTP Post...
-
-			// populate the User object with data form the form
+		if (isset($_POST["username"])){ 
 			$user->setUsername($_POST["username"]);
 			$user->setPassword($_POST["passwd"]);
 
 			try{
-				$user->checkIsValidForRegister(); // if it fails, ValidationException
+				$user->checkIsValidForRegister(); 
 
-				// check if user exists in the database
 				if (!$this->userMapper->usernameExists($_POST["username"])){
-
-					// save the User object into the database
 					$this->userMapper->save($user);
-
-					// POST-REDIRECT-GET
-					// Everything OK, we will redirect the user to the list of posts
-					// We want to see a message after redirection, so we establish
-					// a "flash" message (which is simply a Session variable) to be
-					// get in the view after redirection.
 					$this->view->setFlash("Username ".$user->getUsername()." successfully added. Please login now");
-
-					// perform the redirection. More or less:
-					// header("Location: index.php?controller=users&action=login")
-					// die();
 					$this->view->redirect("users", "login");
 				} else {
 					$errors = array();
@@ -69,39 +54,50 @@ class UsersController extends BaseController {
 					$this->view->setVariable("errors", $errors);
 				}
 			}catch(ValidationException $ex) {
-				// Get the errors array inside the exepction...
 				$errors = $ex->getErrors();
-				// And put it to the view as "errors" variable
 				$this->view->setVariable("errors", $errors);
 			}
 		}
 
-		// Put the User object visible to the view
+		
 		$this->view->setVariable("user", $user);
-
-		// render the view (/view/users/register.php)
 		$this->view->render("users", "register");
 
 	}
-	
 
-	/**
-	* Action to logout
-	*
-	* This action should be called via GET
-	*
-	* No HTTP parameters are needed.
-	*
-	* The views are:
-	* <ul>
-	* <li>users/login (via redirect)</li>
-	* </ul>
-	*
-	* @return void
-	*/
+
+
+	public function edit() {
+
+		$user = new User();
+		$user->setUsername($_SESSION['currentuser']);
+
+		if (isset($_POST["passwd"])) { 
+
+			$user->setPasswd($_POST["passwd"]);
+
+			try {
+				$user->checkIsValidForUpdate(); 
+
+				$this->userMapper->update($user);
+				$this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user ->getUsername()));
+				$this->view->redirect("polls", "index");
+
+			}catch(ValidationException $ex) {
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
+
+		$this->view->setLayout("default");
+		$this->view->setVariable("user", $user);
+		$this->view->render("users", "edit");
+	}
+
+
+	
 	public function logout() {
 		session_destroy();
-
 		$this->view->redirect("users", "login");
 
 	}
