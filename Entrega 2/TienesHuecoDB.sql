@@ -43,10 +43,10 @@ INSERT INTO USER (username, passwd) VALUES
 ('ivandd', 'ivan');
 
 INSERT INTO POLL (id, title, ubication, author, link) VALUES
-(1, 'Reunión Desarrolladores', 'Despacho 23', 'mpegea', 'https://midominio.com/poll/2bd4ezhtqn9cat7w'),
-(2, 'Comida de "ingenieros"', 'Infra', 'albovy', 'https://midominio.com/poll/jklpde3g4n9dog7w'),
-(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'https://midominio.com/poll/asdfezhttlkcat9w'),
-(4, 'Entrenamiento', 'Estadio Santiago Bernabeu', 'ivandd', 'https://midominio.com/poll/2bd4ezhtqn9cat7o');
+(1, 'Reunión Desarrolladores', 'Despacho 23', 'mpegea', 'https://midominio.com/poll/2bd4ezhtqn9ca'),
+(2, 'Comida de "ingenieros"', 'Infra', 'albovy', 'https://midominio.com/poll/jklpde3g4n9do'),
+(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'https://midominio.com/poll/asdfezhttlkca'),
+(4, 'Entrenamiento', 'Estadio Santiago Bernabeu', 'ivandd', 'https://midominio.com/poll/2bd4ezhtqn9ca');
 
 INSERT INTO GAP (id, poll_id, date, timeStart, timeEnd) VALUES
 (1, 1,'2018-09-27', '10:00', '11:00'),

@@ -22,8 +22,7 @@ $view->setVariable("title", "View Poll");
 				<?=htmlentities($poll->getTitle());?>
                 </div>
                 <div id="subsubtitle">
-				<?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> - 	<?= sprintf(i18n("At %s"), $poll->getUbication()) ?>
-
+				<?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> - 	<?= sprintf(i18n("At %s"), $poll->getUbication())?>
                 </div>
                 <div id="link">
                     <div class="inputWithIconLogin inputIconBg">
@@ -38,10 +37,16 @@ $view->setVariable("title", "View Poll");
                             <thead>
                                 <tr>
                                 <th scope="col"></th>
+                                <?php $i=true; ?>
                                 <?php foreach ($users as $user): ?>
                                     <th scope="col"> <?=$user->getUser()->getUsername()?> </th>
+                                    <?php  if($user->getUser()->getUsername() == $currentuser) {
+                                        $i=false; ?>
+                                        <?php } ?>
                                 <?php endforeach; ?>
+                                <?php if($i){ ?>
                                     <th id="user" scope="col"><button type="button" id="addCol" class="btn btn-success" value="+" onclick="appendColumn('dataTable','addCol');">+</button></th>
+                                <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
