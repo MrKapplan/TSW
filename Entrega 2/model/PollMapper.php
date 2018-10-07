@@ -3,6 +3,7 @@
 require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../model/Poll.php");
+require_once(__DIR__."/../model/Gap.php");
 
 
 class PollMapper {
@@ -31,7 +32,7 @@ class PollMapper {
 
 	
 	public function findById($pollid){
-		$stmt = $this->db->prepare("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author, poll.link, user_selects_gap.username, gap.date, gap.timeStart, gap.timeEnd FROM poll, user_selects_gap, gap WHERE poll.id = '$pollid' AND gap.id = user_selects_gap.gap_id");
+		$stmt = $this->db->query("SELECT DISTINCT * FROM poll WHERE poll.id = '$pollid'");
 		$stmt->execute(array($pollid));
 		$poll = $stmt->fetch(PDO::FETCH_ASSOC);
 		
@@ -39,13 +40,16 @@ class PollMapper {
 			return new Poll(
 			$poll["id"],
 			$poll["title"],
-			new User($post["author"]),
+			$poll["ubication"],
+			new User($poll["author"]),
 			$poll["link"]
 		);
 		} else {
 			return NULL;
 		}
 	}
+
+
 
 	// /**
 	// * Loads a Post from the database given its id

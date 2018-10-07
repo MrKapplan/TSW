@@ -20,18 +20,18 @@ $view->setVariable("title", "Register");
                     <form method="POST" action="index.php?controller=users&action=register">
                         <div id="loginInput">
                             <div class="inputWithIconRegister inputIconBg">
-														<?= i18n("Username")?><input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("UsernameAdd")?>" required>
-														<?= isset($errors["username"])?i18n($errors["username"]):"" ?>
+								<?= i18n("Username")?><input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("UsernameAdd")?>" required>
+								<?= isset($errors["username"])?i18n($errors["username"]):"" ?>
                                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div id="loginInput">
                             <div class="inputWithIconRegister inputIconBg">
-														<?= i18n("Password")?><input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
-														<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?>
-														<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+								<?= i18n("Password")?><input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
+								<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?>
+								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-														<button type="submit" class="btn btn-dark"><?= i18n("Register")?></button>
+							<button type="submit" class="btn btn-dark"><?= i18n("Register")?></button>
                         </div>
                     </form>
                 </div>

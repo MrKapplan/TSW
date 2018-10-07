@@ -24,6 +24,13 @@ array(
 	"Edit" => "Editar",
 	"Delete" => "Eliminar",
 	"by %s" => "Creada por %s",
-	"At" => "En"
+	"At %s" => "En %s",
+	"MON" => "LUN",
+	"TUE" => "MAR",
+	"WED" => "MIE",
+	"THU" => "JUE",
+	"FRI" => "VIE",
+	"SAT" => "SAB",
+	"SUN" => "DOM"
 )
 ?>

@@ -55,8 +55,10 @@ class Poll {
 	}
 
 	public function setLink($link) {
-		$this->linl = $link;
+		$this->link = $link;
 	}
+
+
 
 
 	public function checkIsValidForCreate() {

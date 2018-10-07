@@ -28,7 +28,7 @@ $errors = $view->getVariable("errors");
                                 <input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
                                 <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-														<button type="submit" class="btn btn-dark"><?= i18n("login")?></button>
+							<button type="submit" class="btn btn-dark"><?= i18n("login")?></button>
                         </div>
                     </form>
                     <div id="loginPerdidaDeDatos">
