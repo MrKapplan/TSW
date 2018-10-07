@@ -54,6 +54,37 @@ function addTable(idContainer){
     document.getElementById(table.id).appendChild(tbody);
 
 }
+function fillTable(newElement, idElement, fatherElement){
+    var newTr = document.createElement(newElement);
+    newTr.id = idElement;
+    var tbodyFather = document.getElementById(fatherElement);
+    tbodyFather.appendChild(newTr);
+    var tdElement;
+    var inputTable;
+
+    for (var i = 0; i < 3; i++) {
+        if(i==0){
+            tdElement=document.createElement("td");
+            newTr.appendChild(tdElement);
+            tdElement.innerHTML=idElement;
+        }else{
+        tdElement=document.createElement("td");
+        newTr.appendChild(tdElement);
+        inputTable = document.createElement("input");
+        inputTable.type="time";
+        tdElement.appendChild(inputTable);
+        }
+    }
+        
+        
+
+      
+        
+        
+    
+
+
+}
 
 
 function addFatherDiv(newElement, idElement, oldElement){
@@ -122,8 +153,12 @@ $(document).ready(function () {
 
 
                 ////////DESDE AQUI PARA RELLENAR LA TABLA
-                addSonDiv("div", clickedDate.toLocaleDateString(), "timeContainer");
 
+                /*addSonDiv("div", clickedDate.toLocaleDateString(), "timeContainer");*/
+                
+                fillTable("tr", clickedDate.toLocaleDateString(),"tbody");
+
+                /*
                 var startTime = document.createElement("input");
                 startTime.type = "time";
                 startTime.id = clickedDate.toLocaleDateString();
@@ -132,7 +167,7 @@ $(document).ready(function () {
                 var endTime = document.createElement("input");
                 endTime.type = "time";
                 endTime.id = clickedDate.toLocaleDateString();
-                document.getElementById(clickedDate.toLocaleDateString()).appendChild(endTime);
+                document.getElementById(clickedDate.toLocaleDateString()).appendChild(endTime);*/
                 
             }
             calendar.selectDates(selectedDates);
