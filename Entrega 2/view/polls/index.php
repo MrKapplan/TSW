@@ -11,7 +11,7 @@ $currentuser = $view->getVariable("currentusername");
 
       <div class="container">
         <div class="row center-row">
-            <div class="col-lg-6 center-block">
+            <div class="col-lg-12 center-block">
 			<div id="subtitle">
                     <h1><?= i18n("My polls")?></h1>
                 </div>
@@ -29,7 +29,7 @@ $currentuser = $view->getVariable("currentusername");
 							<?php foreach ($polls as $poll): ?>
 								<tr>
 									<td>
-										<a href="index.php?controller=polls&action=view&id=<?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
+										<a href="index.php?controller=polls&action=view&id= <?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
 										</td>
 										
 										<td>
