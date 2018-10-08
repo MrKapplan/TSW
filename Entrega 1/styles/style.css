@@ -170,6 +170,12 @@ input[type=text],[type=password]{
   
   .inputWithIcon{
     position:relative;
+
+  }
+  #encuesta{
+  	width: 70%;
+  	margin: auto;
+
   }
   
   .inputWithIcon i{
@@ -202,6 +208,8 @@ input[type=text],[type=password]{
   width: 50%;
   margin:auto;
 }
+
+
 
 
 

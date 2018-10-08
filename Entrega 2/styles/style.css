@@ -201,9 +201,13 @@ input[type=text],[type=password]{
 
 #loginInput{
   width: 50%;
-  margin:auto;
+  margin: auto;
 }
+ #encuesta{
+  	width: 70%;
+  	margin: auto;
 
+  }
 
 
 
