@@ -1,14 +1,15 @@
 <?php
-//file: view/polls/view.php
+//file: view/assignations/edit.php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
+
 $poll = $view->getVariable("poll");
-$gaps = $view->getVariable("gap");
-$assignations = $view->getVariable("usersGaps");
-$users = $view->getVariable("users");
+$gaps = $view->getVariable("gaps");
+$assignations = $view->getVariable("assignations");
+$participants = $view->getVariable("participants");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
-$view->setVariable("title", "View Poll");
+$view->setVariable("title", "Edit Assignation");
 
 
 ?>
@@ -36,14 +37,14 @@ $view->setVariable("title", "View Poll");
 
                 <div class="col-lg-12 center-block2">
                 <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
-                        <table id="dataTable" class="table text-center">
+                        <table id="dataTable" class="table text-center" onclick="removeCheckbox('dataTable')">
                             <thead>
-                                <tr>
+                            <tr>
                                 <th scope="col"></th>
                             
-                                <?php foreach ($users as $user): ?>
-                                    <?php  if($user->getUser()->getUsername() != $currentuser){ ?>
-                                        <th id="<?=$user->getUser()->getUsername()?>" scope="col"> <?=$user->getUser()->getUsername()?> </th>
+                                <?php foreach ($participants as $participant): ?>
+                                    <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
+                                        <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
                                     <?php } else { ?>
                                             <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
                                    <?php } ?>
@@ -58,15 +59,33 @@ $view->setVariable("title", "View Poll");
                                             <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
                                             <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
-                                          <?php foreach ($users as $user){ 
-                                                    $isAssignated=false; ?>
+                                          <?php foreach ($participants as $participant){ 
+                                                    $isAssignated=false; 
+                                                    $currentUserAsignation = false; ?>
                                             
                                                 <?php foreach($assignations as $assignation){
-                                                       if($assignation->getUser()->getUsername() == $user->getUser()->getUsername() && $assignation->getGap()->getId() == $gap->getId()){
+                                                     $currentUserAsignation = false;
+                                                    if($assignation->getUser()->getUsername() == $participant->getUser()->getUsername() && $assignation->getGap()->getId() == $gap->getId()){
                                                         $isAssignated=true;
-                                                    }
+
                                                 }
-                                                if($isAssignated){ ?>
+
+                                            }
+                                            if($participant->getUser()->getUsername() == $currentuser){
+                                                $currentUserAsignation = true;
+                
+                                            }
+                                                if($currentUserAsignation && $isAssignated){ ?>
+                                                        <td><label class="checkbox">
+                                                        <input type="checkbox" name="assignation[]" value="<?=$gap->getId()?>" class="success" checked/>
+                                                        <span class="success"></span>
+                                                        </label></td>
+                                             <?php   } else if($currentUserAsignation && !$isAssignated){ ?>
+                                                        <td><label class="checkbox">
+                                                        <input type="checkbox" name="assignation[]" value="<?=$gap->getId()?>" />
+                                                        <span class="success"></span>
+                                                        </label></td>                                                 
+                                               <?php } else if($isAssignated){ ?>
                                                         <td><label class="checkbox">
                                                         <input type="checkbox" class="success" checked onclick="return false;" />
                                                         <span class="success"></span>
@@ -74,6 +93,7 @@ $view->setVariable("title", "View Poll");
                                                 <?php } else { ?>
                                                         <td><label class="checkbox">
                                                         <input type="checkbox"  onclick="return false;" />
+                                
                                                         </label></td>
                                                 <?php  } ?>
 
@@ -82,8 +102,8 @@ $view->setVariable("title", "View Poll");
                                     <?php } ?>
                             </tbody>
                         </table>
-                         <a href="./index.php?controller=polls&action=index"><?= i18n("back") ?></a>
-                        <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
+                         <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("back") ?></a>
+                        <button type="submit" class="btn btn-dark"><?= i18n("Save") ?></button>
                     </form>
                 </div>
             </div>

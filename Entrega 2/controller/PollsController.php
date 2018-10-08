@@ -40,11 +40,11 @@ class PollsController extends BaseController {
 
 	
 	public function view(){
-		if (!isset($_GET["id"])) {
+		if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
 		}
 
-		$pollid = $_GET["id"];
+		$pollid = $_GET["poll"];
 		$poll = $this->pollMapper->findById($pollid);
 		$gap = $this->gapMapper->findGapsByIdPoll($pollid);
 
@@ -63,6 +63,7 @@ class PollsController extends BaseController {
 		$this->view->setVariable("gap", $gap);
 		$this->view->setVariable("usersGaps", $assignations);
 		$this->view->setVariable("users", $participants);
+		
 		$this->view->render("polls", "view");
 
 	}

@@ -23,9 +23,6 @@ $currentuser = $view->getVariable("currentusername");
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <!-- Our JS -->
-    <script type="text/javascript" src="./js/common.js"></script>
-
     <!-- CSS -->
     <link rel="stylesheet" href="./styles/style.css">
 	<!-- enable ji18n() javascript function to translate inside your scripts -->

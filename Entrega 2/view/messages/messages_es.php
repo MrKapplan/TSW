@@ -33,6 +33,7 @@ array(
 	"FRI" => "VIE",
 	"SAT" => "SAB",
 	"SUN" => "DOM",
-	"You" => "Tú"
+	"You" => "Tú",
+	"Modify Participation" => "Modificar Participación"
 )
 ?>
