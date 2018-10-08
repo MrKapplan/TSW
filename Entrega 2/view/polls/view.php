@@ -17,7 +17,7 @@ $view->setVariable("title", "View Poll");
 
 <div class="container">
         <div class="row center-row">
-            <div class="col-lg-6 center-block">
+            <div class="col-lg-12 center-block">
                 <div id="subtitle">
 				<?=htmlentities($poll->getTitle());?>
                 </div>

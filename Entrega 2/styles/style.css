@@ -55,7 +55,6 @@ header{
 	margin-left: 10px;
 }
 
-
 #navbarDropdown:hover{
 	color: #000;
 }
@@ -73,6 +72,7 @@ header{
 .container {
 	margin: auto;
 }
+
 
 .center-row{
 	margin-left: auto;
@@ -161,37 +161,37 @@ input[type=text],[type=password]{
 	transition:.3s;
 	height: 10%!important;
   }
-	
-	#loginInput{
-		width: 50%;
-		margin:auto;
-	}
 
-	.inputWithIconLogin input[type=text],[type=password]{
-		padding-left:40px;
-	}
-	
-	.inputWithIconLogin{
-		position:relative;
-	}
-	
-	.inputWithIconLogin i{
-		position:absolute;
-		left:0;
-		top:9px;
-		padding:9px 8px;
-		color:#aaa;
-		transition:.3s;
-	}
-	
-	
-	.inputWithIconLogin.inputIconBg i{
-		background-color:#aaa;
-		color:#fff;
-		padding:9px 4px;
-		border-radius:4px 0 0 4px;
-	}
   
+
+  .inputWithIcon input[type=text],[type=password]{
+    padding-left:40px;
+    text-align: center;
+  }
+  
+  .inputWithIcon{
+    position:relative;
+  }
+  
+  .inputWithIcon i{
+    position:absolute;
+    left:0;
+    top:8px;
+    padding:9px 8px;
+    color:#aaa;
+    transition:.3s;
+  }
+  
+  
+  .inputWithIcon.inputIconBg i{
+    background-color:#aaa;
+    color:#fff;
+    padding:9px 4px;
+    border-radius:4px 0 0 4px;
+  }
+  
+ 
+
 
 .fa-lg {
     font-size: 1.6em;
@@ -199,29 +199,9 @@ input[type=text],[type=password]{
 }
 
 
-.inputWithIconRegister input[type=text],[type=password]{
-	padding-left:40px;
-}
-
-.inputWithIconRegister{
-	position:relative;
-}
-
-.inputWithIconRegister i{
-	position:absolute;
-	left:0;
-	top:31px;
-	padding:9px 8px;
-	color:#aaa;
-	transition:.3s;
-}
-
-
-.inputWithIconRegister.inputIconBg i{
-	background-color:#aaa;
-	color:#fff;
-	padding:9px 4px;
-	border-radius:4px 0 0 4px;
+#loginInput{
+  width: 50%;
+  margin:auto;
 }
 
 
@@ -229,11 +209,13 @@ input[type=text],[type=password]{
 
 /* TYPE=TIME */
 
+
 input[type=time] {
 	width: auto;
 	border: 0;
 	
 }
+
 
 
 /* TYPE=SELECT */
@@ -305,14 +287,10 @@ select{
 
 /* BUTTONS */
 
-
-.btn{
-	padding: .2rem .2rem !important;
-}
-
 .btn-dark{
 	margin-top:20px;
 	margin-bottom:10px;
+	margin-right: 10%;
 	padding:8px;
 	font-size:14px;
 	background-color:#eeee;
@@ -358,10 +336,16 @@ td {
 	background-color: #eeee;
 }
 
-
 #timeContainer{
-	float: right;
-	max-width: 20%;
+		margin-top: 10%;
+		width: 50%;
+	}
+
+@media(min-width: 990px){
+	#timeContainer{
+		float: right;
+		margin-top: 0%;
+	}
 }
 
 /* FOOTER */
@@ -372,15 +356,13 @@ td {
 	width: 100%;
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
-    background-color: white;
+    background-color: #19e6;
     color: #000;
     text-align: center; 
-	border-top: 2px solid black;
 }
 
 ul.social-network {
 	padding: 0;
-	margin-top: 2%;
 	text-align:center;	
 }
 
