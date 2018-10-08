@@ -330,10 +330,16 @@ td {
 	background-color: #eeee;
 }
 
-
 #timeContainer{
-	float: right;
-	max-width: 20%;
+		margin-top: 10%;
+		width: 50%;
+	}
+
+@media(min-width: 990px){
+	#timeContainer{
+		float: right;
+		margin-top: 0%;
+	}
 }
 
 /* FOOTER */

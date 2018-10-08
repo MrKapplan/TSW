@@ -53,6 +53,18 @@ function addTable(idContainer){
     tbody.id = "tbody";
     document.getElementById(table.id).appendChild(tbody);
 
+
+        var boton = document.createElement("button");
+            boton.type = "button";
+            boton.className = "btn btn-dark";
+            boton.value = "Guardar";
+            boton.appendChild(document.createTextNode("Guardar"));
+            document.getElementById(idContainer).appendChild(boton);
+
+
+
+
+
 }
 function fillTable(newElement, idElement, fatherElement){
     var newTr = document.createElement(newElement);
@@ -90,9 +102,34 @@ function fillTable(newElement, idElement, fatherElement){
 function addFatherDiv(newElement, idElement, oldElement){
     var inputDiv = document.createElement(newElement);
     inputDiv.id = idElement;
+
+/*
     var divCalendar = document.getElementById(oldElement);
     parentDiv = divCalendar.parentNode;
     parentDiv.insertBefore(inputDiv, divCalendar);
+    */
+
+    var div = document.getElementsByClassName("demo-section k-content");
+
+    for($i=0; i<div.length; $i++){
+        div[i].id.appendChild(inputDiv);
+    }
+
+
+}
+
+
+function addFatherDiv2(newElement, idElement){
+    var inputDiv = document.createElement(newElement);
+    inputDiv.id = idElement;
+
+    var div = document.getElementsByClassName("demo-section k-content");
+
+    for(var i=0; i<div.length; i++){
+        div[i].appendChild(inputDiv);
+    }
+
+
 }
 
 
@@ -112,7 +149,7 @@ $(document).ready(function () {
     });
 
 
-    addFatherDiv("div", "timeContainer", "calendar");
+    addFatherDiv2("div", "timeContainer");
     addTable("timeContainer");
 
     $("#calendar").on("mousedown", "td", function (e) {
