@@ -2,8 +2,9 @@
 //file: /view/messages/messages_es.php
 $i18n_messages =
 array(
-	"Login" => "Loguin",
+	"Login" => "Login",
 	"login" => "Entrar",
+	"back" => "Volver",
 	"¿Tienes un hueco?" => "¿Tienes un hueco?",
 	"AddPoll" => "Crear Encuesta",
 	"SeeMyPolls" => "Ver Encuestas",

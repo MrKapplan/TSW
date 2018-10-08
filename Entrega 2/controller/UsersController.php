@@ -39,7 +39,7 @@ class UsersController extends BaseController {
 
 		if (isset($_POST["username"])){ 
 			$user->setUsername($_POST["username"]);
-			$user->setPassword($_POST["passwd"]);
+			$user->setPasswd($_POST["passwd"]);
 
 			try{
 				$user->checkIsValidForRegister(); 

@@ -4,7 +4,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $poll = $view->getVariable("poll");
 $gaps = $view->getVariable("gap");
-$usersGaps = $view->getVariable("usersGaps");
+$assignations = $view->getVariable("usersGaps");
 $users = $view->getVariable("users");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
@@ -32,8 +32,7 @@ $view->setVariable("title", "View Poll");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action="crear">
-                        <table id="dataTable" class="table text-center" onload="checkboxes('dataTable')" onclick="removeCheckbox('dataTable')">
+                        <table id="dataTable" class="table text-center">
                             <thead>
                                 <tr>
                                 <th scope="col"></th>
@@ -50,27 +49,42 @@ $view->setVariable("title", "View Poll");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($gaps as $gap){ ?>
+                                <?php foreach ($gaps as $gap){ 
+                                    $gapCount=0;
+                                ?>
                                     <tr id="<?= $gap->getId() ?>">
                                         <td>
                                             <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
                                             <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
 
-                                          <?php foreach ($users as $user){ ?>
+                                          <?php foreach ($users as $user){ 
+                                                    $isAssignated=false; ?>
+                                            
+                                                <?php foreach($assignations as $assignation){
+                                                    if($assignation->getUser()->getUsername() == $user->getUser()->getUsername() && $assignation->getGap()->getId() == $gap->getId()){
+                                                        $isAssignated=true;
+                                                        $gapCount++;
+                                                    }
+                                                }
 
-                                                    <td><label class="checkbox">
-                                                    <input type="checkbox" class="success" checked onclick="return false;" />
-                                                    <span class="success"></span>
-                                                    </label></td>
-         
+                                                if($isAssignated){ ?>
+                                                        <td><label class="checkbox">
+                                                        <input type="checkbox" class="success" checked onclick="return false;" />
+                                                        <span class="success"></span>
+                                                        </label></td>
+                                                <?php } else { ?>
+                                                        <td><label class="checkbox">
+                                                        <input type="checkbox"  onclick="return false;" />
+                                                        </label></td>
+                                                <?php  } ?>
+
                                                 <?php  } ?>
                                     </tr>
                                     <?php } ?>
                             </tbody>
                         </table>
-                    </form>
-                    <button type="button" class="btn btn-dark">Continuar</button>
+                    <a href="./index.php?controller=polls&action=index"><?= i18n("back") ?></a>
                 </div>
             </div>
         </div>
