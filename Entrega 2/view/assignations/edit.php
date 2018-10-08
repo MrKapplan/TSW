@@ -29,7 +29,7 @@ $view->setVariable("title", "Edit Assignation");
 				<?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> - 	<?= sprintf(i18n("At %s"), $poll->getUbication())?>
                 </div>
                 <div id="link">
-                    <div class="inputWithIconLogin inputIconBg">
+                    <div class="inputWithIconLogin inputIconBg" id="encuesta">
                         <input type="text" id="linkEncuesta" placeholder="<?= $poll->getLink()?>" readonly>
                         <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
