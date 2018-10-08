@@ -60,65 +60,62 @@ class PollsController extends BaseController {
 		}
 
 		$this->view->setVariable("poll", $poll);
-		$this->view->setVariable("gap", $gap);
-		$this->view->setVariable("usersGaps", $assignations);
-		$this->view->setVariable("users", $participants);
+		$this->view->setVariable("gaps", $gap);
+		$this->view->setVariable("assignations", $assignations);
+		$this->view->setVariable("participants", $participants);
 		
 		$this->view->render("polls", "view");
 
 	}
 
 	
-	// public function add() {
-	// 	if (!isset($this->currentUser)) {
-	// 		throw new Exception("Not in session. Adding polls requires login");
-	// 	}
+	public function add() {
+		if (!isset($this->currentUser)) {
+			throw new Exception("Not in session. Adding polls requires login");
+		}
 
-	// 	$poll = new Post();
+		$poll = new Poll();
 
-	// 	if (isset($_POST["submit"])) { // reaching via HTTP Post...
+		if (isset($_POST["submit"])) { 
 
-	// 		// populate the Post object with data form the form
-	// 		$poll->setTitle($_POST["title"]);
-	// 		$poll->setContent($_POST["content"]);
+			$poll->setTitle($_POST["title"]);
 
-	// 		// The user of the Post is the currentUser (user in session)
-	// 		$poll->setAuthor($this->currentUser);
 
-	// 		try {
-	// 			// validate Post object
-	// 			$poll->checkIsValidForCreate(); // if it fails, ValidationException
+			if(isset($_POST["ubication"])){
+				$poll->setUbication($_POST["ubication"]);
+			}
 
-	// 			// save the Post object into the database
-	// 			$this->pollMapper->save($pollid);
+			// The user of the Post is the currentUser(user in session)
+			$poll->setAuthor($this->currentUser);
 
-	// 			// POST-REDIRECT-GET
-	// 			// Everything OK, we will redirect the user to the list of polls
-	// 			// We want to see a message after redirection, so we establish
-	// 			// a "flash" message (which is simply a Session variable) to be
-	// 			// get in the view after redirection.
-	// 			$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
+			$link = "https://midominio.com/poll/" . substr(md5($poll->getTitle(), false), 0, 20);
+			$poll->setLink($link);
+			
 
-	// 			// perform the redirection. More or less:
-	// 			// header("Location: index.php?controller=polls&action=index")
-	// 			// die();
-	// 			$this->view->redirect("polls", "index");
+			try {
+				
+				$poll->checkIsValidForCreate(); 
 
-	// 		}catch(ValidationException $ex) {
-	// 			// Get the errors array inside the exepction...
-	// 			$errors = $ex->getErrors();
-	// 			// And put it to the view as "errors" variable
-	// 			$this->view->setVariable("errors", $errors);
-	// 		}
-	// 	}
+				$this->pollMapper->save($poll);
 
-	// 	// Put the Post object visible to the view
-	// 	$this->view->setVariable("post", $pollid);
+				// POST-REDIRECT-GET
+				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
 
-	// 	// render the view (/view/polls/add.php)
-	// 	$this->view->render("polls", "add");
+				$this->view->redirect("polls", "index");
 
-	// }
+			}catch(ValidationException $ex) {
+
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
+
+		// Put the Post object visible to the view
+	//	$this->view->setVariable("post", $pollid);
+
+		$this->view->render("polls", "add");
+
+	}
 
 	
 	// public function edit() {

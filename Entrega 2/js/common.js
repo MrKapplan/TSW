@@ -1,6 +1,5 @@
 
 function removeCheckbox(tableId) {
-    var table = document.getElementById(tableId);
     var fila = document.getElementsByClassName("table-success"); //Array with a one element (tr's id)
 
     for (var i = 0; i < fila.length; i++) {
@@ -57,25 +56,35 @@ function checkboxes(tableId) {
     var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
     var inputElems = document.getElementsByTagName("input");  //Array one dimensional with the inputs (input link poll included)
     var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
-    var count = 0, max = 0, maxAbs = 0, trSelected = -1; 
+    var count = 0, max = 0, maxAbs = 0, trSelected = new Array(); 
 
     for (var j = 1; j < inputElems.length; j++) {
         if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
             count++;
         }
         if (j % numInputsForRow == 0) {  //Separate the elements of each row
-            if (count > maxAbs) {
+            if (count >= max) {
                 max = count;
-                maxAbs = count;
-                trSelected = inputElems[j].parentNode.parentNode.parentNode.id; //trSelected is the id of the row that has the maximum number of checkbox checked
-            } else if (count == max) {
-                max = -1;
-            }
+                //maxAbs = count;
+                trSelected.push(inputElems[j].parentNode.parentNode.parentNode.id); //trSelected is the id of the row that has the maximum number of checkbox checked
+                //console.log(trSelected);
+            // } else if (count == max) {
+            //     max = -1;
+             }
             count = 0;
         }
     }
-    if (trSelected != -1 && max != -1) {
-        document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
+
+    // if (trSelected != -1 && max != -1) {
+    //     document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
+    // }
+
+    if(trSelected.length == 1){
+        document.getElementById(trSelected[0]).setAttribute("class", "table-success"); //Modified the class of div
+    } else {
+        for(var y=0; y<trSelected.length; y++){
+            document.getElementById(trSelected[y]).setAttribute("class", "table-warning"); //Modified the class of div when several options are tied 
+        }
     }
 }
 

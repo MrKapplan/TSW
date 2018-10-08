@@ -117,10 +117,10 @@ header{
 #link{
 	text-align: center;
 	margin: auto;
-	margin-top: 3%;
+	margin-top: 1%;
 	padding-left:3%;
 	font-size: 14px;
-	width:68%
+	width:80%!important;
 }
 
 #requiredInput {
@@ -161,13 +161,6 @@ input[type=text],[type=password]{
 	transition:.3s;
 	height: 10%!important;
   }
-
-  
-
-  #loginInput{
-	width: 50%;
-	margin:auto;
-}
 
 .inputWithIconLogin input[type=text],[type=password]{
 	padding-left:40px;
@@ -227,22 +220,22 @@ border-radius:4px 0 0 4px;
 }
  
 
-
 .fa-lg {
     font-size: 1.6em;
     line-height: 0.84em;
 }
 
 
-#loginInput{
-  width: 50%;
-  margin: auto;
+#inputLogin{
+   width: 50%;
+   margin: auto;
 }
- #encuesta{
-  	width: 70%;
+
+#inputLink{
+  	width: 60%;
   	margin: auto;
 
-  }
+}
 
 
 

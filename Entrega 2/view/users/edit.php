@@ -28,8 +28,11 @@ $currentuser = $view->getVariable("currentusername");
 								<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-							<button type="submit" class="btn btn-dark"><?= i18n("Edit")?></button>
+                            
+                            <button type="submit" class="btn btn-dark"><?= i18n("Edit")?></button>
+                            <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
                         </div>
+                        
                     </form>
                 </div>
             </div>

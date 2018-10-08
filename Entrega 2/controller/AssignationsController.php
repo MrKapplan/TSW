@@ -54,34 +54,25 @@ class AssignationsController extends BaseController {
 			throw new Exception("no such assignations for the poll with id: ".$pollid);
 		}
 
-        
-        if (isset($_POST["submit"])) { // reaching via HTTP Post...
+        if (isset($_POST["submit"])) { 
 
 			try {
                 
-                $assignations = $_POST["assignations"];
-                
+				$newAssignations = $_POST["assignations"];
+				
+				if ( $assignations == NULL){
+					throw new Exception("no such assignations for the poll with id: ".$pollid);
+				}
+        
+				$this->assignationMapper->update($user->getUsername(), $newAssignations, $pollid);
 
-                //update the Post object in the database
-                
-				$this->assignationMapper->update($user->getUsername(), $assignations);
+				$this->view->setFlash(i18n("Gap successfully updated."));
 
-				// POST-REDIRECT-GET
-				// Everything OK, we will redirect the user to the list of posts
-				// We want to see a message after redirection, so we establish
-				// a "flash" message (which is simply a Session variable) to be
-				// get in the view after redirection.
-				$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully updated.")));
-
-				// perform the redirection. More or less:
-				// header("Location: index.php?controller=posts&action=index")
-				// die();
-				//$this->view->redirect("polls", "index");
+				
+				$this->view->redirect("polls", "view&poll=$pollid");
 
 			}catch(ValidationException $ex) {
-				// Get the errors array inside the exepction...
 				$errors = $ex->getErrors();
-				// And put it to the view as "errors" variable
 				$this->view->setVariable("errors", $errors);
 			}
         }
@@ -92,7 +83,6 @@ class AssignationsController extends BaseController {
 		$this->view->setVariable("assignations", $assignations);
 		$this->view->setVariable("participants", $participants);
 
-		// render the view (/view/posts/add.php)
 		$this->view->render("assignations", "edit");
 	}
 

@@ -29,19 +29,19 @@ $view->setVariable("title", "Edit Assignation");
 				<?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> - 	<?= sprintf(i18n("At %s"), $poll->getUbication())?>
                 </div>
                 <div id="link">
-                    <div class="inputWithIconLogin inputIconBg" id="encuesta">
+                    <div id="inputLink" class="inputWithIconLogin inputIconBg">
                         <input type="text" id="linkEncuesta" placeholder="<?= $poll->getLink()?>" readonly>
                         <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>" >
+                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>" onload="removeCheckbox('dataTable')">
                         <table id="dataTable" class="table text-center">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
-                            
+            
                                 <?php foreach ($participants as $participant): ?>
                                     <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
                                         <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
@@ -102,7 +102,7 @@ $view->setVariable("title", "Edit Assignation");
                                     <?php } ?>
                             </tbody>
                         </table>
-                         <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("back") ?></a>
+                         <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("Back") ?></a>
                         <input type="hidden" id="hidden" name="assignations" >
                         <button type="submit" name="submit" class="btn btn-dark" onclick="validateCheckboxes()"><?= i18n("Save")?></button>
                     </form>

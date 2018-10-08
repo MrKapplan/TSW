@@ -4,7 +4,9 @@ $i18n_messages =
 array(
 	"Login" => "Login",
 	"login" => "Entrar",
-	"back" => "Volver",
+	"Back" => "Volver",
+	"Registry" => "Registro",
+	"Register" => "Registrarse",
 	"¿Tienes un hueco?" => "¿Tienes un hueco?",
 	"AddPoll" => "Crear Encuesta",
 	"SeeMyPolls" => "Ver Encuestas",
@@ -34,6 +36,12 @@ array(
 	"SAT" => "SAB",
 	"SUN" => "DOM",
 	"You" => "Tú",
-	"Modify Participation" => "Modificar Participación"
+	"Modify Participation" => "Modificar Participación",
+	"Add Poll" => "Crear Encuesta",
+	"Some data to start..." => "Empecemos por unos datos...",
+	"What is the matter about?" => "Cuéntanos sobre qué va",
+	"Where are you going to celebrate?" => "¿Dónde se va a celebrar?",
+	"Mandatory" => "Obligatorio",
+	"Continue" => "Continuar"
 )
 ?>

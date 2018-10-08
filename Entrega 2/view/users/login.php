@@ -17,13 +17,13 @@ $errors = $view->getVariable("errors");
                 </div>
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="index.php?controller=users&action=login">
-                        <div id="loginInput">
+                        <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
                                 <input type="text" name="username" placeholder="<?= i18n("Username")?>" required>
                                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div id="loginInput">
+                        <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
                                 <input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
                                 <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>

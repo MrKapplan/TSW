@@ -43,42 +43,20 @@ public function findUsersAssignationsInPoll($pollid){
 	}
 	
 
-	public function update($user, $assignations) {
-
-		$assignationsArray= explode(',',$assignations);  
-
-		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?");
-		$stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap where username=? AND gap_id=?");
-	
-
-		foreach($assignationsArray as $assignation){
-			$stmt2 = $this->db->prepare("SELECT Count(*) FROM user_selects_gap where username=? and gap_id=?");
-			$stmt2->execute(array($user, $assignation));
-			if ($stmt2->fetchColumn() > 0) {
-				$stmtDelete->execute(array($user, $assignation));
-			
-
-			} else {
-				
-				
-				$stmtAdd->execute(array($user, $assignation));
-			}
+	public function update($user, $assignations, $pollid) {
 
 		
-		}
+		$assignationsArray= explode(',', $assignations);  
+		
+		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
+		$stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap  where username= ? AND poll_id = ?");
 
-		
-		
-
-		
-		// // $stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?");
-		
-			
-		//  foreach($assignationsArray as $assignation){
-		// 	$stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap  where username= ? AND gap_id=?");
-		// 	$stmtDelete->execute(array($user, $assignation));
-		//  }
-
+		if(count($assignationsArray) > 0){
+			$stmtDelete->execute(array($user, $pollid));
+			foreach($assignationsArray as $assignation){
+			$stmtAdd->execute(array($user, $assignation, $pollid));
+		 }
+		} 
 	}
     
 }
