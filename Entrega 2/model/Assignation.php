@@ -3,19 +3,13 @@
 
 require_once(__DIR__."/../core/ValidationException.php");
 
-
-class Participant {
-
+class Assignation {
 	private $user;
 	private $gap;
 
-
-	public function __construct(User $user=NULL,  Gap $gap=NULL) {
-
+	public function __construct(User $user=NULL, Gap $gap=NULL) {
 		$this->user = $user;
 		$this->gap = $gap;
-
-
 	}
 
 	public function getUser() {

@@ -36,16 +36,12 @@ $view->setVariable("title", "View Poll");
                             <thead>
                                 <tr>
                                 <th scope="col"></th>
-                                <?php $i=true; ?>
+                                <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
                                 <?php foreach ($users as $user): ?>
-                                    <th scope="col"> <?=$user->getUser()->getUsername()?> </th>
-                                    <?php  if($user->getUser()->getUsername() == $currentuser) {
-                                        $i=false; ?>
-                                        <?php } ?>
+                                    <?php  if($user->getUser()->getUsername() != $currentuser): ?>
+                                        <th id="<?=$user->getUser()->getUsername()?>" scope="col"> <?=$user->getUser()->getUsername()?> </th>
+                                            <?php endif; ?>
                                 <?php endforeach; ?>
-                                <?php if($i){ ?>
-                                    <th id="user" scope="col"><button type="button" id="addCol" class="btn btn-success" value="+" onclick="appendColumn('dataTable','addCol');">+</button></th>
-                                <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>

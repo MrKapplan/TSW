@@ -3,8 +3,8 @@
 
 require_once(__DIR__."/../model/Poll.php");
 require_once(__DIR__."/../model/PollMapper.php");
-require_once(__DIR__."/../model/Gap.php");
 require_once(__DIR__."/../model/GapMapper.php");
+require_once(__DIR__."/../model/AssignationMapper.php");
 require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
@@ -20,12 +20,14 @@ class PollsController extends BaseController {
 
 	private $pollMapper;
 	private $gapMapper;
+	private $assignationMapper;
 
 	public function __construct() {
 		parent::__construct();
 
 		$this->pollMapper = new PollMapper();
 		$this->gapMapper = new GapMapper();
+		$this->assignationMapper = new AssignationMapper();
 	}
 
 
@@ -44,23 +46,23 @@ class PollsController extends BaseController {
 
 		$pollid = $_GET["id"];
 		$poll = $this->pollMapper->findById($pollid);
-
 		$gap = $this->gapMapper->findGapsByIdPoll($pollid);
 
-		$usersGaps = $this->gapMapper->findUsersParticipansInPoll($pollid);
-
-		$users = $this->gapMapper->findUsersParticipansInPoll2($pollid);
+		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
+		$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid);
 
 		if ($poll == NULL) {
 			throw new Exception("no such post with id: ".$pollid);
 		} else if ( $gap == NULL){
 			throw new Exception("no such gap with id: ".$pollid);
+		}else if ( $assignations == NULL){
+			throw new Exception("no such assignations with id: ".$pollid);
 		}
 
 		$this->view->setVariable("poll", $poll);
 		$this->view->setVariable("gap", $gap);
-		$this->view->setVariable("usersGaps", $usersGaps);
-		$this->view->setVariable("users", $users);
+		$this->view->setVariable("usersGaps", $assignations);
+		$this->view->setVariable("users", $participants);
 		$this->view->render("polls", "view");
 
 	}

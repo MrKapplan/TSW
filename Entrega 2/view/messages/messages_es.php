@@ -32,6 +32,7 @@ array(
 	"THU" => "JUE",
 	"FRI" => "VIE",
 	"SAT" => "SAB",
-	"SUN" => "DOM"
+	"SUN" => "DOM",
+	"You" => "Tú"
 )
 ?>
