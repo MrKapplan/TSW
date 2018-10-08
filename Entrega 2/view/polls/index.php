@@ -29,7 +29,7 @@ $currentuser = $view->getVariable("currentusername");
 							<?php foreach ($polls as $poll): ?>
 								<tr>
 									<td>
-										<a href="index.php?controller=polls&action=view&id= <?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
+										<a href="index.php?controller=polls&action=view&poll= <?= $poll->getId() ?>"><?= htmlentities($poll->getTitle()) ?></a>
 										</td>
 										
 										<td>

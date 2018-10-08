@@ -164,32 +164,67 @@ input[type=text],[type=password]{
 
   
 
-  .inputWithIcon input[type=text],[type=password]{
-    padding-left:40px;
-    text-align: center;
-  }
-  
-  .inputWithIcon{
-    position:relative;
-  }
-  
-  .inputWithIcon i{
-    position:absolute;
-    left:0;
-    top:8px;
-    padding:9px 8px;
-    color:#aaa;
-    transition:.3s;
-  }
-  
-  
-  .inputWithIcon.inputIconBg i{
-    background-color:#aaa;
-    color:#fff;
-    padding:9px 4px;
-    border-radius:4px 0 0 4px;
-  }
-  
+  #loginInput{
+	width: 50%;
+	margin:auto;
+}
+
+.inputWithIconLogin input[type=text],[type=password]{
+	padding-left:40px;
+}
+
+.inputWithIconLogin{
+	position:relative;
+}
+
+.inputWithIconLogin i{
+	position:absolute;
+	left:0;
+	top:9px;
+	padding:9px 8px;
+	color:#aaa;
+	transition:.3s;
+}
+
+
+.inputWithIconLogin.inputIconBg i{
+	background-color:#aaa;
+	color:#fff;
+	padding:9px 4px;
+	border-radius:4px 0 0 4px;
+}
+
+
+.fa-lg {
+font-size: 1.6em;
+line-height: 0.84em;
+}
+
+
+.inputWithIconRegister input[type=text],[type=password]{
+padding-left:40px;
+}
+
+.inputWithIconRegister{
+position:relative;
+}
+
+.inputWithIconRegister i{
+position:absolute;
+left:0;
+top:31px;
+padding:9px 8px;
+color:#aaa;
+transition:.3s;
+}
+
+
+.inputWithIconRegister.inputIconBg i{
+background-color:#aaa;
+color:#fff;
+padding:9px 4px;
+border-radius:4px 0 0 4px;
+}
  
 
 
@@ -290,7 +325,7 @@ select{
 .btn-dark{
 	margin-top:20px;
 	margin-bottom:10px;
-	margin-right: 10%;
+	margin-right: 0%;
 	padding:8px;
 	font-size:14px;
 	background-color:#eeee;
@@ -356,9 +391,11 @@ td {
 	width: 100%;
 	padding-top: 1.25rem;
 	padding-bottom: 1.25rem;
-    background-color: #19e6;
+    background-color: white;
     color: #000;
-    text-align: center; 
+	text-align: center; 
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
 }
 
 ul.social-network {
@@ -369,6 +406,7 @@ ul.social-network {
 ul.social-network li {
 	display:inline;
 	margin: 0 10px;
+	margin-top: 2%;
 	color:#000;
 }
 ul.social-network li a {	
