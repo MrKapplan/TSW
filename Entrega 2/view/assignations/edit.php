@@ -36,8 +36,8 @@ $view->setVariable("title", "Edit Assignation");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
-                        <table id="dataTable" class="table text-center" onclick="removeCheckbox('dataTable')">
+                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>" >
+                        <table id="dataTable" class="table text-center">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -77,12 +77,12 @@ $view->setVariable("title", "Edit Assignation");
                                             }
                                                 if($currentUserAsignation && $isAssignated){ ?>
                                                         <td><label class="checkbox">
-                                                        <input type="checkbox" name="assignation[]" value="<?=$gap->getId()?>" class="success" checked/>
+                                                        <input type="checkbox" name="assignation" value="<?=$gap->getId()?>" class="success" checked/>
                                                         <span class="success"></span>
                                                         </label></td>
                                              <?php   } else if($currentUserAsignation && !$isAssignated){ ?>
                                                         <td><label class="checkbox">
-                                                        <input type="checkbox" name="assignation[]" value="<?=$gap->getId()?>" />
+                                                        <input type="checkbox" name="assignation" value="<?=$gap->getId()?>"/>
                                                         <span class="success"></span>
                                                         </label></td>                                                 
                                                <?php } else if($isAssignated){ ?>
@@ -103,7 +103,8 @@ $view->setVariable("title", "Edit Assignation");
                             </tbody>
                         </table>
                          <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("back") ?></a>
-                        <button type="submit" class="btn btn-dark"><?= i18n("Save") ?></button>
+                        <input type="hidden" id="hidden" name="assignations" >
+                        <button type="submit" name="submit" class="btn btn-dark" onclick="validateCheckboxes()"><?= i18n("Save")?></button>
                     </form>
                 </div>
             </div>

@@ -78,3 +78,21 @@ function checkboxes(tableId) {
         document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
     }
 }
+
+function validateCheckboxes() {
+
+var checkboxChecked = [];
+var checkbox = document.getElementsByName('assignation');
+
+for (var i=0;i<checkbox.length;i++){
+  if ( checkbox[i].checked ) {
+    checkboxChecked.push(checkbox[i].value);
+  }
+}
+
+//var arv = checkboxChecked.toString();
+//alert(arv);
+document.getElementById("hidden").value = checkboxChecked;
+
+}
+

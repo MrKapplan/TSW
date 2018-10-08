@@ -58,20 +58,25 @@ class AssignationsController extends BaseController {
         if (isset($_POST["submit"])) { // reaching via HTTP Post...
 
 			try {
-				// update the Post object in the database
-				$this->postMapper->update($post);
+                
+                $assignations = $_POST["assignations"];
+                
+
+                //update the Post object in the database
+                
+				$this->assignationMapper->update($user->getUsername(), $assignations);
 
 				// POST-REDIRECT-GET
 				// Everything OK, we will redirect the user to the list of posts
 				// We want to see a message after redirection, so we establish
 				// a "flash" message (which is simply a Session variable) to be
 				// get in the view after redirection.
-				$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully updated."),$post ->getTitle()));
+				$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully updated.")));
 
 				// perform the redirection. More or less:
 				// header("Location: index.php?controller=posts&action=index")
 				// die();
-				$this->view->redirect("posts", "index");
+				//$this->view->redirect("polls", "index");
 
 			}catch(ValidationException $ex) {
 				// Get the errors array inside the exepction...
@@ -91,5 +96,7 @@ class AssignationsController extends BaseController {
 		$this->view->render("assignations", "edit");
 	}
 
-		
+        
+
+
 }
