@@ -62,6 +62,10 @@ class Gap {
 		return $this->poll_id;
 	}
 
+	public function setPoll_id($poll_id) {
+		$this->poll_id = $poll_id;
+	}
+
 	
 
 }

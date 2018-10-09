@@ -33,7 +33,7 @@ $currentuser = $view->getVariable("currentusername");
 
 
 <!-- <body  onload="checkboxes('dataTable')"> -->
-    <body onload="checkboxes('dataTable')">
+    <body>
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">

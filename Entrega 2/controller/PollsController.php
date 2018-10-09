@@ -90,10 +90,10 @@ class PollsController extends BaseController {
 
 			try {
 				$poll->checkIsValidForCreate(); 
-				$this->pollMapper->save($poll);
+				$pollid= $this->pollMapper->save($poll);
 				// POST-REDIRECT-GET
 				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
-				$this->view->redirect("gaps", "add");
+				$this->view->redirect("gaps", "add&poll=$pollid");
 
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
