@@ -24,8 +24,9 @@ function addRow() {
     document.getElementById('tbody').appendChild(timeEnd);
 
     var table = document.getElementById('idTable');
-    var rowCount = table.rows.length - 1;
-    var row = table.insertRow(rowCount);
+    var rowCount = table.rows.length-1;
+    var row = table.insertRow(rowCount+1);
+
 
     var cell = row.insertCell(0);
     cell.appendChild(boton);
