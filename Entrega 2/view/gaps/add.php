@@ -15,6 +15,7 @@ $view->setVariable("title", "Add Gap");
 ?>
  <!-- Kendo UI CSS -->
 <?php $view->moveToFragment("javascript"); ?>
+<script src="./js/common.js"></script>
 <script src="./js/calendar.js"></script>
 <script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>

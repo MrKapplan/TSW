@@ -1,3 +1,41 @@
+function deleteRow(row) {
+    var i = row.parentNode.parentNode.rowIndex;
+    document.getElementById('dataTable').deleteRow(i);
+}
+
+
+function addRow() {
+
+    var boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "btn btn-danger";
+    boton.value = "-";
+    boton.onclick = function () { deleteRow(this) };
+    boton.appendChild(document.createTextNode("-"));
+
+    var timeStart = document.createElement("input");
+    timeStart.type = "time";
+    timeStart.name = "timeStart";
+    document.getElementById('timeStart').appendChild(timeStart);
+
+    var timeEnd = document.createElement("input");
+    timeEnd.type = "time";
+    timeEnd.name = "timeEnd";
+    document.getElementById('timeEnd').appendChild(timeEnd);
+
+    var table = document.getElementById('dataTable');
+    var rowCount = table.rows.length - 1;
+    var row = table.insertRow(rowCount);
+
+    var cell = row.insertCell(0);
+    cell.appendChild(boton);
+    var cell1 = row.insertCell(1);
+    cell1.appendChild(timeStart);
+    var cell2 = row.insertCell(2);
+    cell2.appendChild(timeEnd);
+
+}
+
 function removeCheckbox(tableId) {
     var fila = document.getElementsByClassName("table-success"); //Array with a one element (tr's id)
 
