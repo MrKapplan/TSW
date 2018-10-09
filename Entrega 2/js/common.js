@@ -16,14 +16,14 @@ function addRow() {
     var timeStart = document.createElement("input");
     timeStart.type = "time";
     timeStart.name = "timeStart";
-    document.getElementById('timeStart').appendChild(timeStart);
+    document.getElementById('tbody').appendChild(timeStart);
 
     var timeEnd = document.createElement("input");
     timeEnd.type = "time";
     timeEnd.name = "timeEnd";
-    document.getElementById('timeEnd').appendChild(timeEnd);
+    document.getElementById('tbody').appendChild(timeEnd);
 
-    var table = document.getElementById('dataTable');
+    var table = document.getElementById('idTable');
     var rowCount = table.rows.length - 1;
     var row = table.insertRow(rowCount);
 
