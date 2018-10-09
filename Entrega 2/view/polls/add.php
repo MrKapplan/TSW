@@ -9,8 +9,8 @@ $view->setVariable("title", "Add Poll"); ?>
 <div class="container">
 	<div class="row center-row">
 		<div class="col-lg-6 center-block">
-			<div id="subtitle">
-				<h1><?= i18n("Some data to start...")?></h1>
+			<div id="subtitlePoll">
+				<?=htmlentities(i18n("Some data to start..."))?>
 			</div>
 			<div class="col-lg-12 center-block2">
 				<form method="POST" action="index.php?controller=polls&action=add">

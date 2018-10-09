@@ -16,13 +16,13 @@ $currentuser = $view->getVariable("currentusername");
                 </div>
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="index.php?controller=users&action=edit">
-                        <div id="loginInput">
+                        <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="text" name="username" placeholder="<?= $user->getUsername()?>" readonly>
                                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div id="loginInput">
+                        <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
 								<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?>

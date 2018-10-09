@@ -42,6 +42,7 @@ array(
 	"What is the matter about?" => "Cuéntanos sobre qué va",
 	"Where are you going to celebrate?" => "¿Dónde se va a celebrar?",
 	"Mandatory" => "Obligatorio",
-	"Continue" => "Continuar"
+	"Continue" => "Continuar",
+	'What free days do you have?' => '¿Qué días tienes libres?'
 )
 ?>

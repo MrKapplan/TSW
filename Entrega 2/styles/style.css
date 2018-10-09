@@ -83,7 +83,7 @@ header{
 .center-block{
 	float: none;
 	background-color: white;
-	margin-top: 10%;
+	margin-top: 3%;
 	margin-bottom: 10%;
 	margin-left: auto;
 	margin-right: auto;
@@ -101,17 +101,31 @@ header{
 
 #subtitle{
 	margin: auto;
-	margin-top: 7%;
-	font-size: 22px;
+	margin-top: 4%;
+	font-size: 32px;
 	text-align: center;
-	margin-bottom: 15%;
-
+	margin-bottom: 8%;
 }
+
+#subtitleView{
+	margin: auto;
+	margin-top: 7%;
+	font-size: 32px;
+	text-align: center;
+}
+
+#subtitlePoll{
+	margin: auto;
+	margin-top: 10%;
+	font-size: 32px;
+	text-align: center;
+}
+
 
 #subsubtitle {
 	margin:auto;
-	margin-top:1%;
-	font-size: 12px;
+	margin-top:2%;
+	font-size: 14px;
 	text-align: center;
 	color: grey;
 }

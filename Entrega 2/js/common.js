@@ -1,10 +1,10 @@
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
-    document.getElementById('dataTable').deleteRow(i);
+    document.getElementById('idTable').deleteRow(i);
 }
 
 
-function addRow() {
+function addRow(idElement) {
 
     var boton = document.createElement("button");
     boton.type = "button";
@@ -16,12 +16,12 @@ function addRow() {
     var timeStart = document.createElement("input");
     timeStart.type = "time";
     timeStart.name = "timeStart";
-    document.getElementById('tbody').appendChild(timeStart);
+    document.getElementById(idElement).appendChild(timeStart);
 
     var timeEnd = document.createElement("input");
     timeEnd.type = "time";
     timeEnd.name = "timeEnd";
-    document.getElementById('tbody').appendChild(timeEnd);
+    document.getElementById(idElement).appendChild(timeEnd);
 
     var table = document.getElementById('idTable');
     var rowCount = table.rows.length-1;
@@ -159,3 +159,6 @@ function validateCheckboxes() {
     document.getElementById("hidden").value = checkboxChecked;
 
 }
+
+
+

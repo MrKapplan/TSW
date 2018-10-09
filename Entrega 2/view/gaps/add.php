@@ -17,7 +17,7 @@ $view->setVariable("title", "Add Gap");
 <?php $view->moveToFragment("javascript"); ?>
 <script src="./js/common.js"></script>
 <script src="./js/calendar.js"></script>
-<script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script>
+ <script src="https://kendo.cdn.telerik.com/2018.3.911/js/jquery.min.js"></script> 
 <script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2018.3.911/js/cultures/kendo.culture.es-ES.min.js"></script>
 <?php $view->moveToDefaultFragment(); ?>
@@ -32,12 +32,12 @@ $view->setVariable("title", "Add Gap");
         <div class="row center-row">
             <div class="col-lg-12 center-block">
                 <div id="subtitle">
-                    Vamos a elegir las fechas
+                    <?= i18n("What free days do you have?") ?>
                 </div>
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action='Encuesta_Controller.php'>
+                    <form method="POST" action='index.php?controller=gaps&action=add'>
                         <div id="selectorDate">
-                            <div class="demo-section k-content" style="text-align: center;">
+                            <div class="demo-section k-content">
                                 <div id="calendar">
                                 </div>
                             </div>

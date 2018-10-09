@@ -80,21 +80,21 @@ function fillTable(newElement, idElement, fatherElement) {
             tdElement = document.createElement("td");
             newTr.appendChild(tdElement);
             tdElement.innerHTML = idElement;
-    } else {
-        tdElement = document.createElement("td");
-        newTr.appendChild(tdElement);
-        inputTable = document.createElement("input");
-        inputTable.type = "time";
-        tdElement.appendChild(inputTable);
-    } 
-}
-    tdElement=document.createElement("td");
+        } else {
+            tdElement = document.createElement("td");
+            newTr.appendChild(tdElement);
+            inputTable = document.createElement("input");
+            inputTable.type = "time";
+            tdElement.appendChild(inputTable);
+        }
+    }
+    tdElement = document.createElement("td");
     newTr.appendChild(tdElement);
     var boton = document.createElement("button");
     boton.type = "button";
     boton.className = "btn btn-success";
     boton.value = "-";
-    boton.onclick = function () { addRow() };
+    boton.onclick = function () { addRow(idElement) };
     boton.appendChild(document.createTextNode("+"));
     tdElement.appendChild(boton);
 
@@ -108,13 +108,13 @@ function fillTable(newElement, idElement, fatherElement) {
     tdElement2 = document.createElement("td");
     newTr2.appendChild(tdElement2);
     inputTable = document.createElement("input");
-    inputTable.id= "timeStart";
+    inputTable.id = "timeStart";
 
-    
+
     tdElement3 = document.createElement("td");
     newTr2.appendChild(tdElement3);
     inputTable2 = document.createElement("input");
-    inputTable2.id= "timeEnd";
+    inputTable2.id = "timeEnd";
 
 
 
@@ -164,15 +164,19 @@ function addSonDiv(newElement, idElement, oldElement) {
 
 
 $(document).ready(function () {
-    //  kendo.culture("es-ES");
+    // kendo.culture("es-ES");
     // create Calendar from div HTML element
     $("#calendar").kendoCalendar({
         selectable: "multiple"
     });
 
+    var calendar = $("#calendar").data("kendoCalendar");
 
-    addFatherDiv2("div", "timeContainer");
-    addTable("timeContainer");
+    calendar.min(new Date());
+
+    var table = false;
+    
+    
 
     $("#calendar").on("mousedown", "td", function (e) {
 
@@ -200,21 +204,20 @@ $(document).ready(function () {
                     return clickedDate.getTime() !== item.getTime();
                 });
 
-                // removeInputs(clickedDate.toLocaleDateString());
-                //removeInputs(clickedDate.toLocaleDateString());
+
                 removeInputs(clickedDate.toLocaleDateString());
 
             } else {
                 selectedDates.push(clickedDate);
 
-
-
-
-
                 ////////DESDE AQUI PARA RELLENAR LA TABLA
 
                 /*addSonDiv("div", clickedDate.toLocaleDateString(), "timeContainer");*/
-
+               if(!table){
+                addFatherDiv2("div", "timeContainer");
+                addTable("timeContainer");
+                table =true;
+               }
                 fillTable("tr", clickedDate.toLocaleDateString(), "tbody");
 
                 /*
