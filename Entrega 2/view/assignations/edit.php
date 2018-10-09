@@ -11,7 +11,6 @@ $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $view->setVariable("title", "Edit Assignation");
 
-
 ?>
 <?php $view->moveToFragment("javascript"); ?>
 <script src="./js/common.js"></script>
@@ -36,12 +35,11 @@ $view->setVariable("title", "Edit Assignation");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>" onload="removeCheckbox('dataTable')">
+                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
                         <table id="dataTable" class="table text-center">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
-            
                                 <?php foreach ($participants as $participant): ?>
                                     <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
                                         <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
@@ -62,7 +60,7 @@ $view->setVariable("title", "Edit Assignation");
                                           <?php foreach ($participants as $participant){ 
                                                     $isAssignated=false; 
                                                     $currentUserAsignation = false; ?>
-                                            
+    
                                                 <?php foreach($assignations as $assignation){
                                                      $currentUserAsignation = false;
                                                     if($assignation->getUser()->getUsername() == $participant->getUser()->getUsername() && $assignation->getGap()->getId() == $gap->getId()){
@@ -77,7 +75,7 @@ $view->setVariable("title", "Edit Assignation");
                                             }
                                                 if($currentUserAsignation && $isAssignated){ ?>
                                                         <td><label class="checkbox">
-                                                        <input type="checkbox" name="assignation" value="<?=$gap->getId()?>" class="success" checked/>
+                                                        <input type="checkbox" name="assignation" value="<?=$gap->getId()?>" checked/>
                                                         <span class="success"></span>
                                                         </label></td>
                                              <?php   } else if($currentUserAsignation && !$isAssignated){ ?>
@@ -92,8 +90,7 @@ $view->setVariable("title", "Edit Assignation");
                                                         </label></td>
                                                 <?php } else { ?>
                                                         <td><label class="checkbox">
-                                                        <input type="checkbox"  onclick="return false;" />
-                                
+                                                        <input type="checkbox" onclick="return false;" />
                                                         </label></td>
                                                 <?php  } ?>
 
