@@ -51,9 +51,14 @@ class PollMapper {
 
 
 		public function save(Poll $poll) {
-			$stmt = $this->db->prepare("INSERT INTO poll(title, ubication, author, link) values (?,?,?,?)");
-			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getAuthor()->getUsername(), $poll->getLink()));
+			$stmt = $this->db->prepare("INSERT INTO poll(title, ubication, author) values (?,?,?)");
+			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getAuthor()->getUsername()));
+			$poll_id = $this->db->lastInsertId();
+			$link = "https://midominio.com/poll/" . substr(md5($poll_id, false), 0, 20);
+			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
+			$stmt->execute(array($link, $poll_id));
 			return $this->db->lastInsertId();
+
 		}
 
 		

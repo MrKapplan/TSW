@@ -7,8 +7,6 @@ $view->setVariable("title", "Login");
 $errors = $view->getVariable("errors");
 ?>
 
-<?= isset($errors["general"])?$errors["general"]:"" ?>
-
  <div class="container">
         <div class="row center-row">
             <div class="col-lg-6 center-block">
@@ -26,6 +24,12 @@ $errors = $view->getVariable("errors");
                         <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
                                 <input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
+                                <?php if(isset($errors["general"])) { ?> 
+                                        <div class="alert alert-danger" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <?=i18n($errors["general"])?>
+                                        </div>
+                                <?php } ?>
                                 <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
 							<button type="submit" class="btn btn-dark"><?= i18n("login")?></button>

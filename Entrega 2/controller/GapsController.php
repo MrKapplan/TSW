@@ -21,7 +21,7 @@ class GapsController extends BaseController {
 	
 	public function add() {
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Adding polls requires login");
+			throw new Exception("Not in session. Adding gaps for poll requires login");
 		}
 		$gap = new Gap();
 		

@@ -38,20 +38,20 @@ class AssignationsController extends BaseController {
 
        
 		if ($gaps == NULL) {
-			throw new Exception("no such gap for the poll with id: ".$pollid);
+			throw new Exception("No such gap for the poll with id: ".$pollid);
         }
         
         $poll = $this->pollMapper->findById($pollid);
         
         if ($poll == NULL) {
-			throw new Exception("no such poll with id: ".$pollid);
+			throw new Exception("No such poll with id: ".$pollid);
         }
         
         $assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
         $participants = $this->assignationMapper->findUsersParticipansInPoll($pollid);
 
         if ( $assignations == NULL){
-			throw new Exception("no such assignations for the poll with id: ".$pollid);
+			throw new Exception("No such assignations for the poll with id: ".$pollid);
 		}
 
         if (isset($_POST["submit"])) { 
@@ -61,12 +61,12 @@ class AssignationsController extends BaseController {
 				$newAssignations = $_POST["assignations"];
 				
 				if ( $assignations == NULL){
-					throw new Exception("no such assignations for the poll with id: ".$pollid);
+					throw new Exception("No such assignations for the poll with id: ".$pollid);
 				}
         
 				$this->assignationMapper->update($user->getUsername(), $newAssignations, $pollid);
 
-				$this->view->setFlash(i18n("Gap successfully updated."));
+				$this->view->setFlash(i18n("Assignations successfully updated."));
 
 				
 				$this->view->redirect("polls", "view&poll=$pollid");

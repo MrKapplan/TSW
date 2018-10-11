@@ -1,3 +1,15 @@
+//file js/common.js
+
+//Function JQuery to limit the time of alerts messages
+$(document).ready(function() {
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 4000);
+});
+
+
+//Function to delete a row from a table
+
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
     document.getElementById('dataTable').deleteRow(i);
@@ -63,26 +75,7 @@ function addRow() {
 }
 
 
-
-function removeCheckboxSuccess() {
-    var filaSuccess = document.getElementsByClassName("table-success"); //Array with a one element (tr's id)
-    var filaWarning = document.getElementsByClassName("table-warning"); //Array with a one element (tr's id)
-
-    for (var i = 0; i < filaSuccess.length; i++) {
-        document.getElementById(filaSuccess[i].id).setAttribute("class", ""); //Set tr deleting the class (table-success)
-    }
-}
-
-
-function removeCheckboxWarning() {
-    var filaWarning = document.getElementsByClassName("table-warning"); //Array with a one element (tr's id)
-
-    for (var i = 0; i < filaWarning.length; i++) {
-        document.getElementById(filaWarning[i].id).setAttribute("class", ""); //Set tr deleting the class (table-success)
-    }
-}
-
-
+//Function to delete a button 
 function removeButton(idButton) {
     button = document.getElementById(idButton);
     if (!button) {
@@ -94,37 +87,63 @@ function removeButton(idButton) {
     }
 }
 
-function createCell(cell, text, style) {
+// function createCell(cell, text, style) {
 
-    var label = document.createElement('label');
-    label.className = "checkbox";
-    document.getElementById('addCol').appendChild(label);
+//     var label = document.createElement('label');
+//     label.className = "checkbox";
+//     document.getElementById('addCol').appendChild(label);
 
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked;
-    checkbox.onclick = "return false;";
-    label.appendChild(checkbox);
+//     var checkbox = document.createElement("input");
+//     checkbox.type = "checkbox";
+//     checkbox.checked;
+//     checkbox.onclick = "return false;";
+//     label.appendChild(checkbox);
 
-    var span = document.createElement('span');
-    span.className = "success";
-    label.appendChild(span);
+//     var span = document.createElement('span');
+//     span.className = "success";
+//     label.appendChild(span);
 
-    cell.appendChild(label);
+//     cell.appendChild(label);
 
-}
+// }
 
-function appendColumn(dataTable, idButton) {
-    var table = document.getElementById(dataTable),
-        i;
+// function appendColumn(dataTable, idButton) {
+//     var table = document.getElementById(dataTable), i;
 
-    for (i = 1; i < table.rows.length; i++) {
-        createCell(table.rows[i].insertCell(table.rows[i].cells.length), i, 'col');
+//     for (i = 1; i < table.rows.length; i++) {
+//         createCell(table.rows[i].insertCell(table.rows[i].cells.length), i, 'col');
+//     }
+//     removeButton(idButton);
+// }
+
+
+
+
+//Function to change attribute "class-success"  to "". 
+function removeCheckboxSuccess() {
+    var filaSuccess = document.getElementsByClassName("table-success"); //Array with a one element (tr's id)
+
+    for (var i = 0; i < filaSuccess.length; i++) {
+        document.getElementById(filaSuccess[i].id).setAttribute("class", ""); //Set tr deleting the class (table-success)
     }
-    removeButton(idButton);
 }
 
+//Function to change attribute "class-warning"  to "". 
+function removeCheckboxWarning() {
+    var filaWarning = document.getElementsByClassName("table-warning"); //Array with a one element (tr's id)
 
+    for (var i = 0; i < filaWarning.length; i++) {
+        document.getElementById(filaWarning[i].id).setAttribute("class", ""); //Set tr deleting the class (table-success)
+    }
+}
+
+/*
+*
+* Function to evaluate the most voted option and highlight it in the table:
+*   With "table-success" if it is only one, 
+*   With "table-warning" when the rows are more than one.
+*
+*/
 function checkboxes(tableId) {
 
     var table = document.getElementById(tableId);
@@ -154,7 +173,6 @@ function checkboxes(tableId) {
         document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
     }
     
-
    //Iterate the inputs elements again and check if there is more than one row withe the maximum number of checkbox
     for (var j = 1; j < inputElems.length; j++) { 
         if (inputElems[j].type === "checkbox" && inputElems[j].checked) {

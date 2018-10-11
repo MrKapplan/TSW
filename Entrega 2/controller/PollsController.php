@@ -79,14 +79,11 @@ class PollsController extends BaseController {
 			}
 
 			$poll->setAuthor($this->currentUser);
-			$link = "https://midominio.com/poll/" . substr(md5($poll->getId(), false), 0, 20);
-			$poll->setLink($link);
 
 			try {
 				$poll->checkIsValidForCreate(); 
 				$pollid= $this->pollMapper->save($poll);
-				// POST-REDIRECT-GET
-				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
+				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."), $poll ->getTitle()));
 				$this->view->redirect("gaps", "add&poll=$pollid");
 
 			}catch(ValidationException $ex) {
@@ -116,7 +113,7 @@ class PollsController extends BaseController {
 		}
 
 		if ($poll->getAuthor() != $this->currentUser) {
-			throw new Exception("logged user is not the author of the poll id ".$pollid);
+			throw new Exception("Logged user is not the author of the poll ".$pollid);
 		}
 
 		if (isset($_POST["submit"])) { 
@@ -150,31 +147,22 @@ class PollsController extends BaseController {
 			throw new Exception("id is mandatory");
 		}
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing polls requires login");
+			throw new Exception("Not in session. Deleting polls requires login");
 		}
 		
-		// Get the Post object from the database
 		$pollid = $_REQUEST["poll"];
 		$poll = $this->pollMapper->findById($pollid);
 
-		// Does the post exist?
 		if ($poll == NULL) {
 			throw new Exception("no such poll with id: ".$pollid);
 		}
 
-		// Check if the Post author is the currentUser (in Session)
 		if ($poll->getAuthor() != $this->currentUser) {
-			throw new Exception("Post author is not the logged user");
+			throw new Exception("Logged user is not the author of the poll ");
 		}
 
-		// Delete the Post object from the database
 		$this->pollMapper->delete($poll);
-
-		// POST-REDIRECT-GET
-
-		$this->view->setFlash(sprintf(i18n("Polls \"%s\" successfully deleted."),$poll ->getTitle()));
-
-	
+		$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully deleted."), $poll ->getTitle()));
 		$this->view->redirect("polls", "index");
 
 	}

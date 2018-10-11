@@ -66,6 +66,9 @@ class Poll {
 		if (strlen(trim($this->title)) == 0 ) {
 			$errors["title"] = "title is mandatory";
 		}
+		if (strlen(trim($this->title)) > 220 ) {
+			$errors["title"] = "title can not be that long";
+		}
 		if ($this->author == NULL ) {
 			$errors["author"] = "author is mandatory";
 		}
@@ -81,6 +84,16 @@ class Poll {
 
 		if (!isset($this->id)) {
 			$errors["id"] = "id is mandatory";
+		}
+		if (strlen(trim($this->title)) == 0 ) {
+			$errors["title"] = "title is mandatory";
+		}
+		if (strlen(trim($this->title)) > 220 ) {
+			$errors["title"] = "title can not be that long";
+		}
+
+		if ($this->author == NULL ) {
+			$errors["author"] = "author is mandatory";
 		}
 
 		if (!isset($this->link)) {

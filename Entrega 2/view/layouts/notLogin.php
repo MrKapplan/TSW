@@ -25,13 +25,14 @@ $view = ViewManager::getInstance();
     <!-- CSS -->
     <link rel="stylesheet" href="./styles/style.css"/>
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
-	<script src="index.php?controller=language&action=i18njs"></script>
+    <script src="index.php?controller=language&action=i18njs"></script>
+    <script src="./js/common.js"></script>
 	<?= $view->getFragment("css") ?>
 	<?= $view->getFragment("javascript") ?>
 </head>
 
 
-	<body>
+<body>
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -39,13 +40,17 @@ $view = ViewManager::getInstance();
         </nav>
     </header>
 
-	<main>
-		<!-- flash message -->
-		<div id="flash">
-			<?= $view->popFlash() ?>
-		</div>
-		<?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
-	</main>
+        <main>
+            <?php $message = $view->popFlash(); ?>
+            <?php if (!empty($message)){ ?>
+                    <div class="alert alert-success text-center" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <?=i18n($message)?>
+                    </div>
+            <?php } ?>
+            <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
+    </main>
+
 	   <!-- FOOTER-->
     <footer class="footer">
         <div class="container">
@@ -69,6 +74,6 @@ $view = ViewManager::getInstance();
             </div>
         </div>
     </footer>
-
 </body>
+
 </html>

@@ -10,13 +10,7 @@ $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $view->setVariable("title", "View Poll");
 
-
 ?>
-<?php $view->moveToFragment("javascript"); ?>
-<script src="./js/common.js"></script>
-<?php $view->moveToDefaultFragment(); ?>
-
-
 
 <div class="container">
         <div class="row center-row">
@@ -76,7 +70,7 @@ $view->setVariable("title", "View Poll");
                                                         <input type="checkbox"  onclick="return false;" />
                                                         </label></td>
                                                 <?php  } ?>
-                                                <?php  } ?>
+                                            <?php  } ?>
                                     </tr>
                                     <?php } ?>
                             </tbody>

@@ -6,6 +6,7 @@ $view = ViewManager::getInstance();
 $view->setVariable("title", "MyProfile");
 $user = $view->getVariable("user");
 $currentuser = $view->getVariable("currentusername");
+$errors = $view->getVariable("errors");
 ?>
 
  <div class="container">
@@ -25,7 +26,14 @@ $currentuser = $view->getVariable("currentusername");
                         <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
-								<?= isset($errors["passwd"])?i18n($errors["passwd"]):"" ?>
+                                <?php $message = $errors["passwd"]; ?>
+                                <?php if (!empty($message)){ ?>
+                                        <div class="alert alert-danger" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong><?=$message?></strong>
+                                        </div>
+                                        <?php $message=null; ?>
+                                <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
                             

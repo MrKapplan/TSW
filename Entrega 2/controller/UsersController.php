@@ -25,7 +25,7 @@ class UsersController extends BaseController {
 				$this->view->redirect("polls", "index");
 			}else{
 				$errors = array();
-				$errors["general"] = "Username is not valid";
+				$errors["general"] = "User or password is not valid";
 				$this->view->setVariable("errors", $errors);
 			}
 		}
@@ -38,6 +38,7 @@ class UsersController extends BaseController {
 
 		if (isset($_POST["username"])){ 
 			$user->setUsername($_POST["username"]);
+
 			$user->setPasswd($_POST["passwd"]);
 
 			try{
@@ -45,11 +46,12 @@ class UsersController extends BaseController {
 
 				if (!$this->userMapper->usernameExists($_POST["username"])){
 					$this->userMapper->save($user);
-					$this->view->setFlash("Username ".$user->getUsername()." successfully added. Please login now");
+					$this->view->setFlash(sprintf(i18n("Username \"%s\" successfully added. Please login now"), $user->getUsername()));
 					$this->view->redirect("users", "login");
 				} else {
 					$errors = array();
-					$errors["username"] = "Username already exists";
+					$errors["username"] = "Username is not valid";
+					$errors["passwd"] = "Password is not valid";
 					$this->view->setVariable("errors", $errors);
 				}
 			}catch(ValidationException $ex) {
@@ -69,26 +71,24 @@ class UsersController extends BaseController {
 
 		$user = new User();
 		$user->setUsername($_SESSION['currentuser']);
-
 		if (isset($_POST["passwd"])) { 
 			$user->setPasswd($_POST["passwd"]);
-
 			try {
 				$user->checkIsValidForUpdate(); 
 				$this->userMapper->update($user);
-				$this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user ->getUsername()));
+				$this->view->setFlash(i18n("Password successfully updated."));
 				$this->view->redirect("polls", "index");
-
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
 			}
 		}
-
 		$this->view->setLayout("default");
 		$this->view->setVariable("user", $user);
 		$this->view->render("users", "edit");
 	}
+
+
 
 
 	public function logout() {
