@@ -1,16 +1,9 @@
 <?php
-// file: model/Gap.php
+//file: model/Gap.php
 
 require_once(__DIR__."/../core/ValidationException.php");
 
-/**
-* Class Comment
-*
-* Represents a Comment in the blog. A Comment is attached
-* to a Post and was written by an specific User (author)
-*
-* @author lipido <lipido@gmail.com>
-*/
+
 class Gap {
 
 	private $id;

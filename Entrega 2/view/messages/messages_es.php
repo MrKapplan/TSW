@@ -43,6 +43,12 @@ array(
 	"Where are you going to celebrate?" => "¿Dónde se va a celebrar?",
 	"Mandatory" => "Obligatorio",
 	"Continue" => "Continuar",
-	'What free days do you have?' => '¿Qué días tienes libres?'
+	'What free days do you have?' => '¿Qué días tienes libres?',
+	"Save"=>"Guardar",
+	"Do you want to change something?" => "¿Te gustaría cambiar algo?",
+	"Attention" => "Atención",
+	"Are you sure you want to delete this poll?" => "¿Estás seguro de que quieres eliminar esta encuesta?",
+	"Ok" => "Si",
+	"Cancel" => "Cancelar"
 )
 ?>

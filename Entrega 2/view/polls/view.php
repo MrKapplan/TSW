@@ -35,8 +35,8 @@ $view->setVariable("title", "View Poll");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>" onload="removeCheckbox('dataTable')">
-                        <table id="dataTable" class="table text-center" >
+                <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
+                        <table id="dataTable" class="table text-center">
                             <thead>
                                 <tr>
                                 <th scope="col"></th>
@@ -76,13 +76,13 @@ $view->setVariable("title", "View Poll");
                                                         <input type="checkbox"  onclick="return false;" />
                                                         </label></td>
                                                 <?php  } ?>
-
                                                 <?php  } ?>
                                     </tr>
                                     <?php } ?>
                             </tbody>
                         </table>
-                         <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
+                         <a href="./index.php?controller=polls&action=index" ><?= i18n("Back") ?></a>
+                         <input type="hidden" id="hidden"> 
                         <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
                     </form>
                 </div>

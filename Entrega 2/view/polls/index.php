@@ -7,7 +7,10 @@ $view->setVariable("title", i18n("My polls"));
 $polls = $view->getVariable("polls");
 $currentuser = $view->getVariable("currentusername");
 
-?>
+$view->moveToFragment("javascript"); ?>
+<script src='./js/edit.js' defer></script>
+<?php $view->moveToDefaultFragment(); ?>
+
 
       <div class="container">
         <div class="row center-row">
@@ -33,25 +36,41 @@ $currentuser = $view->getVariable("currentusername");
 										</td>
 										
 										<td>
-											<?= $poll->getUbication() ?>
+											<?= htmlentities($poll->getUbication()) ?>
 										</td>
 															 
 										<td>
-											<?= $poll->getAuthor()->getUsername() ?>
+											<?= htmlentities($poll->getAuthor()->getUsername()) ?>
 										</td>
 
 										<td>
 											<?php	
 												if (isset($currentuser) && $currentuser == $poll->getAuthor()->getUsername()): ?>
-													&nbsp;<a href="index.php?controller=polls&action=edit&id=<?= $poll->getId() ?>"><?= i18n("Edit") ?></a>
+												<a href="index.php?controller=polls&action=edit&poll=<?= $poll->getId() ?>">
+                          <span title="Edit" class="btn btn-primary btn-sm  fa fa-pencil"></a>&nbsp;&nbsp;
+                          <i title="Delete" class="btn btn-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#confirm-submit"></i>
 
-													<form method="POST "action="index.php?controller=polls&action=delete" id="delete_post_<?= $poll->getId(); ?>
-														<input type="hidden" name="id" value="<?= $poll->getId() ?>">
-														<a href="#"	onclick="	if (confirm('<?= i18n("are you sure?")?>')) {	document.getElementById('delete_poll_<?= $poll->getId() ?>').submit()}"><?= i18n("Delete") ?></a>
-													</form>
-													
-												<?php endif; ?>
-										</td>
+                          <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <?= i18n("Attention")?>
+                                </div>
+                                <div class="modal-body">
+                                  <?= i18n("Are you sure you want to delete this poll?")?> 
+                                </div>
+                                <form method="POST" action="index.php?controller=polls&action=delete">
+                                  <input type="hidden" name="poll" value=<?= $poll->getId(); ?>>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal"><?= i18n("Cancel")?></button>
+                                  <button type="submit" name="submit" id="submit" class="btn btn-success success"><?= i18n("Ok")?></a>
+                                 </div>
+                                 </form>
+                               </div>
+                             </div>
+                           </div>
+											   <?php endif; ?>
+									</td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>
@@ -59,5 +78,10 @@ $currentuser = $view->getVariable("currentusername");
                 </div>
             </div>
         </div>
-    </div>
+        
+
+
+	
+
+
 

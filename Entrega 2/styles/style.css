@@ -21,7 +21,6 @@ header{
 }
 .nav-link {
     padding-left:0;
-
 }
 
 .navbar-brand {
@@ -44,7 +43,6 @@ header{
 	color: #000; 
 }
 
-
 .dropdown-menu{
 	min-width: 0;
 	text-align: center;
@@ -64,7 +62,6 @@ header{
 	text-decoration: none;
 	background-color: #fff;
 }
-
 
 
 /* BODY BASIC ELEMENTS */
@@ -164,7 +161,7 @@ header{
 
 /* INPUTS */
 
-/* TYPE=TEXT */
+/* TYPE=TEXT  AND TYPE=PASSWORD*/
 
 input[type=text],[type=password]{
     width:100%;
@@ -177,6 +174,10 @@ input[type=text],[type=password]{
 	transition:.3s;
 	height: 10%!important;
   }
+
+.inputWithIconLogin input[type=text],[type=password]{
+	padding-left:40px;
+}
 
 .inputWithIconLogin input[type=text],[type=password]{
 	padding-left:40px;
@@ -243,6 +244,7 @@ border-radius:4px 0 0 4px;
 
 
 #inputLogin{
+
    width: 50%;
    margin: auto;
 }
@@ -250,32 +252,19 @@ border-radius:4px 0 0 4px;
 #inputLink{
   	width: 60%;
   	margin: auto;
-
 }
 
+#inputDate{
+	margin: auto;
+	width: 60%;
+	margin: auto;
+ }
 
-
-/* TYPE=TIME */
-
-
-input[type=time] {
-	width: auto;
-	border: 0;
-	
-}
-
-
-
-/* TYPE=SELECT */
-
-select{
+#inputTime{
+	margin: auto;
+	width: 40%;
 	border: 0;
 }
-
-.k-block, .k-content, .k-dropdown .k-input, .k-popup, .k-widget{
-	text-align: inherit!important;
-}
-
 
 
 /* TYPE=CHECKBOX */
@@ -351,10 +340,9 @@ select{
 }
 
 
-
 /* FORMS AND TABLE ELEMENTS */
 
-td {
+td{
 	text-align: center; 
 	vertical-align: middle!important;
 }
@@ -369,7 +357,7 @@ td {
 }
 
 
-/* CALENDAR */
+/* //CALENDAR
 
 .k-calendar .k-header .k-link {
 	color: black;
@@ -394,7 +382,7 @@ td {
 		float: right;
 		margin-top: 0%;
 	}
-}
+} */
 
 /* FOOTER */
 

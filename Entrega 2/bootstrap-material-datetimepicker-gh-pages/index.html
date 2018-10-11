@@ -96,7 +96,7 @@
 				<div class="col-md-6">
 					<code>
 						<p>Code</p>
-						$('#date-es').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', lang : 'es', weekStart : 1});
+						$('#date-es').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY', lang : 'es', weekStart : 1});
 					</code>
 				</div>
 			</div>
@@ -105,36 +105,18 @@
 		<script type="text/javascript">
 		$(document).ready(function()
 		{
-			$('#date').bootstrapMaterialDatePicker
-			({
-				time: false,
-				clearButton: true
-			});
-
-			$('#time').bootstrapMaterialDatePicker
-			({
-				date: false,
-				shortTime: false,
-				format: 'HH:mm'
-			});
-
-			$('#date-format').bootstrapMaterialDatePicker
-			({
-				format: 'dddd DD MMMM YYYY - HH:mm'
-			});
+			
 			$('#date-es').bootstrapMaterialDatePicker
 			({
-				format: 'DD/MM/YYYY HH:mm',
+				format: 'DD/MM/YYYY',
 				lang: 'es',
 				weekStart: 1, 
-				nowButton : true,
-				switchOnClick : true,
+				time: false,
+				//nowButton : true,
+				//switchOnClick : true,
 				minDate : new Date()
 				
 			});
-
-
-			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
 
 			$.material.init()
 		});

@@ -25,7 +25,8 @@ $currentuser = $view->getVariable("currentusername");
 
     <?= $view->getFragment("javascript") ?>
 
-	<?= $view->getFragment("css") ?>
+    <?= $view->getFragment("css") ?>
+    
     <!-- CSS -->
     <link rel="stylesheet" href="./styles/style.css">
 	<!-- enable ji18n() javascript function to translate inside your scripts -->
@@ -35,8 +36,8 @@ $currentuser = $view->getVariable("currentusername");
 </head>
 
 
-<!-- <body  onload="checkboxes('dataTable')"> -->
-    <body>
+<body onmousemove="checkboxes('dataTable')" >
+  
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">

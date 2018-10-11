@@ -56,28 +56,18 @@ class PollMapper {
 			return $this->db->lastInsertId();
 		}
 
-	// 	/**
-	// 	* Updates a Post in the database
-	// 	*
-	// 	* @param Post $post The post to be updated
-	// 	* @throws PDOException if a database error occurs
-	// 	* @return void
-	// 	*/
-	// 	public function update(Post $post) {
-	// 		$stmt = $this->db->prepare("UPDATE posts set title=?, content=? where id=?");
-	// 		$stmt->execute(array($post->getTitle(), $post->getContent(), $post->getId()));
-	// 	}
+		
 
-	// 	/**
-	// 	* Deletes a Post into the database
-	// 	*
-	// 	* @param Post $post The post to be deleted
-	// 	* @throws PDOException if a database error occurs
-	// 	* @return void
-	// 	*/
-	// 	public function delete(Post $post) {
-	// 		$stmt = $this->db->prepare("DELETE from posts WHERE id=?");
-	// 		$stmt->execute(array($post->getId()));
-	// 	}
+		public function update(Poll $poll) {
+			$stmt = $this->db->prepare("UPDATE poll set title=?, ubication=? where id=?");
+			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getId()));
+		}
+
+
+
+		public function delete(Poll $poll) {
+			$stmt = $this->db->prepare("DELETE from poll WHERE id=?");
+			$stmt->execute(array($poll->getId()));
+		}
 
 	 }

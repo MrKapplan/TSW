@@ -75,11 +75,16 @@ class Poll {
 		}
 	}
 
+
 	public function checkIsValidForUpdate() {
 		$errors = array();
 
 		if (!isset($this->id)) {
 			$errors["id"] = "id is mandatory";
+		}
+
+		if (!isset($this->link)) {
+			$errors["link"] = "link is mandatory";
 		}
 
 		try{

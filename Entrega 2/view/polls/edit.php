@@ -1,28 +1,45 @@
 <?php
-//file: view/posts/edit.php
-
+//file: view/polls/edit.php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-
-$post = $view->getVariable("post");
+$poll = $view->getVariable("poll");
 $errors = $view->getVariable("errors");
+$view->setVariable("title", "Add Poll"); ?>
 
-$view->setVariable("title", "Edit Post");
 
-?><h1><?= i18n("Modify post") ?></h1>
-<form action="index.php?controller=posts&amp;action=edit" method="POST">
-	<?= i18n("Title") ?>: <input type="text" name="title"
-	value="<?= isset($_POST["title"])?$_POST["title"]:$post->getTitle() ?>">
-	<?= isset($errors["title"])?i18n($errors["title"]):"" ?><br>
-
-	<?= i18n("Contents") ?>: <br>
-	<textarea name="content" rows="4" cols="50"><?=
-	isset($_POST["content"])?
-	htmlentities($_POST["content"]):
-	htmlentities($post->getContent())
-	?></textarea>
-	<?= isset($errors["content"])?i18n($errors["content"]):"" ?><br>
-
-	<input type="hidden" name="id" value="<?= $post->getId() ?>">
-	<input type="submit" name="submit" value="<?= i18n("Modify post") ?>">
-</form>
+<div class="container">
+	<div class="row center-row">
+		<div class="col-lg-6 center-block">
+			<div id="subtitlePoll">
+				<?=htmlentities(i18n("Do you want to change something?"))?>
+			</div>
+			<div class="col-lg-12 center-block2">
+				<form method="POST" action="index.php?controller=polls&action=edit&poll=<?=$poll->getId()?>">
+					<div id="requiredInput">
+						<div class="inputWithIconLogin inputIconBg">
+							<input type="text" name="title" placeholder="<?= i18n("What is the matter about?")?>"  value="<?=htmlentities($poll->getTitle())?>" required>
+							<i class="fa fa-reorder fa-lg fa-fw" aria-hidden="true"></i>
+						</div>
+						<div id=lblBox>
+						<?= i18n("Mandatory")?>
+						</div>
+					</div>
+					<div id="optionalInput">
+						<div class="inputWithIconLogin inputIconBg">
+							<input type="text" name="ubication" placeholder="<?= i18n("Where are you going to celebrate?")?>" value="<?=htmlentities($poll->getUbication())?>">
+							<i class="fa fa-map-marker fa-lg fa-fw" aria-hidden="true"></i>
+						</div>
+					</div>
+	                <div id="optionalInput">
+                    	<div class="inputWithIconLogin inputIconBg">
+                        	<input type="text" placeholder="<?=$poll->getLink()?>" readonly>
+                        	<i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
+                   		 </div>
+					</div>
+					<button type="submit" name="submit" class="btn-dark"><?= i18n("Save")?></button>
+				</form>
+				<a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
+			</div>
+		</div>
+	</div>
+</div>

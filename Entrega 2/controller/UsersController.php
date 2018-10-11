@@ -15,7 +15,6 @@ class UsersController extends BaseController {
 		parent::__construct();
 
 		$this->userMapper = new UserMapper();
-
 		$this->view->setLayout("notLogin");
 	}
 
@@ -58,7 +57,6 @@ class UsersController extends BaseController {
 				$this->view->setVariable("errors", $errors);
 			}
 		}
-
 		
 		$this->view->setVariable("user", $user);
 		$this->view->render("users", "register");
@@ -73,12 +71,10 @@ class UsersController extends BaseController {
 		$user->setUsername($_SESSION['currentuser']);
 
 		if (isset($_POST["passwd"])) { 
-
 			$user->setPasswd($_POST["passwd"]);
 
 			try {
 				$user->checkIsValidForUpdate(); 
-
 				$this->userMapper->update($user);
 				$this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user ->getUsername()));
 				$this->view->redirect("polls", "index");
@@ -95,7 +91,6 @@ class UsersController extends BaseController {
 	}
 
 
-	
 	public function logout() {
 		session_destroy();
 		$this->view->redirect("users", "login");

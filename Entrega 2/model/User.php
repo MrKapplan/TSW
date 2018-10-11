@@ -1,15 +1,9 @@
 <?php
-// file: model/User.php
+//file: model/User.php
 
 require_once(__DIR__."/../core/ValidationException.php");
 
-/**
-* Class User
-*
-* Represents a User in the blog
-*
-* @author lipido <lipido@gmail.com>
-*/
+
 class User {
 
 	private $username;

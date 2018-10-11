@@ -1,5 +1,5 @@
 <?php
-// file: /core/PDOConnection.php
+//file: /core/PDOConnection.php
 
 class PDOConnection {
 	private static $dbhost = "127.0.0.1";

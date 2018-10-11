@@ -9,13 +9,7 @@ require_once(__DIR__."/../model/User.php");
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
-/**
-* Class pollsController
-*
-* Controller to make a CRUDL of polls entities
-*
-* @author lipido <lipido@gmail.com>
-*/
+
 class PollsController extends BaseController {
 
 	private $pollMapper;
@@ -79,14 +73,14 @@ class PollsController extends BaseController {
 		if (isset($_POST["submit"])) { 
 
 			$poll->setTitle($_POST["title"]);
+
 			if(isset($_POST["ubication"])){
 				$poll->setUbication($_POST["ubication"]);
 			}
-			// The user of the Post is the currentUser(user in session)
+
 			$poll->setAuthor($this->currentUser);
-			$link = "https://midominio.com/poll/" . substr(md5($poll->getTitle(), false), 0, 20);
+			$link = "https://midominio.com/poll/" . substr(md5($poll->getId(), false), 0, 20);
 			$poll->setLink($link);
-			
 
 			try {
 				$poll->checkIsValidForCreate(); 
@@ -105,127 +99,84 @@ class PollsController extends BaseController {
 	}
 
 	
-	// public function edit() {
-	// 	if (!isset($_REQUEST["id"])) {
-	// 		throw new Exception("A post id is mandatory");
-	// 	}
+	public function edit() {
+		if (!isset($_REQUEST["poll"])) {
+			throw new Exception("A poll id is mandatory");
+		}
 
-	// 	if (!isset($this->currentUser)) {
-	// 		throw new Exception("Not in session. Editing polls requires login");
-	// 	}
+		if (!isset($this->currentUser)) {
+			throw new Exception("Not in session. Editing polls requires login");
+		}
 
+		$pollid = $_REQUEST["poll"];
+		$poll = $this->pollMapper->findById($pollid);
 
-	// 	// Get the Post object from the database
-	// 	$pollid = $_REQUEST["id"];
-	// 	$poll = $this->pollMapper->findById($pollid);
+		if ($poll == NULL) {
+			throw new Exception("no such post with id: ".$pollid);
+		}
 
-	// 	// Does the post exist?
-	// 	if ($poll == NULL) {
-	// 		throw new Exception("no such post with id: ".$pollid);
-	// 	}
+		if ($poll->getAuthor() != $this->currentUser) {
+			throw new Exception("logged user is not the author of the poll id ".$pollid);
+		}
 
-	// 	// Check if the Post author is the currentUser (in Session)
-	// 	if ($poll->getAuthor() != $this->currentUser) {
-	// 		throw new Exception("logged user is not the author of the post id ".$pollid);
-	// 	}
+		if (isset($_POST["submit"])) { 
 
-	// 	if (isset($_POST["submit"])) { // reaching via HTTP Post...
+			$poll->setTitle($_POST["title"]);
+			if(isset($_POST["ubication"])){
+				$poll->setUbication($_POST["ubication"]);
+			}
 
-	// 		// populate the Post object with data form the form
-	// 		$poll->setTitle($_POST["title"]);
-	// 		$poll->setContent($_POST["content"]);
+			try {
+			
+				$poll->checkIsValidForUpdate();
+				$this->pollMapper->update($poll);
+				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully updated."),$poll ->getTitle()));
+				$this->view->redirect("polls", "index");
 
-	// 		try {
-	// 			// validate Post object
-	// 			$poll->checkIsValidForUpdate(); // if it fails, ValidationException
+			}catch(ValidationException $ex) {
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
 
-	// 			// update the Post object in the database
-	// 			$this->pollMapper->update($poll);
+		$this->view->setVariable("poll", $poll);
+		$this->view->render("polls", "edit");
+	}
 
-	// 			// POST-REDIRECT-GET
-	// 			// Everything OK, we will redirect the user to the list of polls
-	// 			// We want to see a message after redirection, so we establish
-	// 			// a "flash" message (which is simply a Session variable) to be
-	// 			// get in the view after redirection.
-	// 			$this->view->setFlash(sprintf(i18n("Post \"%s\" successfully updated."),$poll ->getTitle()));
+	
 
-	// 			// perform the redirection. More or less:
-	// 			// header("Location: index.php?controller=polls&action=index")
-	// 			// die();
-	// 			$this->view->redirect("polls", "index");
-
-	// 		}catch(ValidationException $ex) {
-	// 			// Get the errors array inside the exepction...
-	// 			$errors = $ex->getErrors();
-	// 			// And put it to the view as "errors" variable
-	// 			$this->view->setVariable("errors", $errors);
-	// 		}
-	// 	}
-
-	// 	// Put the Post object visible to the view
-	// 	$this->view->setVariable("post", $poll);
-
-	// 	// render the view (/view/polls/add.php)
-	// 	$this->view->render("polls", "edit");
-	// }
-
-// 	/**
-// 	* Action to delete a post
-// 	*
-// 	* This action should only be called via HTTP POST
-// 	*
-// 	* The expected HTTP parameters are:
-// 	* <ul>
-// 	* <li>id: Id of the post (via HTTP POST)</li>
-// 	* </ul>
-// 	*
-// 	* The views are:
-// 	* <ul>
-// 	* <li>polls/index: If post was successfully deleted (via redirect)</li>
-// 	* </ul>
-// 	* @throws Exception if no id was provided
-// 	* @throws Exception if no user is in session
-// 	* @throws Exception if there is not any post with the provided id
-// 	* @throws Exception if the author of the post to be deleted is not the current user
-// 	* @return void
-// 	*/
-// 	public function delete() {
-// 		if (!isset($_POST["id"])) {
-// 			throw new Exception("id is mandatory");
-// 		}
-// 		if (!isset($this->currentUser)) {
-// 			throw new Exception("Not in session. Editing polls requires login");
-// 		}
+	public function delete() {
+		if (!isset($_POST["poll"])) {
+			throw new Exception("id is mandatory");
+		}
+		if (!isset($this->currentUser)) {
+			throw new Exception("Not in session. Editing polls requires login");
+		}
 		
-// 		// Get the Post object from the database
-// 		$pollid = $_REQUEST["id"];
-// 		$poll = $this->pollMapper->findById($pollid);
+		// Get the Post object from the database
+		$pollid = $_REQUEST["poll"];
+		$poll = $this->pollMapper->findById($pollid);
 
-// 		// Does the post exist?
-// 		if ($poll == NULL) {
-// 			throw new Exception("no such post with id: ".$pollid);
-// 		}
+		// Does the post exist?
+		if ($poll == NULL) {
+			throw new Exception("no such poll with id: ".$pollid);
+		}
 
-// 		// Check if the Post author is the currentUser (in Session)
-// 		if ($poll->getAuthor() != $this->currentUser) {
-// 			throw new Exception("Post author is not the logged user");
-// 		}
+		// Check if the Post author is the currentUser (in Session)
+		if ($poll->getAuthor() != $this->currentUser) {
+			throw new Exception("Post author is not the logged user");
+		}
 
-// 		// Delete the Post object from the database
-// 		$this->pollMapper->delete($poll);
+		// Delete the Post object from the database
+		$this->pollMapper->delete($poll);
 
-// 		// POST-REDIRECT-GET
-// 		// Everything OK, we will redirect the user to the list of polls
-// 		// We want to see a message after redirection, so we establish
-// 		// a "flash" message (which is simply a Session variable) to be
-// 		// get in the view after redirection.
-// 		$this->view->setFlash(sprintf(i18n("Polls \"%s\" successfully deleted."),$poll ->getTitle()));
+		// POST-REDIRECT-GET
 
-// 		// perform the redirection. More or less:
-// 		// header("Location: index.php?controller=polls&action=index")
-// 		// die();
-// 		$this->view->redirect("polls", "index");
+		$this->view->setFlash(sprintf(i18n("Polls \"%s\" successfully deleted."),$poll ->getTitle()));
 
-// 	}
+	
+		$this->view->redirect("polls", "index");
+
+	}
 
 }
