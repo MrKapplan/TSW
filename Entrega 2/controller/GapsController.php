@@ -20,6 +20,7 @@ class GapsController extends BaseController {
 
 	
 	public function add() {
+
 		if (!isset($this->currentUser)) {
 			throw new Exception("Not in session. Adding gaps for poll requires login");
 		}
@@ -32,31 +33,36 @@ class GapsController extends BaseController {
 		$pollid = $_GET['poll'];
 		$gap->setPoll_id($pollid);
 
-		// if (isset($_POST["submit"])) { 
+		 if (isset($_POST["submit"])) { 
+			try {
+                
+				$dates = $_POST["dates"];
+				if ($dates == NULL){
+					throw new Exception("1");
+				}
+				
+				$timesStart = $_POST['timesStart'];
+				if ($timesStart == NULL){
+					throw new Exception("2");
+				}
 
-		// 	$poll->setTitle($_POST["title"]);
-		// 	if(isset($_POST["ubication"])){
-		// 		$poll->setUbication($_POST["ubication"]);
-		// 	}
-		// 	// The user of the Post is the currentUser(user in session)
-		// 	$poll->setAuthor($this->currentUser);
-		// 	$link = "https://midominio.com/poll/" . substr(md5($poll->getTitle(), false), 0, 20);
-		// 	$poll->setLink($link);
-			
+				$timesEnd = $_POST['timesEnd'];
+				if ($timesEnd == NULL){
+					throw new Exception("3");
+				}
 
-		// 	try {
-		// 		$poll->checkIsValidForCreate(); 
-		// 		$this->pollMapper->save($poll);
-		// 		// POST-REDIRECT-GET
-		// 		$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."),$poll ->getTitle()));
-		// 		$this->view->redirect("gaps", "add");
+		 		$this->gapMapper->save($dates, $timesStart, $timesEnd, $pollid);
+		 		// POST-REDIRECT-GET
+		 		//$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."),$gap ->getId()));
+		 		//$this->view->redirect("poll", "index");
 
-		// 	}catch(ValidationException $ex) {
-		// 		$errors = $ex->getErrors();
-		// 		$this->view->setVariable("errors", $errors);
-		// 	}
-		// }
+			}catch(ValidationException $ex) {
+				$errors = $ex->getErrors();
+				$this->view->setVariable("errors", $errors);
+			}
+		}
 
+		$this->view->setVariable("gap", $gap);
 		$this->view->render("gaps", "add");
 
 	}

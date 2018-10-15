@@ -82,8 +82,9 @@ class PollsController extends BaseController {
 
 			try {
 				$poll->checkIsValidForCreate(); 
-				$pollid= $this->pollMapper->save($poll);
-				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."), $poll ->getTitle()));
+				$pollid = $this->pollMapper->save($poll);
+				var_dump($pollid);
+				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."), $poll->getTitle()));
 				$this->view->redirect("gaps", "add&poll=$pollid");
 
 			}catch(ValidationException $ex) {

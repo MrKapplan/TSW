@@ -25,6 +25,21 @@ class GapMapper {
 		return $gaps;
 	}
 
+	public function save($dates, $timesStart, $timesEnd) {
+
+		$datesArray = explode(',', $dates);
+		$timeStartArray = explode(',', $timesStart);
+		$timeEndArray = explode(',', $timesEnd);
+
+		for($j=0; $j<count($datesArray); $j++){
+			$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart_id=?,timeEnd=?, poll_id=?");
+			$stmt->execute(array($datesArray[$j], $timeStartArray[$j], $timeEndArray[$j], $pollid));
+		}
+		// $assignationsArray= explode(',', $assignations);  
+		// $stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
+		// $stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap  where username= ? AND poll_id = ?");
+
+	}
 
 	
 	

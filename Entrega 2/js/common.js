@@ -18,6 +18,7 @@ function deleteRow(row) {
 
 function addRow() {
 
+
     var boton = document.createElement("button");
     boton.type = "button";
     boton.className = "btn btn-danger";
@@ -25,38 +26,129 @@ function addRow() {
     boton.onclick = function () { deleteRow(this) };
     boton.appendChild(document.createTextNode("-"));
 
-    // var date = document.createElement("input");
-    // date.type = "text";
-    // date.id = "date-es";
-    // document.getElementById('inputDate').appendChild(date);
 
 
-    var divGrandFatherTimeStart = document.createElement("div");
-    divGrandFatherTimeStart.id= "inputTime";
-    document.getElementById("inputTime").appendChild(divGrandFatherTimeStart);
-
-    var divFatherTimeStart = document.createElement("div");
-    divFatherTimeStart.className= "inputWithIconLogin inputIconBg";
-    document.getElementById( divGrandFatherTimeStart.id).appendChild(divFatherTimeStart);
-
-    var timeStart = document.createElement("input");
-    timeStart.type = "text";
-    timeStart.id = "timeStart";
-    document.getElementById('inputTime').appendChild(timeStart);
-
-    var tag = document.createElement("i");
-    tag.className = "fa fa-clock-o fa-lg fa-fw";
-    document.getElementById(timeStart.id).appendChild(tag);
 
 
+
+    var divDate = document.createElement("div");
+    divDate.id = "inputDate";
+
+    var divIcon = document.createElement("div");
+    divIcon.className = "inputWithIconLogin inputIconBg";
+    divDate.appendChild(divIcon);
+
+    var inputDate = document.createElement("input");
+    inputDate.type ="text";
+    inputDate.id = "date-es";
+    inputDate.className = "date";
+    inputDate.required;
+    divIcon.appendChild(inputDate);
+
+    $(inputDate).bootstrapMaterialDatePicker
+    ({
+        format: 'DD/MM/YYYY',
+        lang: 'es',
+        time: false,
+        weekStart: 1, 
+        nowButton : true,
+        switchOnClick : true,
+        minDate : new Date()
+
+    });
+
+    var iconDate = document.createElement("i");
+    iconDate.className = "fa fa-calendar fa-lg fa-fw";
+   divIcon.appendChild(iconDate);
+
+
+
+
+
+
+
+    // var divTime = document.createElement("div");
+    // divTime.id = "inputTime";
+
+    // var divIcon2 = document.createElement("div");
+    // divIcon2.className = "inputWithIconLogin inputIconBg";
+    // divTime.appendChild(divIcon2);
+
+    // var inputTimeStart = document.createElement("input");
+    // inputTimeStart.type ="text";
+    // inputTimeStart.id = "timeStart";
+    // inputTimeStart.required;
+    // divIcon2.appendChild(inputTimeStart);
+
+
+    // $(inputTimeStart).bootstrapMaterialDatePicker
+    // ({
+    //     date: false,
+    //     shortTime: false,
+    //     format: 'HH:mm'
+    // });
     
 
-    var timeEnd = document.createElement("input");
-    timeEnd.type = "text";
-    timeEnd.id = "timeEnd";
-    document.getElementById('inputTime').appendChild(timeEnd);
+    // var iconTimeStart = document.createElement("i");
+    // iconTimeStart.className = "fa fa-clock-o fa-lg fa-fw";
+    // divIcon2.appendChild(iconTimeStart);
 
 
+
+    var divTimeStart = document.createElement("div");
+    divTimeStart.id = "inputTime";
+
+    var divIcon2 = document.createElement("div");
+    divIcon2.className = "inputWithIconLogin inputIconBg";
+    divTimeStart.appendChild(divIcon2);
+
+    var inputTimeStart = document.createElement("input");
+    inputTimeStart.type ="text";
+   // inputTimeStart.id = "timeStart";
+    inputTimeStart.className = "timeStart";
+    inputTimeStart.required;
+    divIcon2.appendChild(inputTimeStart);
+
+    $(inputTimeStart).bootstrapMaterialDatePicker
+    ({
+        date: false,
+        shortTime: false,
+        format: 'HH:mm'
+    });
+
+    var iconTimeStart = document.createElement("i");
+    iconTimeStart.className = "fa fa-clock-o fa-lg fa-fw";
+    divIcon2.appendChild(iconTimeStart);
+
+
+
+
+
+
+    var divTimeEnd = document.createElement("div");
+    divTimeEnd.id = "inputTime";
+
+    var divIcon3 = document.createElement("div");
+    divIcon3.className = "inputWithIconLogin inputIconBg";
+    divTimeEnd.appendChild(divIcon3);
+
+    var inputTimeEnd = document.createElement("input");
+    inputTimeEnd.type ="text";
+   // inputTimeEnd.id = "timeEnd";
+    inputTimeEnd.className = "timeEnd";
+    inputTimeEnd.required;
+    divIcon3.appendChild(inputTimeEnd);
+
+    $(inputTimeEnd).bootstrapMaterialDatePicker
+    ({
+        date: false,
+        shortTime: false,
+        format: 'HH:mm'
+    });
+
+    var iconTimeEnd = document.createElement("i");
+    iconTimeEnd.className = "fa fa-clock-o fa-lg fa-fw";
+    divIcon3.appendChild(iconTimeEnd);
 
 
     var table = document.getElementById('dataTable');
@@ -66,11 +158,11 @@ function addRow() {
     var cell = row.insertCell(0);
     cell.appendChild(boton);
     var cell1 = row.insertCell(1);
-    //cell1.appendChild(date);
+    cell1.appendChild(divDate);
     var cell2 = row.insertCell(2);
-    cell2.appendChild(divGrandFatherTimeStart);
+    cell2.appendChild(divTimeStart);
     var cell3 = row.insertCell(3);
-    cell3.appendChild(timeEnd);
+    cell3.appendChild(divTimeEnd);
 
 }
 
@@ -209,6 +301,39 @@ function validateCheckboxes() {
     //var arv = checkboxChecked.toString();
     //alert(arv);
     document.getElementById("hidden").value = checkboxChecked;
+
+}
+
+
+
+
+function valueData() {
+
+    var dateArray=[];
+    var inputsDate = document.getElementsByClassName('date');
+
+    for (var i = 0; i < inputsDate.length; i++) {
+            dateArray.push(inputsDate[i].value);
+    }
+    document.getElementById('dates').value = dateArray;
+
+
+    var timeStartArray=[];
+    var inputsTimeStart = document.getElementsByClassName('timeStart');
+
+    for (var i = 0; i < inputsTimeStart.length; i++) {
+        timeStartArray.push(inputsTimeStart[i].value.toString());
+    }
+    document.getElementById('timesStarts').value = timeStartArray;
+
+
+    var timeEndArray=[];
+    var inputsTimeSEnd = document.getElementsByClassName('timeEnd');
+
+    for (var i = 0; i < inputsTimeSEnd.length; i++) {
+        timeEndArray.push(inputsTimeSEnd[i].value.toString());
+    }
+    document.getElementById('timesEnd').value = timeEndArray;
 
 }
 

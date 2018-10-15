@@ -57,7 +57,7 @@ class PollMapper {
 			$link = "https://midominio.com/poll/" . substr(md5($poll_id, false), 0, 20);
 			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
 			$stmt->execute(array($link, $poll_id));
-			return $this->db->lastInsertId();
+			return $poll_id;
 
 		}
 

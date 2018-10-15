@@ -3,7 +3,7 @@
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 
-//$poll = $view->getVariable("poll");
+$gap = $view->getVariable("gap");
 // $gaps = $view->getVariable("gaps");
 // $assignations = $view->getVariable("assignations");
 // $participants = $view->getVariable("participants");
@@ -40,7 +40,7 @@ $view->setVariable("title", "Add Gap");
                     <?= i18n("What free days do you have?") ?>
                 </div>
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action='index.php?controller=gaps&action=add'>
+                    <form method="POST" action='index.php?controller=gaps&action=add&poll=<?= $gap->getPoll_id()?>'>
                     <table id="dataTable" class="table text-center">
                         <thead>
                             <tr>
@@ -56,7 +56,7 @@ $view->setVariable("title", "Add Gap");
                                 <td>
                                     <div id="inputDate">
                                         <div class="inputWithIconLogin inputIconBg">
-                                            <input type="text" id="date-es" name="date1" required>
+                                            <input type="text" id="date-es" class ="date" required>
                                              <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@ $view->setVariable("title", "Add Gap");
                                 <td>
                                     <div id="inputTime">
                                         <div class="inputWithIconLogin inputIconBg">
-                                            <input type="text" id="timeStart" required>
+                                            <input type="text" id="timeStart" class="timeStart" >
                                              <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@ $view->setVariable("title", "Add Gap");
                                 <td>
                                     <div id="inputTime">
                                         <div class="inputWithIconLogin inputIconBg">
-                                            <input type="text" id="timeEnd" required>
+                                            <input type="text" id="timeEnd" class="timeEnd" >
                                              <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                              
                                         </div>
@@ -85,7 +85,10 @@ $view->setVariable("title", "Add Gap");
 
                             </tbody>
                     </table>
-                        <!-- <button type="button" class="btn btn-dark" value=fechas>Continuar</button> -->
+                    <input type="hidden" id="dates" name="dates"> 
+                    <input type="hidden" id="timeStarts" name="timesStart"> 
+                    <input type="hidden" id="timeEnds" name="timesEnd"> 
+                        <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()">Continuar</button>
                     </form>
                 </div>
             </div>
