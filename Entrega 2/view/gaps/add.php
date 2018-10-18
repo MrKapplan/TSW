@@ -82,12 +82,11 @@ $view->setVariable("title", "Add Gap");
                                 </td>
                                 <td><button type="button" class="btn btn-success" id="botonAñadir" value="+"  onclick="addRow('dataTable');">+</button></td>
                             </tr>
-
-                            </tbody>
+                        </tbody>
                     </table>
                     <input type="hidden" id="dates" name="dates"> 
-                    <input type="hidden" id="timeStarts" name="timesStart"> 
-                    <input type="hidden" id="timeEnds" name="timesEnd"> 
+                    <input type="hidden" id="timesStarts" name="timesStart"> 
+                    <input type="hidden" id="timesEnds" name="timesEnd"> 
                         <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()">Continuar</button>
                     </form>
                 </div>

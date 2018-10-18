@@ -42,11 +42,13 @@ class GapsController extends BaseController {
 				}
 				
 				$timesStart = $_POST['timesStart'];
+				//var_dump($timesStart);
 				if ($timesStart == NULL){
 					throw new Exception("2");
 				}
 
 				$timesEnd = $_POST['timesEnd'];
+				//var_dump($timesEnd);
 				if ($timesEnd == NULL){
 					throw new Exception("3");
 				}

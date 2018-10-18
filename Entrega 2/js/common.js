@@ -309,7 +309,7 @@ function validateCheckboxes() {
 
 function valueData() {
 
-    var dateArray=[];
+    var dateArray = [];
     var inputsDate = document.getElementsByClassName('date');
 
     for (var i = 0; i < inputsDate.length; i++) {
@@ -318,7 +318,7 @@ function valueData() {
     document.getElementById('dates').value = dateArray;
 
 
-    var timeStartArray=[];
+    var timeStartArray = [];
     var inputsTimeStart = document.getElementsByClassName('timeStart');
 
     for (var i = 0; i < inputsTimeStart.length; i++) {
@@ -327,13 +327,13 @@ function valueData() {
     document.getElementById('timesStarts').value = timeStartArray;
 
 
-    var timeEndArray=[];
-    var inputsTimeSEnd = document.getElementsByClassName('timeEnd');
+    var timeEndArray = [];
+    var inputsTimeEnd = document.getElementsByClassName('timeEnd');
 
-    for (var i = 0; i < inputsTimeSEnd.length; i++) {
-        timeEndArray.push(inputsTimeSEnd[i].value.toString());
+    for (var i = 0; i < inputsTimeEnd.length; i++) {
+        timeEndArray.push(inputsTimeEnd[i].value.toString());
     }
-    document.getElementById('timesEnd').value = timeEndArray;
+    document.getElementById('timesEnds').value = timeEndArray;
 
 }
 
