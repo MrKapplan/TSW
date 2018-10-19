@@ -47,7 +47,7 @@ class PollsController extends BaseController {
 		$poll = $this->pollMapper->findById($pollid);
 		$gap = $this->gapMapper->findGapsByIdPoll($pollid);
 		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
-		$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid);
+		$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid,$this->currentUser->getUsername());
 		$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $pollid);
 
 		if ($poll == NULL) {

@@ -10,8 +10,8 @@ $currentuser = $view->getVariable("currentusername");
 
 
 <div class="container">
-  <div class="row center-row">
-     <div class="col-lg-12 center-block">
+    <div class="row center-row">
+      <div class="col-lg-12 center-block">
 			 <div id="subtitle">
          <h1><?= i18n("My polls")?></h1>
          </div>

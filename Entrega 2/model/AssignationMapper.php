@@ -38,8 +38,8 @@ class AssignationMapper {
 	}
 
 
-	public function findUsersParticipansInPoll($pollid){
-		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid'");
+	public function findUsersParticipansInPoll($pollid,$currentUser){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid'ORDER BY username <> '$currentUser'");
 		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$participants = array();

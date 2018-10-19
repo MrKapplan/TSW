@@ -31,66 +31,65 @@ $view->setVariable("title", "Edit Gap");
 
 
 <div class="container">
-        <div class="row center-row">
-            <div class="col-lg-12 center-block">
-                <div id="subtitle">
-                    <?= i18n("Do you want to modify the timetables?") ?>
-                </div>
-                <div class="col-lg-12 center-block2">
-                    <form method="POST" action='index.php?controller=gaps&action=edit&poll=<?=$poll?>'>
+    <div class="row center-row">
+        <div class="col-lg-12 center-block">
+            <div id="subtitle">
+                <?= i18n("Do you want to modify the timetables?") ?>
+            </div>
+            <div class="col-lg-12 center-block2">
+                <form method="POST" action='index.php?controller=gaps&action=edit&poll=<?=$poll?>'>
                     <table id="dataTable" class="table text-center">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
+                                <th scope="col"><button type="button" class="btn btn-success" id="botonAñadir" value="+"  onclick="addRow('dataTable');">+</button></th>
                                 <th scope="col"> <?= i18n("Date")?></th>
                                 <th scope="col"><?= i18n("Start")?></th>
                                 <th scope="col"><?= i18n("End")?></th>
                             </tr>
                         </thead>
                         <tbody>
-                                <?php foreach($gaps as $gap): ?>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <div id="inputDate">
-                                                <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="date-es<?=$gap->getId()?>" class ="date" value="<?php echo date('d/m/Y', strtotime($gap->getDate()))?>"  required>
-                                                    <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
-                                                </div>
+                            <?php foreach($gaps as $gap): ?>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div id="inputDate">
+                                            <div class="inputWithIconLogin inputIconBg">
+                                                <input type="text" id="date-es<?=$gap->getId()?>" class ="date" value="<?php echo date('d/m/Y', strtotime($gap->getDate()))?>"  required>
+                                                <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                                             </div>
-                                        </td>
+                                        </div>
+                                    </td>
 
-                                        <td>
-                                            <div id="inputTime">
-                                                <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeStart<?=$gap->getId()?>" class="timeStart"  value="<?php echo substr($gap->getTimeStart(), 0, 5);?>" required>
-                                                    <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
-                                                </div>
+                                    <td>
+                                        <div id="inputTime">
+                                            <div class="inputWithIconLogin inputIconBg">
+                                                <input type="text" id="timeStart<?=$gap->getId()?>" class="timeStart"  value="<?php echo substr($gap->getTimeStart(), 0, 5);?>" required>
+                                                <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                             </div>
-                                        </td>
+                                        </div>
+                                    </td>
 
-                                        <td>
-                                            <div id="inputTime">
-                                                <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeEnd<?=$gap->getId()?>" class="timeEnd" value="<?php echo substr($gap->getTimeEnd(), 0, 5);?>" required>
-                                                    <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
-                                                </div>
+                                    <td>
+                                        <div id="inputTime">
+                                            <div class="inputWithIconLogin inputIconBg">
+                                                 <input type="text" id="timeEnd<?=$gap->getId()?>" class="timeEnd" value="<?php echo substr($gap->getTimeEnd(), 0, 5);?>" required>
+                                                 <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                             </div>
-                                        </td>
-                                        <script>calendar(<?=$gap->getId()?>);</script>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <td><button type="button" class="btn btn-success" id="botonAñadir" value="+"  onclick="addRow('dataTable');">+</button></td>
-                         </tbody>
+                                        </div>
+                                    </td>
+                                    <script>calendar(<?=$gap->getId()?>);</script>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
                     </table>
                     <input type="hidden" id="dates" name="dates"> 
                     <input type="hidden" id="timesStarts" name="timesStart"> 
                     <input type="hidden" id="timesEnds" name="timesEnd"> 
                     <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
 </div>
 
 

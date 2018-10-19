@@ -36,7 +36,7 @@ $view->setVariable("title", "Add Assignation");
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
-                                    <?php if(count($participants) > 0) {?>
+                                    <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>  
                                         <?php foreach ($participants as $participant): ?>
                                             <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
                                                 <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
@@ -44,9 +44,6 @@ $view->setVariable("title", "Add Assignation");
                                                 <th class="zoom" id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
                                             <?php } ?>
                                         <?php endforeach; ?>
-                                            <?php } else { ?>
-                                                <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>         
-                                            <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +54,12 @@ $view->setVariable("title", "Add Assignation");
                                             <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
                                             <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
-                                        <?php if(count($participants) > 0) { ?>
+
+                                        <td><label class="checkbox">
+                                            <input type="checkbox" name="assignation" value="<?=$gap->getId()?>"/>
+                                            <span class="success"></span>
+                                        </label></td>
+
                                           <?php foreach ($participants as $participant){ 
                                                     $isAssignated=false; 
                                                     $currentUserAsignation=false; ?>
@@ -94,12 +96,6 @@ $view->setVariable("title", "Add Assignation");
 
                                             <?php  } ?>
                                     </tr>
-                                        <?php } else { ?>
-                                                <td><label class="checkbox">
-                                                <input type="checkbox" name="assignation" value="<?=$gap->getId()?>"/>
-                                                <span class="success"></span>
-                                                </label></td>
-                                        <?php } ?>
                                     <?php } ?>
                             </tbody>
                         </table>

@@ -17,7 +17,7 @@ class PollMapper {
 
 	public function findAll($user) {
 		
-		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR '$user' = user_selects_gap.username AND user_selects_gap.gap_id = gap.id AND gap.poll_id = poll.id");
+		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR user_selects_gap.username = '$user'");
 		$polls_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$polls = array();
