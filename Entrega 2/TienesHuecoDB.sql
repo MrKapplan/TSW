@@ -67,9 +67,4 @@ INSERT INTO USER_SELECTS_GAP (username, gap_id, poll_id) VALUES
 ('mpegea', 1, 1),
 ('mpegea', 2, 1),
 ('ivan', 1, 1),
-('ivan', 3, 1),
-('ivan', 1, 2),
-('ivan', 1, 3),
-('ivan', 1, 4),
-('ivan', 1, 5),
-('ivan', 1, 6);
+('ivan', 3, 1);
