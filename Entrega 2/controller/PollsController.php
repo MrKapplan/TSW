@@ -34,16 +34,21 @@ class PollsController extends BaseController {
 
 	
 	public function view(){
+
+		if (!isset($this->currentUser)) {
+			throw new Exception("Not in session. View polls requires login");
+		}
+
 		if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
 		}
-
 		$pollid = $_GET["poll"];
+
 		$poll = $this->pollMapper->findById($pollid);
 		$gap = $this->gapMapper->findGapsByIdPoll($pollid);
-
 		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
 		$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid);
+		$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $pollid);
 
 		if ($poll == NULL) {
 			throw new Exception("no such post with id: ".$pollid);
@@ -58,6 +63,7 @@ class PollsController extends BaseController {
 		$this->view->setVariable("gaps", $gap);
 		$this->view->setVariable("assignations", $assignations);
 		$this->view->setVariable("participants", $participants);
+		$this->view->setVariable("isParticipant", $isParticipant);
 		
 		$this->view->render("polls", "view");
 

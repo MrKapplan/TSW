@@ -51,12 +51,11 @@ class PollMapper {
 
 
 		public function save(Poll $poll) {
+			
 			$stmt = $this->db->prepare("INSERT INTO poll(title, ubication, author) values (?,?,?)");
 			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getAuthor()->getUsername()));
 			$poll_id = $this->db->lastInsertId();
-			$link = "https://midominio.com/poll/" . substr(md5($poll_id, false), 0, 20);
-			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
-			$stmt->execute(array($link, $poll_id));
+			$this->generateLink($poll_id);
 			return $poll_id;
 
 		}
@@ -68,6 +67,11 @@ class PollMapper {
 			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getId()));
 		}
 
+		public function generateLink($poll){
+			$link = "https://midominio.com/poll/" . substr(md5($poll, false), 0, 20);
+			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
+			$stmt->execute(array($link, $poll_id));
+		}
 
 
 		public function delete(Poll $poll) {

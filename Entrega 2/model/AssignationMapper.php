@@ -12,7 +12,17 @@ class AssignationMapper {
 	}
 
 
-public function findUsersAssignationsInPoll($pollid){
+	public function isParticipant($currentUser, $poll){
+		$stmt = $this->db->prepare("SELECT count(username) FROM USER_SELECTS_GAP where username=? AND poll_id=?");
+		$stmt->execute(array($currentUser->getUsername(), $poll));
+
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+	}
+	
+
+	public function findUsersAssignationsInPoll($pollid){
 		$stmt = $this->db->query("SELECT user_selects_gap.username, user_selects_gap.gap_id FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid'");
 		$assignation_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +55,6 @@ public function findUsersAssignationsInPoll($pollid){
 
 	public function update($user, $assignations, $pollid) {
 
-		
 		$assignationsArray= explode(',', $assignations);  
 		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
 		$stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap  where username= ? AND poll_id = ?");

@@ -36,7 +36,9 @@ array(
 	"SAT" => "SAB",
 	"SUN" => "DOM",
 	"You" => "Tú",
+	"There are not participations! Be the first to do it!" => "¡No hay participaciones! ¡Sé el primero en participar!",
 	"Modify Participation" => "Modificar Participación",
+	"Take part" => "Participar",
 	"Add Poll" => "Crear Encuesta",
 	"Some data to start..." => "Empecemos por unos datos...",
 	"What is the matter about?" => "Cuéntanos sobre qué va",
@@ -74,7 +76,13 @@ array(
 	"author is mandatory" => "El autor de la encuesta es obligatorio",
 	"Username must be at least 5 characters length" => "El username debe tener al menos 5 caracteres",
 	"Password must be at least 5 characters length" => "La contraseña debe tener al menos 5 caracteres",
-	"User or password is not valid" => "El usuario o la contraseña no es válido"
+	"User or password is not valid" => "El usuario o la contraseña no es válido",
+	"Date" => "Fecha",
+	"Start" => "Inicio",
+	"End" => "Fin",
+	"Modify Gap" => "Editar Huecos",
+	"Do you want to modify the timetables?" => "¿Quieres modificar los horarios?",
+	"Continue" => "Continuar"
 
 
 

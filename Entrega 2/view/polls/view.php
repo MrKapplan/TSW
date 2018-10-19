@@ -6,9 +6,9 @@ $poll = $view->getVariable("poll");
 $gaps = $view->getVariable("gaps");
 $assignations = $view->getVariable("assignations");
 $participants = $view->getVariable("participants");
+$isParticipant = $view->getVariable("isParticipant");
 $currentuser = $view->getVariable("currentusername");
 $view->setVariable("title", "View Poll");
-
 ?>
 
 <div class="container">
@@ -27,21 +27,19 @@ $view->setVariable("title", "View Poll");
                     </div>
                 </div>
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
                         <?php if(count($participants) < 1){?>
-                            <div id="subtitleView">
-                                <?=htmlentities("Nadie ha participado aún! Se el primero en hacerlo");?>
+                            <div id="messageView">
+                                <?= i18n("There are not participations! Be the first to do it!");?>
                             </div>
                         <?php } else{ ?>
                             <table id="dataTable" class="table text-center">
                                 <thead>
                                     <tr>
-                                        <th scope="col"></th>
+                                        <th scope="col"><input type="hidden"></th>
                                         <?php foreach ($participants as $user): ?>
                                             <?php  if($user->getUser()->getUsername() != $currentuser){ ?>
                                                 <th id="<?=$user->getUser()->getUsername()?>" scope="col"> <?=$user->getUser()->getUsername()?> </th>
-                                            <?php } else { 
-                                                 $isParticipant = true;?>
+                                            <?php } else { ?>
                                                 <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
                                              <?php } ?>
                                         <?php endforeach; ?>
@@ -78,11 +76,12 @@ $view->setVariable("title", "View Poll");
                                 </tbody>
                             </table>
                         <?php } ?>
-                         <a href="./index.php?controller=polls&action=index" ><?= i18n("Back") ?></a>
-                         <input type="hidden" id="hidden"> 
-                                <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
-                                <button type="submit" class="btn btn-dark"><?= i18n("Add Participation") ?></button>
-                    </form>
+                         <a href="./index.php?controller=polls&action=index" ><?= i18n("Back") ?></a>                            
+                         <?php if($isParticipant){ ?>
+                                <button type="submit" class="btn btn-dark"><a href="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>"><?= i18n("Modify Participation") ?></a></button>
+                         <?php } else { ?>
+                                <button type="submit" class="btn btn-dark"><a href="index.php?controller=assignations&action=add&poll=<?=$poll->getId()?>"><?= i18n("Take part") ?></a></button>
+                         <?php } ?>
              </div>
         </div>
     </div>

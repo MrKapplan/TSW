@@ -92,7 +92,7 @@ $view->setVariable("title", "Edit Assignation");
                                     <?php } ?>
                             </tbody>
                         </table>
-                         <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("Back") ?></a>
+                        <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("Back") ?></a>
                         <input type="hidden" id="hidden" name="assignations"> 
                         <button type="submit" name="submit" class="btn btn-dark" onclick="validateCheckboxes()"><?= i18n("Save")?></button>
                     </form>

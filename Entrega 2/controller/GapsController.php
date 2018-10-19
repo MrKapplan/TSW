@@ -42,21 +42,19 @@ class GapsController extends BaseController {
 				}
 				
 				$timesStart = $_POST['timesStart'];
-				//var_dump($timesStart);
 				if ($timesStart == NULL){
 					throw new Exception("2");
 				}
 
 				$timesEnd = $_POST['timesEnd'];
-				//var_dump($timesEnd);
 				if ($timesEnd == NULL){
 					throw new Exception("3");
 				}
 
 		 		$this->gapMapper->save($dates, $timesStart, $timesEnd, $pollid);
 		 		// POST-REDIRECT-GET
-		 		//$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."),$gap ->getId()));
-		 		//$this->view->redirect("poll", "index");
+		 		$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."),$gap ->getId()));
+		 		$this->view->redirect("poll", "index");
 
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
@@ -70,31 +68,54 @@ class GapsController extends BaseController {
 	}
 
 
-	// public function view(){
-	// 	if (!isset($_GET["id"])) {
-	// 		throw new Exception("id is mandatory");
-	// 	}
 
-	// 	$pollid = $_GET["id"];
-	// 	$poll = $this->pollMapper->findById($pollid);
-	// 	$gap = $this->gapMapper->findGapsByIdPoll($pollid);
+	public function edit() {
 
-	// 	$assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
-	// 	$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid);
+		if (!isset($this->currentUser)) {
+			throw new Exception("Not in session. Editing gaps for poll requires login");
+		}
+		
+		if (!isset($_GET["poll"])) {
+			throw new Exception("id is mandatory");
+		}
 
-	// 	if ($poll == NULL) {
-	// 		throw new Exception("no such post with id: ".$pollid);
-	// 	} else if ( $gap == NULL){
-	// 		throw new Exception("no such gap with id: ".$pollid);
-	// 	}else if ( $assignations == NULL){
-	// 		throw new Exception("no such assignations with id: ".$pollid);
-	// 	}
+		$poll = $_GET['poll'];
+		$gaps = $this->gapMapper->findGapsByIdPoll($poll);
 
-	// 	$this->view->setVariable("poll", $poll);
-	// 	$this->view->setVariable("gap", $gap);
-	// 	$this->view->setVariable("usersGaps", $assignations);
-	// 	$this->view->setVariable("users", $participants);
-	// 	$this->view->render("polls", "view");
+		//  if (isset($_POST["submit"])) { 
+		// 	try {
+                
+		// 		$dates = $_POST["dates"];
+		// 		if ($dates == NULL){
+		// 			throw new Exception("1");
+		// 		}
+				
+		// 		$timesStart = $_POST['timesStart'];
+		// 		if ($timesStart == NULL){
+		// 			throw new Exception("2");
+		// 		}
 
-	// }
+		// 		$timesEnd = $_POST['timesEnd'];
+		// 		if ($timesEnd == NULL){
+		// 			throw new Exception("3");
+		// 		}
+
+		//  		$this->gapMapper->save($dates, $timesStart, $timesEnd, $pollid);
+		//  		// POST-REDIRECT-GET
+		//  		$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."),$gap ->getId()));
+		//  		$this->view->redirect("poll", "index");
+
+		// 	}catch(ValidationException $ex) {
+		// 		$errors = $ex->getErrors();
+		// 		$this->view->setVariable("errors", $errors);
+		// 	}
+		// }
+
+		$this->view->setVariable("poll", $poll);
+		$this->view->setVariable("gaps", $gaps);
+		
+		$this->view->render("gaps", "edit");
+
+	}
+
 }

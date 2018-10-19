@@ -44,10 +44,10 @@ $view->setVariable("title", "Add Gap");
                     <table id="dataTable" class="table text-center">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Inicio</th>
-                                <th scope="col">Fin</th>
+                            <th scope="col"></th>
+                                <th scope="col"><?= i18n("Date")?></th>
+                                <th scope="col"><?= i18n("Start")?></th>
+                                <th scope="col"><?= i18n("End")?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,7 +87,7 @@ $view->setVariable("title", "Add Gap");
                     <input type="hidden" id="dates" name="dates"> 
                     <input type="hidden" id="timesStarts" name="timesStart"> 
                     <input type="hidden" id="timesEnds" name="timesEnd"> 
-                        <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()">Continuar</button>
+                        <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>
                     </form>
                 </div>
             </div>

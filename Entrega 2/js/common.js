@@ -27,10 +27,6 @@ function addRow() {
     boton.appendChild(document.createTextNode("-"));
 
 
-
-
-
-
     var divDate = document.createElement("div");
     divDate.id = "inputDate";
 
@@ -63,38 +59,6 @@ function addRow() {
 
 
 
-
-
-
-
-    // var divTime = document.createElement("div");
-    // divTime.id = "inputTime";
-
-    // var divIcon2 = document.createElement("div");
-    // divIcon2.className = "inputWithIconLogin inputIconBg";
-    // divTime.appendChild(divIcon2);
-
-    // var inputTimeStart = document.createElement("input");
-    // inputTimeStart.type ="text";
-    // inputTimeStart.id = "timeStart";
-    // inputTimeStart.required;
-    // divIcon2.appendChild(inputTimeStart);
-
-
-    // $(inputTimeStart).bootstrapMaterialDatePicker
-    // ({
-    //     date: false,
-    //     shortTime: false,
-    //     format: 'HH:mm'
-    // });
-    
-
-    // var iconTimeStart = document.createElement("i");
-    // iconTimeStart.className = "fa fa-clock-o fa-lg fa-fw";
-    // divIcon2.appendChild(iconTimeStart);
-
-
-
     var divTimeStart = document.createElement("div");
     divTimeStart.id = "inputTime";
 
@@ -104,7 +68,6 @@ function addRow() {
 
     var inputTimeStart = document.createElement("input");
     inputTimeStart.type ="text";
-   // inputTimeStart.id = "timeStart";
     inputTimeStart.className = "timeStart";
     inputTimeStart.required;
     divIcon2.appendChild(inputTimeStart);
@@ -119,8 +82,6 @@ function addRow() {
     var iconTimeStart = document.createElement("i");
     iconTimeStart.className = "fa fa-clock-o fa-lg fa-fw";
     divIcon2.appendChild(iconTimeStart);
-
-
 
 
 
@@ -298,12 +259,9 @@ function validateCheckboxes() {
         }
     }
 
-    //var arv = checkboxChecked.toString();
-    //alert(arv);
     document.getElementById("hidden").value = checkboxChecked;
 
 }
-
 
 
 
@@ -336,6 +294,5 @@ function valueData() {
     document.getElementById('timesEnds').value = timeEndArray;
 
 }
-
 
 

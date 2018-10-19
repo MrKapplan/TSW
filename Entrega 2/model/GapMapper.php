@@ -32,12 +32,9 @@ class GapMapper {
 		$timeEndArray = explode(',', $timesEnd);
 
 		for($j=0; $j<count($datesArray); $j++){
-
 			$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
 			$stmt->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[0]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
 		}
-
-
 	}
 
 	

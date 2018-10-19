@@ -127,6 +127,7 @@ header{
 	color: grey;
 }
 
+
 #link{
 	text-align: center;
 	margin: auto;
@@ -342,6 +343,15 @@ border-radius:4px 0 0 4px;
 }
 
 
+/* a {
+	color: black!important;
+}
+
+a:hover{
+	color: white!important;
+} */
+
+
 /* FORMS AND TABLE ELEMENTS */
 
 td{
@@ -443,3 +453,6 @@ ul.social-network li a {
 	-webkit-transform : scale(1.3);    
 	-o-transform : scale(1.3);         
 } 
+
+
+
