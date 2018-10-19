@@ -13,7 +13,7 @@ class GapMapper {
 
 
 	public function findGapsByIdPoll($pollid){
-		$stmt = $this->db->query("SELECT DISTINCT * FROM gap WHERE gap.poll_id = '$pollid'");
+		$stmt = $this->db->query("SELECT DISTINCT * FROM gap WHERE gap.poll_id = '$pollid' ORDER BY date");
 		$gaps_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$gaps = array();
@@ -30,13 +30,28 @@ class GapMapper {
 		$datesArray = explode(',', $dates);
 		$timeStartArray = explode(',', $timesStart);
 		$timeEndArray = explode(',', $timesEnd);
+		$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
 
 		for($j=0; $j<count($datesArray); $j++){
-			$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
-			$stmt->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[0]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
+			$stmt->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[$j]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
 		}
 	}
 
-	
+
+	public function updateGaps($dates, $timesStart, $timesEnd, $pollid) {
+
+		$datesArray = explode(',', $dates);
+		$timeStartArray = explode(',', $timesStart);
+		$timeEndArray = explode(',', $timesEnd);
+
+		$stmtDelete = $this->db->prepare("DELETE FROM gap where poll_id = ?");
+		$stmtDelete->execute(array($pollid));
+		$stmtAdd = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
+
+		for($j=0; $j<count($datesArray); $j++){
+			$stmtAdd->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[0]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
+		}
+	}
+
 	
 }

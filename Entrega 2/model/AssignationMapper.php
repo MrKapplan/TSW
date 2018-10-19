@@ -58,9 +58,23 @@ class AssignationMapper {
 		$assignationsArray= explode(',', $assignations);  
 		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
 		$stmtDelete = $this->db->prepare("DELETE FROM user_selects_gap  where username= ? AND poll_id = ?");
-
+		
 		if(count($assignationsArray) > 0 && $assignationsArray[0] !== ""){
 			$stmtDelete->execute(array($user, $pollid));
+			foreach($assignationsArray as $assignation){
+			$stmtAdd->execute(array($user, $assignation, $pollid));
+		 }
+		} else {
+			$stmtDelete->execute(array($user, $pollid));
+		} 
+	}
+
+	public function addAssignation($user, $assignations, $pollid) {
+
+		$assignationsArray= explode(',', $assignations);  
+		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
+
+		if(count($assignationsArray) > 0 && $assignationsArray[0] !== ""){
 			foreach($assignationsArray as $assignation){
 			$stmtAdd->execute(array($user, $assignation, $pollid));
 		 }

@@ -140,37 +140,6 @@ function removeButton(idButton) {
     }
 }
 
-// function createCell(cell, text, style) {
-
-//     var label = document.createElement('label');
-//     label.className = "checkbox";
-//     document.getElementById('addCol').appendChild(label);
-
-//     var checkbox = document.createElement("input");
-//     checkbox.type = "checkbox";
-//     checkbox.checked;
-//     checkbox.onclick = "return false;";
-//     label.appendChild(checkbox);
-
-//     var span = document.createElement('span');
-//     span.className = "success";
-//     label.appendChild(span);
-
-//     cell.appendChild(label);
-
-// }
-
-// function appendColumn(dataTable, idButton) {
-//     var table = document.getElementById(dataTable), i;
-
-//     for (i = 1; i < table.rows.length; i++) {
-//         createCell(table.rows[i].insertCell(table.rows[i].cells.length), i, 'col');
-//     }
-//     removeButton(idButton);
-// }
-
-
-
 
 //Function to change attribute "class-success"  to "". 
 function removeCheckboxSuccess() {

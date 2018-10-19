@@ -68,9 +68,9 @@ class PollMapper {
 		}
 
 		public function generateLink($poll){
-			$link = "https://midominio.com/poll/" . substr(md5($poll, false), 0, 20);
+			$link = "https://midominio.com/poll/" . md5($poll, false);
 			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
-			$stmt->execute(array($link, $poll_id));
+			$stmt->execute(array($link, $poll));
 		}
 
 

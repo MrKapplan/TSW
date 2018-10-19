@@ -127,6 +127,13 @@ header{
 	color: grey;
 }
 
+#messageView{
+	margin: auto;
+	margin-bottom: 7%;
+	margin-top: 2%;
+	font-size: 26px;
+	text-align: center;
+}
 
 #link{
 	text-align: center;

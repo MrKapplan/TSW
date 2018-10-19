@@ -43,7 +43,7 @@ $currentuser = $view->getVariable("currentusername");
                           <td>
                             <?php	
                               if (isset($currentuser) && $currentuser == $poll->getAuthor()->getUsername()): ?>
-                              <a href="index.php?controller=polls&action=edit&poll=<?= $poll->getId() ?>">
+                              <a href="index.php?controller=polls&action=edit&poll=<?= htmlentities($poll->getId())?>">
                                 <span title="Edit" class="btn btn-primary btn-sm  fa fa-pencil"></a>&nbsp;&nbsp;
                                 <i title="Delete" class="btn btn-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#confirm-submit"></i>
                                 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

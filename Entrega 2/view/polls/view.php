@@ -18,7 +18,7 @@ $view->setVariable("title", "View Poll");
 				    <?=htmlentities($poll->getTitle());?>
                 </div>
                 <div id="subsubtitle">
-				    <?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> - 	<?= sprintf(i18n("At %s"), $poll->getUbication())?>
+<?= sprintf(i18n("by %s"), $poll->getAuthor()->getUsername()) ?> <?php if($poll->getUbication() != null): ?> - <?= sprintf(i18n("At %s"), $poll->getUbication()) ?><?php endif; ?>
                 </div>
                 <div id="link">
                     <div id="inputLink" class="inputWithIconLogin inputIconBg">
@@ -27,11 +27,17 @@ $view->setVariable("title", "View Poll");
                     </div>
                 </div>
                 <div class="col-lg-12 center-block2">
-                        <?php if(count($participants) < 1){?>
+                        <?php if(count($gaps) == 0){?>
                             <div id="messageView">
-                                <?= i18n("There are not participations! Be the first to do it!");?>
+                                <?= i18n("There are not gaps!");?>
                             </div>
+                        <?php } else if(count($participants) < 1){?>
+                                <div id="messageView">
+                                    <?= i18n("There are not participations! Be the first to do it!");?>
+                                </div>
+                                <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getId())?>'>
                         <?php } else{ ?>
+                            <form method="POST" action='index.php?controller=assignations&action=edit&poll=<?=htmlentities($poll->getId())?>'>
                             <table id="dataTable" class="table text-center">
                                 <thead>
                                     <tr>
@@ -76,11 +82,13 @@ $view->setVariable("title", "View Poll");
                                 </tbody>
                             </table>
                         <?php } ?>
-                         <a href="./index.php?controller=polls&action=index" ><?= i18n("Back") ?></a>                            
-                         <?php if($isParticipant){ ?>
-                                <button type="submit" class="btn btn-dark"><a href="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>"><?= i18n("Modify Participation") ?></a></button>
+                         <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
+                         <?php if(count($gaps) == 0){ ?>
+                                
+                         <?php } elseif($isParticipant){ ?>
+                                <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
                          <?php } else { ?>
-                                <button type="submit" class="btn btn-dark"><a href="index.php?controller=assignations&action=add&poll=<?=$poll->getId()?>"><?= i18n("Take part") ?></a></button>
+                                <button type="submit" class="btn btn-dark"><?= i18n("Take part") ?></button>
                          <?php } ?>
              </div>
         </div>

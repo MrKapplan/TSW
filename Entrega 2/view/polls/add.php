@@ -5,7 +5,6 @@ $view = ViewManager::getInstance();
 $errors = $view->getVariable("errors");
 $view->setVariable("title", "Add Poll"); ?>
 
-
 <div class="container">
 	<div class="row center-row">
 		<div class="col-lg-6 center-block">

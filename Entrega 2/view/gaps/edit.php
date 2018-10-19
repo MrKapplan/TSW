@@ -10,16 +10,16 @@ $errors = $view->getVariable("errors");
 $view->setVariable("title", "Edit Gap");
 
 ?>
- <!-- Kendo UI CSS -->
 <?php $view->moveToFragment("javascript"); ?>
+ <!-- Kendo UI CSS -->
 <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
 <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
-<script src='./js/common.js' defer></script>
-<script src='./js/calendar.js' defer></script>
+<script src='./js/common.js'></script>
+<script src='./js/calendar.js'></script>
 <?php $view->moveToDefaultFragment(); ?>
 
 <?php $view->moveToFragment("css"); ?>
@@ -54,16 +54,16 @@ $view->setVariable("title", "Edit Gap");
                                         <td>
                                             <div id="inputDate">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="date-es" class ="date" value="<?php echo date('d/m/Y', strtotime($gap->getDate()))?>" required>
+                                                    <input type="text" id="date-es<?=$gap->getId()?>" class ="date" value="<?php echo date('d/m/Y', strtotime($gap->getDate()))?>"  required>
                                                     <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </td>
-                                        
+
                                         <td>
                                             <div id="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeStart" class="timeStart"  value="<?php echo substr($gap->getTimeStart(), 0, 5);?>" required>
+                                                    <input type="text" id="timeStart<?=$gap->getId()?>" class="timeStart"  value="<?php echo substr($gap->getTimeStart(), 0, 5);?>" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -72,11 +72,12 @@ $view->setVariable("title", "Edit Gap");
                                         <td>
                                             <div id="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeEnd" class="timeEnd" value="<?php echo substr($gap->getTimeEnd(), 0, 5);?>" required>
+                                                    <input type="text" id="timeEnd<?=$gap->getId()?>" class="timeEnd" value="<?php echo substr($gap->getTimeEnd(), 0, 5);?>" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </td>
+                                        <script>calendar(<?=$gap->getId()?>);</script>
                                     </tr>
                                 <?php endforeach; ?>
                             <td><button type="button" class="btn btn-success" id="botonAñadir" value="+"  onclick="addRow('dataTable');">+</button></td>

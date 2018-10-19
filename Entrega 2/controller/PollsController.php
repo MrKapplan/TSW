@@ -52,9 +52,9 @@ class PollsController extends BaseController {
 
 		if ($poll == NULL) {
 			throw new Exception("no such post with id: ".$pollid);
-		} else if ( $gap == NULL){
-			throw new Exception("no such gap with id: ".$pollid);
-		}
+		} // else if ( $gap == NULL){
+		// 	throw new Exception("no such gap with id: ".$pollid);
+		// }
 		// else if ( $assignations == NULL){
 		// 	throw new Exception("no such assignations with id: ".$pollid);
 		// }

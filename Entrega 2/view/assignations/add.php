@@ -1,5 +1,5 @@
 <?php
-//file: view/assignations/edit.php
+//file: view/assignations/add.php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 
@@ -9,7 +9,7 @@ $assignations = $view->getVariable("assignations");
 $participants = $view->getVariable("participants");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
-$view->setVariable("title", "Edit Assignation");
+$view->setVariable("title", "Add Assignation");
 
 ?>
 
@@ -31,18 +31,22 @@ $view->setVariable("title", "Edit Assignation");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
+                    <form method="POST" action="index.php?controller=assignations&action=add&poll=<?=$poll->getId()?>">
                         <table id="dataTable" class="table text-center">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
-                                    <?php foreach ($participants as $participant): ?>
-                                        <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
-                                            <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
-                                        <?php } else { ?>
-                                            <th class="zoom" id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
-                                        <?php } ?>
-                                    <?php endforeach; ?>
+                                    <?php if(count($participants) > 0) {?>
+                                        <?php foreach ($participants as $participant): ?>
+                                            <?php  if($participant->getUser()->getUsername() != $currentuser){ ?>
+                                                <th id="<?=$participant->getUser()->getUsername()?>" scope="col"> <?=$participant->getUser()->getUsername()?> </th>
+                                            <?php } else { ?>
+                                                <th class="zoom" id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                            <?php } else { ?>
+                                                <th id="<?=$currentuser?>" scope="col"> <?=i18n("You")?></th>         
+                                            <?php } ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,9 +57,10 @@ $view->setVariable("title", "Edit Assignation");
                                             <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
                                             <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
+                                        <?php if(count($participants) > 0) { ?>
                                           <?php foreach ($participants as $participant){ 
                                                     $isAssignated=false; 
-                                                    $currentUserAsignation = false; ?>
+                                                    $currentUserAsignation=false; ?>
     
                                                 <?php foreach($assignations as $assignation){
                                                      $currentUserAsignation = false;
@@ -87,8 +92,14 @@ $view->setVariable("title", "Edit Assignation");
                                                         </label></td>
                                                 <?php  } ?>
 
-                                                <?php  } ?>
+                                            <?php  } ?>
                                     </tr>
+                                        <?php } else { ?>
+                                                <td><label class="checkbox">
+                                                <input type="checkbox" name="assignation" value="<?=$gap->getId()?>"/>
+                                                <span class="success"></span>
+                                                </label></td>
+                                        <?php } ?>
                                     <?php } ?>
                             </tbody>
                         </table>
