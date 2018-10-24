@@ -78,21 +78,12 @@ class GapsController extends BaseController {
 		 if (isset($_POST["submit"])) { 
 			try {
 				$dates = $_POST["dates"];
-				if ($dates == NULL){
-					throw new Exception("1");
-				}
-				
 				$timesStart = $_POST['timesStart'];
-				if ($timesStart == NULL){
-					throw new Exception("2");
-				}
-
 				$timesEnd = $_POST['timesEnd'];
-				if ($timesEnd == NULL){
-					throw new Exception("3");
-				}
 
-		 		$this->gapMapper->updateGaps($dates, $timesStart, $timesEnd, $poll);
+				//$this->gappMapper->checkForUpdates($dates, $timesStart,$timesEnd);
+
+		 		$this->gapMapper->updateGaps($dates, $timesStart, $timesEnd, $poll, $gaps);
 		 		$this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll));
 		 		$this->view->redirect("polls", "view&poll=$poll");
 

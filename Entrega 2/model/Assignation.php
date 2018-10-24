@@ -23,12 +23,4 @@ class Assignation {
 		return $this->gap;
 	}
 
-	// public function getPoll() {
-	// 	return $this->poll;
-	// }
-
-	
-
-	
-
 }

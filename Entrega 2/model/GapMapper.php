@@ -15,7 +15,6 @@ class GapMapper {
 	public function findGapsByIdPoll($pollid){
 		$stmt = $this->db->query("SELECT DISTINCT * FROM gap WHERE gap.poll_id = '$pollid' ORDER BY date");
 		$gaps_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 		$gaps = array();
 		
 		foreach ($gaps_db as $gap) {
@@ -38,20 +37,34 @@ class GapMapper {
 	}
 
 
-	public function updateGaps($dates, $timesStart, $timesEnd, $pollid) {
+	public function updateGaps($dates, $timesStart, $timesEnd, $pollid, $gaps) {
 
 		$datesArray = explode(',', $dates);
 		$timeStartArray = explode(',', $timesStart);
 		$timeEndArray = explode(',', $timesEnd);
+		$stmtAddGap = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
+		$stmtDeleteGapUpdate = $this->db->prepare("DELETE FROM gap where id=?");
+		$i=0;
 
-		$stmtDelete = $this->db->prepare("DELETE FROM gap where poll_id = ?");
-		$stmtDelete->execute(array($pollid));
-		$stmtAdd = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
-
-		for($j=0; $j<count($datesArray); $j++){
-			$stmtAdd->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[0]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
-		}
-	}
-
-	
+		if($datesArray[0] !== ""){
+			$dateToDB = date('Y-m-d',strtotime(str_replace('/','-',$datesArray[$i])));
+			foreach($gaps as $gap){
+					if(count($datesArray) > $i){
+						if( $gap->getDate() != $dateToDB || substr($gap->getTimeStart(),0,5) != $timeStartArray[$i] || substr($gap->getTimeEnd(),0,5) != $timeEndArray[$i]){
+							$stmtDeleteGapUpdate->execute(array($gap->getId()));	
+							$stmtAddGap->execute(array($dateToDB, $timeStartArray[$i], $timeEndArray[$i], $pollid));
+						} 
+					} else {
+						$stmtDeleteGapUpdate->execute(array($gap->getId()));
+					}
+					$i++;
+				}
+				for($i; $i<count($datesArray); $i++){
+					$stmtAddGap->execute(array($dateToDB, $timeStartArray[$i], $timeEndArray[$i], $pollid));
+				}
+			} else {
+				$stmtDeleteGapsByPollId = $this->db->prepare("DELETE FROM gap where poll_id=?");
+				$stmtDeleteGapsByPollId->execute(array($pollid));
+			}
+		}	
 }

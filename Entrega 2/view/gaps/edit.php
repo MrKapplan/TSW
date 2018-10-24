@@ -77,6 +77,10 @@ $view->setVariable("title", "Edit Gap");
                                             </div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" value="-" onclick="deleteRow(this)">-</button>
+                                    </td>
+
                                     <script>calendar(<?=$gap->getId()?>);</script>
                                 </tr>
                             <?php endforeach; ?>
