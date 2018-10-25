@@ -17,23 +17,23 @@ class PollMapper {
 
 	public function findAll($user) {
 		
-		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR user_selects_gap.username = '$user'");
+		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author, poll.link FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR poll.id = user_selects_gap.poll_id AND user_selects_gap.username = '$user'");
 		$polls_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$polls = array();
 
 		foreach ($polls_db as $poll) {
 			$author = new User($poll["author"]);
-			array_push($polls, new Poll($poll["id"], $poll["title"],  $poll["ubication"], $author));
+			array_push($polls, new Poll($poll["id"], $poll["title"], $poll["ubication"], $author, $poll["link"]));
 		}
 
 		return $polls;
 	}
 
 	
-	public function findById($pollid){
-		$stmt = $this->db->query("SELECT DISTINCT * FROM poll WHERE poll.id = '$pollid'");
-		$stmt->execute(array($pollid));
+	public function findPollByLink($pollLink){
+		$stmt = $this->db->query("SELECT DISTINCT * FROM poll WHERE link = '$pollLink'");
+		//$stmt->execute(array($pollLink));
 		$poll = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		if($poll != null) {
@@ -68,7 +68,7 @@ class PollMapper {
 		}
 
 		public function generateLink($poll){
-			$link = "https://midominio.com/poll/" . md5($poll, false);
+			$link = md5("pollid".$poll, false);
 			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
 			$stmt->execute(array($link, $poll));
 		}

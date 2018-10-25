@@ -36,28 +36,25 @@ class PollsController extends BaseController {
 	public function view(){
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. View polls requires login");
-		}
+			$_SESSION['BACK'] =  $_GET["poll"];
+			$this->view->redirect("users", "login");
+		} else {
 
 		if (!isset($_GET["poll"])) {
-			throw new Exception("id is mandatory");
+			//throw new Exception("id is mandatory");
+
 		}
-		$pollid = $_GET["poll"];
+		$pollLink = $_GET["poll"];
 
-		$poll = $this->pollMapper->findById($pollid);
-		$gap = $this->gapMapper->findGapsByIdPoll($pollid);
-		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
-		$participants = $this->assignationMapper->findUsersParticipansInPoll($pollid,$this->currentUser->getUsername());
-		$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $pollid);
-
+		$poll = $this->pollMapper->findPollByLink($pollLink);
 		if ($poll == NULL) {
-			throw new Exception("no such post with id: ".$pollid);
-		} // else if ( $gap == NULL){
-		// 	throw new Exception("no such gap with id: ".$pollid);
-		// }
-		// else if ( $assignations == NULL){
-		// 	throw new Exception("no such assignations with id: ".$pollid);
-		// }
+			throw new Exception("no such post with id: ".$pollLink);
+		} 
+
+		$gap = $this->gapMapper->findGapsByIdPoll($poll->getId());
+		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
+		$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $this->currentUser->getUsername());
+		$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $poll->getId());
 
 		$this->view->setVariable("poll", $poll);
 		$this->view->setVariable("gaps", $gap);
@@ -66,6 +63,9 @@ class PollsController extends BaseController {
 		$this->view->setVariable("isParticipant", $isParticipant);
 		
 		$this->view->render("polls", "view");
+		
+	
+	}
 
 	}
 
@@ -90,7 +90,7 @@ class PollsController extends BaseController {
 			try {
 				$poll->checkIsValidForCreate(); 
 				$pollid = $this->pollMapper->save($poll);
-				var_dump($pollid);
+				//var_dump($pollid);
 				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."), $poll->getTitle()));
 				$this->view->redirect("gaps", "add&poll=$pollid");
 
@@ -105,23 +105,24 @@ class PollsController extends BaseController {
 
 	
 	public function edit() {
-		if (!isset($_REQUEST["poll"])) {
-			throw new Exception("A poll id is mandatory");
-		}
 
 		if (!isset($this->currentUser)) {
 			throw new Exception("Not in session. Editing polls requires login");
 		}
 
-		$pollid = $_REQUEST["poll"];
-		$poll = $this->pollMapper->findById($pollid);
+		if (!isset($_REQUEST["poll"])) {
+			throw new Exception("A poll id is mandatory");
+		}
 
+		$pollLink = $_REQUEST["poll"];
+
+		$poll = $this->pollMapper->findPollByLink($pollLink);
 		if ($poll == NULL) {
-			throw new Exception("no such post with id: ".$pollid);
+			throw new Exception("no such poll with id: ".$poll->getId());
 		}
 
 		if ($poll->getAuthor() != $this->currentUser) {
-			throw new Exception("Logged user is not the author of the poll ".$pollid);
+			throw new Exception("Logged user is not the author of the poll ".$poll->getId());
 		}
 
 		if (isset($_POST["submit"])) { 
@@ -158,20 +159,21 @@ class PollsController extends BaseController {
 			throw new Exception("Not in session. Deleting polls requires login");
 		}
 		
-		$pollid = $_REQUEST["poll"];
-		$poll = $this->pollMapper->findById($pollid);
+		$pollLink = $_REQUEST["poll"];
+		$poll = $this->pollMapper->findPollByLink($pollLink);
 
 		if ($poll == NULL) {
-			throw new Exception("no such poll with id: ".$pollid);
+			throw new Exception("no such poll with id: ".$poll->getId());
 		}
 
 		if ($poll->getAuthor() != $this->currentUser) {
 			throw new Exception("Logged user is not the author of the poll ");
 		}
 
-		$this->pollMapper->delete($poll);
-		$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully deleted."), $poll ->getTitle()));
-		$this->view->redirect("polls", "index");
+		var_dump($poll);
+		// $this->pollMapper->delete($poll);
+		// $this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully deleted."), $poll ->getTitle()));
+		// $this->view->redirect("polls", "index");
 
 	}
 

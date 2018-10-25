@@ -23,7 +23,7 @@ $view->setVariable("title", "View Poll");
             </div>
             <div id="link">
                 <div id="inputLink" class="inputWithIconLogin inputIconBg">
-                    <input type="text" placeholder="<?= $poll->getLink()?>" readonly>
+                    <input type="text" placeholder="localhost/index.php?controller=polls&action=view&poll=<?= $poll->getLink()?>" readonly>
                      <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
                 </div>
             </div>
@@ -31,16 +31,20 @@ $view->setVariable("title", "View Poll");
                 <?php if(count($gaps) == 0){?>
                     <div id="messageView">
                         <?= i18n("There are not gaps!");?>
+                        <?php if($poll->getAuthor()->getUsername() == $currentuser) { ?>
+                             <?= i18n("Add it ");?><a href="index.php?controller=gaps&action=add&poll=<?= $poll->getLink() ?>"><?= i18n("here");?></a>
+
+                    <?php } ?>
                     </div>
                     <?php }else if(count($participants) < 1){?>
                             <div id="messageView">
                                 <?= i18n("There are not participations! Be the first to do it!");?>
                             </div>
-                            <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getId())?>'>
+                            <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>
                     <?php }else if($isParticipant == FALSE) { ?>
-                        <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getId())?>'>   
+                        <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>   
                     <?php }else{ ?>
-                        <form method="POST" action='index.php?controller=assignations&action=edit&poll=<?=htmlentities($poll->getId())?>'>
+                        <form method="POST" action='index.php?controller=assignations&action=edit&poll=<?=htmlentities($poll->getLink())?>'>
                      <?php } ?>
 
                     <?php if(count($participants) > 0): ?>

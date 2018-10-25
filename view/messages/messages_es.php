@@ -83,7 +83,9 @@ array(
 	"Modify Gap" => "Editar Huecos",
 	"Do you want to modify the timetables?" => "¿Quieres modificar los horarios?",
 	"Continue" => "Continuar",
-	"There are not gaps!" => "¡Aún no hay huecos!"
+	"There are not gaps!" => "¡Aún no hay huecos!",
+	"Add it " => "Añadelos ",
+	"here" => "aquí"
 
 
 

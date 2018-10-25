@@ -32,7 +32,7 @@ $view->setVariable("title", "Add Poll"); ?>
 					</div>
 	                <div id="optionalInput">
                     	<div class="inputWithIconLogin inputIconBg">
-                        	<input type="text" placeholder="<?=$poll->getLink()?>" readonly>
+                        	<input type="text" placeholder="localhost/index.php?controller=polls&action=view&poll=<?=$poll->getLink()?>" readonly>
                         	<i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
                    		 </div>
 					</div>

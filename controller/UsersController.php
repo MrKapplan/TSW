@@ -22,13 +22,19 @@ class UsersController extends BaseController {
 		if (isset($_POST["username"])){ 
 			if ($this->userMapper->isValidUser($_POST["username"],$_POST["passwd"])) {
 				$_SESSION["currentuser"] = $_POST["username"];
-				$this->view->redirect("polls", "index");
+				
+				if(isset($_SESSION['BACK'])){
+					$this->view->redirect("polls", "view&poll=".$_SESSION['BACK']);
+				} else{
+					$this->view->redirect("polls", "index");
+				}
 			}else{
 				$errors = array();
 				$errors["general"] = "User or password is not valid";
 				$this->view->setVariable("errors", $errors);
 			}
 		}
+
 		$this->view->render("users", "login");
 	}
 

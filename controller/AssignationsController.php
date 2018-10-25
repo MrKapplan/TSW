@@ -33,26 +33,28 @@ class AssignationsController extends BaseController {
         if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
         }
-        $pollid =  $_GET["poll"];
-        $gaps = $this->gapMapper->findGapsByIdPoll($pollid);
-
+		$pollLink =  $_GET["poll"];
+		
+		$poll = $this->pollMapper->findPollByLink($pollLink);
+		if ($poll == NULL) {
+			throw new Exception("No such poll with id: ".$poll->getId());
+		}
+		
+        $gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 		if ($gaps == NULL) {
-			throw new Exception("No such gap for the poll with id: ".$pollid);
+			throw new Exception("No such gap for the poll with id: ".$poll->getId());
         }
-        $poll = $this->pollMapper->findById($pollid);
-        
-        if ($poll == NULL) {
-			throw new Exception("No such poll with id: ".$pollid);
-        }
-        $assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
-        $participants = $this->assignationMapper->findUsersParticipansInPoll($pollid, $user->getUsername());
+
+
+        $assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
+        $participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $user->getUsername());
 
         if (isset($_POST["submit"])) { 
 			try {
 				$assignations = $_POST["assignations"];
-				$this->assignationMapper->addAssignation($user->getUsername(), $assignations, $pollid);
+				$this->assignationMapper->addAssignation($user->getUsername(), $assignations, $poll->getId());
 				$this->view->setFlash(i18n("Assignations successfully updated."));
-				$this->view->redirect("polls", "view&poll=$pollid");
+				$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
@@ -77,31 +79,33 @@ class AssignationsController extends BaseController {
         if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
         }
-        $pollid =  $_GET["poll"];
-        $gaps = $this->gapMapper->findGapsByIdPoll($pollid);
+		$pollLink =  $_GET["poll"];
 
-		if ($gaps == NULL) {
-			throw new Exception("No such gap for the poll with id: ".$pollid);
-        }
-        $poll = $this->pollMapper->findById($pollid);
-        
-        if ($poll == NULL) {
+		$poll = $this->pollMapper->findPollByLink($pollLink);
+		if ($poll == NULL) {
 			throw new Exception("No such poll with id: ".$pollid);
         }
+	
+        $gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
+
+		if ($gaps == NULL) {
+			throw new Exception("No such gap for the poll with id: ".$poll->getId());
+        }
         
-        $assignations = $this->assignationMapper->findUsersAssignationsInPoll($pollid);
-        $participants = $this->assignationMapper->findUsersParticipansInPoll($pollid, $user->getUsername());
+        $assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
 
         if ( $assignations == NULL){
-			throw new Exception("No such assignations for the poll with id: ".$pollid);
+			throw new Exception("No such assignations for the poll with id: ".$poll->getId());
 		}
+
+		$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $user->getUsername());
 
         if (isset($_POST["submit"])) { 
 			try {
 				$newAssignations = $_POST["assignations"];
-				$this->assignationMapper->update($user->getUsername(), $newAssignations, $pollid);
+				$this->assignationMapper->update($user->getUsername(), $newAssignations, $poll->getId());
 				$this->view->setFlash(i18n("Assignations successfully updated."));			
-				$this->view->redirect("polls", "view&poll=$pollid");
+				$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);

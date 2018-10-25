@@ -31,7 +31,7 @@ $view->setVariable("title", "Edit Assignation");
                 </div>
 
                 <div class="col-lg-12 center-block2">
-                    <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getId()?>">
+                    <form method="POST" action="index.php?controller=assignations&action=edit&poll=<?=$poll->getLink()?>">
                         <table id="dataTable" class="table text-center">
                             <thead>
                                 <tr>

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS POLL(
   title varchar(225) NOT NULL,
   ubication varchar(225),
   author varchar(25) NOT NULL,
-  link varchar(125) UNIQUE NOT NULL,
+  link varchar(225) UNIQUE NOT NULL,
   PRIMARY KEY(id),
   FOREIGN KEY (author) REFERENCES USER (username) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -46,12 +46,12 @@ INSERT INTO USER (username, passwd) VALUES
 ('admin', 'admin');
 
 INSERT INTO POLL (id, title, ubication, author, link) VALUES
-(1, 'Reunión de desarrolladores', 'Despacho 23', 'mpegea', 'localhost/TSW/'),
-(2, 'Camino de Santiago', 'Santiago de Compostela', 'albovy', 'https://midominio.com/poll/c81e728d9d4c2f636f067f89cc14862c'),
-(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'https://midominio.com/poll/eccbc87e4b5ce2fe28308fd9f2a7baf3'),
-(4, 'Entrenamientos semana 12', 'Campo de O Couto', 'ivan', 'https://midominio.com/poll/a87ff679a2f3e71d9181a67b7542122c'),
-(5, 'Quedada graduados 2014/15', 'Bar Graduado', 'ivan', 'https://midominio.com/poll/e4da3b7fbbce2345d7772b0674a318d5'),
-(6, 'Magostos 2018', 'Finca de Javier', 'mpegea', 'https://midominio.com/poll/1679091c5a880faf6fb5e6087eb1b2dc');
+(1, 'Reunión de desarrolladores', 'Despacho 23', 'mpegea', 'ec819428960921f0cc1ce29022d26862'),
+(2, 'Camino de Santiago', 'Santiago de Compostela', 'albovy', '208872e6934784b6844c0394eed87e99'),
+(3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'b7a34489ac1bbb0bfad1a1a46c01ad0f'),
+(4, 'Entrenamientos semana 12', 'Campo de O Couto', 'ivan', '32237d5e7fb42892fd766692010996b4'),
+(5, 'Quedada graduados 2014/15', 'Bar Graduado', 'ivan', '39b656378545d9ff04282e0b7dbe3f12'),
+(6, 'Magostos 2018', 'Finca de Javier', 'mpegea', 'f1188203ff33e591ffc4e877ec978682');
 
 INSERT INTO GAP (id, poll_id, date, timeStart, timeEnd) VALUES
 (1, 1,'2018-09-27', '10:00', '11:00'),

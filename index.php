@@ -34,14 +34,16 @@ define("DEFAULT_ACTION", "login");
 */
 function run() {
 	// invoke action!
-	try {
-		if (!isset($_GET["controller"])) {
-			$_GET["controller"] = DEFAULT_CONTROLLER;
-		}
 
-		if (!isset($_GET["action"])) {
-			$_GET["action"] = DEFAULT_ACTION;
-		}
+	
+	try {
+			if (!isset($_GET["controller"])) {
+				$_GET["controller"] = DEFAULT_CONTROLLER;
+			}
+
+			if (!isset($_GET["action"])) {
+				$_GET["action"] = DEFAULT_ACTION;
+			}
 
 		// Here is where the "magic" occurs.
 		// URLs like: index.php?controller=posts&action=add
