@@ -46,7 +46,7 @@ INSERT INTO USER (username, passwd) VALUES
 ('admin', 'admin');
 
 INSERT INTO POLL (id, title, ubication, author, link) VALUES
-(1, 'Reunión de desarrolladores', 'Despacho 23', 'mpegea', 'https://midominio.com/poll/c4ca4238a0b923820dcc509a6f75849b'),
+(1, 'Reunión de desarrolladores', 'Despacho 23', 'mpegea', 'localhost/TSW/'),
 (2, 'Camino de Santiago', 'Santiago de Compostela', 'albovy', 'https://midominio.com/poll/c81e728d9d4c2f636f067f89cc14862c'),
 (3, 'Trail Ribeira Sacra', 'Galiza', 'mpegea', 'https://midominio.com/poll/eccbc87e4b5ce2fe28308fd9f2a7baf3'),
 (4, 'Entrenamientos semana 12', 'Campo de O Couto', 'ivan', 'https://midominio.com/poll/a87ff679a2f3e71d9181a67b7542122c'),

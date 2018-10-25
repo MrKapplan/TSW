@@ -87,8 +87,8 @@ $view->setVariable("title", "Edit Gap");
                         </tbody>
                     </table>
                     <input type="hidden" id="dates" name="dates"> 
-                    <input type="hidden" id="timesStarts" name="timesStart"> 
-                    <input type="hidden" id="timesEnds" name="timesEnd"> 
+                    <!-- <input type="hidden" id="timesStarts" name="timesStart"> 
+                    <input type="hidden" id="timesEnds" name="timesEnd">  -->
                     <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>
                 </form>
             </div>

@@ -174,7 +174,7 @@ function checkboxes(tableId) {
     var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
     var count = 0, max = 0, maxAbs = 0, trSelected = -1, trSelectedArray = new Array(); 
 
-    console.log(inputElems);
+    
     for (var j = 1; j < inputElems.length; j++) {
         if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
             count++;
@@ -235,34 +235,52 @@ function validateCheckboxes() {
 
 
 
+// function valueData() {
+
+//     var dateArray = [];
+//     var inputsDate = document.getElementsByClassName('date');
+
+//     for (var i = 0; i < inputsDate.length; i++) {
+//             dateArray.push(inputsDate[i].value);
+//     }
+//     document.getElementById('dates').value = dateArray;
+
+
+//     var timeStartArray = [];
+//     var inputsTimeStart = document.getElementsByClassName('timeStart');
+
+//     for (var i = 0; i < inputsTimeStart.length; i++) {
+//         timeStartArray.push(inputsTimeStart[i].value.toString());
+//     }
+//     document.getElementById('timesStarts').value = timeStartArray;
+
+
+//     var timeEndArray = [];
+//     var inputsTimeEnd = document.getElementsByClassName('timeEnd');
+
+//     for (var i = 0; i < inputsTimeEnd.length; i++) {
+//         timeEndArray.push(inputsTimeEnd[i].value.toString());
+//     }
+//     document.getElementById('timesEnds').value = timeEndArray;
+
+// }
+
+
 function valueData() {
 
-    var dateArray = [];
+    var dateArray = [[]];
     var inputsDate = document.getElementsByClassName('date');
+    var inputsTimeStart = document.getElementsByClassName('timeStart');
+    var inputsTimeEnd = document.getElementsByClassName('timeEnd');
+
 
     for (var i = 0; i < inputsDate.length; i++) {
-            dateArray.push(inputsDate[i].value);
+            dateArray[i]= [inputsDate[i].value, inputsTimeStart[i].value.toString(), inputsTimeEnd[i].value.toString()];
     }
+    //console.log(dateArray);
+
     document.getElementById('dates').value = dateArray;
 
 
-    var timeStartArray = [];
-    var inputsTimeStart = document.getElementsByClassName('timeStart');
-
-    for (var i = 0; i < inputsTimeStart.length; i++) {
-        timeStartArray.push(inputsTimeStart[i].value.toString());
-    }
-    document.getElementById('timesStarts').value = timeStartArray;
-
-
-    var timeEndArray = [];
-    var inputsTimeEnd = document.getElementsByClassName('timeEnd');
-
-    for (var i = 0; i < inputsTimeEnd.length; i++) {
-        timeEndArray.push(inputsTimeEnd[i].value.toString());
-    }
-    document.getElementById('timesEnds').value = timeEndArray;
 
 }
-
-
