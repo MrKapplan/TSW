@@ -86,7 +86,7 @@ $view->setVariable("title", "Edit Gap");
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <input type="hidden" id="dates" name="dates"> 
+                    <input type="hidden" id="data" name="data"> 
                     <!-- <input type="hidden" id="timesStarts" name="timesStart"> 
                     <input type="hidden" id="timesEnds" name="timesEnd">  -->
                     <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>

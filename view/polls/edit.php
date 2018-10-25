@@ -39,7 +39,7 @@ $view->setVariable("title", "Add Poll"); ?>
 					<button type="submit" name="submit" class="btn-dark"><?= i18n("Save")?></button>
 				</form>
 				<div id="subtitle">
-					<button type="submit" class="btn btn-dark"><a href="index.php?controller=gaps&action=edit&poll=<?=$poll->getId()?>"><?= i18n("Modify Gap") ?></a></button>
+					<button type="submit" class="btn btn-dark"><a href="index.php?controller=gaps&action=edit&poll=<?=$poll->getLink()?>"><?= i18n("Modify Gap") ?></a></button>
 				</div>
 				<a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
 			</div>

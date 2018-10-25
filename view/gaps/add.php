@@ -2,7 +2,7 @@
 //file: view/gaps/add.php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$gap = $view->getVariable("gap");
+$poll = $view->getVariable("poll");
 $currentuser = $view->getVariable("currentusername");
 $errors = $view->getVariable("errors");
 $view->setVariable("title", "Add Gap");
@@ -35,7 +35,7 @@ $view->setVariable("title", "Add Gap");
                 <?= i18n("What free days do you have?") ?>
             </div>
             <div class="col-lg-12 center-block2">
-                <form method="POST" action='index.php?controller=gaps&action=add&poll=<?= $gap->getPoll_id()?>'>
+                <form method="POST" action='index.php?controller=gaps&action=add&poll=<?= $poll->getLink()?>'>
                     <table id="dataTable" class="table text-center">
                         <thead>
                             <tr>

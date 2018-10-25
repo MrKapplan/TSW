@@ -31,6 +31,14 @@ $(document).ready(function()
     $.material.init()
 });
 
+
+
+
+
+
+
+
+
 function calendar(id){
 
     $('#date-es'+id).bootstrapMaterialDatePicker

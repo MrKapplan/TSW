@@ -3,6 +3,7 @@
 
 require_once(__DIR__."/../model/Gap.php");
 require_once(__DIR__."/../model/GapMapper.php");
+require_once(__DIR__."/../model/PollMapper.php");
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -14,6 +15,7 @@ class GapsController extends BaseController {
 	public function __construct() {
 		parent::__construct();
 
+		$this->pollMapper = new PollMapper();
 		$this->gapMapper = new GapMapper();
 
 	}
@@ -29,8 +31,8 @@ class GapsController extends BaseController {
 		if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
 		}
-		$pollid = $_GET['poll'];
-		$gap->setPoll_id($pollid);
+		$pollLink = $_GET['poll'];
+		$poll = $this->pollMapper->findPollByLink($pollLink);
 
 		 if (isset($_POST["submit"])) { 
 			try {
@@ -51,13 +53,13 @@ class GapsController extends BaseController {
 
 		 		$gapId = $this->gapMapper->save($dates, $timesStart, $timesEnd, $pollid);
 		 		$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."), $gapId));
-		 		$this->view->redirect("polls", "view&poll=$pollid");
+		 		$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
 			}
 		}
-		$this->view->setVariable("gap", $gap);
+		$this->view->setVariable("poll", $poll);
 		$this->view->render("gaps", "add");
 	}
 
@@ -72,20 +74,23 @@ class GapsController extends BaseController {
 		if (!isset($_GET["poll"])) {
 			throw new Exception("id is mandatory");
 		}
-		$poll = $_GET['poll'];
+		$pollLink = $_GET['poll'];
+		
 		$gaps = $this->gapMapper->findGapsByIdPoll($poll);
 
 		 if (isset($_POST["submit"])) { 
 			try {
-				$dates = $_POST["dates"];
+				$data = json_decode($_POST["data"]);
+
+				if ($data == NULL){
+					throw new Exception("3");
+				}
+
+				//$this->gappMapper->checkForUpdates($data);
+				//var_dump(count($data));
+				//var_dump($data[0]->date);
 				
-				var_dump($dates);
-				// $timesStart = $_POST['timesStart'];
-				// $timesEnd = $_POST['timesEnd'];
-
-				// //$this->gappMapper->checkForUpdates($dates, $timesStart,$timesEnd);
-
-		 		// $this->gapMapper->updateGaps($dates, $timesStart, $timesEnd, $poll, $gaps);
+		 		$this->gapMapper->updateGaps($data, $poll, $gaps);
 		 		// $this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll));
 		 		// $this->view->redirect("polls", "view&poll=$poll");
 

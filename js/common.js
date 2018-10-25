@@ -268,18 +268,18 @@ function validateCheckboxes() {
 
 function valueData() {
 
-    var dateArray = [[]];
+    var dataArray = [];
     var inputsDate = document.getElementsByClassName('date');
     var inputsTimeStart = document.getElementsByClassName('timeStart');
     var inputsTimeEnd = document.getElementsByClassName('timeEnd');
 
 
     for (var i = 0; i < inputsDate.length; i++) {
-            dateArray[i]= [inputsDate[i].value, inputsTimeStart[i].value.toString(), inputsTimeEnd[i].value.toString()];
+        dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
     }
     //console.log(dateArray);
 
-    document.getElementById('dates').value = dateArray;
+    document.getElementById('data').value = JSON.stringify(dataArray);
 
 
 

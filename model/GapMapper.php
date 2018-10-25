@@ -12,7 +12,7 @@ class GapMapper {
 	}
 
 
-	public function findGapsByIdPoll($pollid){
+	public function findGapsByLinkPoll($pollLink){
 		$stmt = $this->db->query("SELECT DISTINCT * FROM gap WHERE gap.poll_id = '$pollid' ORDER BY date");
 		$gaps_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$gaps = array();
@@ -37,34 +37,37 @@ class GapMapper {
 	}
 
 
-	public function updateGaps($dates, $timesStart, $timesEnd, $pollid, $gaps) {
+	public function updateGaps($data, $pollid, $gaps) {
 
-		$datesArray = explode(',', $dates);
-		$timeStartArray = explode(',', $timesStart);
-		$timeEndArray = explode(',', $timesEnd);
+		// $datesArray = explode(',', $dates);
+		// $timeStartArray = explode(',', $timesStart);
+		// $timeEndArray = explode(',', $timesEnd);
 		$stmtAddGap = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
 		$stmtDeleteGapUpdate = $this->db->prepare("DELETE FROM gap where id=?");
 		$i=0;
 
-		if($datesArray[0] !== ""){
-			$dateToDB = date('Y-m-d',strtotime(str_replace('/','-',$datesArray[$i])));
+		if($data[0] !== null){
+			$dateToDB = date('Y-m-d',strtotime(str_replace('/','-',$data[$i]->date)));
 			foreach($gaps as $gap){
-					if(count($datesArray) > $i){
-						if( $gap->getDate() != $dateToDB || substr($gap->getTimeStart(),0,5) != $timeStartArray[$i] || substr($gap->getTimeEnd(),0,5) != $timeEndArray[$i]){
+					if(count($data) > $i){
+						if( $gap->getDate() != $dateToDB || substr($gap->getTimeStart(),0,5) != $data[$i]->start || substr($gap->getTimeEnd(),0,5) != $data[$i]->end){
 							$stmtDeleteGapUpdate->execute(array($gap->getId()));	
-							$stmtAddGap->execute(array($dateToDB, $timeStartArray[$i], $timeEndArray[$i], $pollid));
+							$stmtAddGap->execute(array($dateToDB, $data[$i]->start, $data[$i]->end, $pollid));
 						} 
 					} else {
 						$stmtDeleteGapUpdate->execute(array($gap->getId()));
 					}
 					$i++;
 				}
-				for($i; $i<count($datesArray); $i++){
-					$stmtAddGap->execute(array($dateToDB, $timeStartArray[$i], $timeEndArray[$i], $pollid));
+				for($i; $i<count($data); $i++){
+					$stmtAddGap->execute(array($dateToDB, $data[$i]->start, $data[$i]->end, $pollid));
 				}
 			} else {
 				$stmtDeleteGapsByPollId = $this->db->prepare("DELETE FROM gap where poll_id=?");
 				$stmtDeleteGapsByPollId->execute(array($pollid));
 			}
+
+
+
 		}	
 }

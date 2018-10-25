@@ -55,8 +55,8 @@ class PollMapper {
 			$stmt = $this->db->prepare("INSERT INTO poll(title, ubication, author) values (?,?,?)");
 			$stmt->execute(array($poll->getTitle(), $poll->getUbication(), $poll->getAuthor()->getUsername()));
 			$poll_id = $this->db->lastInsertId();
-			$this->generateLink($poll_id);
-			return $poll_id;
+			$link = $this->generateLink($poll_id);
+			return $link;
 
 		}
 
@@ -71,6 +71,8 @@ class PollMapper {
 			$link = md5("pollid".$poll, false);
 			$stmt = $this->db->prepare("UPDATE poll set link=? where id=?");
 			$stmt->execute(array($link, $poll));
+
+			return $link;
 		}
 
 
