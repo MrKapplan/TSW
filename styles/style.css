@@ -172,7 +172,7 @@ header{
 /* TYPE=TEXT  AND TYPE=PASSWORD*/
 
 input[type=text],[type=password]{
-    width:100%;
+    width:103%;
     border:2px solid #aaa;
     border-radius:4px;
     margin:8px 0;
