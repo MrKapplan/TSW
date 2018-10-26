@@ -35,6 +35,7 @@ $currentuser = $view->getVariable("currentusername");
     <!-- Internalization JS -->
 	<script src="index.php?controller=language&action=i18njs"></script>
 
+
 </head>
 
 <body>
@@ -42,7 +43,7 @@ $currentuser = $view->getVariable("currentusername");
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.php?controller=polls&action=index"><?= i18n("¿Tienes un hueco?")?></a>
+            <a class="navbar-brand" href="index.php?controller=polls&action=index"><img src="../img/logo.png" alt="logo" class="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

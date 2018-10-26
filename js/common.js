@@ -117,13 +117,15 @@ function addRow() {
     var row = table.insertRow(rowCount);
 
     var cell = row.insertCell(0);
-    cell.appendChild(boton);
+    
     var cell1 = row.insertCell(1);
     cell1.appendChild(divDate);
     var cell2 = row.insertCell(2);
     cell2.appendChild(divTimeStart);
     var cell3 = row.insertCell(3);
     cell3.appendChild(divTimeEnd);
+    var cell4 = row.insertCell(4);
+    cell4.appendChild(boton);
 
 }
 

@@ -29,6 +29,7 @@ $view = ViewManager::getInstance();
     <script src="./js/common.js"></script>
 	<?= $view->getFragment("css") ?>
 	<?= $view->getFragment("javascript") ?>
+
 </head>
 
 
@@ -36,7 +37,7 @@ $view = ViewManager::getInstance();
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.php"><?= i18n("¿Tienes un hueco?")?></a>
+            <a class="navbar-brand" href="index.php"><img src="../img/logo.png" alt="logo" class="logo"></a>
         </nav>
     </header>
 
