@@ -18,7 +18,6 @@ class Assignation {
 		return $this->user;
     }
     
-
 	public function getGap() {
 		return $this->gap;
 	}

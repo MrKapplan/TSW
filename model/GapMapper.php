@@ -12,7 +12,8 @@ class GapMapper {
 	}
 
 
-	public function findGapsByLinkPoll($pollLink){
+	public function findGapsByIdPoll($pollid){
+
 		$stmt = $this->db->query("SELECT DISTINCT * FROM gap WHERE gap.poll_id = '$pollid' ORDER BY date");
 		$gaps_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$gaps = array();
@@ -24,50 +25,101 @@ class GapMapper {
 		return $gaps;
 	}
 
-	public function save($dates, $timesStart, $timesEnd, $pollid) {
+	public function save($data, $pollid) {
 
-		$datesArray = explode(',', $dates);
-		$timeStartArray = explode(',', $timesStart);
-		$timeEndArray = explode(',', $timesEnd);
 		$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
 
-		for($j=0; $j<count($datesArray); $j++){
-			$stmt->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$datesArray[$j]))), $timeStartArray[$j], $timeEndArray[$j], $pollid));
+		for($j=0; $j<count($data); $j++){
+			$stmt->execute(array( date('Y-m-d',strtotime(str_replace('/','-',$data[$j]->date))), $data[$j]->start, $data[$j]->end, $pollid));
 		}
 	}
 
 
 	public function updateGaps($data, $pollid, $gaps) {
 
-		// $datesArray = explode(',', $dates);
-		// $timeStartArray = explode(',', $timesStart);
-		// $timeEndArray = explode(',', $timesEnd);
 		$stmtAddGap = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");
 		$stmtDeleteGapUpdate = $this->db->prepare("DELETE FROM gap where id=?");
 		$i=0;
 
-		if($data[0] !== null){
-			$dateToDB = date('Y-m-d',strtotime(str_replace('/','-',$data[$i]->date)));
+		if(count($data) > 0){
 			foreach($gaps as $gap){
 					if(count($data) > $i){
-						if( $gap->getDate() != $dateToDB || substr($gap->getTimeStart(),0,5) != $data[$i]->start || substr($gap->getTimeEnd(),0,5) != $data[$i]->end){
+						if( $gap->getDate() != date('Y-m-d',strtotime(str_replace('/','-',$data[$i]->date))) || substr($gap->getTimeStart(),0,5) != $data[$i]->start || substr($gap->getTimeEnd(),0,5) != $data[$i]->end){
 							$stmtDeleteGapUpdate->execute(array($gap->getId()));	
-							$stmtAddGap->execute(array($dateToDB, $data[$i]->start, $data[$i]->end, $pollid));
+							$stmtAddGap->execute(array(date('Y-m-d',strtotime(str_replace('/','-',$data[$i]->date))), $data[$i]->start, $data[$i]->end, $pollid));
 						} 
 					} else {
 						$stmtDeleteGapUpdate->execute(array($gap->getId()));
 					}
 					$i++;
 				}
+				
 				for($i; $i<count($data); $i++){
-					$stmtAddGap->execute(array($dateToDB, $data[$i]->start, $data[$i]->end, $pollid));
+					$stmtAddGap->execute(array(date('Y-m-d',strtotime(str_replace('/','-',$data[$i]->date))), $data[$i]->start, $data[$i]->end, $pollid));
 				}
+
 			} else {
 				$stmtDeleteGapsByPollId = $this->db->prepare("DELETE FROM gap where poll_id=?");
 				$stmtDeleteGapsByPollId->execute(array($pollid));
 			}
+		}
+		
+		public function dateOverlap($data, $pos, $date, $timeStart, $timeEnd){
+
+			for($i=0; $i<count($data); $i++){
+				if($i !== $pos){
+					if($data[$i]->date == $date){
+						if(($data[$i]->start <= $timeStart) && ($timeStart <= $data[$i]->end)){
+							return true;
+						} else if(($timeStart <= $data[$i]->start) && ($data[$i]->start <= $timeEnd)){
+							return true;
+						}
+					}
+				}
+			
+			}
+			return false;
+		}
+
+		
+	public function checkForAdd_Updates($data){
+
+		$errors = array();
+
+		for($i=0; $i<count($data); $i++){
+
+			if (strlen($data[$i]->date) !== 10) {
+				$errors = "The date length is incorrect";
+			}
+
+			else if (!preg_match("/^(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[012])\\/(19|20)[0-9]{2}$/", $data[$i]->date)) {
+				$errors = "The date format is incorrect";
+			} 
+
+			else if (strlen($data[$i]->start) !== 5) {
+				$errors = "The start time must be 5 characters length";
+			}
+
+			else if (strlen($data[$i]->end) !== 5) {
+				$errors = "The end time must be 5 characters length";
+			}
+
+			else if($this->dateOverlap($data, $i, $data[$i]->date, $data[$i]->start, $data[$i]->end)){
+				$errors = "There are days with overlapping schedules" ;
+			}
+
+			else if($data[$i]->end <= $data[$i]->start){
+				$errors = "The end time has to be longer than start time";
+			}
+
+			if (sizeof($errors)>0){
+				throw new ValidationException($errors, "dateTime is not valid");
+			}
+
+		}
+
+	}
 
 
 
-		}	
 }

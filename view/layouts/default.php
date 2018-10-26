@@ -37,7 +37,7 @@ $currentuser = $view->getVariable("currentusername");
 
 </head>
 
-<body onmouseover = "checkboxes('dataTable')">
+<body>
   
     <!-- HEADER -->
     <header>

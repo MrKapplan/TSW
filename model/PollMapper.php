@@ -14,7 +14,6 @@ class PollMapper {
 		$this->db = PDOConnection::getInstance();
 	}
 
-
 	public function findAll($user) {
 		
 		$stmt = $this->db->query("SELECT DISTINCT poll.id, poll.title, poll.ubication, poll.author, poll.link FROM poll, gap, user_selects_gap WHERE '$user' = poll.author OR poll.id = user_selects_gap.poll_id AND user_selects_gap.username = '$user'");
@@ -32,8 +31,8 @@ class PollMapper {
 
 	
 	public function findPollByLink($pollLink){
+		
 		$stmt = $this->db->query("SELECT DISTINCT * FROM poll WHERE link = '$pollLink'");
-		//$stmt->execute(array($pollLink));
 		$poll = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		if($poll != null) {
@@ -49,7 +48,6 @@ class PollMapper {
 		}
 	}
 
-
 		public function save(Poll $poll) {
 			
 			$stmt = $this->db->prepare("INSERT INTO poll(title, ubication, author) values (?,?,?)");
@@ -59,8 +57,6 @@ class PollMapper {
 			return $link;
 
 		}
-
-		
 
 		public function update(Poll $poll) {
 			$stmt = $this->db->prepare("UPDATE poll set title=?, ubication=? where id=?");
@@ -73,12 +69,6 @@ class PollMapper {
 			$stmt->execute(array($link, $poll));
 
 			return $link;
-		}
-
-
-		public function delete(Poll $poll) {
-			$stmt = $this->db->prepare("DELETE from poll WHERE id=?");
-			$stmt->execute(array($poll->getId()));
 		}
 
 	 }

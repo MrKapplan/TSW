@@ -25,7 +25,7 @@ $view->setVariable("title", "Add Assignation");
                 </div>
                 <div id="link">
                     <div id="inputLink" class="inputWithIconLogin inputIconBg">
-                        <input type="text" id="linkEncuesta" placeholder="<?= $poll->getLink()?>" readonly>
+                        <input type="text" id="linkEncuesta" placeholder="localhost/index.php?controller=polls&action=view&poll=<?= $poll->getLink()?>" readonly>
                         <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ $view->setVariable("title", "Add Assignation");
                                     <?php } ?>
                             </tbody>
                         </table>
-                        <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getId()?>"><?= i18n("Back") ?></a>
+                        <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getLink()?>"><?= i18n("Back") ?></a>
                         <input type="hidden" id="hidden" name="assignations"> 
                         <button type="submit" name="submit" class="btn btn-dark" onclick="validateCheckboxes()"><?= i18n("Save")?></button>
                     </form>

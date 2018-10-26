@@ -48,7 +48,7 @@ array(
 	'What free days do you have?' => '¿Qué días tienes libres?',
 	"Save"=>"Guardar",
 	"Do you want to change something?" => "¿Te gustaría cambiar algo?",
-	"Attention" => "Atención",
+	"Attention" => "¡¡Atención !!",
 	"Are you sure you want to delete this poll?" => "¿Estás seguro de que quieres eliminar esta encuesta?",
 	"Ok" => "Si",
 	"Cancel" => "Cancelar",
@@ -85,7 +85,23 @@ array(
 	"Continue" => "Continuar",
 	"There are not gaps!" => "¡Aún no hay huecos!",
 	"Add it " => "Añadelos ",
-	"here" => "aquí"
+	"here" => "aquí",
+	"The date length is incorrect" => "La longitud de la fecha es incorrecta",
+	"The date format is incorrect" => "El formato de la fecha es incorrecto",
+	"The start time must be 5 characters length" => "La hora de inicio tiene que tener 5 caracteres",
+	"The end time must be 5 characters length" => "La hora de fin tiene que tener 5 caracteres",
+	"The end time has to be longer than start time" => "La hora de fin tiene que ser mayor que la hora de inicio",
+	"dateTime is not valid" => "El horario no es válido",
+	"Polls gaps \"%s\" successfully edited." => "El hueco de la encuesta \"%s\" se ha modificado con éxito",
+	"Not in session. Editing gaps for poll requires login" => "No estás loggeado. Para editar un huecp necesitas autenticarte",
+	"Gaps id is mandatory" => "El id del gap es obligatorio",
+	"Assignations successfully added." => "¡Participación correctamente añadida!",
+	"Title is mandatory" => "El título esobligatorio",
+	"Title can not be that long" => "El título no puede ser tan largo",
+	"Author is mandatory" => "El autor es obligarorio",
+	"Link is mandatory" => "El link es obligatorio",
+	"There are days with overlapping schedules" => "¡Hay días con horarios solapados!"
+
 
 
 

@@ -30,6 +30,13 @@ $view->setVariable("title", "Edit Gap");
 <?php $view->moveToDefaultFragment(); ?>
 
 
+<?php if (!empty($errors)){ ?>
+    <div class="alert alert-danger text-center" id="success-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<?=i18n($errors)?>
+    </div>
+<?php } ?>
+
 <div class="container">
     <div class="row center-row">
         <div class="col-lg-12 center-block">
@@ -37,7 +44,7 @@ $view->setVariable("title", "Edit Gap");
                 <?= i18n("Do you want to modify the timetables?") ?>
             </div>
             <div class="col-lg-12 center-block2">
-                <form method="POST" action='index.php?controller=gaps&action=edit&poll=<?=$poll?>'>
+                <form method="POST" action='index.php?controller=gaps&action=edit&poll=<?=$poll->getLink()?>'>
                     <table id="dataTable" class="table text-center">
                         <thead>
                             <tr>

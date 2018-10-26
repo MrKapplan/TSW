@@ -21,7 +21,6 @@ class Poll {
 
 	}
 
-
 	public function getId() {
 		return $this->id;
 	}
@@ -64,13 +63,13 @@ class Poll {
 	public function checkIsValidForCreate() {
 		$errors = array();
 		if (strlen(trim($this->title)) == 0 ) {
-			$errors["title"] = "title is mandatory";
+			$errors["title"] = "Title is mandatory";
 		}
 		if (strlen(trim($this->title)) > 220 ) {
-			$errors["title"] = "title can not be that long";
+			$errors["title"] = "Title can not be that long";
 		}
 		if ($this->author == NULL ) {
-			$errors["author"] = "author is mandatory";
+			$errors["author"] = "Author is mandatory";
 		}
 
 		if (sizeof($errors) > 0){
@@ -86,18 +85,18 @@ class Poll {
 			$errors["id"] = "id is mandatory";
 		}
 		if (strlen(trim($this->title)) == 0 ) {
-			$errors["title"] = "title is mandatory";
+			$errors["title"] = "Title is mandatory";
 		}
 		if (strlen(trim($this->title)) > 220 ) {
-			$errors["title"] = "title can not be that long";
+			$errors["title"] = "Title can not be that long";
 		}
 
 		if ($this->author == NULL ) {
-			$errors["author"] = "author is mandatory";
+			$errors["author"] = "Author is mandatory";
 		}
 
 		if (!isset($this->link)) {
-			$errors["link"] = "link is mandatory";
+			$errors["link"] = "Link is mandatory";
 		}
 
 		try{

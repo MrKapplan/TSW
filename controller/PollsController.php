@@ -74,7 +74,6 @@ class PollsController extends BaseController {
 		if (!isset($this->currentUser)) {
 			throw new Exception("Not in session. Adding polls requires login");
 		}
-
 		$poll = new Poll();
 
 		if (isset($_POST["submit"])) { 
@@ -84,14 +83,11 @@ class PollsController extends BaseController {
 			if(isset($_POST["ubication"])){
 				$poll->setUbication($_POST["ubication"]);
 			}
-
 			$poll->setAuthor($this->currentUser);
 
 			try {
 				$poll->checkIsValidForCreate(); 
 				$pollLink = $this->pollMapper->save($poll);
-				
-				//var_dump($pollid);
 				$this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully added."), $poll->getTitle()));
 				$this->view->redirect("gaps", "add&poll=$pollLink");
 
@@ -114,7 +110,6 @@ class PollsController extends BaseController {
 		if (!isset($_REQUEST["poll"])) {
 			throw new Exception("A poll id is mandatory");
 		}
-
 		$pollLink = $_REQUEST["poll"];
 
 		$poll = $this->pollMapper->findPollByLink($pollLink);
@@ -148,34 +143,6 @@ class PollsController extends BaseController {
 
 		$this->view->setVariable("poll", $poll);
 		$this->view->render("polls", "edit");
-	}
-
-	
-
-	public function delete() {
-		if (!isset($_POST["poll"])) {
-			throw new Exception("id is mandatory");
-		}
-		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Deleting polls requires login");
-		}
-		
-		$pollLink = $_REQUEST["poll"];
-		$poll = $this->pollMapper->findPollByLink($pollLink);
-
-		if ($poll == NULL) {
-			throw new Exception("no such poll with id: ".$poll->getId());
-		}
-
-		if ($poll->getAuthor() != $this->currentUser) {
-			throw new Exception("Logged user is not the author of the poll ");
-		}
-
-		var_dump($poll);
-		// $this->pollMapper->delete($poll);
-		// $this->view->setFlash(sprintf(i18n("Poll \"%s\" successfully deleted."), $poll ->getTitle()));
-		// $this->view->redirect("polls", "index");
-
 	}
 
 }

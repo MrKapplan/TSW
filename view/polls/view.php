@@ -91,6 +91,7 @@ $view->setVariable("title", "View Poll");
                             </tbody>
                         </table>
                     <?php endif; ?>
+                    <script>checkboxes();</script>
                     <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
                     <?php if(count($gaps) == 0){ ?>
                     <?php } elseif($isParticipant){ ?>

@@ -28,6 +28,13 @@ $view->setVariable("title", "Add Gap");
 <?php $view->moveToDefaultFragment(); ?>
 
 
+<?php if (!empty($errors)){ ?>
+    <div class="alert alert-danger text-center" id="success-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<?=i18n($errors)?>
+    </div>
+<?php } ?>
+
 <div class="container">
     <div class="row center-row">
         <div class="col-lg-12 center-block">
@@ -60,7 +67,7 @@ $view->setVariable("title", "Add Gap");
                                 <td>
                                     <div id="inputTime">
                                         <div class="inputWithIconLogin inputIconBg">
-                                            <input type="text" id="timeStart" class="timeStart" >
+                                            <input type="text" id="timeStart" class="timeStart" required>
                                             <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                         </div>
                                     </div>
@@ -69,7 +76,7 @@ $view->setVariable("title", "Add Gap");
                                 <td>
                                     <div id="inputTime">
                                         <div class="inputWithIconLogin inputIconBg">
-                                            <input type="text" id="timeEnd" class="timeEnd" >
+                                            <input type="text" id="timeEnd" class="timeEnd" required>
                                             <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    
                                         </div>
                                     </div>
@@ -77,9 +84,9 @@ $view->setVariable("title", "Add Gap");
                             </tr>
                         </tbody>
                     </table>
-                    <input type="hidden" id="dates" name="dates"> 
-                    <input type="hidden" id="timesStarts" name="timesStart"> 
-                    <input type="hidden" id="timesEnds" name="timesEnd"> 
+                    <input type="hidden" id="data" name="data"> 
+                    <!-- <input type="hidden" id="timesStarts" name="timesStart"> 
+                    <input type="hidden" id="timesEnds" name="timesEnd">  -->
                     <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>
                 </form>
             </div>

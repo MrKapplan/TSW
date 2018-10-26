@@ -17,7 +17,6 @@ class GapsController extends BaseController {
 
 		$this->pollMapper = new PollMapper();
 		$this->gapMapper = new GapMapper();
-
 	}
 
 	
@@ -36,22 +35,16 @@ class GapsController extends BaseController {
 
 		 if (isset($_POST["submit"])) { 
 			try {
-				$dates = $_POST["dates"];
-				if ($dates == NULL){
-					throw new Exception("1");
+
+				$data = json_decode($_POST["data"]);
+				if ($data == NULL){
+					$errors = "Date and times are mandatory";
+					throw new ValidationException($errors, "dateTime is not valid");
 				}
 				
-				$timesStart = $_POST['timesStart'];
-				if ($timesStart == NULL){
-					throw new Exception("2");
-				}
-
-				$timesEnd = $_POST['timesEnd'];
-				if ($timesEnd == NULL){
-					throw new Exception("3");
-				}
-
-		 		$gapId = $this->gapMapper->save($dates, $timesStart, $timesEnd, $pollid);
+				$this->gapMapper->checkForAdd_Updates($data);
+				
+				$gapId = $this->gapMapper->save($data, $poll->getId());
 		 		$this->view->setFlash(sprintf(i18n("Gap \"%s\" successfully added."), $gapId));
 		 		$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
@@ -64,43 +57,38 @@ class GapsController extends BaseController {
 	}
 
 
-
 	public function edit() {
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing gaps for poll requires login");
-		}
+			throw new Exception("Not in session. Editing participation requires login");
+
+		} 
 		
-		if (!isset($_GET["poll"])) {
+		if (!isset($_GET["poll"]) || empty($_GET["poll"])) {
 			throw new Exception("id is mandatory");
-		}
-		$pollLink = $_GET['poll'];
-		
-		$gaps = $this->gapMapper->findGapsByIdPoll($poll);
+		} 
+			$pollLink = $_GET['poll'];
+			$poll = $this->pollMapper->findPollByLink($pollLink);
+			$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 
-		 if (isset($_POST["submit"])) { 
-			try {
-				$data = json_decode($_POST["data"]);
+			if (isset($_POST["submit"])) { 
+				try {
+					$data = json_decode($_POST["data"]);
 
-				if ($data == NULL){
-					throw new Exception("3");
+					$this->gapMapper->checkForAdd_Updates($data);
+					$this->gapMapper->updateGaps($data, $poll->getId(), $gaps);
+					$this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll->getId()));
+					$this->view->redirect("polls", "view&poll=$pollLink");
+				}catch(ValidationException $ex) {
+					$errors = $ex->getErrors();
+					$this->view->setVariable("errors", $errors);
 				}
-
-				//$this->gappMapper->checkForUpdates($data);
-				//var_dump(count($data));
-				//var_dump($data[0]->date);
-				
-		 		$this->gapMapper->updateGaps($data, $poll, $gaps);
-		 		// $this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll));
-		 		// $this->view->redirect("polls", "view&poll=$poll");
-
-			}catch(ValidationException $ex) {
-				$errors = $ex->getErrors();
-				$this->view->setVariable("errors", $errors);
 			}
-		}
-		$this->view->setVariable("poll", $poll);
-		$this->view->setVariable("gaps", $gaps);
-		$this->view->render("gaps", "edit");
+
+			$this->view->setVariable("poll", $poll);
+			$this->view->setVariable("gaps", $gaps);
+			$this->view->render("gaps", "edit");
 	}
+	
+	
 }

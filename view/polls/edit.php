@@ -14,7 +14,7 @@ $view->setVariable("title", "Add Poll"); ?>
 				<?=htmlentities(i18n("Do you want to change something?"))?>
 			</div>
 			<div class="col-lg-12 center-block2">
-				<form method="POST" action="index.php?controller=polls&action=edit&poll=<?=$poll->getId()?>">
+				<form method="POST" action="index.php?controller=polls&action=edit&poll=<?=$poll->getLink()?>">
 					<div id="requiredInput">
 						<div class="inputWithIconLogin inputIconBg">
 							<input type="text" name="title" placeholder="<?= i18n("What is the matter about?")?>"  value="<?=htmlentities($poll->getTitle())?>" required>

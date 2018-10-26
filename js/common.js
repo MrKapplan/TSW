@@ -38,7 +38,7 @@ function addRow() {
     inputDate.type ="text";
     inputDate.id = "date-es";
     inputDate.className = "date";
-    inputDate.required;
+    inputDate.required = true;
     divIcon.appendChild(inputDate);
 
     $(inputDate).bootstrapMaterialDatePicker
@@ -69,7 +69,7 @@ function addRow() {
     var inputTimeStart = document.createElement("input");
     inputTimeStart.type ="text";
     inputTimeStart.className = "timeStart";
-    inputTimeStart.required;
+    inputTimeStart.required = true;
     divIcon2.appendChild(inputTimeStart);
 
     $(inputTimeStart).bootstrapMaterialDatePicker
@@ -97,7 +97,7 @@ function addRow() {
     inputTimeEnd.type ="text";
    // inputTimeEnd.id = "timeEnd";
     inputTimeEnd.className = "timeEnd";
-    inputTimeEnd.required;
+    inputTimeEnd.required = true;
     divIcon3.appendChild(inputTimeEnd);
 
     $(inputTimeEnd).bootstrapMaterialDatePicker
@@ -166,9 +166,9 @@ function removeCheckboxWarning() {
 *   With "table-warning" when the rows are more than one.
 *
 */
-function checkboxes(tableId) {
+function checkboxes() {
 
-    var table = document.getElementById(tableId);
+    var table = document.getElementById('dataTable');
     var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
     var inputElems = document.getElementsByTagName("input");  //Array one dimensional with the inputs (input link poll included)
     var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
@@ -235,37 +235,6 @@ function validateCheckboxes() {
 
 
 
-// function valueData() {
-
-//     var dateArray = [];
-//     var inputsDate = document.getElementsByClassName('date');
-
-//     for (var i = 0; i < inputsDate.length; i++) {
-//             dateArray.push(inputsDate[i].value);
-//     }
-//     document.getElementById('dates').value = dateArray;
-
-
-//     var timeStartArray = [];
-//     var inputsTimeStart = document.getElementsByClassName('timeStart');
-
-//     for (var i = 0; i < inputsTimeStart.length; i++) {
-//         timeStartArray.push(inputsTimeStart[i].value.toString());
-//     }
-//     document.getElementById('timesStarts').value = timeStartArray;
-
-
-//     var timeEndArray = [];
-//     var inputsTimeEnd = document.getElementsByClassName('timeEnd');
-
-//     for (var i = 0; i < inputsTimeEnd.length; i++) {
-//         timeEndArray.push(inputsTimeEnd[i].value.toString());
-//     }
-//     document.getElementById('timesEnds').value = timeEndArray;
-
-// }
-
-
 function valueData() {
 
     var dataArray = [];
@@ -273,11 +242,9 @@ function valueData() {
     var inputsTimeStart = document.getElementsByClassName('timeStart');
     var inputsTimeEnd = document.getElementsByClassName('timeEnd');
 
-
     for (var i = 0; i < inputsDate.length; i++) {
         dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
     }
-    //console.log(dateArray);
 
     document.getElementById('data').value = JSON.stringify(dataArray);
 

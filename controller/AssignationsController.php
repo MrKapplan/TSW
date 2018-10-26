@@ -53,7 +53,7 @@ class AssignationsController extends BaseController {
 			try {
 				$assignations = $_POST["assignations"];
 				$this->assignationMapper->addAssignation($user->getUsername(), $assignations, $poll->getId());
-				$this->view->setFlash(i18n("Assignations successfully updated."));
+				$this->view->setFlash(i18n("Assignations successfully added."));
 				$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
@@ -87,13 +87,11 @@ class AssignationsController extends BaseController {
         }
 	
         $gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
-
 		if ($gaps == NULL) {
 			throw new Exception("No such gap for the poll with id: ".$poll->getId());
         }
         
         $assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
-
         if ( $assignations == NULL){
 			throw new Exception("No such assignations for the poll with id: ".$poll->getId());
 		}

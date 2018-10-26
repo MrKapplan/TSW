@@ -184,12 +184,9 @@ input[type=text],[type=password]{
   }
 
 .inputWithIconLogin input[type=text],[type=password]{
-	padding-left:40px;
+	padding-left:35px;
 }
 
-.inputWithIconLogin input[type=text],[type=password]{
-	padding-left:40px;
-}
 
 .inputWithIconLogin{
 	position:relative;
@@ -376,32 +373,6 @@ td{
 }
 
 
-/* //CALENDAR
-
-.k-calendar .k-header .k-link {
-	color: black;
-}
-
-.k-calendar .k-header{
-	background-color: #eeee;
-}
-
-
-.k-calendar .k-header .k-state-hover {
-	background-color: #eeee;
-}
-
-#timeContainer{
-		margin-top: 10%;
-		width: 50%;
-	}
-
-@media(min-width: 990px){
-	#timeContainer{
-		float: right;
-		margin-top: 0%;
-	}
-} */
 
 /* FOOTER */
 
@@ -455,10 +426,10 @@ ul.social-network li a {
 
  .zoom:hover{
 	/* tranformamos el elemento al pasar el mouse por encima al doble de  su tamaño con scale(2). */
-	transform : scale(1.3);
-	-moz-transform : scale(1.3);       
-	-webkit-transform : scale(1.3);    
-	-o-transform : scale(1.3);         
+	transform : scale(1.4);
+	-moz-transform : scale(1.4);       
+	-webkit-transform : scale(1.4);    
+	-o-transform : scale(1.4);         
 } 
 
 
