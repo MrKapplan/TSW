@@ -8,17 +8,10 @@ $assignations = $view->getVariable("assignations");
 $participants = $view->getVariable("participants");
 $isParticipant = $view->getVariable("isParticipant");
 $currentuser = $view->getVariable("currentusername");
-$errors = $view->popFlashDanger();
 $view->setVariable("title", "View Poll");
 ?>
 
 
-<?php if (!empty($errors)){ ?>
-    <div class="alert alert-danger text-center" id="success-danger" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<?=i18n($errors)?>
-    </div>
-<?php } ?>
 
 <div class="container">
     <div class="row center-row">

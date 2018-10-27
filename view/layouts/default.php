@@ -93,11 +93,17 @@ $currentuser = $view->getVariable("currentusername");
 
 	<main>
     <?php $message = $view->popFlash(); ?>
+    <?php $errors = $view->popFlashDanger(); ?>
     <?php if (!empty($message)){ ?>
             <div class="alert alert-success text-center" id="success-alert" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<?=i18n($message)?>
             </div>
+    <?php } else if (!empty($errors)){ ?>
+    <div class="alert alert-danger text-center" id="success-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<?=i18n($errors)?>
+    </div>
     <?php } ?>
         <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
     </main>

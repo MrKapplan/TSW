@@ -101,7 +101,7 @@ class GapsController extends BaseController {
 
 					$this->gapMapper->checkForAdd_Updates($data);
 					$this->gapMapper->updateGaps($data, $poll->getId(), $gaps);
-					$this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll->getId()));
+					$this->view->setFlash(sprintf(i18n("Poll's gaps \"%s\" successfully edited."), $poll->getTitle()));
 					$this->view->redirect("polls", "view&poll=$pollLink");
 				}catch(ValidationException $ex) {
 					$errors = $ex->getErrors();
