@@ -36,7 +36,18 @@ $errors = $view->getVariable("errors");
                         </div>
                     </form>
                     <div id="loginPerdidaDeDatos">
-                    <a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Not user?")?><?= i18n("Register here!")?></a>
+                        <a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Not user?")?><?= i18n("Register here!")?></a>
+                    </div>
+
+                    <div>
+                        <form method="POST" action="index.php?controller=language&action=change">
+                            <p><select name="lang" onchange="this.form.submit()">
+                                <option value=""></option>
+                                <option value="es">Castellano</option>
+                                <option value="en">English</option>
+                            </select></p>
+                        </form>
+
                     </div>
                 </div>
             </div>
