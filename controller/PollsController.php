@@ -10,11 +10,14 @@ require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
 
+
+
 class PollsController extends BaseController {
 
 	private $pollMapper;
 	private $gapMapper;
 	private $assignationMapper;
+	private $errors = array();
 
 	public function __construct() {
 		parent::__construct();
@@ -27,6 +30,11 @@ class PollsController extends BaseController {
 
 	public function index() {
 
+		if (!isset($this->currentUser)) {
+			$this->view->setFlashDanger(i18n("Not in session. View polls requires login"));
+			$this->view->redirect("users", "login");
+		}
+
 		$polls = $this->pollMapper->findAll($_SESSION["currentuser"]);
 		$this->view->setVariable("polls", $polls);
 		$this->view->render("polls", "index");
@@ -37,42 +45,43 @@ class PollsController extends BaseController {
 
 		if (!isset($this->currentUser)) {
 			$_SESSION['BACK'] =  $_GET["poll"];
+			$this->view->setFlashDanger(i18n("Not in session. View polls requires login"));
 			$this->view->redirect("users", "login");
 		} else {
 
-		if (!isset($_GET["poll"])) {
-			//throw new Exception("id is mandatory");
+			if (!isset($_GET["poll"]) || empty($_GET["poll"])) {
+				$this->view->setFlashDanger(i18n("The poll id is mandatory"));
+				$this->view->redirect("polls", "index");
+			}
+			$pollLink = $_GET["poll"];
 
+			$poll = $this->pollMapper->findPollByLink($pollLink);
+			if ($poll == NULL) {
+				$this->view->setFlashDanger(i18n("This poll does not exit"));
+				$this->view->redirect("polls", "index");
+			} 
+
+			$gap = $this->gapMapper->findGapsByIdPoll($poll->getId());
+			$assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
+			$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $this->currentUser->getUsername());
+			$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $poll->getId());
+
+			$this->view->setVariable("poll", $poll);
+			$this->view->setVariable("gaps", $gap);
+			$this->view->setVariable("assignations", $assignations);
+			$this->view->setVariable("participants", $participants);
+			$this->view->setVariable("isParticipant", $isParticipant);
+			
+			$this->view->render("polls", "view");	
 		}
-		$pollLink = $_GET["poll"];
-
-		$poll = $this->pollMapper->findPollByLink($pollLink);
-		if ($poll == NULL) {
-			throw new Exception("no such post with id: ".$pollLink);
-		} 
-
-		$gap = $this->gapMapper->findGapsByIdPoll($poll->getId());
-		$assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
-		$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $this->currentUser->getUsername());
-		$isParticipant = $this->assignationMapper->isParticipant($this->currentUser, $poll->getId());
-
-		$this->view->setVariable("poll", $poll);
-		$this->view->setVariable("gaps", $gap);
-		$this->view->setVariable("assignations", $assignations);
-		$this->view->setVariable("participants", $participants);
-		$this->view->setVariable("isParticipant", $isParticipant);
-		
-		$this->view->render("polls", "view");
-		
-	
-	}
 
 	}
 
 	
 	public function add() {
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Adding polls requires login");
+			$this->view->setFlashDanger(i18n("Not in session. Adding polls requires login"));
+			$this->view->redirect("users", "login");
 		}
 		$poll = new Poll();
 
@@ -104,21 +113,25 @@ class PollsController extends BaseController {
 	public function edit() {
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing polls requires login");
+			$this->view->setFlashDanger(i18n("Not in session. Editing polls requires login"));
+			$this->view->redirect("users", "login");
 		}
 
-		if (!isset($_REQUEST["poll"])) {
-			throw new Exception("A poll id is mandatory");
+		if (!isset($_REQUEST["poll"]) || empty($_GET["poll"])) {
+			$this->view->setFlashDanger(i18n("The poll id is mandatory"));
+			$this->view->redirect("polls", "index");
 		}
 		$pollLink = $_REQUEST["poll"];
 
 		$poll = $this->pollMapper->findPollByLink($pollLink);
 		if ($poll == NULL) {
-			throw new Exception("no such poll with id: ".$poll->getId());
+			$this->view->setFlashDanger(i18n("This poll does not exist"));
+			$this->view->redirect("polls", "index");
 		}
 
 		if ($poll->getAuthor() != $this->currentUser) {
-			throw new Exception("Logged user is not the author of the poll ".$poll->getId());
+			$this->view->setFlashDanger(i18n("Only the polls author can edit the poll"));
+			$this->view->redirect("polls", "index");
 		}
 
 		if (isset($_POST["submit"])) { 

@@ -31,7 +31,7 @@ $view->setVariable("title", "Add Gap");
 <?php if (!empty($errors)){ ?>
     <div class="alert alert-danger text-center" id="success-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<?=i18n($errors)?>
+		<?=i18n(array_pop($errors))?>
     </div>
 <?php } ?>
 

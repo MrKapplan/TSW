@@ -63,8 +63,13 @@ header{
 	background-color: #fff;
 }
 .logo{
-	height: 75px;
+	height: 40px;
 }
+
+.logoLogin{
+	height: 60px;
+}
+
 
 /* BODY BASIC ELEMENTS */
 
@@ -90,6 +95,17 @@ header{
 	max-width: 80%;
 }
 
+.center-block-login{
+	float: none;
+	background-color: white;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 5px;
+	max-width: 80%;
+}
+
 .center-block2 {
 	  margin: auto;
 	  margin-top: 5%;
@@ -104,6 +120,12 @@ header{
 	font-size: 32px;
 	text-align: center;
 	margin-bottom: 8%;
+}
+
+#subtitleLogin{
+	margin: auto;
+	margin-top: 4%;
+	text-align: center;
 }
 
 #subtitleView{
@@ -160,10 +182,12 @@ header{
 	margin-bottom: 5%;
 }
 
+#loginPerdidaDeDatos{
+	margin-left: 25%;
+}
 
 .font-weight-light{
-  font-size: 10px;
-  margin-left: 25%;
+  font-size: 13px;
 }
 
 
@@ -352,14 +376,21 @@ button a{
 	text-decoration: none;
 }
 
-
-/* a {
-	color: black!important;
+.loginButton {
+    width: 102%;
+    margin-bottom: 4%;
 }
 
-a:hover{
-	color: white!important;
-} */
+.btn-darkLogin {
+    margin-bottom: 30px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #eeee;
+    color: #000;
+    border: none;
+    border-bottom: 3px solid #19e6;
+    border-radius: 2px;
+}
 
 
 /* FORMS AND TABLE ELEMENTS */
@@ -437,6 +468,5 @@ ul.social-network li a {
 	-webkit-transform : scale(1.4);    
 	-o-transform : scale(1.4);         
 } 
-
 
 

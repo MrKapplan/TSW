@@ -89,27 +89,27 @@ class GapMapper {
 		for($i=0; $i<count($data); $i++){
 
 			if (strlen($data[$i]->date) !== 10) {
-				$errors = "The date length is incorrect";
+				array_push($errors,"The date length is incorrect");
 			}
 
 			else if (!preg_match("/^(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[012])\\/(19|20)[0-9]{2}$/", $data[$i]->date)) {
-				$errors = "The date format is incorrect";
+				array_push($errors,"The date format is incorrect");
 			} 
 
 			else if (strlen($data[$i]->start) !== 5) {
-				$errors = "The start time must be 5 characters length";
+				array_push($errors,"The start time must be 5 characters length");
 			}
 
 			else if (strlen($data[$i]->end) !== 5) {
-				$errors = "The end time must be 5 characters length";
+				array_push($errors, "The end time must be 5 characters length");
 			}
 
 			else if($this->dateOverlap($data, $i, $data[$i]->date, $data[$i]->start, $data[$i]->end)){
-				$errors = "There are days with overlapping schedules" ;
+				array_push($errors, "There are days with overlapping schedules");
 			}
 
 			else if($data[$i]->end <= $data[$i]->start){
-				$errors = "The end time has to be longer than start time";
+				array_push($errors, "The end time has to be longer than start time");
 			}
 
 			if (sizeof($errors)>0){

@@ -12,15 +12,16 @@ $view->setVariable("title", "Register");
 
  <div class="container">
         <div class="row center-row">
-            <div class="col-lg-6 center-block">
-                <div id="subtitle">
-                    <h1><?= i18n("Registry")?></h1>
+            <div class="col-lg-6 center-block-login">
+            <div id="subtitleLogin">
+                    <a class="navbar-brand" href="index.php"><img src="../img/logo.png" alt="logo" class="logoLogin"></a>
+                    <h5><br><?= i18n("Registry")?></h5>
                 </div>
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="index.php?controller=users&action=register">
                         <div id="inputLogin">
                             <div class="inputWithIconRegister inputIconBg">
-                                <?= i18n("Username")?><input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("UsernameAdd")?>" required>
+                                <?= i18n("Username")?><input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("Username")?>" required>
                                 <?php if(isset($errors["username"])) { ?> 
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -32,7 +33,7 @@ $view->setVariable("title", "Register");
                         </div>
                         <div id="inputLogin">
                             <div class="inputWithIconRegister inputIconBg">
-                                <?= i18n("Password")?><input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
+                                <?= i18n("Password")?><input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
                                 <?php if(isset($errors["passwd"])) { ?> 
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

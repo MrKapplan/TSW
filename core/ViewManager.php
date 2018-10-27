@@ -80,6 +80,16 @@ class ViewManager {
 		return $this->getVariable("__flashmessage__", "");
 	}
 
+	public function setFlashDanger($flashMessage) {
+		$this->setVariable("__flashmessage__", $flashMessage, true);
+
+	}
+
+
+	public function popFlashDanger() {
+		return $this->getVariable("__flashmessage__", "");
+	}
+
 
 
 	public function setLayout($layout) {

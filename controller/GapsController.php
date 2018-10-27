@@ -23,23 +23,35 @@ class GapsController extends BaseController {
 	public function add() {
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Adding gaps for poll requires login");
+			$this->view->setFlashDanger(i18n("Not in session. Adding gaps requires login"));
+			$this->view->redirect("users", "login");
 		}
 		$gap = new Gap();
 		
-		if (!isset($_GET["poll"])) {
-			throw new Exception("id is mandatory");
+		if (!isset($_GET["poll"]) || empty($_GET["poll"])) {
+			$this->view->setFlashDanger(i18n("The poll id is mandatory"));
+			$this->view->redirect("polls", "index");
 		}
 		$pollLink = $_GET['poll'];
 		$poll = $this->pollMapper->findPollByLink($pollLink);
+
+		if ($poll == NULL) {
+			$this->view->setFlashDanger(i18n("This poll does not exist"));
+			$this->view->redirect("polls", "index");
+		}
+
+		if ($poll->getAuthor()->getUsername() != $this->currentUser->getUsername()) {
+			$this->view->setFlashDanger(i18n("Only the polls author can add gaps"));
+			$this->view->redirect("polls", "index");
+		}
 
 		 if (isset($_POST["submit"])) { 
 			try {
 
 				$data = json_decode($_POST["data"]);
 				if ($data == NULL){
-					$errors = "Date and times are mandatory";
-					throw new ValidationException($errors, "dateTime is not valid");
+					$this->view->setFlashDanger(i18n("The gap dates are mandatory to add it"));
+					$this->view->redirect("polls", "add");
 				}
 				
 				$this->gapMapper->checkForAdd_Updates($data);
@@ -60,15 +72,27 @@ class GapsController extends BaseController {
 	public function edit() {
 
 		if (!isset($this->currentUser)) {
-			throw new Exception("Not in session. Editing participation requires login");
-
+			$this->view->setFlashDanger(i18n("Not in session. Editing gaps requires login"));
+			$this->view->redirect("users", "login");
 		} 
 		
 		if (!isset($_GET["poll"]) || empty($_GET["poll"])) {
-			throw new Exception("id is mandatory");
+			$this->view->setFlashDanger(i18n("The poll id is mandatory"));
+			$this->view->redirect("polls", "index");
 		} 
 			$pollLink = $_GET['poll'];
 			$poll = $this->pollMapper->findPollByLink($pollLink);
+
+			if ($poll == NULL) {
+				$this->view->setFlashDanger(i18n("This poll does not exist"));
+				$this->view->redirect("polls", "index");
+			}
+	
+			if ($poll->getAuthor()->getUsername() != $this->currentUser->getUsername()) {
+				$this->view->setFlashDanger(i18n("Only the polls author can add gaps"));
+				$this->view->redirect("polls", "index");
+			}
+
 			$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 
 			if (isset($_POST["submit"])) { 

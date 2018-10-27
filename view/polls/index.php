@@ -5,9 +5,17 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $view->setVariable("title", i18n("My polls"));
 $polls = $view->getVariable("polls");
+$errors = $view->popFlashDanger();
 $currentuser = $view->getVariable("currentusername");
 ?>
 
+
+<?php if (!empty($errors)){ ?>
+    <div class="alert alert-danger text-center" id="success-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<?=i18n($errors)?>
+    </div>
+<?php } ?>
 
 <div class="container">
     <div class="row center-row">
@@ -19,9 +27,9 @@ $currentuser = $view->getVariable("currentusername");
             <table id="dataTable" class="table text-center">
                <thead>
                   <tr>
-                     <th scope="col"><?= i18n("title")?></th>
-                     <th scope="col"><?= i18n("ubication")?></th>
-                     <th scope="col"><?= i18n("author")?></th>
+                     <th scope="col"><?= i18n("Title")?></th>
+                     <th scope="col"><?= i18n("Ubication")?></th>
+                     <th scope="col"><?= i18n("Author")?></th>
                      <th scope="col"> </th>
 							     </tr>
                    </thead>
@@ -29,7 +37,7 @@ $currentuser = $view->getVariable("currentusername");
                      <?php foreach ($polls as $poll): ?>
                        <tr>
                           <td>
-                          <a href="index.php?controller=polls&action=view&poll=<?= $poll->getLink() ?>"><?= htmlentities($poll->getTitle()) ?></a>
+                          <a title="<?= i18n("See "); echo $poll->getTitle()?>" href="index.php?controller=polls&action=view&poll=<?= $poll->getLink() ?>"><?= htmlentities($poll->getTitle()) ?></a>
                           </td>
 										
                           <td>
@@ -48,9 +56,9 @@ $currentuser = $view->getVariable("currentusername");
                             <?php	
                               if (isset($currentuser) && $currentuser == $poll->getAuthor()->getUsername()): ?>
                               <a href="index.php?controller=polls&action=edit&poll=<?= htmlentities($poll->getLink())?>">
-                                <span title="Edit Poll" class="btn btn-primary btn-sm fa fa-pencil"></a>&nbsp;&nbsp;
+                                <span title="<?= i18n("Edit Polls")?>" class="btn btn-primary btn-sm fa fa-pencil"></a>&nbsp;&nbsp;
                               <a href="index.php?controller=gaps&action=edit&poll=<?= htmlentities($poll->getLink())?>">
-                                <span title="Edit Gaps" class="btn btn-success btn-sm fa fa-th-list"></a>&nbsp;&nbsp;
+                                <span title="<?= i18n("Edit Gaps")?>" class="btn btn-success btn-sm fa fa-th-list"></a>&nbsp;&nbsp;
                               <?php endif; ?>
                            </td>
                          </tr>

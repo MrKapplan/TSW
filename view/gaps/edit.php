@@ -33,7 +33,7 @@ $view->setVariable("title", "Edit Gap");
 <?php if (!empty($errors)){ ?>
     <div class="alert alert-danger text-center" id="success-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<?=i18n($errors)?>
+		<?=i18n(array_pop($errors))?>
     </div>
 <?php } ?>
 
@@ -94,8 +94,6 @@ $view->setVariable("title", "Edit Gap");
                         </tbody>
                     </table>
                     <input type="hidden" id="data" name="data"> 
-                    <!-- <input type="hidden" id="timesStarts" name="timesStart"> 
-                    <input type="hidden" id="timesEnds" name="timesEnd">  -->
                     <button type="submit" name="submit" class="btn btn-dark" onclick="valueData()"><?= i18n("Continue")?></button>
                 </form>
             </div>

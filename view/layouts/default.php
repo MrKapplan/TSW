@@ -52,10 +52,10 @@ $currentuser = $view->getVariable("currentusername");
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=polls&action=add"><?= i18n("AddPoll")?></a>
+                        <a class="nav-link" href="index.php?controller=polls&action=add"><?= i18n("Add Poll")?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=polls&action=index"><?= i18n("SeeMyPolls")?></a>
+                        <a class="nav-link" href="index.php?controller=polls&action=index"><?= i18n("See Polls")?></a>
                     </li>
                 </ul>
                 <div class="nav-item dropdown">
@@ -67,6 +67,24 @@ $currentuser = $view->getVariable("currentusername");
                         <a class="dropdown-item" href="index.php?controller=users&action=edit"><?= i18n("MyProfile")?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="index.php?controller=users&action=logout"><?= i18n("Logout")?></a>
+                    </div>
+                </div>
+
+                 <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <?php if($_SESSION['__currentlang__'] === 'es') { ?>
+                            <img src="../img/spain.png" >
+                        <?php } else { ?>
+                            <img src="../img/uk.png">
+                        <?php } ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php if($_SESSION['__currentlang__'] === 'es') { ?>
+                        <a href="index.php?controller=language&action=change&lang=en"><img src="../img/uk.png"></a>
+                        <?php } else { ?>
+                        <a href="index.php?controller=language&action=change&lang=es"><img src="../img/spain.png"></a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -102,7 +120,7 @@ $currentuser = $view->getVariable("currentusername");
                     </div>
                     <div class="col-lg-12">
                         <div class="copyright">
-                            <span>&copy;TienesHueco 2018. Let's do it! By </span><a href="" target="_blank">G25_TSW</a>
+                            <span>&copy;MeetPoll. Are you free? By </span><a href="" target="_blank">G25_TSW</a>
                         </div>
                     </div>
                 </div>

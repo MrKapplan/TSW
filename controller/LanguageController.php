@@ -9,13 +9,13 @@ class LanguageController {
 
 
 	public function change() {
-		if(!isset($_POST["lang"])) {
+		if(!isset($_GET["lang"])) {
 			throw new Exception("no lang parameter was provided");
 		}
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
-		I18n::getInstance()->setLanguage($_POST["lang"]);
+		I18n::getInstance()->setLanguage($_GET["lang"]);
 
 		header("Location: ".$_SERVER["HTTP_REFERER"]);
 		die();
