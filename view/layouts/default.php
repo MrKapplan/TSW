@@ -61,10 +61,10 @@ $currentuser = $view->getVariable("currentusername");
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <?= i18n("MyAccount")?>
+                        <?= i18n("My Account")?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="index.php?controller=users&action=edit"><?= i18n("MyProfile")?></a>
+                        <a class="dropdown-item" href="index.php?controller=users&action=edit"><?= i18n("My Profile")?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="index.php?controller=users&action=logout"><?= i18n("Logout")?></a>
                     </div>
