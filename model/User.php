@@ -33,7 +33,7 @@ class User {
 	}
 
 	
-	public function checkIsValidForRegister() {
+	public function checkIsValidForRegister($confirmPasswd) {
 		$errors = array();
 		if (strlen($this->username) < 5) {
 			$errors["username"] = "Username must be at least 5 characters length";
@@ -42,18 +42,27 @@ class User {
 		if (strlen($this->passwd) < 5) {
 			$errors["passwd"] = "Password must be at least 5 characters length";
 		}
+
+		if($this->passwd !== $confirmPasswd){
+			$errors["ConfirmPasswd"] = "The passwords do not match";
+		}
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}
 	}
 
 
-	public function checkIsValidForUpdate() {
+	public function checkIsValidForUpdate($confirmPasswd) {
 		$errors = array();
 
 		if (strlen($this->passwd) < 5) {
 			$errors["passwd"] = "Password must be at least 5 characters length";
 		}
+
+		if($this->passwd !== $confirmPasswd){
+			$errors["confirmPasswd"] = "The passwords do not match";
+		}
+
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}

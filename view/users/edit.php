@@ -26,7 +26,6 @@ $errors = $view->getVariable("errors");
                         <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
-                                <?php $message = $errors["passwd"]; ?>
                                 <?php if (!empty($message)){ ?>
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -36,11 +35,23 @@ $errors = $view->getVariable("errors");
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                            
+                        </div>
+                        <div id="inputLogin">
+                            <div class="inputWithIconLogin inputIconBg">
+								<input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
+                                <?php if (!empty($message)){ ?>
+                                        <div class="alert alert-danger" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <strong><?=$message?></strong>
+                                        </div>
+                                        <?php $message=null; ?>
+                                <?php } ?>
+								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+                            </div>
+                        </div>
                             <button type="submit" class="btn btn-dark"><?= i18n("Edit")?></button>
                             <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
                         </div>
-                        
                     </form>
                 </div>
             </div>

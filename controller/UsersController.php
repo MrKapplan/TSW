@@ -44,22 +44,16 @@ class UsersController extends BaseController {
 
 		if (isset($_POST["username"])){ 
 			$user->setUsername($_POST["username"]);
-
 			$user->setPasswd($_POST["passwd"]);
-
+			$confirmPasswd = $_POST["confirmPasswd"];
 			try{
-				$user->checkIsValidForRegister(); 
+				$user->checkIsValidForRegister($confirmPasswd); 
 
 				if (!$this->userMapper->usernameExists($_POST["username"])){
 					$this->userMapper->save($user);
 					$this->view->setFlash(sprintf(i18n("Username \"%s\" successfully added. Please login now"), $user->getUsername()));
 					$this->view->redirect("users", "login");
-				} else {
-					$errors = array();
-					$errors["username"] = "Username is not valid";
-					$errors["passwd"] = "Password is not valid";
-					$this->view->setVariable("errors", $errors);
-				}
+				} 
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);
@@ -79,8 +73,9 @@ class UsersController extends BaseController {
 		$user->setUsername($_SESSION['currentuser']);
 		if (isset($_POST["passwd"])) { 
 			$user->setPasswd($_POST["passwd"]);
+			$confirmPasswd = $_POST["confirmPasswd"];
 			try {
-				$user->checkIsValidForUpdate(); 
+				$user->checkIsValidForUpdate($confirmPasswd); 
 				$this->userMapper->update($user);
 				$this->view->setFlash(i18n("Password successfully updated."));
 				$this->view->redirect("polls", "index");

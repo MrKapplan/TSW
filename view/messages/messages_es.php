@@ -19,6 +19,8 @@ array(
 	"Create an account." => "Crea una cuenta",
 	"UsernameAdd" => "Introduzca un username",
 	"PasswdAdd" => "Introduzca una contraseña",
+	"Confirm the password" =>"Confirma la contraseña",
+	"The passwords do not match" => "Las contraseñas no coinciden",
 	"My polls" => "Mis encuestas",
 	"Title" => "Título",
 	"Ubication" => "Ubicación",

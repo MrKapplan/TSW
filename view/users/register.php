@@ -42,6 +42,19 @@ $view->setVariable("title", "Register");
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
+                        </div>
+                            <div id="inputLogin">
+                                <div class="inputWithIconRegister inputIconBg">
+                                    <?= i18n("Confirm the password")?><input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
+                                    <?php if(isset($errors["ConfirmPasswd"])) { ?> 
+                                            <div class="alert alert-danger" role="alert">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <?=i18n($errors["ConfirmPasswd"])?>
+                                            </div>
+                                    <?php } ?>
+                                    <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+                                </div>
+                            </div>
 							<button type="submit" class="btn btn-dark"><?= i18n("Register")?></button>
                         </div>
                     </form>
