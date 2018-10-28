@@ -130,7 +130,7 @@ class PollsController extends BaseController {
 		}
 
 		if ($poll->getAuthor() != $this->currentUser) {
-			$this->view->setFlashDanger(i18n("Only the polls author can edit the poll"));
+			$this->view->setFlashDanger(i18n("Only the poll's author can edit the poll"));
 			$this->view->redirect("polls", "index");
 		}
 

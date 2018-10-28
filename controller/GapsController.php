@@ -41,7 +41,7 @@ class GapsController extends BaseController {
 		}
 
 		if ($poll->getAuthor()->getUsername() != $this->currentUser->getUsername()) {
-			$this->view->setFlashDanger(i18n("Only the polls author can add gaps"));
+			$this->view->setFlashDanger(i18n("Only the poll's author can add gaps"));
 			$this->view->redirect("polls", "index");
 		}
 
@@ -89,7 +89,7 @@ class GapsController extends BaseController {
 			}
 	
 			if ($poll->getAuthor()->getUsername() != $this->currentUser->getUsername()) {
-				$this->view->setFlashDanger(i18n("Only the polls author can add gaps"));
+				$this->view->setFlashDanger(i18n("Only the poll's author can edit gaps"));
 				$this->view->redirect("polls", "index");
 			}
 

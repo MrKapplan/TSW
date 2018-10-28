@@ -108,8 +108,10 @@ array(
 	"The poll id is mandatory" => "El id de la encuesta es obligatorio",
 	"This poll does not exit" => "Esta encuesta no existe",
 	"The gap dates are mandatory to add it" => "Los datos del hueco son obligatorios para añadirlos",
-	"Only the polls author can add gaps" => "Sólo el autor de la encuesta puede añadir huecos",
-	"Not in session. View polls requires login" => "No estás logueado. Para ver una encuesta necesitas estás logueado"
+	"Only the poll's author can add gaps" => "Sólo el autor de la encuesta puede añadir huecos",
+	"Only the poll's author can edit gaps" => "Sólo el autor de la encuesta puede editar huecos",
+	"Not in session. View polls requires login" => "No estás logueado. Para ver una encuesta necesitas estás logueado",
+	"Only the poll's author can edit the poll" => "Sólo el autor de la encuesta puede editarla"
 
 
 
