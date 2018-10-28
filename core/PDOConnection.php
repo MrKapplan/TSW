@@ -3,7 +3,7 @@
 
 class PDOConnection {
 	private static $dbhost = "127.0.0.1";
-	private static $dbname = "tsw";
+	private static $dbname = "meetpoll";
 	private static $dbuser = "root";
 	private static $dbpass = "";
 	private static $db_singleton = null;

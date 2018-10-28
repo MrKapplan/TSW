@@ -13,7 +13,7 @@ class AssignationMapper {
 
 
 	public function isParticipant($currentUser, $poll){
-		$stmt = $this->db->prepare("SELECT count(username) FROM USER_SELECTS_GAP where username=? AND poll_id=?");
+		$stmt = $this->db->prepare("SELECT count(username) FROM user_selects_gap where username=? AND poll_id=?");
 		$stmt->execute(array($currentUser->getUsername(), $poll));
 
 		if ($stmt->fetchColumn() > 0) {

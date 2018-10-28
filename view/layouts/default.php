@@ -79,7 +79,7 @@ $currentuser = $view->getVariable("currentusername");
                             <img src="../img/uk.png">
                         <?php } ?>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu idiomas" aria-labelledby="navbarDropdown">
                     <?php if($_SESSION['__currentlang__'] === 'es') { ?>
                         <a href="index.php?controller=language&action=change&lang=en"><img src="../img/uk.png"></a>
                         <?php } else { ?>
