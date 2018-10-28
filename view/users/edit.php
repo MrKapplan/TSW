@@ -25,13 +25,12 @@ $errors = $view->getVariable("errors");
                         </div>
                         <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
-								<input type="password" name="passwd" placeholder="<?= i18n("PasswdAdd")?>" required>
-                                <?php if (!empty($message)){ ?>
+								<input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
+                                <?php if (!empty($errors['passwd'])){ ?>
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong><?=$message?></strong>
+                                            <strong><?=$errors['passwd']?></strong>
                                         </div>
-                                        <?php $message=null; ?>
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
@@ -39,12 +38,11 @@ $errors = $view->getVariable("errors");
                         <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
-                                <?php if (!empty($message)){ ?>
+                                <?php if (!empty($errors['confirmPasswd'])){ ?>
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong><?=$message?></strong>
+                                            <strong><?=$errors['confirmPasswd']?></strong>
                                         </div>
-                                        <?php $message=null; ?>
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
