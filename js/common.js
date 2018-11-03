@@ -247,6 +247,8 @@ function valueData() {
     for (var i = 0; i < inputsDate.length; i++) {
         dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
     }
+	
+	console.log(dataArray);
 
     document.getElementById('data').value = JSON.stringify(dataArray);
 
