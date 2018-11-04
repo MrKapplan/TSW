@@ -227,11 +227,14 @@ function validateCheckboxes() {
 
     for (var i = 0; i < checkbox.length; i++) {
         if (checkbox[i].checked) {
-            checkboxChecked.push(checkbox[i].value);
+            //checkboxChecked.push(checkbox[i].value);
+            console.log(checkbox[i].value);
+            checkboxChecked.push({"gap":checkbox[i].value});
         }
     }
 
-    document.getElementById("hidden").value = checkboxChecked;
+    console.log(JSON.stringify(checkboxChecked));
+    document.getElementById("gaps").value = JSON.stringify(checkboxChecked);
 
 }
 
@@ -248,7 +251,6 @@ function valueData() {
         dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
     }
 	
-	console.log(dataArray);
 
     document.getElementById('data').value = JSON.stringify(dataArray);
 

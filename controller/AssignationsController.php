@@ -11,6 +11,8 @@ require_once(__DIR__."/../controller/BaseController.php");
 class AssignationsController extends BaseController {
 
 	private $assignationMapper;
+	private $gapMapper;
+	private $pollMapper;
 
 	public function __construct() {
 		parent::__construct();
@@ -49,12 +51,14 @@ class AssignationsController extends BaseController {
 			$this->view->redirect("polls", "view&poll=$pollLink");
         }
 
-        $assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
-        $participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $user->getUsername());
+        $assignationsDB = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
+        $participantsDB = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $user->getUsername());
 
         if (isset($_POST["submit"])) { 
 			try {
-				$assignations = $_POST["assignations"];
+
+				$assignations = json_decode($_POST["assignations"]);
+
 				$this->assignationMapper->addAssignation($user->getUsername(), $assignations, $poll->getId());
 				$this->view->setFlash(i18n("Assignations successfully added."));
 				$this->view->redirect("polls", "view&poll=$pollLink");
@@ -65,8 +69,8 @@ class AssignationsController extends BaseController {
         }
 		$this->view->setVariable("poll", $poll);
 		$this->view->setVariable("gaps", $gaps);
-		$this->view->setVariable("assignations", $assignations);
-		$this->view->setVariable("participants", $participants);
+		$this->view->setVariable("assignations", $assignationsDB);
+		$this->view->setVariable("participants", $participantsDB);
 		$this->view->render("assignations", "add");
 	}
 
@@ -107,7 +111,8 @@ class AssignationsController extends BaseController {
 
         if (isset($_POST["submit"])) { 
 			try {
-				$newAssignations = $_POST["assignations"];
+
+				$newAssignations = json_decode($_POST["assignations"]);
 				$this->assignationMapper->update($user->getUsername(), $newAssignations, $poll->getId());
 				$this->view->setFlash(i18n("Assignations successfully updated."));			
 				$this->view->redirect("polls", "view&poll=$pollLink");

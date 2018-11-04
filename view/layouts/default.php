@@ -7,7 +7,7 @@ $currentuser = $view->getVariable("currentusername");
 ?><!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="./img/favicon.png" />
+<link rel="shortcut icon" href="/meetPoll_TSW/img/favicon.png" />
 	<title><?= $view->getVariable("title", "no title") ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
@@ -43,7 +43,7 @@ $currentuser = $view->getVariable("currentusername");
     <!-- HEADER -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="index.php?controller=polls&action=index"><img src="../img/logo.png" alt="logo" class="logo"></a>
+            <a class="navbar-brand" href="index.php?controller=polls&action=index"><img src="/meetPoll_TSW/img/logo.png" alt="logo" class="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -74,16 +74,16 @@ $currentuser = $view->getVariable("currentusername");
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <?php if($_SESSION['__currentlang__'] === 'es') { ?>
-                            <img src="../img/spain.png" >
+                            <img src="/meetPoll_TSW/img/spain.png" >
                         <?php } else { ?>
-                            <img src="../img/uk.png">
+                            <img src="/meetPoll_TSW/img/uk.png">
                         <?php } ?>
                     </a>
                     <div class="dropdown-menu idiomas" aria-labelledby="navbarDropdown">
                     <?php if($_SESSION['__currentlang__'] === 'es') { ?>
-                        <a href="index.php?controller=language&action=change&lang=en"><img src="../img/uk.png"></a>
+                        <a href="index.php?controller=language&action=change&lang=en"><img src="/meetPoll_TSW/img/uk.png"></a>
                         <?php } else { ?>
-                        <a href="index.php?controller=language&action=change&lang=es"><img src="../img/spain.png"></a>
+                        <a href="index.php?controller=language&action=change&lang=es"><img src="/meetPoll_TSW/img/spain.png"></a>
                         <?php } ?>
                     </div>
                 </div>

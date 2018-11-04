@@ -100,7 +100,7 @@ $view->setVariable("title", "Add Assignation");
                             </tbody>
                         </table>
                         <a href="./index.php?controller=polls&action=view&poll=<?=$poll->getLink()?>"><?= i18n("Back") ?></a>
-                        <input type="hidden" id="hidden" name="assignations"> 
+                        <input type="hidden" id="gaps" name="assignations"> 
                         <button type="submit" name="submit" class="btn btn-dark" onclick="validateCheckboxes()"><?= i18n("Save")?></button>
                     </form>
                 </div>
