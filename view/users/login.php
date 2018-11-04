@@ -19,7 +19,7 @@ $errors = $view->getVariable("errors");
         <div class="row center-row">
             <div class="col-lg-6 center-block-login">
                 <div id="subtitleLogin">
-                    <a class="navbar-brand" href="index.php"><img src="../img/logo.png" alt="logo" class="logoLogin"></a>
+                    <a class="navbar-brand" href="index.php"><img src="/meetPoll_TSW/img/logo.png" alt="logo" class="logoLogin"></a>
                     <h5><br><?= i18n("Sign in to MeetPoll")?></h5>
                 </div>
                 <div class="col-lg-12 center-block2">
