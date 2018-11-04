@@ -61,8 +61,8 @@ array(
 	"Not in session. Editing participation requires login" => "No estás logueado. Para cambiar la participación se necesita estar logueado!",
 	"id is mandatory" => "El id es obligatorio",
 	"No such poll with id: " => "No hay encuesta con el identificador: ",
-	"You have not participated in the survey \"%s\" yet" => "Aún no has participado en la encuesta: \"%s\"",
-	"There are no gaps for the poll \"%s\"" => "No hay huecos para la encuesta: \"%s\"",
+	"You have not participated in the survey \"%s\" yet" => "Aún no has participado en la encuesta: \"%s\" ",
+	"There are no gaps for the poll \"%s\" " => "No hay huecos para la encuesta: \"%s\" ",
 	"Assignations successfully updated." => "¡Se han actualizado sus asignaciones!",
 	"Not in session. Adding polls requires login" => "No estás logueado. Añadir nuevas encuestas requiere de estar logueado.",
 	"no lang parameter was provided" => "No se aportó ningún parámetro para indicar el lenguaje",
@@ -110,10 +110,10 @@ array(
 	"The poll id is mandatory" => "El id de la encuesta es obligatorio",
 	"This poll does not exit" => "Esta encuesta no existe",
 	"The gap dates are mandatory to add it" => "Los datos del hueco son obligatorios para añadirlos",
-	"Only the poll's author can add gaps" => "Sólo el autor de la encuesta puede añadir huecos",
-	"Only the poll's author can edit gaps" => "Sólo el autor de la encuesta puede editar huecos",
+	"Only the polls author can add gaps" => "Sólo el autor de la encuesta puede añadir huecos",
+	"Only the polls author can edit gaps" => "Sólo el autor de la encuesta puede editar huecos",
 	"Not in session. View polls requires login" => "No estás logueado. Para ver una encuesta necesitas estás logueado",
-	"Only the poll's author can edit the poll" => "Sólo el autor de la encuesta puede editarla"
+	"Only the polls author can edit the poll" => "Sólo el autor de la encuesta puede editarla"
 
 
 

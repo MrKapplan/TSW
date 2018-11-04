@@ -13,7 +13,7 @@ $errors = $view->getVariable("errors");
         <div class="row center-row">
             <div class="col-lg-6 center-block">
                 <div id="subtitle">
-                    <h1><?= i18n("MyProfile")?></h1>
+                    <h1><?= i18n("My Profile")?></h1>
                 </div>
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="index.php?controller=users&action=edit">
