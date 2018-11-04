@@ -22,8 +22,7 @@ $errors = $view->getVariable("errors");
 								<input type="text" name="username" placeholder="<?= $user->getUsername()?>" readonly>
                                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                        </div>
-                        <div id="inputLogin">
+
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
                                 <?php if (!empty($errors['passwd'])){ ?>
@@ -34,8 +33,7 @@ $errors = $view->getVariable("errors");
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                        </div>
-                        <div id="inputLogin">
+
                             <div class="inputWithIconLogin inputIconBg">
 								<input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
                                 <?php if (!empty($errors['confirmPasswd'])){ ?>
@@ -46,8 +44,8 @@ $errors = $view->getVariable("errors");
                                 <?php } ?>
 								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                        </div>
-                            <button type="submit" class="btn btn-dark"><?= i18n("Edit")?></button>
+                        
+                            <button type="submit" class="loginButton btn btn-dark"><?= i18n("Edit")?></button>
                             <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
                         </div>
                     </form>
