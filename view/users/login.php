@@ -29,8 +29,6 @@ $errors = $view->getVariable("errors");
                                 <input type="text" name="username" placeholder="<?= i18n("Username")?>" required>
                                 <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
-                        </div>
-                        <div id="inputLogin">
                             <div class="inputWithIconLogin inputIconBg">
                                 <input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
                                 <?php if(isset($errors["general"])) { ?> 
@@ -45,7 +43,7 @@ $errors = $view->getVariable("errors");
                         </div>
                     </form>
                     <div id="loginPerdidaDeDatos">
-                    <?= i18n("New to MeetPoll? ")?><a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Create an account.")?></a>
+                        <?= i18n("New to MeetPoll? ")?><a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Create an account.")?></a>
                     </div>
                 </div>
             </div>

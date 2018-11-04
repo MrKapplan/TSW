@@ -28,7 +28,7 @@ function addRow() {
 
 
     var divDate = document.createElement("div");
-    divDate.id = "inputDate";
+    divDate.className = "inputDate";
 
     var divIcon = document.createElement("div");
     divIcon.className = "inputWithIconLogin inputIconBg";
@@ -60,7 +60,7 @@ function addRow() {
 
 
     var divTimeStart = document.createElement("div");
-    divTimeStart.id = "inputTime";
+    divTimeStart.className = "inputTime";
 
     var divIcon2 = document.createElement("div");
     divIcon2.className = "inputWithIconLogin inputIconBg";
@@ -84,10 +84,10 @@ function addRow() {
     divIcon2.appendChild(iconTimeStart);
 
 
-
+    
 
     var divTimeEnd = document.createElement("div");
-    divTimeEnd.id = "inputTime";
+    divTimeEnd.className = "inputTime";
 
     var divIcon3 = document.createElement("div");
     divIcon3.className = "inputWithIconLogin inputIconBg";

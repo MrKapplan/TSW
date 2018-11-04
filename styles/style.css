@@ -48,7 +48,12 @@ header{
 	text-align: center;
 }
 
-#navbarDropdown{
+#navbarDropdownAccount{
+	color: #000;
+	margin-left: 10px;
+}
+
+#navbarDropdownLang{
 	color: #000;
 	margin-left: 10px;
 }
@@ -292,13 +297,13 @@ border-radius:4px 0 0 4px;
   	margin: auto;
 }
 
-#inputDate{
+.inputDate{
 	margin: auto;
 	width: 60%;
 	margin: auto;
  }
 
-#inputTime{
+.inputTime{
 	margin: auto;
 	width: 40%;
 	border: 0;
@@ -405,11 +410,11 @@ td{
 	vertical-align: middle!important;
 }
 
-#ytitle{
+.ytitle{
 	font-weight: 600;
 }
 
-#ysubtitle {
+.ysubtitle {
 	color:grey;
 	font-size: 12px;
 }

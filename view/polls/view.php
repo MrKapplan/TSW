@@ -29,24 +29,23 @@ $view->setVariable("title", "View Poll");
                 </div>
             </div>
              <div class="col-lg-12 center-block2">
-                <?php if(count($gaps) == 0){?>
+                <?php if(count($gaps) == 0): ?>
                     <div id="messageView">
                         <?= i18n("There are not gaps!");?>
-                        <?php if($poll->getAuthor()->getUsername() == $currentuser) { ?>
+                        <?php if($poll->getAuthor()->getUsername() == $currentuser): ?>
                              <?= i18n("Add it ");?><a href="index.php?controller=gaps&action=add&poll=<?= $poll->getLink() ?>"><?= i18n("here");?></a>
-
-                    <?php } ?>
+                        <?php endif; ?>
                     </div>
-                    <?php }else if(count($participants) < 1){?>
-                            <div id="messageView">
-                                <?= i18n("There are not participations! Be the first to do it!");?>
-                            </div>
-                            <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>
-                    <?php }else if($isParticipant == FALSE) { ?>
-                        <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>   
-                    <?php }else{ ?>
-                        <form method="POST" action='index.php?controller=assignations&action=edit&poll=<?=htmlentities($poll->getLink())?>'>
-                     <?php } ?>
+                <?php elseif(count($participants) < 1): ?>
+                    <div id="messageView">
+                        <?= i18n("There are not participations! Be the first to do it!");?>
+                    </div>
+                    <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>
+                <?php elseif($isParticipant == FALSE): ?>
+                    <form method="POST" action='index.php?controller=assignations&action=add&poll=<?=htmlentities($poll->getLink())?>'>   
+                <?php else: ?>
+                    <form method="POST" action='index.php?controller=assignations&action=edit&poll=<?=htmlentities($poll->getLink())?>'>
+                <?php endif;?>
 
                     <?php if(count($participants) > 0): ?>
                         <table id="dataTable" class="table text-center">
@@ -66,8 +65,8 @@ $view->setVariable("title", "View Poll");
                                 <?php foreach ($gaps as $gap):?>
                                     <tr id="<?= $gap->getId() ?>">
                                         <td>
-                                            <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
-                                            <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
+                                            <div class="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
+                                            <div class="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
                                         <?php foreach ($participants as $user): 
                                             $isAssignated=false; ?>
@@ -76,30 +75,32 @@ $view->setVariable("title", "View Poll");
                                                     $isAssignated=true;
                                                 endif;
                                             endforeach;
-                                            if($isAssignated){ ?>
+                                            if($isAssignated): ?>
                                                 <td><label class="checkbox">
                                                 <input type="checkbox" class="success" checked onclick="return false;" />
                                                 <span class="success"></span>
                                                 </label></td>
-                                            <?php } else { ?>
+                                            <?php else : ?>
                                                 <td><label class="checkbox">
                                                 <input type="checkbox"  onclick="return false;" />
                                                 </label></td>
-                                            <?php  } ?>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
                     <?php endif; ?>
-                    <script>checkboxes();</script>
-                    <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
-                    <?php if(count($gaps) == 0){ ?>
-                    <?php } elseif($isParticipant){ ?>
-                            <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
-                    <?php } else { ?>
-                            <button type="submit" class="btn btn-dark"><?= i18n("Take part") ?></button>
-                    <?php } ?>
+                
+                <script>checkboxes();</script>
+                <a href="./index.php?controller=polls&action=index"><?= i18n("Back") ?></a>
+                <?php if(count($gaps) == 0): ?>
+                <?php elseif($isParticipant): ?>
+                    <button type="submit" class="btn btn-dark"><?= i18n("Modify Participation") ?></button>
+                <?php else: ?>
+                    <button type="submit" class="btn btn-dark"><?= i18n("Take part") ?></button>
+                <?php endif; ?>
+                </form>
             </div>
          </div>
      </div>

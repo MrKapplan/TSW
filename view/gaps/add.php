@@ -11,11 +11,11 @@ $view->setVariable("title", "Add Gap");
 <?php $view->moveToFragment("javascript"); ?>
  <!-- Kendo UI CSS -->
 <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
-<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script src="./js/bootstrap-material-datetimepicker.js"></script>
 <script src='./js/common.js'></script>
 <script src='./js/calendar.js' defer></script>
 <?php $view->moveToDefaultFragment(); ?>
@@ -65,7 +65,7 @@ $view->setVariable("title", "Add Gap");
                                 </td>
 
                                 <td>
-                                    <div id="inputTime">
+                                    <div id="inputTimeStart">
                                         <div class="inputWithIconLogin inputIconBg">
                                             <input type="text" id="timeStart" class="timeStart" required>
                                             <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
@@ -74,7 +74,7 @@ $view->setVariable("title", "Add Gap");
                                 </td>
 
                                 <td>
-                                    <div id="inputTime">
+                                    <div id="inputTimeEnd">
                                         <div class="inputWithIconLogin inputIconBg">
                                             <input type="text" id="timeEnd" class="timeEnd" required>
                                             <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    

@@ -37,7 +37,7 @@ $currentuser = $view->getVariable("currentusername");
                                     
                           <td>
                           <?php if($poll->getAuthor()->getUsername() == $currentuser){ ?>
-                                  <?=i18n("You")?></th>
+                                  <?=i18n("You")?>
                                 <?php } else { ?>
                                   <?= htmlentities($poll->getAuthor()->getUsername()) ?>
                                 <?php } ?>
@@ -47,9 +47,9 @@ $currentuser = $view->getVariable("currentusername");
                             <?php	
                               if (isset($currentuser) && $currentuser == $poll->getAuthor()->getUsername()): ?>
                               <a href="index.php?controller=polls&action=edit&poll=<?= htmlentities($poll->getLink())?>">
-                                <span title="<?= i18n("Edit Polls")?>" class="btn btn-primary btn-sm fa fa-pencil"></a>&nbsp;&nbsp;
+                                <span title="<?= i18n("Edit Polls")?>" class="btn btn-primary btn-sm fa fa-pencil"></span></a>&nbsp;&nbsp;
                               <a href="index.php?controller=gaps&action=edit&poll=<?= htmlentities($poll->getLink())?>">
-                                <span title="<?= i18n("Edit Gaps")?>" class="btn btn-success btn-sm fa fa-th-list"></a>&nbsp;&nbsp;
+                                <span title="<?= i18n("Edit Gaps")?>" class="btn btn-success btn-sm fa fa-th-list"></span></a>&nbsp;&nbsp;
                               <?php endif; ?>
                            </td>
                          </tr>

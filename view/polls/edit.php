@@ -4,7 +4,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $poll = $view->getVariable("poll");
 $errors = $view->getVariable("errors");
-$view->setVariable("title", "Add Poll"); ?>
+$view->setVariable("title", "Edit Poll"); ?>
 
 
 <div class="container">
@@ -29,8 +29,7 @@ $view->setVariable("title", "Add Poll"); ?>
 							<input type="text" name="ubication" placeholder="<?= i18n("Where are you going to celebrate?")?>" value="<?=htmlentities($poll->getUbication())?>">
 							<i class="fa fa-map-marker fa-lg fa-fw" aria-hidden="true"></i>
 						</div>
-					</div>
-	                <div id="optionalInput">
+
                     	<div class="inputWithIconLogin inputIconBg">
                         	<input type="text" placeholder="localhost/index.php?controller=polls&action=view&poll=<?=$poll->getLink()?>" readonly>
                         	<i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>

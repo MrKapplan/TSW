@@ -1,16 +1,15 @@
 <?php
 //file: view/layouts/default.php
-
 $view = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
+?>
 
-?><!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<link rel="shortcut icon" href="/meetPoll_TSW/img/favicon.png" />
+    <link rel="shortcut icon" href="/meetPoll_TSW/img/favicon.png" />
 	<title><?= $view->getVariable("title", "no title") ?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta charset="UTF-8" />
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet">
@@ -59,11 +58,10 @@ $currentuser = $view->getVariable("currentusername");
                     </li>
                 </ul>
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a id="navbarDropdownAccount" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?= i18n("My Account")?>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownAccount">
                         <a class="dropdown-item" href="index.php?controller=users&action=edit"><?= i18n("My Profile")?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="index.php?controller=users&action=logout"><?= i18n("Logout")?></a>
@@ -71,19 +69,18 @@ $currentuser = $view->getVariable("currentusername");
                 </div>
 
                  <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a id="navbarDropdownLang" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php if($_SESSION['__currentlang__'] === 'es') { ?>
-                            <img src="/meetPoll_TSW/img/spain.png" >
+                            <img src="/meetPoll_TSW/img/spain.png" alt="lang">
                         <?php } else { ?>
-                            <img src="/meetPoll_TSW/img/uk.png">
+                            <img src="/meetPoll_TSW/img/uk.png" alt="lang">
                         <?php } ?>
                     </a>
-                    <div class="dropdown-menu idiomas" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu idiomas" aria-labelledby="navbarDropdownLang">
                     <?php if($_SESSION['__currentlang__'] === 'es') { ?>
-                        <a href="index.php?controller=language&action=change&lang=en"><img src="/meetPoll_TSW/img/uk.png"></a>
+                        <a href="index.php?controller=language&action=change&lang=en"><img src="/meetPoll_TSW/img/uk.png" alt="lang"></a>
                         <?php } else { ?>
-                        <a href="index.php?controller=language&action=change&lang=es"><img src="/meetPoll_TSW/img/spain.png"></a>
+                        <a href="index.php?controller=language&action=change&lang=es"><img src="/meetPoll_TSW/img/spain.png" alt="lang"></a>
                         <?php } ?>
                     </div>
                 </div>
