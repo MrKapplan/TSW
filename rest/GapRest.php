@@ -14,6 +14,7 @@ require_once(__DIR__."/BaseRest.php");
 * are intended to be mapped as callbacks using the URIDispatcher class.
 *
 */
+
 class GapRest extends BaseRest {
 	private $gapMapper;
 
@@ -46,13 +47,11 @@ class GapRest extends BaseRest {
 
 				// response OK. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-				header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
-				//header('Content-Type: application/json');
-				// echo(json_encode(array(
-				// 	"date"=>$postId,
-				// 	"start"=>$post->getTitle(),
-				// 	"end" => $post->getContent()
-				// )));
+				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
+				header('Content-Type: application/json');
+				echo(json_encode(array(
+					"gaps"=>$data,
+				)));
 
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
@@ -86,12 +85,10 @@ class GapRest extends BaseRest {
 				// response OK. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
-				//header('Content-Type: application/json');
-				// echo(json_encode(array(
-				// 	"date"=>$postId,
-				// 	"start"=>$post->getTitle(),
-				// 	"end" => $post->getContent()
-				// )));
+				header('Content-Type: application/json');
+				echo(json_encode(array(
+					"gaps"=>$data,
+				)));
 
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');

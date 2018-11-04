@@ -13,6 +13,7 @@ require_once(__DIR__."/BaseRest.php");
 * are intended to be mapped as callbacks using the URIDispatcher class.
 *
 */
+
 class AssignationRest extends BaseRest {
 	private $pollMapper;
     private $gapMapper;
@@ -30,34 +31,23 @@ class AssignationRest extends BaseRest {
     public function add($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
-        //$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 
         if($poll == NULL){
             header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			header('Content-Type: application/json');
-        // }else if($gaps == NULL){
-        //     header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-        //     header('Content-Type: application/json');
         }else {
-            
 			try {
-
-				// validate Gaps object
-				//$this->gapMapper->checkForAdd_Updates($data);
-
 				// save the Assignation object into the database
 				$this->assignationMapper->addAssignation($currentUser->getUsername(), $data, $poll->getId());
 
-				// response OK. Also send post in content
+				// response CREATED. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
-				//header('Content-Type: application/json');
-				// echo(json_encode(array(
-				// 	"date"=>$postId,
-				// 	"start"=>$post->getTitle(),
-				// 	"end" => $post->getContent()
-				// )));
-
+				header('Content-Type: application/json');
+                //echo(($poll->getId()));
+                echo(json_encode(array(
+                    "gap"=>$data
+                )));
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 				header('Content-Type: application/json');
@@ -67,38 +57,26 @@ class AssignationRest extends BaseRest {
 	}
 
 
-	    public function edit($pollLink, $data) {
+	public function edit($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
-        //$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 
         if($poll == NULL){
             header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			header('Content-Type: application/json');
-        // }else if($gaps == NULL){
-        //     header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-        //     header('Content-Type: application/json');
-        // 
         }else {
-            
 			try {
-                
-				// validate Gaps object
-				//$this->gapMapper->checkForAdd_Updates($data);
-
 				// save the Assignation object into the database
 				$this->assignationMapper->update($currentUser->getUsername(), $data, $poll->getId());
 
 				// response OK. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
-				//header('Content-Type: application/json');
-				// echo(json_encode(array(
-				// 	"date"=>$postId,
-				// 	"start"=>$post->getTitle(),
-				// 	"end" => $post->getContent()
-				// )));
-
+				header('Content-Type: application/json');
+                //echo(($poll->getId()));
+                echo(json_encode(array(
+				 	"gap"=>$data
+				)));
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 				header('Content-Type: application/json');
