@@ -28,7 +28,7 @@ class AssignationRest extends BaseRest {
     }
     
 
-    public function add($pollLink, $data) {
+    public function addAssignations($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
 
@@ -37,17 +37,18 @@ class AssignationRest extends BaseRest {
 			header('Content-Type: application/json');
         }else {
 			try {
-				// save the Assignation object into the database
 				$this->assignationMapper->addAssignation($currentUser->getUsername(), $data, $poll->getId());
-
-				// response CREATED. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
 				header('Content-Type: application/json');
-                //echo(($poll->getId()));
-                echo(json_encode(array(
-                    "gap"=>$data
-                )));
+				echo(json_encode(array(
+					"pollid"=>$poll->getId(),
+					"title"=>$poll->getTitle(),
+					"ubication"=>$poll->getUbication(),
+					"link"=>$poll->getLink(),
+					"user"=>$currentUser->getUsername(),
+					"assignation"=>$data
+				)));
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 				header('Content-Type: application/json');
@@ -57,7 +58,7 @@ class AssignationRest extends BaseRest {
 	}
 
 
-	public function edit($pollLink, $data) {
+	public function editAssignations($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
 
@@ -66,16 +67,17 @@ class AssignationRest extends BaseRest {
 			header('Content-Type: application/json');
         }else {
 			try {
-				// save the Assignation object into the database
 				$this->assignationMapper->update($currentUser->getUsername(), $data, $poll->getId());
-
-				// response OK. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
 				header('Content-Type: application/json');
-                //echo(($poll->getId()));
-                echo(json_encode(array(
-				 	"gap"=>$data
+				echo(json_encode(array(
+					"pollid"=>$poll->getId(),
+					"title"=>$poll->getTitle(),
+					"ubication"=>$poll->getUbication(),
+					"link"=>$poll->getLink(),
+					"user"=>$currentUser->getUsername(),
+					"newAssignations"=>$data
 				)));
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
@@ -90,5 +92,5 @@ class AssignationRest extends BaseRest {
 // URI-MAPPING for this Rest endpoint
 $assignationRest = new AssignationRest();
 URIDispatcher::getInstance()
-->map("POST", "/assignation/$1", array($assignationRest, "add"))
-->map("PUT", "/assignation/$1", array($assignationRest, "edit"));
+->map("POST", "/assignation/$1", array($assignationRest, "addAssignations"))
+->map("PUT", "/assignation/$1", array($assignationRest, "editAssignations"));

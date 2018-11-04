@@ -26,7 +26,7 @@ class GapRest extends BaseRest {
     }
     
 
-    public function add($pollLink, $data) {
+    public function addGap($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
 
@@ -39,18 +39,18 @@ class GapRest extends BaseRest {
 			echo("You are not authorized to add gap if you are not the poll's author");
         } else {
 			try {
-				// validate Gaps object
 				$this->gapMapper->checkForAdd_Updates($data);
-
-				// save the Gaps object into the database
 				$this->gapMapper->save($data, $poll->getId());
 
-				// response OK. Also send post in content
 				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
 				header('Content-Type: application/json');
 				echo(json_encode(array(
-					"gaps"=>$data,
+					"pollid"=>$poll->getId(),
+					"title"=>$poll->getTitle(),
+					"ubication"=>$poll->getUbication(),
+					"link"=>$poll->getLink(),
+					"gaps"=>$data
 				)));
 
 			} catch (ValidationException $e) {
@@ -62,7 +62,7 @@ class GapRest extends BaseRest {
 	}
 
 
-	public function edit($pollLink, $data) {
+	public function updateGap($pollLink, $data) {
 		$currentUser = parent::authenticateUser();
         $poll = $this->pollMapper->findPollByLink($pollLink);
 
@@ -76,18 +76,17 @@ class GapRest extends BaseRest {
 			try {
 				$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
 
-				// validate Gaps object
 				$this->gapMapper->checkForAdd_Updates($data);
-
-				// save the Gaps object into the database
 				$this->gapMapper->updateGaps($data, $poll->getId(), $gaps);
-
-				// response OK. Also send post in content
-				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+				header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
 				header('Content-Type: application/json');
 				echo(json_encode(array(
-					"gaps"=>$data,
+					"pollid"=>$poll->getId(),
+					"title"=>$poll->getTitle(),
+					"ubication"=>$poll->getUbication(),
+					"link"=>$poll->getLink(),
+					"gaps"=>$data
 				)));
 
 			} catch (ValidationException $e) {
@@ -98,14 +97,10 @@ class GapRest extends BaseRest {
 		}
 	}
 
-
-
-
-
 }
 
 // URI-MAPPING for this Rest endpoint
 $gapRest = new GapRest();
 URIDispatcher::getInstance()
-->map("POST", "/gap/$1", array($gapRest, "add"))
-->map("PUT", "/gap/$1", array($gapRest, "edit"));
+->map("POST", "/gap/$1", array($gapRest, "addGap"))
+->map("PUT", "/gap/$1", array($gapRest, "updateGap"));
