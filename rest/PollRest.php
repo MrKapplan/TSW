@@ -57,6 +57,121 @@ class PollRest extends BaseRest {
 		echo(json_encode($polls_array));
 
 	}
+	public function createPoll($data) {
+		$currentUser = parent::authenticateUser();
+		$poll = new Poll();
+
+		$poll->setTitle($data->title);
+		$poll->setAuthor($currentUser);
+		if (isset($data->ubication)) {
+			
+			$poll->setUbication($data->ubication);
+
+		}
+
+		try {
+			
+			$poll->checkIsValidForCreate(); 
+			$pollLink = $this->pollMapper->save($poll);
+
+			
+			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
+			//header('Location: '.$_SERVER['REQUEST_URI']."/".$postId);
+			header('Content-Type: application/json');
+			echo(json_encode(array(
+				"link"=>$pollLink,
+				"title"=>$poll->getTitle(),
+				"ubication" => $poll->getUbication()
+			)));
+
+		} catch (ValidationException $e) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
+		}
+	}
+	public function readPoll($pollLink) {
+		$currentLogged = parent::authenticateUser();
+		$poll = $this->pollMapper->findPollByLink($pollLink);
+		if ($poll == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Post with id ".$pollLink." not found");
+			return;
+		}
+			$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
+			if(!empty($gaps)){
+				$assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
+				$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $currentLogged);
+				$isParticipant = $this->assignationMapper->isParticipant($currentLogged, $poll->getId());
+			}
+
+		$poll_array = array(
+			"id" => $poll->getId(),
+			"title" => $poll->getTitle(),
+			"ubication" => $poll->getUbication(),
+			"author_id" => $poll->getAuthor()->getusername()
+
+		);
+
+		
+		$poll_array["gaps"] = array();
+		foreach ($gaps as $gap) {
+			array_push($poll_array["gaps"], array(
+				"id" => $gap->getId(),
+				"date" => $gap->getDate(),
+				"timeStart" => $gap->getTimeStart()
+			));
+		}
+		
+
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($poll_array));
+	}
+	public function updatePoll($pollLink, $data) {
+		$currentUser = parent::authenticateUser();
+
+		$poll = $this->pollMapper->findPollByLink($pollLink);
+		if ($poll == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Post with id ".$pollLink." not found");
+			return;
+		}
+
+		// Check if the Post author is the currentUser (in Session)
+		if ($poll->getAuthor() != $currentUser) {
+			header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+			echo("you are not the author of this post");
+			return;
+		}
+		$poll->setTitle($data->title);
+		if (isset($data->ubication)) {
+			
+			$poll->setUbication($data->ubication);
+
+		}
+
+		try {
+			// validate Post object
+			$poll->checkIsValidForUpdate(); // if it fails, ValidationException
+			$this->pollMapper->update($poll);
+			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+			header('Content-Type: application/json');
+			
+			$poll_array = array(
+				"id" => $poll->getId(),
+				"title" => $poll->getTitle(),
+				"ubication" => $poll->getUbication(),
+				"author_id" => $poll->getAuthor()->getusername()
+	
+			);
+			echo(json_encode($poll_array));
+		}catch (ValidationException $e) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
+		}
+	}
 /*
 	public function createPost($data) {
 		$currentUser = parent::authenticateUser();
@@ -212,13 +327,13 @@ class PollRest extends BaseRest {
 $pollRest = new PollRest();
 URIDispatcher::getInstance()
 
-->map("GET","/poll", array($pollRest,"getPolls"));
-/*
-->map("GET",	"/post/$1", array($postRest,"readPost"))
-->map("POST", "/post", array($postRest,"createPost"))
-->map("POST", "/post/$1/comment", array($postRest,"createComment"))
-->map("PUT",	"/post/$1", array($postRest,"updatePost"))
-->map("DELETE", "/post/$1", array($postRest,"deletePost"));
-*/
+->map("GET","/poll", array($pollRest,"getPolls"))
+
+->map("GET","/poll/$1", array($pollRest,"readPoll"))
+->map("POST", "/poll", array($pollRest,"createPoll"))
+//->map("POST", "/post/$1/comment", array($postRest,"createComment"))
+->map("PUT","/poll/$1", array($pollRest,"updatePoll"));
+//->map("DELETE", "/post/$1", array($postRest,"deletePost"));
+
 
 
