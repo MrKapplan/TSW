@@ -51,9 +51,11 @@ class UserRest extends BaseRest {
 
 	public function modify($username, $data) {
 		$currentLogged = parent::authenticateUser();
+
 		if ($currentLogged->getUsername() != $username) {
 			header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
 			echo("You are not authorized to login as anyone but you");
+		
 		} else {
 			$user = new User($data->username, $data->password);
 			try {
@@ -61,8 +63,8 @@ class UserRest extends BaseRest {
 
 				$this->userMapper->update($user);
 
-				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-				header("Location: ".$_SERVER['REQUEST_URI']."/".$data->username);
+				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+				//header("Location: ".$_SERVER['REQUEST_URI']."/".$data->username);
 			}catch(ValidationException $e) {
 				http_response_code(400);
 				header('Content-Type: application/json');
@@ -79,6 +81,6 @@ class UserRest extends BaseRest {
 // URI-MAPPING for this Rest endpoint
 $userRest = new UserRest();
 URIDispatcher::getInstance()
-->map("GET",	"/user/$1", array($userRest,"login"))
+->map("GET", "/user/$1", array($userRest,"login"))
 ->map("POST", "/user", array($userRest,"register"))
 ->map("PUT", "/user/$1", array($userRest,"modify"));

@@ -33,36 +33,75 @@ class GapRest extends BaseRest {
         if($poll == NULL){
             header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			header('Content-Type: application/json');
-        }
-
-        if($currentUser->getUsername() != $poll->getAuthor()->getUsername()){
+        }else if($currentUser->getUsername() != $poll->getAuthor()->getUsername()){
             header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
 			echo("You are not authorized to add gap if you are not the poll's author");
-        }
+        } else {
+			try {
+				// validate Gaps object
+				$this->gapMapper->checkForAdd_Updates($data);
 
-		try {
-			// validate Gaps object
-			$this->gapMapper->checkForAdd_Updates($data);
+				// save the Gaps object into the database
+				$this->gapMapper->save($data, $poll->getId());
 
-			// save the Gaps object into the database
-			$this->gapMapper->save($data, $poll->getId());
+				// response OK. Also send post in content
+				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
+				header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
+				//header('Content-Type: application/json');
+				// echo(json_encode(array(
+				// 	"date"=>$postId,
+				// 	"start"=>$post->getTitle(),
+				// 	"end" => $post->getContent()
+				// )));
 
-			// response OK. Also send post in content
-			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-			header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
-			//header('Content-Type: application/json');
-			// echo(json_encode(array(
-			// 	"date"=>$postId,
-			// 	"start"=>$post->getTitle(),
-			// 	"end" => $post->getContent()
-			// )));
-
-		} catch (ValidationException $e) {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			header('Content-Type: application/json');
-			echo(json_encode($e->getErrors()));
+			} catch (ValidationException $e) {
+				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+				header('Content-Type: application/json');
+				echo(json_encode($e->getErrors()));
+			}
 		}
 	}
+
+
+	public function edit($pollLink, $data) {
+		$currentUser = parent::authenticateUser();
+        $poll = $this->pollMapper->findPollByLink($pollLink);
+
+        if($poll == NULL){
+            header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			header('Content-Type: application/json');
+        } else if($currentUser->getUsername() != $poll->getAuthor()->getUsername()){
+            header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
+			echo("You are not authorized to add gap if you are not the poll's author");
+        } else{
+			try {
+				$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
+
+				// validate Gaps object
+				$this->gapMapper->checkForAdd_Updates($data);
+
+				// save the Gaps object into the database
+				$this->gapMapper->updateGaps($data, $poll->getId(), $gaps);
+
+				// response OK. Also send post in content
+				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
+				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
+				//header('Content-Type: application/json');
+				// echo(json_encode(array(
+				// 	"date"=>$postId,
+				// 	"start"=>$post->getTitle(),
+				// 	"end" => $post->getContent()
+				// )));
+
+			} catch (ValidationException $e) {
+				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+				header('Content-Type: application/json');
+				echo(json_encode($e->getErrors()));
+			}
+		}
+	}
+
+
 
 
 
@@ -71,4 +110,5 @@ class GapRest extends BaseRest {
 // URI-MAPPING for this Rest endpoint
 $gapRest = new GapRest();
 URIDispatcher::getInstance()
-->map("POST", "/gap/$1", array($gapRest, "add"));
+->map("POST", "/gap/$1", array($gapRest, "add"))
+->map("PUT", "/gap/$1", array($gapRest, "edit"));
