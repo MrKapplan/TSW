@@ -87,10 +87,37 @@ class AssignationRest extends BaseRest {
 		}
 	}
 
+	public function viewAssignations($pollLink) {
+		$currentLogged = parent::authenticateUser();
+
+		$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
+		//var_dump( $assignations);
+		
+		if (!isset($assignations)) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Assignations with poll id ".$pollLink." not found");
+			return;
+		} else {
+			$assignations_array["assignations"] = array();
+			foreach ($assignations as $assignation) {
+				array_push($assignations_array["assignations"], array(
+					"username" => $assignation->getUser()->getUsername(),
+					"gap_id" => $assignation->getGap()->getId(),
+					"poll_id" => $assignation->getPoll()->getId()
+				));
+			}
+		}
+
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($assignations_array));
+	}
+
 }
 
 // URI-MAPPING for this Rest endpoint
 $assignationRest = new AssignationRest();
 URIDispatcher::getInstance()
+->map("GET", "/assignation/$1", array($assignationRest, "viewAssignations"))
 ->map("POST", "/assignation/$1", array($assignationRest, "addAssignations"))
 ->map("PUT", "/assignation/$1", array($assignationRest, "editAssignations"));

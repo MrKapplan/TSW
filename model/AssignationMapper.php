@@ -22,6 +22,7 @@ class AssignationMapper {
 	}
 	
 
+
 	public function findUsersAssignationsInPoll($pollid){
 		$stmt = $this->db->query("SELECT user_selects_gap.username, user_selects_gap.gap_id FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid'");
 		$assignation_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -39,7 +40,7 @@ class AssignationMapper {
 
 
 	public function findUsersParticipansInPoll($pollid,$currentUser){
-		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid'ORDER BY username <> '$currentUser'");
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid' ORDER BY username <> '$currentUser'");
 		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$participants = array();
@@ -51,6 +52,26 @@ class AssignationMapper {
 
 		return $participants;
 	}
+
+
+
+	public function findAssignationsByLinkPoll($pollLink, $currentUser){
+
+		$stmt = $this->db->query("SELECT user_selects_gap.username, user_selects_gap.gap_id, user_selects_gap.poll_id FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
+		$assignations_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$assignations = array();
+		
+		foreach ($assignations_db as $assignation) {
+			$username = new User($assignation["username"]);
+			$gap = new Gap($assignation["gap_id"]);
+			$poll = new Poll($assignation["poll_id"]);
+			array_push($assignations, new Assignation($username, $gap,  $poll));
+		}
+
+		return $assignations;
+	}
+
+
 	
 
 	public function update($user, $assignations, $pollid) {

@@ -60,12 +60,12 @@ class UserService {
     });
   }
 
-  register(user) {
-    return $.ajax({
-      url: AppConfig.backendServer+'/rest/user',
-      method: 'POST',
-      data: JSON.stringify(user),
-      contentType: 'application/json'
-    });
-  }
+  // register(user) {
+  //   return $.ajax({
+  //     url: AppConfig.backendServer+'/rest/user',
+  //     method: 'POST',
+  //     data: JSON.stringify(user),
+  //     contentType: 'application/json'
+  //   });
+  // }
 }

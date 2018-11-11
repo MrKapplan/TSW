@@ -13,7 +13,6 @@ class PollsModel extends Fronty.Model {
     });
   }
 
-
   setPolls(polls) {
     this.set((self) => {
       self.polls = polls;

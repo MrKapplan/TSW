@@ -100,21 +100,6 @@ class PollRest extends BaseRest {
 			);
 		}
 
-		$gaps = $this->gapMapper->findGapsByIdPoll($poll->getId());
-		if($gaps != NULL){
-			$assignations = $this->assignationMapper->findUsersAssignationsInPoll($poll->getId());
-			$participants = $this->assignationMapper->findUsersParticipansInPoll($poll->getId(), $currentLogged->getUsername());
-
-			$poll_array["gaps"] = array();
-			foreach ($gaps as $gap) {
-				array_push($poll_array["gaps"], array(
-					"id" => $gap->getId(),
-					"date" => $gap->getDate(),
-					"timeStart" => $gap->getTimeStart()
-				));
-			}
-		}
-
 		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 		header('Content-Type: application/json');
 		echo(json_encode($poll_array));

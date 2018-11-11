@@ -35,7 +35,7 @@ class PollsComponent extends Fronty.ModelComponent {
 
 class PollRowComponent extends Fronty.ModelComponent {
   constructor(pollModel, userModel, router, pollsComponent) {
-    super(Handlebars.templates.postrow, pollModel, null, null);
+    super(Handlebars.templates.pollrow, pollModel, null, null);
     
     this.pollsComponent = pollsComponent;
     

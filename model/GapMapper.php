@@ -25,6 +25,21 @@ class GapMapper {
 		return $gaps;
 	}
 
+
+	public function findGapsByLinkPoll($pollLink){
+
+		$stmt = $this->db->query("SELECT gap.id, gap.date, gap.timeStart, gap.timeEnd, gap.poll_id from gap, poll WHERE gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY date");
+		$gaps_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$gaps = array();
+		
+		foreach ($gaps_db as $gap) {
+			array_push($gaps, new Gap($gap["id"], $gap["date"],  $gap["timeStart"], $gap["timeEnd"], $gap["poll_id"]));
+		}
+
+		return $gaps;
+	}
+
+
 	public function save($data, $pollid) {
 
 		$stmt = $this->db->prepare("INSERT INTO gap set date=?, timeStart=?, timeEnd=?, poll_id=?");

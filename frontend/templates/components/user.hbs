@@ -4,7 +4,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">{{i18n 'Add Poll'}}</a>
+            <a class="nav-link" href="#add-poll">{{i18n 'Add Poll'}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">{{i18n 'See Polls'}}</a>
@@ -18,20 +18,16 @@
               <a class="dropdown-item" id="logout" href="#">{{i18n 'Logout'}}</a>
             </div>
           </div>
-
-          {{!-- <div id="languagecontrol"></div> --}}
-
         </div>
+      
       
   {{else}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#login">{{i18n 'Login'}}</a>
-          </li>
-        </ul>
-          {{!-- <div id="languagecontrol">Loading...</div> --}}
-
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#login">{{i18n 'Login'}}</a>
+            </li>
+          </ul>
         </div>
 
   {{/if}}

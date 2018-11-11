@@ -97,10 +97,38 @@ class GapRest extends BaseRest {
 		}
 	}
 
+
+	public function viewGaps($pollLink) {
+		$currentLogged = parent::authenticateUser();
+
+		$gaps = $this->gapMapper->findGapsByLinkPoll($pollLink);
+		
+		if ($gaps == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Gaps with poll id ".$pollLink." not found");
+			return;
+		} else {
+			$gaps_array["gaps"] = array();
+			foreach ($gaps as $gap) {
+				array_push($gaps_array["gaps"], array(
+					"id" => $gap->getId(),
+					"date" => $gap->getDate(),
+					"timeStart" => $gap->getTimeStart(),
+					"timeEnd" => $gap->getTimeEnd(),
+				));
+			}
+		}
+
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($gaps_array));
+	}
+
 }
 
 // URI-MAPPING for this Rest endpoint
 $gapRest = new GapRest();
 URIDispatcher::getInstance()
+->map("GET", "/gap/$1", array($gapRest, "viewGaps"))
 ->map("POST", "/gap/$1", array($gapRest, "addGap"))
 ->map("PUT", "/gap/$1", array($gapRest, "updateGap"));

@@ -36,7 +36,6 @@ class PollEditComponent extends Fronty.ModelComponent {
     if (selectedLink != null) {
       this.pollsService.findPoll(selectedLink)
         .then((poll) => {
-          console.log(poll);
           this.pollsModel.setSelectedPoll(poll);
         });
     }

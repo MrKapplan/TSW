@@ -11,13 +11,6 @@ class PollsService {
     return $.get(AppConfig.backendServer+'/meetPoll_TSW/rest/poll/' + link);
   }
 
-  // deletePost(id) {
-  //   return $.ajax({
-  //     url: AppConfig.backendServer+'/rest/post/' + id,
-  //     method: 'DELETE'
-  //   });
-  // }
-
   updatePoll(poll) {
     return $.ajax({
       url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll/' + poll.link,
@@ -27,14 +20,14 @@ class PollsService {
     });
   }
 
-  // addPost(post) {
-  //   return $.ajax({
-  //     url: AppConfig.backendServer+'/rest/post',
-  //     method: 'POST',
-  //     data: JSON.stringify(post),
-  //     contentType: 'application/json'
-  //   });
-  // }
+  addPoll(poll) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll',
+      method: 'POST',
+      data: JSON.stringify(poll),
+      contentType: 'application/json'
+    });
+  }
 
   // createComment(postid, comment) {
   //   return $.ajax({

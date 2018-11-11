@@ -35,10 +35,14 @@ Promise.all([
       Handlebars.templates.pollstable = Handlebars.compile(source)),
     loadTextFile('templates/components/poll-edit.hbs').then((source) =>
       Handlebars.templates.polledit = Handlebars.compile(source)),
-    // loadTextFile('templates/components/post-view.hbs').then((source) =>
-    //   Handlebars.templates.postview = Handlebars.compile(source)),
+      loadTextFile('templates/components/poll-add.hbs').then((source) =>
+      Handlebars.templates.polladd = Handlebars.compile(source)),
+    loadTextFile('templates/components/poll-view.hbs').then((source) =>
+      Handlebars.templates.pollview = Handlebars.compile(source)),
     loadTextFile('templates/components/poll-row.hbs').then((source) =>
-      Handlebars.templates.postrow = Handlebars.compile(source))
+      Handlebars.templates.pollrow = Handlebars.compile(source)),
+      // loadTextFile('templates/components/gap-add.hbs').then((source) =>
+      // Handlebars.templates.pollrow = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

@@ -6,29 +6,35 @@ class MainComponent extends Fronty.RouterComponent {
     // we can instantiate models at any place
     var userModel = new UserModel();
     var pollsModel = new PollsModel();
+    var gapsModel = new GapsModel();
+    var assignationsModel = new AssignationsModel();
 
     super.setRouterConfig({
       polls: {
         component: new PollsComponent(pollsModel, userModel, this),
         title: 'Polls'
       },
-      // 'view-post': {
-      //   component: new PostViewComponent(postsModel, userModel, this),
-      //   title: 'Post'
-      // },
+      'view-poll': {
+        component: new PollViewComponent(pollsModel, gapsModel, assignationsModel, userModel, this),
+        title: 'Poll'
+      },
       'edit-poll': {
         component: new PollEditComponent(pollsModel, userModel, this),
         title: 'Edit Poll'
       },
-      // 'add-post': {
-      //   component: new PostAddComponent(postsModel, userModel, this),
-      //   title: 'Add Post'
-      // },
+      'add-poll': {
+        component: new PollAddComponent(pollsModel, userModel, this),
+        title: 'Add Poll'
+      },
+      'add-gaps': {
+        component: new GapAddComponent(gapsModel, userModel, this),
+        title: 'Add Gaps'
+      },
       login: {
         component: new LoginComponent(userModel, this),
         title: 'Login'
       },
-      defaultRoute: 'polls'
+      defaultRoute: 'login'
     });
     
     Handlebars.registerHelper('currentPage', () => {
@@ -44,9 +50,10 @@ class MainComponent extends Fronty.RouterComponent {
   _createUserBarComponent(userModel, userService) {
     var userbar = new Fronty.ModelComponent(Handlebars.templates.user, userModel, 'userbar');
 
-    userbar.addEventListener('click', '#logoutbutton', () => {
+    userbar.addEventListener('click', '#logout', () => {
       userModel.logout();
       userService.logout();
+      
     });
 
     // do relogin
