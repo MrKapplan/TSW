@@ -43,7 +43,7 @@ $errors = $view->getVariable("errors");
                         </div>
                     </form>
                     <div id="loginPerdidaDeDatos">
-                        <?= i18n("New to MeetPoll? ")?><a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Create an account.")?></a>
+                        <?= i18n("New to MeetPoll?")?><a class="font-weight-light" href="index.php?controller=users&action=register"><?= i18n("Create an account.")?></a>
                     </div>
                 </div>
             </div>

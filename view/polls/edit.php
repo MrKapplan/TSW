@@ -20,7 +20,7 @@ $view->setVariable("title", "Edit Poll"); ?>
 							<input type="text" name="title" placeholder="<?= i18n("What is the matter about?")?>"  value="<?=htmlentities($poll->getTitle())?>" required>
 							<i class="fa fa-reorder fa-lg fa-fw" aria-hidden="true"></i>
 						</div>
-						<div id=lblBox>
+						<div id="lblBox">
 						<?= i18n("Mandatory")?>
 						</div>
 					</div>

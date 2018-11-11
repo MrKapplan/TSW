@@ -1,0 +1,38 @@
+
+  {{#if isLogged}}
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{i18n 'Add Poll'}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{i18n 'See Polls'}}</a>
+          </li>
+        </ul>
+        <div class="nav-item dropdown">
+          <a id="navbarDropdownAccount" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{i18n 'My Account'}}</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownAccount">
+            <a class="dropdown-item" href="">{{i18n 'My Profile'}}</a>
+            <div class="dropdown-divider"></div>
+              <a class="dropdown-item" id="logout" href="#">{{i18n 'Logout'}}</a>
+            </div>
+          </div>
+
+          {{!-- <div id="languagecontrol"></div> --}}
+
+        </div>
+      
+  {{else}}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#login">{{i18n 'Login'}}</a>
+          </li>
+        </ul>
+          {{!-- <div id="languagecontrol">Loading...</div> --}}
+
+        </div>
+
+  {{/if}}
+

@@ -1,0 +1,61 @@
+
+
+
+
+
+<div class="container">
+	<div class="row center-row">
+		<div class="col-lg-6 center-block">
+			<div id="subtitlePoll">
+			  {{i18n 'Do you want to change anything?'}}
+			</div>
+			<div class="col-lg-12 center-block2">
+					<div id="requiredInput">
+						<div class="inputWithIconLogin inputIconBg">
+              <input type="text" name="title" placeholder="{{i18n 'Whats is the matter about?'}}"  value="{{selectedPoll.title}}" required>
+							<i class="fa fa-reorder fa-lg fa-fw" aria-hidden="true"></i>
+						</div>
+						<div id="lblBox">
+					    {{i18n 'Mandatory'}}
+						</div>
+					</div>
+          {{#if errors.title}}
+            <div class="alert alert-danger text-center" id="success-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{#i18n}}{{errors.title}}{{/i18n}}<br>
+            </div>
+          {{/if}}
+          <div id="optionalInput">
+						<div class="inputWithIconLogin inputIconBg">
+							<input type="text" name="ubication" placeholder="{{i18n 'Where are you going to celebrate?'}}" value="{{selectedPoll.title}}">
+							<i class="fa fa-map-marker fa-lg fa-fw" aria-hidden="true"></i>
+						</div><br>
+          {{#if errors.ubication}}
+            <div class="alert alert-danger text-center" id="success-danger" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              {{#i18n}}{{errors.ubication}}{{/i18n}}<br>
+            </div>
+          {{/if}}
+
+            <div class="inputWithIconLogin inputIconBg">
+              <input type="text" placeholder="{{selectedPoll.link}}" readonly>
+              <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
+            </div>
+					</div>
+					<button id="savebutton" type="submit" name="submit" class="btn-dark">{{i18n 'Save'}}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+  {{!-- {{i18n 'Title'}}:<input type="text" id="title" value="{{selectedPoll.title}}">
+  {{#i18n}}{{errors.title}}{{/i18n}}<br> {{i18n 'Content'}}:
+  <br>
+  <textarea id="content" rows="20" cols="80">{{selectedPoll.ubication}}</textarea>
+  {{#i18n}}{{errors.content}}{{/i18n}}
+  <br>
+  <input type="button" id="savebutton" value="{{i18n 'Save'}}"></input> --}}
+
+
+

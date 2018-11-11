@@ -95,7 +95,8 @@ class PollRest extends BaseRest {
 				"id" => $poll->getId(),
 				"title" => $poll->getTitle(),
 				"ubication" => $poll->getUbication(),
-				"author_id" => $poll->getAuthor()->getusername()
+				"author" => $poll->getAuthor()->getusername(),
+				"link" => $poll->getLink()
 			);
 		}
 
@@ -148,7 +149,8 @@ class PollRest extends BaseRest {
 					"id" => $poll->getId(),
 					"title" => $poll->getTitle(),
 					"ubication" => $poll->getUbication(),
-					"author_id" => $poll->getAuthor()->getusername()
+					"author" => $poll->getAuthor()->getusername(),
+					"link" => $poll->getLink()
 		
 				);
 				echo(json_encode($poll_array));

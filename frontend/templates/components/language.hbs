@@ -1,0 +1,18 @@
+            <div class="nav-item dropdown">
+              <a id="navbarDropdownLang" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 {{#if isSpain}}
+                  <img src="/meetPoll_TSW/img/spain.png" alt="lang">
+                {{else}}
+                  <img src="/meetPoll_TSW/img/uk.png" alt="lang">
+                {{/if}}
+              </a>
+              <div class="dropdown-menu idiomas" aria-labelledby="navbarDropdownLang">
+                 {{#if isSpain}}
+                  <a href="#{{isSpain}}" id="englishlink"><img src="/meetPoll_TSW/img/uk.png" alt="lang"></a>
+                {{else}}
+                  <a href="#{{isSpain}}" id="spanishlink"><img src="/meetPoll_TSW/img/spain.png" alt="lang"></a>
+                 {{/if}}
+              </div>
+            </div>
+
+     
