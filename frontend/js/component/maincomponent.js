@@ -30,11 +30,15 @@ class MainComponent extends Fronty.RouterComponent {
         component: new GapAddComponent(gapsModel, userModel, this),
         title: 'Add Gaps'
       },
+      'edit-gaps': {
+        component: new GapEditComponent(pollsModel, gapsModel, userModel, this),
+        title: 'Edit Gaps'
+      },
       login: {
         component: new LoginComponent(userModel, this),
         title: 'Login'
       },
-      defaultRoute: 'login'
+      defaultRoute: 'polls'
     });
     
     Handlebars.registerHelper('currentPage', () => {
@@ -70,6 +74,7 @@ class MainComponent extends Fronty.RouterComponent {
   _createLanguageComponent() {
     var languageComponent = new Fronty.ModelComponent(Handlebars.templates.language, this.routerModel, 'languagecontrol');
     // language change links
+
     languageComponent.addEventListener('click', '#englishlink', () => {
       I18n.changeLanguage('default');
       document.location.reload();

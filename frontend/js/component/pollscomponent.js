@@ -38,28 +38,19 @@ class PollRowComponent extends Fronty.ModelComponent {
     super(Handlebars.templates.pollrow, pollModel, null, null);
     
     this.pollsComponent = pollsComponent;
-    
     this.userModel = userModel;
     this.addModel('user', userModel); // a secondary model
-    
     this.router = router;
 
-    // this.addEventListener('click', '.remove-button', (event) => {
-    //   if (confirm(I18n.translate('Are you sure?'))) {
-    //     var postId = event.target.getAttribute('item');
-    //     this.pollsComponent.pollsService.deletePost(postId)
-    //       .fail(() => {
-    //         alert('post cannot be deleted')
-    //       })
-    //       .always(() => {
-    //         this.pollsComponent.updatePosts();
-    //       });
-    //   }
-    // });
 
     this.addEventListener('click', '.editPoll-button', (event) => {
       var pollLink = event.target.getAttribute('item');
       this.router.goToPage('edit-poll?link=' + pollLink);
+    });
+
+    this.addEventListener('click', '.editGaps-button', (event) => {
+      var pollLink = event.target.getAttribute('item');
+      this.router.goToPage('edit-gaps?link=' + pollLink);
     });
   }
 

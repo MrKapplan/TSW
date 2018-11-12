@@ -1,6 +1,7 @@
 class PollEditComponent extends Fronty.ModelComponent {
   constructor(pollsModel, userModel, router) {
     super(Handlebars.templates.polledit, pollsModel);
+    
     this.pollsModel = pollsModel; // posts
     this.userModel = userModel; // global
     this.addModel('user', userModel);

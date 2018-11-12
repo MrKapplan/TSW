@@ -7,6 +7,14 @@ class GapsService {
       return $.get(AppConfig.backendServer+'/meetPoll_TSW/rest/gap/' + pollLink);
     }
   
+    addGaps(pollLink, gaps) {
+      return $.ajax({
+        url: AppConfig.backendServer+'/meetPoll_TSW/rest/gap/' + pollLink,
+        method: 'POST',
+        data: gaps,
+        contentType: 'application/json'
+      });
+    }
 
     // updatePoll(poll) {
     //   return $.ajax({
@@ -17,14 +25,7 @@ class GapsService {
     //   });
     // }
   
-    // addPoll(poll) {
-    //   return $.ajax({
-    //     url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll',
-    //     method: 'POST',
-    //     data: JSON.stringify(poll),
-    //     contentType: 'application/json'
-    //   });
-    // }
+
   
   
   }

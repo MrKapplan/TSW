@@ -2,7 +2,7 @@ class UserService {
   constructor() {
 
   }
-
+  
   loginWithSessionData() {
     var self = this;
     return new Promise((resolve, reject) => {

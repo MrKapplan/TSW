@@ -14,11 +14,9 @@ class PollAddComponent extends Fronty.ModelComponent {
       newPoll.title = $('#title').val();
       newPoll.ubication = $('#ubication').val();
       newPoll.author = this.userModel.currentUser;
-      console.log(newPoll.title);
-      console.log(newPoll.ubication);
-      console.log(newPoll.author);
       this.pollsService.addPoll(newPoll)
         .then(() => {
+
           this.router.goToPage('add-gaps');
         })
         .fail((xhr, errorThrown, statusText) => {

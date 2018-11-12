@@ -1,25 +1,17 @@
 class GapAddComponent extends Fronty.ModelComponent {
     constructor(gapsModel, userModel, router) {
       super(Handlebars.templates.gapadd, gapsModel);
-      this.gapsModel = gapsModel; // polls
-      
+      this.gapsModel = gapsModel; // gaps
       this.userModel = userModel; // global
       this.addModel('user', userModel);
       this.router = router;
-  
-      this.gapssService = new GapsService();
+      this.gapsService = new GapsService();
   
       this.addEventListener('click', '#savebutton', () => {
-        var newGap = {};
-        newGap.date = $('#date').val();
-        newGap.timeStart = $('#ubication').val();
-        newGap.timeEnd = this.userModel.currentUser;
-        // newGap.poll_id =
-        console.log(  newGap.date);
-        console.log(newGap.timeStart);
-        console.log(nnewGap.timeEnd);
-        // console.log(newGap.poll_id);
-        this.gapsService.addPoll(newGap)
+        var newGaps = $('#gaps').val();
+        var linkPoll = $('#link').val();
+        
+        this.gapsService.addGaps(linkPoll, newGaps)
           .then(() => {
             this.router.goToPage('polls');
           })

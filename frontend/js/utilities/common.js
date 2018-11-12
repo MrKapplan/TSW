@@ -248,7 +248,7 @@ function valueData() {
     }
 	
 
-    document.getElementById('data').value = JSON.stringify(dataArray);
+    document.getElementById('gaps').value = JSON.stringify(dataArray);
 
 
 

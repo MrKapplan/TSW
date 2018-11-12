@@ -32,7 +32,7 @@ class GapRest extends BaseRest {
 
 
         if($poll == NULL){
-            header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+            header($_SERVER['SERVER_PROTOCOL'].' 404 Bad request');
 			header('Content-Type: application/json');
         }else if($currentUser->getUsername() != $poll->getAuthor()->getUsername()){
             header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
@@ -42,8 +42,10 @@ class GapRest extends BaseRest {
 				$this->gapMapper->checkForAdd_Updates($data);
 				$this->gapMapper->save($data, $poll->getId());
 
+				
+
 				header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-				//header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
+				header('Location: /meetPoll_TSW/rest/poll/'.$pollLink);
 				header('Content-Type: application/json');
 				echo(json_encode(array(
 					"pollid"=>$poll->getId(),

@@ -41,8 +41,10 @@ Promise.all([
       Handlebars.templates.pollview = Handlebars.compile(source)),
     loadTextFile('templates/components/poll-row.hbs').then((source) =>
       Handlebars.templates.pollrow = Handlebars.compile(source)),
-      // loadTextFile('templates/components/gap-add.hbs').then((source) =>
-      // Handlebars.templates.pollrow = Handlebars.compile(source))
+    loadTextFile('templates/components/gap-add.hbs').then((source) =>
+      Handlebars.templates.gapadd = Handlebars.compile(source)),
+    loadTextFile('templates/components/gap-edit.hbs').then((source) =>
+      Handlebars.templates.gapedit = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {
