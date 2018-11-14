@@ -8,7 +8,7 @@
         <div class="col-lg-12 center-block">
             {{#if errors}}
                 <div class="alert alert-danger text-center" id="success-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" id="add-row-button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{errorrs}}
                 </div>
             {{/if}}
@@ -17,8 +17,7 @@
             </div>
             <div id="link">
                 <div id="inputLink" class="inputWithIconLogin inputIconBg">
-                    <input type="text" placeholder="{{selectedPoll.link}}" readonly>
-                    <i class="fa fa-link fa-lg fa-fw" aria-hidden="true"></i>
+                    <input type="hidden" id="poll-link" value="{{polls.selectedPoll.link}}" readonly>
                 </div>
             </div>
             <div class="col-lg-12 center-block2">
@@ -32,37 +31,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each selectedGap as |gap|}}
-                        <tr>
-                            <td></td>
-                            <td>
-                                <div id="inputDate">
-                                    <div class="inputWithIconLogin inputIconBg">
-                                        <input type="text" id="date-es" class ="date" value="{{gap.date}}" required>
-                                        <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </td>
+                        {{#if selectedGap}}
+                            {{#each selectedGap as |gap|}}
+                                {{#each gap as |item|}}
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <div id="inputDate">
+                                                <div class="inputWithIconLogin inputIconBg">
+                                                    <input type="text" id="date-es" class ="date" value="{{item.date}}" required>
+                                                    <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                            <td>
-                                <div id="inputTimeStart">
-                                    <div class="inputWithIconLogin inputIconBg">
-                                        <input type="text" id="timeStart" class="timeStart" value="{{gap.timeStart}}" required>
-                                        <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </td>
+                                        <td>
+                                            <div id="inputTimeStart">
+                                                <div class="inputWithIconLogin inputIconBg">
+                                                    <input type="text" id="timeStart" class="timeStart" value="{{item.timeStart}}" required>
+                                                    <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                            <td>
-                                <div id="inputTimeEnd">
-                                    <div class="inputWithIconLogin inputIconBg">
-                                        <input type="text" id="timeEnd" class="timeEnd" value="{{gap.timeEnd}}" required>
-                                        <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    
-                                    </div>
-                                </div>
-                            </td>
-                        </tr> 
-                        {{/each}}
+                                        <td>
+                                            <div id="inputTimeEnd">
+                                                <div class="inputWithIconLogin inputIconBg">
+                                                    <input type="text" id="timeEnd" class="timeEnd" value="{{item.timeEnd}}" required>
+                                                    <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            {{/each}} 
+                        {{/if}}
                     </tbody>
                 </table>
                 <input type="hidden" id="gaps"> 

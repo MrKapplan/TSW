@@ -10,7 +10,7 @@ class GapsModel extends Fronty.Model {
     setSelectedGap(gap) {
       this.set((self) => {
         self.selectedGap = gap;
-        //console.log(self.selectedGap);
+        console.log(self.selectedGap);
       });
       
     }

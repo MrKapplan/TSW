@@ -1,11 +1,11 @@
 //file js/common.js
 
 //Function JQuery to limit the time of alerts messages
-$(document).ready(function() {
-    setTimeout(function() {
-        $(".alert").alert('close');
-    }, 4000);
-});
+// $(document).ready(function() {
+//     setTimeout(function() {
+//         $(".alert").alert('close');
+//     }, 4000);
+// });
 
 
 //Function to delete a row from a table
@@ -41,17 +41,17 @@ function addRow() {
     inputDate.required = true;
     divIcon.appendChild(inputDate);
 
-    $(inputDate).bootstrapMaterialDatePicker
-    ({
-        format: 'DD/MM/YYYY',
-        lang: 'es',
-        time: false,
-        weekStart: 1, 
-        nowButton : true,
-        switchOnClick : true,
-        minDate : new Date()
+    // $(inputDate).bootstrapMaterialDatePicker
+    // ({
+    //     format: 'DD/MM/YYYY',
+    //     lang: 'es',
+    //     time: false,
+    //     weekStart: 1, 
+    //     nowButton : true,
+    //     switchOnClick : true,
+    //     minDate : new Date()
 
-    });
+    // });
 
     var iconDate = document.createElement("i");
     iconDate.className = "fa fa-calendar fa-lg fa-fw";
@@ -72,12 +72,12 @@ function addRow() {
     inputTimeStart.required = true;
     divIcon2.appendChild(inputTimeStart);
 
-    $(inputTimeStart).bootstrapMaterialDatePicker
-    ({
-        date: false,
-        shortTime: false,
-        format: 'HH:mm'
-    });
+    // $(inputTimeStart).bootstrapMaterialDatePicker
+    // ({
+    //     date: false,
+    //     shortTime: false,
+    //     format: 'HH:mm'
+    // });
 
     var iconTimeStart = document.createElement("i");
     iconTimeStart.className = "fa fa-clock-o fa-lg fa-fw";
@@ -100,12 +100,12 @@ function addRow() {
     inputTimeEnd.required = true;
     divIcon3.appendChild(inputTimeEnd);
 
-    $(inputTimeEnd).bootstrapMaterialDatePicker
-    ({
-        date: false,
-        shortTime: false,
-        format: 'HH:mm'
-    });
+    // $(inputTimeEnd).bootstrapMaterialDatePicker
+    // ({
+    //     date: false,
+    //     shortTime: false,
+    //     format: 'HH:mm'
+    // });
 
     var iconTimeEnd = document.createElement("i");
     iconTimeEnd.className = "fa fa-clock-o fa-lg fa-fw";

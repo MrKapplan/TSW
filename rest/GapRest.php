@@ -114,9 +114,9 @@ class GapRest extends BaseRest {
 			foreach ($gaps as $gap) {
 				array_push($gaps_array["gaps"], array(
 					"id" => $gap->getId(),
-					"date" => $gap->getDate(),
-					"timeStart" => $gap->getTimeStart(),
-					"timeEnd" => $gap->getTimeEnd(),
+					"date" => date('d/m/Y', strtotime($gap->getDate())),
+					"timeStart" => substr($gap->getTimeStart(), 0, 5),
+					"timeEnd" => substr($gap->getTimeEnd(), 0, 5),
 				));
 			}
 		}

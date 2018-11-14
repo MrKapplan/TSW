@@ -1,17 +1,17 @@
 
 // $(document).ready(function()
 // { 
-//     $('#date-es').bootstrapMaterialDatePicker
-//     ({
-//         format: 'DD/MM/YYYY',
-//         lang: 'es',
-//         time: false,
-//         weekStart: 1, 
-//         nowButton : true,
-//         switchOnClick : true,
-//         minDate : new Date()
+    //     $('#date-es').bootstrapMaterialDatePicker
+    //     ({
+    //         format: 'DD/MM/YYYY',
+    //         lang: 'es',
+    //         time: false,
+    //         weekStart: 1, 
+    //         nowButton : true,
+    //         switchOnClick : true,
+    //         minDate : new Date()
 
-//     });
+    //     });
 
 //     $('#timeStart').bootstrapMaterialDatePicker
 //     ({

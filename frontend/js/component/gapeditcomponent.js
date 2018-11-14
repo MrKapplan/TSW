@@ -1,10 +1,14 @@
 class GapEditComponent extends Fronty.ModelComponent {
     constructor(pollsModel,gapsModel, userModel, router) {
-      super(Handlebars.templates.gapedit, gapsModel, pollsModel);
-      this.pollsModel = pollsModel;
+      super(Handlebars.templates.gapedit, gapsModel);
+
       this.gapsModel = gapsModel; // gaps
+
+      this.pollsModel = pollsModel;
+      this.addModel('polls', pollsModel)
       this.userModel = userModel; // global
       this.addModel('user', userModel);
+
       this.router = router;
       this.pollsService = new PollsService();
       this.gapsService = new GapsService();
@@ -29,7 +33,25 @@ class GapEditComponent extends Fronty.ModelComponent {
           });
       });
     }
-    
+
+
+    afterRender() {
+  
+      $('#date-es').bootstrapMaterialDatePicker
+     ({
+         format: 'DD/MM/YYYY',
+         lang: 'es',
+         time: false,
+         weekStart: 1, 
+         nowButton : true,
+         switchOnClick : true,
+         minDate : new Date()
+
+     });
+    }
+
+
+
     onStart() {
         var selectedLink = this.router.getRouteQueryParam('link');
         if (selectedLink != null) {
