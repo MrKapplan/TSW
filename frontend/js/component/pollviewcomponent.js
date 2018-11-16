@@ -1,12 +1,18 @@
 class PollViewComponent extends Fronty.ModelComponent {
   constructor(pollsModel, gapsModel, assignationsModel, userModel, router) {
-    super(Handlebars.templates.pollview, pollsModel, gapsModel);
+    super(Handlebars.templates.pollview, pollsModel);
 
     this.pollsModel = pollsModel; // posts
-    this.gapsModel = gapsModel; //gaps
-    this.assignationsModel = assignationsModel; //assignations user-gap
+
     this.userModel = userModel; // global
     this.addModel('user', userModel);
+
+    this.gapsModel = gapsModel;
+    this.addModel('gaps', gapsModel)
+
+    this.assignationsModel = assignationsModel;
+    this.addModel('assignations', assignationsModel)
+
     this.router = router;
 
     this.pollsService = new PollsService();
@@ -60,6 +66,8 @@ class PollViewComponent extends Fronty.ModelComponent {
         .then((gaps) => {
           this.gapsModel.setSelectedGap(gaps);
           //console.log(gaps);
+         // console.log(gaps.length);
+
         });
 
     }
@@ -70,7 +78,8 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.findAssignationsPoll(pollLink)
         .then((assignations) => {
           this.assignationsModel.setSelectedAssignation(assignations);
-          //console.log(assignations);
+          console.log(assignations);
+          console.log(assignations['assignationsDB'].length);
         });
 
     }

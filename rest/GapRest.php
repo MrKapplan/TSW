@@ -103,27 +103,25 @@ class GapRest extends BaseRest {
 	public function viewGaps($pollLink) {
 		$currentLogged = parent::authenticateUser();
 
-		$gaps = $this->gapMapper->findGapsByLinkPoll($pollLink);
-		
-		if ($gaps == NULL) {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("Gaps with poll id ".$pollLink." not found");
-			return;
-		} else {
-			$gaps_array["gaps"] = array();
+		try{
+			$gaps = $this->gapMapper->findGapsByLinkPoll($pollLink);
+			$gaps_array = array();
 			foreach ($gaps as $gap) {
-				array_push($gaps_array["gaps"], array(
+				array_push($gaps_array, array(
 					"id" => $gap->getId(),
 					"date" => date('d/m/Y', strtotime($gap->getDate())),
 					"timeStart" => substr($gap->getTimeStart(), 0, 5),
 					"timeEnd" => substr($gap->getTimeEnd(), 0, 5),
 				));
 			}
+			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+			header('Content-Type: application/json');
+			echo(json_encode($gaps_array));
+		}catch(ValidationException $e){
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
 		}
-
-		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
-		header('Content-Type: application/json');
-		echo(json_encode($gaps_array));
 	}
 
 }

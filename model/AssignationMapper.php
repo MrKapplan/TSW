@@ -20,6 +20,15 @@ class AssignationMapper {
 			return true;
 		}
 	}
+
+	public function isParticipantByPollLink($currentUser, $pollLink){
+		$stmt = $this->db->prepare("SELECT count(user_selects_gap.username) FROM user_selects_gap, poll where user_selects_gap.username=? AND user_selects_gap.poll_id = poll.id AND poll.link = ?");
+		$stmt->execute(array($currentUser->getUsername(), $pollLink));
+
+		if ($stmt->fetchColumn() > 0) {
+			return true;
+		}
+	}
 	
 
 
@@ -41,6 +50,21 @@ class AssignationMapper {
 
 	public function findUsersParticipansInPoll($pollid,$currentUser){
 		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid' ORDER BY username <> '$currentUser'");
+		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$participants = array();
+		
+		foreach ($participants_db as $participant) {
+			$username = new User($participant["username"]);
+			array_push($participants, new Assignation($username));
+		}
+
+		return $participants;
+	}
+
+
+	public function findUsersParticipansInPollByLink($pollLink, $currentUser){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
 		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$participants = array();

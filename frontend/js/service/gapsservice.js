@@ -16,6 +16,15 @@ class GapsService {
       });
     }
 
+    editGaps(pollLink, gaps) {
+      return $.ajax({
+        url: AppConfig.backendServer+'/meetPoll_TSW/rest/gap/' + pollLink,
+        method: 'PUT',
+        data: gaps,
+        contentType: 'application/json'
+      });
+    }
+
     // updatePoll(poll) {
     //   return $.ajax({
     //     url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll/' + poll.link,

@@ -87,30 +87,41 @@ class AssignationRest extends BaseRest {
 		}
 	}
 
+
 	public function viewAssignations($pollLink) {
 		$currentLogged = parent::authenticateUser();
 
-		$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
-		//var_dump( $assignations);
+		try{
+			$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
+			$isParticipant = $this->assignationMapper->isParticipantByPollLink($currentLogged, $pollLink);
+			$participants = $this->assignationMapper->findUsersParticipansInPollByLink($pollLink, $currentLogged->getUsername());
+
+			$assignations_array['assignationsDB'] = array();
 		
-		if (!isset($assignations)) {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
-			echo("Assignations with poll id ".$pollLink." not found");
-			return;
-		} else {
-			$assignations_array["assignations"] = array();
 			foreach ($assignations as $assignation) {
-				array_push($assignations_array["assignations"], array(
+				array_push($assignations_array['assignationsDB'], array(
 					"username" => $assignation->getUser()->getUsername(),
 					"gap_id" => $assignation->getGap()->getId(),
 					"poll_id" => $assignation->getPoll()->getId()
 				));
 			}
-		}
 
-		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
-		header('Content-Type: application/json');
-		echo(json_encode($assignations_array));
+			$assignations_array['isParticipant'] = array();
+			array_push($assignations_array['isParticipant'], array(
+				"isParticipant" => $isParticipant));
+
+			$assignations_array['participants'] = array();
+			array_push($assignations_array['participants'], array(
+				"participants" => $participants));
+
+			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+			header('Content-Type: application/json');
+			echo(json_encode($assignations_array));
+		}catch(ValidationException $e){
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			header('Content-Type: application/json');
+			echo(json_encode($e->getErrors()));
+		}
 	}
 
 }

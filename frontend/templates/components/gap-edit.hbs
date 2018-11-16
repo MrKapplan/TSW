@@ -24,7 +24,7 @@
                 <table id="dataTable" class="table text-center">
                     <thead>
                         <tr>
-                            <th scope="col"><button type="button" class="btn btn-success" id="botonAñadir" value="+"  onclick="addRow('dataTable');">+</button></th>
+                            <th scope="col"><button type="button" class="btn btn-success" id="addrow-button" value="+">+</button></th>
                             <th scope="col">{{i18n 'Date'}}</th>
                             <th scope="col">{{i18n 'Start'}}</th>
                             <th scope="col">{{i18n 'End'}}</th>
@@ -37,27 +37,27 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <div id="inputDate">
+                                            <div class="inputDate">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="date-es" class ="date" value="{{item.date}}" required>
+                                                    <input type="text" id="date-es{{item.id}}" class ="date" value="{{item.date}}" required>
                                                     <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <div id="inputTimeStart">
+                                            <div class="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeStart" class="timeStart" value="{{item.timeStart}}" required>
+                                                    <input type="text" id="timeStart{{item.id}}" class="timeStart" value="{{item.timeStart}}" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <div id="inputTimeEnd">
+                                            <div class="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeEnd" class="timeEnd" value="{{item.timeEnd}}" required>
+                                                    <input type="text" id="timeEnd{{item.id}}" class="timeEnd" value="{{item.timeEnd}}" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    
                                                 </div>
                                             </div>

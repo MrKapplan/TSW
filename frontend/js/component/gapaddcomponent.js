@@ -27,6 +27,9 @@ class GapAddComponent extends Fronty.ModelComponent {
       });
     }
     
+    
+
+
     onStart() {
       this.gapsModel.setSelectedGap(new GapModel());
     }
