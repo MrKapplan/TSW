@@ -19,25 +19,17 @@ class PollViewComponent extends Fronty.ModelComponent {
     this.gapsService = new GapsService();
     this.assignationsService = new AssignationsService();
 
-    // this.addEventListener('click', '#savecommentbutton', () => {
-    //   var selectedId = this.router.getRouteQueryParam('id');
-    //   this.postsService.createComment(selectedId, {
-    //       content: $('#commentcontent').val()
-    //     })
-    //     .then(() => {
-    //       $('#commentcontent').val('');
-    //       this.loadPost(selectedId);
-    //     })
-    //     .fail((xhr, errorThrown, statusText) => {
-    //       if (xhr.status == 400) {
-    //         this.postsModel.set(() => {
-    //           this.postsModel.commentErrors = xhr.responseJSON;
-    //         });
-    //       } else {
-    //         alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
-    //       }
-    //     });
-    // });
+
+    this.addEventListener('click', '#addParticipation-button', (event) => {
+      var pollLink = event.target.getAttribute('item');
+      this.router.goToPage('add-assignation?link=' + pollLink);
+    });
+
+    this.addEventListener('click', '#modifyParticipation-button', (event) => {
+      var pollLink = event.target.getAttribute('item');
+      this.router.goToPage('modify-assignation?link=' + pollLink);
+    });
+
   }
 
 
@@ -45,16 +37,11 @@ class PollViewComponent extends Fronty.ModelComponent {
   afterRender() {
   
     $.each(this.gapsModel.selectedGap, function(index, gap) {
-  
           var d = new Date(gap.date);
-          $('#gap-date-item-'.concat(gap.id)).html(d.toString().substr(0,3).toUpperCase().concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5)));
-
-          
+          $('#gap-date-item-'.concat(gap.id)).html(d.toString().substr(0,3).toUpperCase().concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
     }); 
 
   }
-
-
 
 
   onStart() {
@@ -62,16 +49,14 @@ class PollViewComponent extends Fronty.ModelComponent {
     this.loadPoll(selectedLink);
     this.loadGapsPoll(selectedLink);
     this.loadAssignationsPoll(selectedLink);
-
-
   }
 
+  
   loadPoll(pollLink) {
     if (pollLink != null) {
       this.pollsService.findPoll(pollLink)
         .then((poll) => {
           this.pollsModel.setSelectedPoll(poll);
-          //console.log(poll);
         });
 
     }
@@ -82,9 +67,6 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.gapsService.findGapsPoll(pollLink)
         .then((gaps) => {
           this.gapsModel.setSelectedGap(gaps);
-          //console.log(gaps);
-         // console.log(gaps.length);
-
         });
 
     }
@@ -95,10 +77,9 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.findAssignationsPoll(pollLink)
         .then((assignations) => {
           this.assignationsModel.setSelectedAssignation(assignations);
-         //console.log(assignations);
-          //console.log(assignations['assignationsDB'].length);
         });
 
     }
   }
+
 }

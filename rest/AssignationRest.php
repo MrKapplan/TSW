@@ -92,33 +92,30 @@ class AssignationRest extends BaseRest {
 		$currentLogged = parent::authenticateUser();
 
 		try{
-			$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
+			//$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
 			$isParticipant = $this->assignationMapper->isParticipantByPollLink($currentLogged, $pollLink);
 			$participants = $this->assignationMapper->findUsersParticipansInPollByLink($pollLink, $currentLogged->getUsername());
 
-			$assignations_array['assignationsDB'] = array();
-			foreach ($assignations as $assignation) {
-				array_push($assignations_array['assignationsDB'], array(
-					"username" => $assignation->getUser()->getUsername(),
-					"gap_id" => $assignation->getGap()->getId(),
-					"poll_id" => $assignation->getPoll()->getId()
-				));
-			}
+			$assignations = $this->assignationMapper->findAssignationUsers($pollLink,$currentLogged->getUsername());
+			$assignations_array['assignations'] = array();
 
-			$assignations_array['participants'] = array();
-			foreach ($participants as $participant) {
-					array_push($assignations_array['participants'], array(
-						"participant" => $participant->getUser()->getUsername()
-					));
+
+			foreach($assignations as $assignation){
+				array_push($assignations_array['assignations'], $assignation);
 			}
+			
 
 			$assignations_array['isParticipant'] = $isParticipant;
-			//array_push($assignations_array['isParticipante'], $isParticipant);
+			//array_push($assignations_array['isParticipant'], $isParticipant);
 
 
 			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 			header('Content-Type: application/json');
 			echo(json_encode($assignations_array));
+			// $as = array();
+			// array_push($as, $assignations_array);
+			// array_push($as, $participations_array);
+			// echo(json_encode($as));
 		}catch(ValidationException $e){
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			header('Content-Type: application/json');

@@ -49,38 +49,6 @@ class AssignationMapper {
 		return $assignations;
 	}
 
-
-	public function findUsersParticipansInPoll($pollid,$currentUser){
-		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid' ORDER BY username <> '$currentUser'");
-		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		$participants = array();
-		
-		foreach ($participants_db as $participant) {
-			$username = new User($participant["username"]);
-			array_push($participants, new Assignation($username));
-		}
-
-		return $participants;
-	}
-
-
-	public function findUsersParticipansInPollByLink($pollLink, $currentUser){
-		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
-		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-		$participants = array();
-		
-		foreach ($participants_db as $participant) {
-			$username = new User($participant["username"]);
-			array_push($participants, new Assignation($username));
-		}
-
-		return $participants;
-	}
-
-
-
 	public function findAssignationsByLinkPoll($pollLink, $currentUser){
 
 		$stmt = $this->db->query("SELECT user_selects_gap.username, user_selects_gap.gap_id, user_selects_gap.poll_id FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
@@ -98,7 +66,70 @@ class AssignationMapper {
 	}
 
 
-	
+	public function findUsersParticipansInPoll($pollid,$currentUser){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, gap WHERE gap_id = gap.id AND gap.poll_id = '$pollid' ORDER BY username <> '$currentUser'");
+		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$participants = array();
+		
+		foreach ($participants_db as $participant) {
+			$username = new User($participant["username"]);
+			array_push($participants, new Assignation($username));
+		}
+
+		return $participants;
+	}
+
+
+
+
+	public function findUsersParticipansInPollByLink($pollLink,$currentUser){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
+		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$participants = array();
+		
+		foreach ($participants_db as $participant) {
+			$username = new User($participant["username"]);
+			array_push($participants, new Assignation($username));
+		}
+
+		return $participants;
+	}
+
+
+	public function gapsForUser($pollLink, $user){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.gap_id FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' AND user_selects_gap.username = '$user'");
+		$assignationParticipant_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$assignationParticipant = array();
+
+		foreach ($assignationParticipant_db as $gapsUser) {
+			array_push($assignationParticipant, $gapsUser["gap_id"]);
+		}
+
+		return $assignationParticipant;
+		
+	}
+
+
+	public function findAssignationUsers($pollLink, $currentUser){
+		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
+		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$participants = array();
+		
+		foreach ($participants_db as $participant) {
+			$username = new User($participant["username"]);
+			$gaps = $this->gapsForUser($pollLink, $username->getUsername());
+			array_push($participants, array("participant" => $username->getUsername(),
+											"gaps" => $gaps));
+		}
+		return $participants;
+	}
+
+
+
 
 	public function update($user, $assignations, $pollid) {
 
@@ -123,8 +154,6 @@ class AssignationMapper {
 			$stmtAdd->execute(array($user, $assignations[$j]->gap, $pollid));
 		}
 	} 
-	
 
-	
-    
+
 }

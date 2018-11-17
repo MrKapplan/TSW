@@ -44,7 +44,11 @@ Promise.all([
     loadTextFile('templates/components/gap-add.hbs').then((source) =>
       Handlebars.templates.gapadd = Handlebars.compile(source)),
     loadTextFile('templates/components/gap-edit.hbs').then((source) =>
-      Handlebars.templates.gapedit = Handlebars.compile(source))
+      Handlebars.templates.gapedit = Handlebars.compile(source)),
+    loadTextFile('templates/components/assignation-add.hbs').then((source) =>
+      Handlebars.templates.assignationadd = Handlebars.compile(source)),
+    loadTextFile('templates/components/assignation-edit.hbs').then((source) =>
+      Handlebars.templates.assignationedit = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

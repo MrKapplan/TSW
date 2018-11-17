@@ -171,7 +171,8 @@ function removeCheckboxWarning() {
 function checkboxes() {
 
     var table = document.getElementById('dataTable');
-    var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
+    console.log(table);
+    var rowCount = table.rows.length - 1;                   //Number of row (-1 for not counting the table titles)
     var inputElems = document.getElementsByTagName("input");  //Array one dimensional with the inputs (input link poll included)
     var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
     var count = 0, max = 0, maxAbs = 0, trSelected = -1, trSelectedArray = new Array(); 

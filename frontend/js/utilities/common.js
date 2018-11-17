@@ -168,7 +168,7 @@ function removeCheckboxWarning() {
 *   With "table-warning" when the rows are more than one.
 *
 */
-// function checkboxes() {
+function checkboxes() {
 
 //     var table = document.getElementById('dataTable');
 //     var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
@@ -218,7 +218,7 @@ function removeCheckboxWarning() {
 //             document.getElementById(trSelectedArray[y]).setAttribute("class", "table-warning"); //Modified the class of div when several options are tied 
 //         }
 //     } 
-// }
+}
 
 function validateCheckboxes() {
 
