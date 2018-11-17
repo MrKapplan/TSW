@@ -7,7 +7,7 @@ class GapAddComponent extends Fronty.ModelComponent {
       this.router = router;
       this.gapsService = new GapsService();
   
-      this.addEventListener('click', '#savebutton', () => {
+      this.addEventListener('click', '#addGap', () => {
         var newGaps = $('#gaps').val();
         var linkPoll = $('#link').val();
         
@@ -28,7 +28,67 @@ class GapAddComponent extends Fronty.ModelComponent {
     }
     
     
+    afterRender() {
 
+      $('#date-item-0').bootstrapMaterialDatePicker 
+      ({
+        format: 'DD/MM/YYYY',
+        lang: 'es',
+        time: false,
+        weekStart: 1, 
+        nowButton : true,
+        switchOnClick : true,
+        minDate : new Date()
+      });
+
+
+      $('#timeStart-item-0').bootstrapMaterialDatePicker
+      ({
+        date: false,
+        shortTime: false,
+        format: 'HH:mm'
+      });
+
+
+      $('#timeEnd-item-0').bootstrapMaterialDatePicker
+      ({
+        date: false,
+        shortTime: false,
+        format: 'HH:mm'
+      });
+  
+      // $.each(this.gapsModel.selectedGap, function(index, gap) {
+
+      //     $('#date-item-'.concat(gap.id)).bootstrapMaterialDatePicker 
+      //     ({
+      //       format: 'DD/MM/YYYY',
+      //       lang: 'es',
+      //       time: false,
+      //       weekStart: 1, 
+      //       nowButton : true,
+      //       switchOnClick : true,
+      //       minDate : new Date()
+      //     });
+
+
+      //     $('#timeStart-item-'.concat(gap.id)).bootstrapMaterialDatePicker
+      //     ({
+      //       date: false,
+      //       shortTime: false,
+      //       format: 'HH:mm'
+      //     });
+
+
+      //     $('#timeEnd-item-'.concat(gap.id)).bootstrapMaterialDatePicker
+      //     ({
+      //       date: false,
+      //       shortTime: false,
+      //       format: 'HH:mm'
+      //     });
+      // }); 
+
+    $.material.init()
+    }
 
     onStart() {
       this.gapsModel.setSelectedGap(new GapModel());

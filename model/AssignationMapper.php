@@ -27,6 +27,8 @@ class AssignationMapper {
 
 		if ($stmt->fetchColumn() > 0) {
 			return true;
+		}else {
+			return false;
 		}
 	}
 	

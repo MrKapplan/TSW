@@ -33,13 +33,12 @@
                     <tbody>
                         {{#if selectedGap}}
                             {{#each selectedGap as |gap|}}
-                                {{#each gap as |item|}}
                                     <tr>
                                         <td></td>
                                         <td>
                                             <div class="inputDate">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="date-es{{item.id}}" class ="date" value="{{item.date}}" required>
+                                                    <input type="text" id="date-item-{{gap.id}}" class ="date" value="{{gap.date}}" required>
                                                     <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -48,7 +47,7 @@
                                         <td>
                                             <div class="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeStart{{item.id}}" class="timeStart" value="{{item.timeStart}}" required>
+                                                    <input type="text" id="timeStart-item-{{gap.id}}" class="timeStart" value="{{gap.timeStart}}" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
                                                 </div>
                                             </div>
@@ -57,19 +56,18 @@
                                         <td>
                                             <div class="inputTime">
                                                 <div class="inputWithIconLogin inputIconBg">
-                                                    <input type="text" id="timeEnd{{item.id}}" class="timeEnd" value="{{item.timeEnd}}" required>
+                                                    <input type="text" id="timeEnd-item-{{gap.id}}" class="timeEnd" value="{{gap.timeEnd}}" required>
                                                     <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>    
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                {{/each}}
                             {{/each}} 
                         {{/if}}
                     </tbody>
                 </table>
                 <input type="hidden" id="gaps"> 
-                <button type="submit" id="savebutton" class="btn btn-dark" onclick="valueData()">{{i18n 'Continue'}}</button>
+                <button type="submit" id="editGap" class="btn btn-dark" onclick="valueData()">{{i18n 'Continue'}}</button>
             </div>
         </div>
     </div>

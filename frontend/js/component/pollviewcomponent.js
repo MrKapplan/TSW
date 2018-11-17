@@ -40,6 +40,23 @@ class PollViewComponent extends Fronty.ModelComponent {
     // });
   }
 
+
+
+  afterRender() {
+  
+    $.each(this.gapsModel.selectedGap, function(index, gap) {
+  
+          var d = new Date(gap.date);
+          $('#gap-date-item-'.concat(gap.id)).html(d.toString().substr(0,3).toUpperCase().concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5)));
+
+          
+    }); 
+
+  }
+
+
+
+
   onStart() {
     var selectedLink = this.router.getRouteQueryParam('link');
     this.loadPoll(selectedLink);
@@ -78,8 +95,8 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.findAssignationsPoll(pollLink)
         .then((assignations) => {
           this.assignationsModel.setSelectedAssignation(assignations);
-          console.log(assignations);
-          console.log(assignations['assignationsDB'].length);
+         //console.log(assignations);
+          //console.log(assignations['assignationsDB'].length);
         });
 
     }

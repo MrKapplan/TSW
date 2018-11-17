@@ -9,7 +9,7 @@ class PollEditComponent extends Fronty.ModelComponent {
 
     this.pollsService = new PollsService();
 
-    this.addEventListener('click', '#savebutton', () => {
+    this.addEventListener('click', '#editPoll', () => {
       this.pollsModel.selectedPoll.title = $('#title').val();
       this.pollsModel.selectedPoll.ubication = $('#ubication').val();
       this.pollsService.updatePoll(this.pollsModel.selectedPoll)

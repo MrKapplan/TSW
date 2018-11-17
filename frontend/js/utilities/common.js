@@ -168,57 +168,57 @@ function removeCheckboxWarning() {
 *   With "table-warning" when the rows are more than one.
 *
 */
-function checkboxes() {
+// function checkboxes() {
 
-    var table = document.getElementById('dataTable');
-    var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
-    var inputElems = document.getElementsByTagName("input");  //Array one dimensional with the inputs (input link poll included)
-    var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
-    var count = 0, max = 0, maxAbs = 0, trSelected = -1, trSelectedArray = new Array(); 
+//     var table = document.getElementById('dataTable');
+//     var rowCount = table.rows.length - 1;                     //Number of row (-1 for not counting the table titles)
+//     var inputElems = document.getElementsByTagName("input");  //Array one dimensional with the inputs (input link poll included)
+//     var numInputsForRow = (inputElems.length - 1) / rowCount; //Number of inputs for Row (-1 for not counting the link poll input)
+//     var count = 0, max = 0, maxAbs = 0, trSelected = -1, trSelectedArray = new Array(); 
 
     
-    for (var j = 1; j < inputElems.length; j++) {
-        if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
-            count++;
-        }
-        if (j % numInputsForRow == 0) {  //Separate the elements of each row
-            if (count > maxAbs) {
-                max = count;
-                maxAbs = count;
-                trSelected = inputElems[j].parentNode.parentNode.parentNode.id; //trSelected is the id of the row that has the maximum number of checkbox checked
-            } else if (count == max) {
-                max = -1;
-            }
-            count = 0;
-        }
-    }
+//     for (var j = 1; j < inputElems.length; j++) {
+//         if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+//             count++;
+//         }
+//         if (j % numInputsForRow == 0) {  //Separate the elements of each row
+//             if (count > maxAbs) {
+//                 max = count;
+//                 maxAbs = count;
+//                 trSelected = inputElems[j].parentNode.parentNode.parentNode.id; //trSelected is the id of the row that has the maximum number of checkbox checked
+//             } else if (count == max) {
+//                 max = -1;
+//             }
+//             count = 0;
+//         }
+//     }
 
-    if (trSelected != -1 && max != -1) {
-        removeCheckboxWarning();
-        document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
-    }
+//     if (trSelected != -1 && max != -1) {
+//         removeCheckboxWarning();
+//         document.getElementById(trSelected).setAttribute("class", "table-success"); //Modified the class of div
+//     }
     
-   //Iterate the inputs elements again and check if there is more than one row withe the maximum number of checkbox
-    for (var j = 1; j < inputElems.length; j++) { 
-        if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
-            count++;
-        }
-        if (j % numInputsForRow == 0) {  
-            if (count == maxAbs) { //if count (of row) is equal to the maximux push this row id in a array.
-                trSelectedArray.push(inputElems[j].parentNode.parentNode.parentNode.id);
-            } 
-            count = 0;
-        }
-    }
+//    //Iterate the inputs elements again and check if there is more than one row withe the maximum number of checkbox
+//     for (var j = 1; j < inputElems.length; j++) { 
+//         if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+//             count++;
+//         }
+//         if (j % numInputsForRow == 0) {  
+//             if (count == maxAbs) { //if count (of row) is equal to the maximux push this row id in a array.
+//                 trSelectedArray.push(inputElems[j].parentNode.parentNode.parentNode.id);
+//             } 
+//             count = 0;
+//         }
+//     }
 
-    if(trSelectedArray.length > 1){ //if the array with de row's id have more than 1 element, remove the old modification (table-success) and insert table-warning in this rows.
-        removeCheckboxSuccess();
-        removeCheckboxWarning();
-        for(var y=0; y<trSelectedArray.length; y++){
-            document.getElementById(trSelectedArray[y]).setAttribute("class", "table-warning"); //Modified the class of div when several options are tied 
-        }
-    } 
-}
+//     if(trSelectedArray.length > 1){ //if the array with de row's id have more than 1 element, remove the old modification (table-success) and insert table-warning in this rows.
+//         removeCheckboxSuccess();
+//         removeCheckboxWarning();
+//         for(var y=0; y<trSelectedArray.length; y++){
+//             document.getElementById(trSelectedArray[y]).setAttribute("class", "table-warning"); //Modified the class of div when several options are tied 
+//         }
+//     } 
+// }
 
 function validateCheckboxes() {
 

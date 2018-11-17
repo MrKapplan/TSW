@@ -97,7 +97,6 @@ class AssignationRest extends BaseRest {
 			$participants = $this->assignationMapper->findUsersParticipansInPollByLink($pollLink, $currentLogged->getUsername());
 
 			$assignations_array['assignationsDB'] = array();
-		
 			foreach ($assignations as $assignation) {
 				array_push($assignations_array['assignationsDB'], array(
 					"username" => $assignation->getUser()->getUsername(),
@@ -106,13 +105,16 @@ class AssignationRest extends BaseRest {
 				));
 			}
 
-			$assignations_array['isParticipant'] = array();
-			array_push($assignations_array['isParticipant'], array(
-				"isParticipant" => $isParticipant));
-
 			$assignations_array['participants'] = array();
-			array_push($assignations_array['participants'], array(
-				"participants" => $participants));
+			foreach ($participants as $participant) {
+					array_push($assignations_array['participants'], array(
+						"participant" => $participant->getUser()->getUsername()
+					));
+			}
+
+			$assignations_array['isParticipant'] = $isParticipant;
+			//array_push($assignations_array['isParticipante'], $isParticipant);
+
 
 			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 			header('Content-Type: application/json');

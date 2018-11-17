@@ -67,7 +67,7 @@ class PollRest extends BaseRest {
 			$poll->checkIsValidForCreate(); 
 			$pollLink = $this->pollMapper->save($poll);
 			header($_SERVER['SERVER_PROTOCOL'].' 201 Created');
-			//header('Location: '.$_SERVER['REQUEST_URI']."/".$postId);
+			header('Location: '.$_SERVER['REQUEST_URI']."/".$pollLink);
 			header('Content-Type: application/json');
 			echo(json_encode(array(
 				"title"=>$poll->getTitle(),

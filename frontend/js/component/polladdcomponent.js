@@ -6,18 +6,24 @@ class PollAddComponent extends Fronty.ModelComponent {
     this.userModel = userModel; // global
     this.addModel('user', userModel);
     this.router = router;
-
     this.pollsService = new PollsService();
 
-    this.addEventListener('click', '#savebutton', () => {
+    this.addEventListener('click', '#addPoll', () => {
       var newPoll = {};
       newPoll.title = $('#title').val();
       newPoll.ubication = $('#ubication').val();
       newPoll.author = this.userModel.currentUser;
       this.pollsService.addPoll(newPoll)
-        .then(() => {
-
-          this.router.goToPage('add-gaps');
+        .then((xhr) => {
+          //console.log(this.pollsService.addPoll(newPoll));
+          //console.log(xhr.link);
+          
+        //   if (xhr.status === 201) {
+        //     var data = xhr.response;
+        //     var parsed = JSON.parse(data);
+        //     console.log(parsed);
+        // }
+          this.router.goToPage('add-gaps?poll='.concat(xhr.link));
         })
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {

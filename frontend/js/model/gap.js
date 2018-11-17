@@ -25,29 +25,5 @@ class GapModel extends Fronty.Model {
       
     }
   
-    // setTitle(date) {
-    //   this.set((self) => {
-    //     self.date = date;
-    //   });
-    // }
-  
-    // setUbication(timeStart) {
-    //   this.set((self) => {
-    //     self.timeStart = timeStart;
-    //   });
-    // }
-  
-    // setAuthor(timeEnd) {
-    //   this.set((self) => {
-    //     self.timeEnd = timeEnd;
-    //   });
-    // }
-  
-    // setLink(link) {
-    //   this.set((self) => {
-    //     self.link = link;
-    //   });
-    // }
-  
   }
   
