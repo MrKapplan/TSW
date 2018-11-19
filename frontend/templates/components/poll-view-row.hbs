@@ -1,13 +1,47 @@
 
-    {{#each assignations.selectedAssignation as |assignation|}}  
-        {{#ifIn id gaps}}
+
+
+
+
+
+
+
+
+
+<tr id="gap-item-{{id}}">
+     <td>
+        <div id="gap-date-item-{{id}}" class="ytitle"> </div>
+        <div id="gap-time-item-{{id}}" class="ysubtitle">{{timeStart}} - {{timeEnd}} </div>
+    </td>
+
+    {{#each assignations.selectedAssignation as |assignation|}}
+        {{#ifIn ../id gaps}}
             <td><label class="checkbox">
                 <input type="checkbox" onclick="return false;" checked>
                 <span class="success"></span>
             </label></td>
         {{else}}
             <td><label class="checkbox">
-                <input type="checkbox" onclick="return false;">
+                {{gap.id}}<input type="checkbox" onclick="return false;">
                 </label></td>
         {{/ifIn}}  
     {{/each}}
+</tr>
+
+
+
+
+{{!-- <td id="gap-item-{{id}}">
+    {{#each assignations.selectedAssignation as |assignation|}}
+        {{#ifIn ../id gaps}}
+            <label class="checkbox">
+                <input type="checkbox" onclick="return false;" checked>
+                <span class="success"></span>
+            </label>
+        {{else}}
+            <label class="checkbox">
+                <input type="checkbox" onclick="return false;">
+                </label>
+        {{/ifIn}}  
+    {{/each}}
+</td> --}}
