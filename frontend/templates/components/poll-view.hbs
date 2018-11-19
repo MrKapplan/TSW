@@ -47,25 +47,13 @@
                             </thead>
                              <tbody>
                                 {{#each gaps.selectedGap as |gap|}}
-                                    <tr id="gap-item-{{gap.id}}">
-                                        <td>
-                                            <div id="gap-date-item-{{gap.id}}" class="ytitle"> </div>
-                                            <div id="gap-time-item-{{gap.id}}" class="ysubtitle">{{gap.[timeStart]}} - {{gap.[timeEnd]}} </div>
-                                        </td>
-                                        {{#each ../assignations.selectedAssignation as |assignation|}}  
-                                                {{#ifIn gap.id gaps}}
-                                                    <td><label class="checkbox">
-                                                    <input type="checkbox" onclick="return false;" checked>
-                                                    <span class="success"></span>
-                                                    </label></td>
-                                                {{else}}
-                                                    <td><label class="checkbox">
-                                                    <input type="checkbox" onclick="return false;">
-                                                    </label></td>
-                                                {{/ifIn}}  
-                                        {{/each}}
-                                    </tr>
-                                   {{/each}}   
+                                    <td>
+                                        <div id="gap-date-item-{{gap.id}}" class="ytitle"> </div>
+                                        <div id="gap-time-item-{{gap.id}}" class="ysubtitle">{{gap.timeStart}} - {{gap.timeEnd}} </div>
+                                    </td>
+                                    <tr fronty-component="PollViewRowComponent" key="{{gap.id}}" id="{{gap.id}}" model="gaps.selectedGap[{{@index}}]"><tr>
+                                   {{/each}}
+                                         
                             </tbody> 
                         </table>
                     {{/if_max}}

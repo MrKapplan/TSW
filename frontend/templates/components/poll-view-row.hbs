@@ -1,0 +1,13 @@
+
+    {{#each assignations.selectedAssignation as |assignation|}}  
+        {{#ifIn id gaps}}
+            <td><label class="checkbox">
+                <input type="checkbox" onclick="return false;" checked>
+                <span class="success"></span>
+            </label></td>
+        {{else}}
+            <td><label class="checkbox">
+                <input type="checkbox" onclick="return false;">
+                </label></td>
+        {{/ifIn}}  
+    {{/each}}

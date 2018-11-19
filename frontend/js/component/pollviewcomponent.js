@@ -40,18 +40,10 @@ class PollViewComponent extends Fronty.ModelComponent {
           var d = new Date(gap.date);
           $('#gap-date-item-'.concat(gap.id)).html(d.toString().substr(0,3).toUpperCase().concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
     }); 
-
   }
 
 
-  onStart() {
-    var selectedLink = this.router.getRouteQueryParam('link');
-    this.loadPoll(selectedLink);
-    this.loadGapsPoll(selectedLink);
-    this.loadAssignationsPoll(selectedLink);
-  }
 
-  
   loadPoll(pollLink) {
     if (pollLink != null) {
       this.pollsService.findPoll(pollLink)
@@ -66,7 +58,9 @@ class PollViewComponent extends Fronty.ModelComponent {
     if (pollLink != null) {
       this.gapsService.findGapsPoll(pollLink)
         .then((gaps) => {
-          this.gapsModel.setSelectedGap(gaps);
+          
+          this.gapsModel.setSelectedGap(gaps.map((gap) => new GapModel(gap.id, gap.date, gap.timeStart, gap.timeEnd, gap.poll_id)));
+          console.log(gaps);
         });
 
     }
@@ -82,4 +76,40 @@ class PollViewComponent extends Fronty.ModelComponent {
     }
   }
 
+
+  onStart() {
+    var selectedLink = this.router.getRouteQueryParam('link');
+    this.loadPoll(selectedLink);
+    this.loadGapsPoll(selectedLink);
+    this.loadAssignationsPoll(selectedLink);
+  }
+
+    // Override
+    createChildModelComponent(className, element, id, modelItem) {
+      return new PollViewRowComponent(modelItem, this.assignationsModel, this.userModel, this.router, this);
+    }
 }
+
+
+class PollViewRowComponent extends Fronty.ModelComponent {
+  constructor(gapsModel, assignationsModel, userModel, router, pollViewComponent) {
+    super(Handlebars.templates.pollviewrow, gapsModel);
+
+    // this.pollsModel = pollsModel; // posts
+    this.userModel = userModel; // global
+    this.addModel('user', userModel);
+
+    // this.gapsModel = gapsModel;
+    // this.addModel('gaps', gapsModel)
+
+    this.assignationsModel = assignationsModel;
+    this.addModel('assignations', assignationsModel)
+
+    this.router = router;
+
+  }
+
+}
+
+
+
