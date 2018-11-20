@@ -38,8 +38,8 @@ class PollViewComponent extends Fronty.ModelComponent {
   
     $.each(this.gapsModel.selectedGap, function(index, gap) {
           var d = new Date(gap.date);
-          $('#gap-date-item-'.concat(gap.id)).html(d.toString().substr(0,3).toUpperCase().concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
-    }); 
+          $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(d.toString().substr(0,3).toUpperCase()).concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
+         }); 
   }
 
 
@@ -85,22 +85,17 @@ class PollViewComponent extends Fronty.ModelComponent {
 
     // Override
     createChildModelComponent(className, element, id, modelItem) {
-      return new PollViewRowComponent(modelItem, this.assignationsModel, this.userModel, this.router, this);
+      return new PollViewRowComponent(modelItem, this.assignationsModel, this);
     }
 }
 
 
 class PollViewRowComponent extends Fronty.ModelComponent {
-  constructor(gapsModel, assignationsModel, userModel, router, pollViewComponent) {
+  constructor(gapsModel, assignationsModel, pollViewComponent) {
     super(Handlebars.templates.pollviewrow, gapsModel);
-
-    this.userModel = userModel; // global
-    this.addModel('user', userModel);
     
     this.assignationsModel = assignationsModel;
     this.addModel('assignations', assignationsModel)
-
-    this.router = router;
 
   }
 
