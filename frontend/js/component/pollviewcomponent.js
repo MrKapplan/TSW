@@ -39,7 +39,13 @@ class PollViewComponent extends Fronty.ModelComponent {
     $.each(this.gapsModel.selectedGap, function(index, gap) {
           var d = new Date(gap.date);
           $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(d.toString().substr(0,3).toUpperCase()).concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
-         }); 
+    }); 
+
+         var table = document.getElementById('dataTable');
+         if(table !== null){
+           this.checkboxes(table);
+         }
+         
   }
 
 
@@ -59,7 +65,6 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.gapsService.findGapsPoll(pollLink)
         .then((gaps) => {
           this.gapsModel.setSelectedGap(gaps.map((gap) => new GapModel(gap.id, gap.date, gap.timeStart, gap.timeEnd, gap.poll_id)));
-          console.log(gaps);
         });
 
     }
@@ -83,10 +88,76 @@ class PollViewComponent extends Fronty.ModelComponent {
     this.loadAssignationsPoll(selectedLink);
   }
 
-    // Override
-    createChildModelComponent(className, element, id, modelItem) {
-      return new PollViewRowComponent(modelItem, this.assignationsModel, this);
+  // Override
+  createChildModelComponent(className, element, id, modelItem) {
+    return new PollViewRowComponent(modelItem, this.assignationsModel, this);
+  }
+
+
+
+  removeCheckboxSuccess() {
+    var filaSuccess = document.getElementsByClassName("table-success"); 
+    for (var i = 0; i < filaSuccess.length; i++) {
+        document.getElementById(filaSuccess[i].id).setAttribute("class",""); 
     }
+  }
+
+  removeCheckboxWarning() {
+    var filaWarning = document.getElementsByClassName("table-warning"); 
+    for (var i = 0; i < filaWarning.length; i++) {
+        document.getElementById(filaWarning[i].id).setAttribute("class","");
+    }
+  }
+
+  checkboxes(table){
+    var rowCount = table.rows.length - 1;
+    var inputElems = document.getElementsByTagName("input");
+    var numInputsForRow = (inputElems.length - 1) / rowCount;
+    var count = 0, max = 0, maxAbs = 0, trSelected = -1, trSelectedArray = new Array();
+  
+      
+    for (var j = 1; j < inputElems.length; j++) {
+      if(inputElems[j].type === "checkbox" && inputElems[j].checked) {
+        count++;
+      }
+      if (j % numInputsForRow == 0) {
+        if (count > maxAbs) {
+          max = count;
+          maxAbs = count;
+          trSelected = inputElems[j].parentNode.parentNode.parentNode.id;
+        } else if (count == max) {
+            max = -1;
+        }
+          count = 0;
+      }
+    }
+  
+    if (trSelected != -1 && max != -1) {
+      this.removeCheckboxWarning();
+      document.getElementById(trSelected).setAttribute("class", "table-success");
+    }
+      
+    for (var j = 1; j < inputElems.length; j++) { 
+      if (inputElems[j].type === "checkbox" && inputElems[j].checked) {
+        count++;
+      }
+      if (j % numInputsForRow == 0) {  
+        if (count == maxAbs) {
+          trSelectedArray.push(inputElems[j].parentNode.parentNode.parentNode.id);
+        } 
+        count = 0;
+      }
+    }
+  
+    if(trSelectedArray.length > 1){
+      this.removeCheckboxSuccess();
+      this.removeCheckboxWarning();
+      for(var y=0; y<trSelectedArray.length; y++){
+        document.getElementById(trSelectedArray[y]).setAttribute("class", "table-warning");
+      }
+    } 
+  }
+
 }
 
 
