@@ -34,14 +34,14 @@ class MainComponent extends Fronty.RouterComponent {
         component: new GapEditComponent(pollsModel, gapsModel, userModel, this),
         title: 'Edit Gaps'
       },
-      'add-assignation': {
-        component: new AssignationAddComponent(pollsModel, gapsModel, userModel, this),
-        title: 'Add Assignation'
-      },
-      'edit-assignation': {
-        component: new AssignationEditComponent(pollsModel, gapsModel, userModel, this),
-        title: 'Edit Assignation'
-      },
+      // 'add-assignation': {
+      //   component: new AssignationAddComponent(pollsModel, gapsModel, userModel, this),
+      //   title: 'Add Assignation'
+      // },
+      // 'edit-assignation': {
+      //   component: new AssignationEditComponent(pollsModel, gapsModel, userModel, this),
+      //   title: 'Edit Assignation'
+      // },
       login: {
         component: new LoginComponent(userModel, this),
         title: 'Login'

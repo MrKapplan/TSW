@@ -8,7 +8,7 @@
     {{#each assignations.selectedAssignation as |assignation|}}
         {{#ifIn ../id gaps}}
             <td><label class="checkbox">
-                <input type="checkbox" onclick="return false;" checked>
+                <input type="checkbox" onclick="return false;" checked disabled>
                 <span class="success"></span>
             </label></td>
         {{else}}
