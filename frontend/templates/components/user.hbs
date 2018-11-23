@@ -1,6 +1,5 @@
 
   {{#if isLogged}}
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -12,20 +11,25 @@
         </ul>
         <div class="nav-item dropdown">
           <a id="navbarDropdownAccount" class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{i18n 'My Account'}}</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownAccount">
+          <div class="dropdown-menu">
             <a class="dropdown-item" href="">{{i18n 'My Profile'}}</a>
             <div class="dropdown-divider"></div>
               <a class="dropdown-item" id="logout" href="#">{{i18n 'Logout'}}</a>
             </div>
           </div>
         </div>
-      
+
+        {{#if loginError}}
+          <div class="alert alert-danger text-center" id="success-success" role="alert">
+            {{#i18n}}{{loginError}}{{/i18n}}<br>
+          </div>
+        {{/if}}
       
   {{else}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#login">{{i18n 'Login'}}</a>
+              <a class="nav-link" id="login" href="#">{{i18n 'Login'}}</a>
             </li>
           </ul>
         </div>

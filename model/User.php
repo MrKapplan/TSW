@@ -39,11 +39,11 @@ class User {
 			$errors["username"] = "Username must be at least 5 characters length";
 
 		}
-		if (strlen($this->passwd) < 5) {
+		else if (strlen($this->passwd) < 5) {
 			$errors["passwd"] = "Password must be at least 5 characters length";
 		}
 
-		if($this->passwd !== $confirmPasswd){
+		else if($this->passwd !== $confirmPasswd){
 			$errors["ConfirmPasswd"] = "The passwords do not match";
 		}
 		if (sizeof($errors)>0){

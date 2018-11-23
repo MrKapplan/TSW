@@ -73,7 +73,7 @@ class MainComponent extends Fronty.RouterComponent {
       this.routerConfig[this.getRouterModel().currentPage].private === true &&
       !this.userModel.isLogged)
       {
-        //alert("is private");
+        alert("is private");
         var redirectOnLogin = window.location.hash.substring(1);
         this.goToPage('login?redirectUrl='+encodeURI(redirectOnLogin));
         
@@ -104,6 +104,12 @@ class MainComponent extends Fronty.RouterComponent {
       this.goToPage("login");
       
     });
+
+    userbar.addEventListener('click', '#login', () => {
+      userModel.set(() => {
+        userModel.registerMode = false;
+      });
+  });
 
     // do relogin
     userService.loginWithSessionData()

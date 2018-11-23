@@ -1,9 +1,11 @@
 class LoginComponent extends Fronty.ModelComponent {
   constructor(userModel, router) {
     super(Handlebars.templates.login, userModel);
+   
     this.userModel = userModel;
     this.userService = new UserService();
     this.router = router;
+
    // alert(this.router.getRouteQueryParam('redirectUrl'))
     this.addEventListener('click', '#loginbutton', (event) => {
       this.userService.login($('#username').val(), $('#passwd').val())
@@ -31,8 +33,10 @@ class LoginComponent extends Fronty.ModelComponent {
 
     this.addEventListener('click', '#registerbutton', () => {
       this.userService.register({
-          username: $('#registerusername').val(),
-          password: $('#registerpassword').val()
+          username: $('#username').val(),
+          password: $('#passwd').val(),
+          confirmPassword: $('#confirmPasswd').val()
+
         })
         .then(() => {
           alert(I18n.translate('User registered! Please login'));
@@ -43,13 +47,15 @@ class LoginComponent extends Fronty.ModelComponent {
         })
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {
-            this.userModel.set(() => {
-              this.userModel.registerErrors = xhr.responseJSON;
+            this.userModel.set((model) => {
+              //console.log( xhr.responseJSON);
+              model.loginError = xhr.responseJSON;
             });
           } else {
-            alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
+            alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
           }
         });
     });
   }
 }
+

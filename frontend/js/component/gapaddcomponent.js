@@ -1,6 +1,7 @@
 class GapAddComponent extends Fronty.ModelComponent {
     constructor(pollsModel, gapsModel, userModel, router) {
       super(Handlebars.templates.gapadd, gapsModel);
+      
       this.gapsModel = gapsModel; 
       this.pollsModel = pollsModel;
       this.addModel('poll', pollsModel);
@@ -26,7 +27,7 @@ class GapAddComponent extends Fronty.ModelComponent {
                 this.gapsModel.errors = xhr.responseJSON;
               });
             } else {
-              alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
+              alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
             }
           });
       });

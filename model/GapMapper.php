@@ -116,7 +116,6 @@ class GapMapper {
 			}
 	
 			else if (!preg_match("/^([01]?[0-9]|2[0-3])\\:[0-5][0-9]$/", $data[$i]->start)) {
-				var_dump($data[$i]->start);
 				array_push($errors,"The time start format is incorrect");
 			} 
 
@@ -125,7 +124,6 @@ class GapMapper {
 			}
 
 			else if (!preg_match("/^([01]?[0-9]|2[0-3])\\:[0-5][0-9]$/", $data[$i]->end)) {
-				var_dump($data[$i]->start);
 				array_push($errors,"The time end format is incorrect");
 			} 
 

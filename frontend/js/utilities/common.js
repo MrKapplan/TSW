@@ -107,21 +107,6 @@ function removeButton(idButton) {
 }
 
 
-function validateCheckboxes() {
-
-    var checkboxChecked = [];
-    var checkbox = document.getElementsByName('assignation');
-
-    for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].checked) {
-            checkboxChecked.push({"gap":checkbox[i].value});
-        }
-    }
-    document.getElementById("gaps").value = JSON.stringify(checkboxChecked);
-
-}
-
-
 
 function valueData() {
 

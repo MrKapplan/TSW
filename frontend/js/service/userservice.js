@@ -52,6 +52,7 @@ class UserService {
     });
   }
 
+
   logout() {
     window.sessionStorage.removeItem('login');
     window.sessionStorage.removeItem('pass');
@@ -60,12 +61,13 @@ class UserService {
     });
   }
 
-  // register(user) {
-  //   return $.ajax({
-  //     url: AppConfig.backendServer+'/rest/user',
-  //     method: 'POST',
-  //     data: JSON.stringify(user),
-  //     contentType: 'application/json'
-  //   });
-  // }
+  register(user) {
+
+    return $.ajax({
+      url: AppConfig.backendServer+'/meetPoll_TSW/rest/user',
+      method: 'POST',
+      data: JSON.stringify(user),
+      contentType: 'application/json'
+    });
+  }
 }
