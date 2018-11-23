@@ -4,11 +4,15 @@ class LoginComponent extends Fronty.ModelComponent {
     this.userModel = userModel;
     this.userService = new UserService();
     this.router = router;
-
+   // alert(this.router.getRouteQueryParam('redirectUrl'))
     this.addEventListener('click', '#loginbutton', (event) => {
       this.userService.login($('#username').val(), $('#passwd').val())
         .then(() => {
-          this.router.goToPage('polls');
+          var redirectUrl = this.router.getRouteQueryParam('redirectUrl');
+          if (redirectUrl === undefined || redirectUrl === null) {
+            redirectUrl = 'polls';
+          }
+          this.router.goToPage(redirectUrl);
           this.userModel.setLoggeduser($('#username').val());
         })
         .catch((error) => {

@@ -43,12 +43,12 @@ class PollRowComponent extends Fronty.ModelComponent {
     this.router = router;
 
 
-    this.addEventListener('click', '.editPoll-button', (event) => {
+    this.addEventListener('click', '.editPoll', (event) => {
       var pollLink = event.target.getAttribute('item');
       this.router.goToPage('edit-poll?link=' + pollLink);
     });
 
-    this.addEventListener('click', '.editGaps-button', (event) => {
+    this.addEventListener('click', '.editGaps', (event) => {
       var pollLink = event.target.getAttribute('item');
       this.router.goToPage('edit-gaps?link=' + pollLink);
     });

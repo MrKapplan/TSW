@@ -46,7 +46,9 @@ Promise.all([
     loadTextFile('templates/components/gap-edit.hbs').then((source) =>
       Handlebars.templates.gapedit = Handlebars.compile(source)),
     loadTextFile('templates/components/poll-view-row.hbs').then((source) =>
-      Handlebars.templates.pollviewrow = Handlebars.compile(source))
+      Handlebars.templates.pollviewrow = Handlebars.compile(source)),
+    loadTextFile('templates/components/assignation-add.hbs').then((source) =>
+      Handlebars.templates.assignationadd = Handlebars.compile(source))
   ])
   .then(() => {
     $(() => {

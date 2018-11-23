@@ -4,67 +4,104 @@ class MainComponent extends Fronty.RouterComponent {
 
     // models instantiation
     // we can instantiate models at any place
-    var userModel = new UserModel();
+    this.userModel = new UserModel();
     var pollsModel = new PollsModel();
     var gapsModel = new GapsModel();
     var assignationsModel = new AssignationsModel();
-
-    super.setRouterConfig({
+    this.routerConfig = 
+    {
+      
       polls: {
-        component: new PollsComponent(pollsModel, userModel, this),
-        title: 'Polls'
+        component: new PollsComponent(pollsModel, this.userModel, this),
+        title: 'Polls',
+        private: true
       },
       'view-poll': {
-        component: new PollViewComponent(pollsModel, gapsModel, assignationsModel, userModel, this),
-        title: 'Poll'
+        component: new PollViewComponent(pollsModel, gapsModel, assignationsModel, this.userModel, this),
+        title: 'Poll',
+        private: true
       },
       'edit-poll': {
-        component: new PollEditComponent(pollsModel, userModel, this),
-        title: 'Edit Poll'
+        component: new PollEditComponent(pollsModel, this.userModel, this),
+        title: 'Edit Poll',
+        private: true
       },
       'add-poll': {
-        component: new PollAddComponent(pollsModel, userModel, this),
-        title: 'Add Poll'
+        component: new PollAddComponent(pollsModel, this.userModel, this),
+        title: 'Add Poll',
+        private: true
       },
       'add-gaps': {
-        component: new GapAddComponent(pollsModel, gapsModel, userModel, this),
-        title: 'Add Gaps'
+        component: new GapAddComponent(pollsModel, gapsModel, this.userModel, this),
+        title: 'Add Gaps',
+        private: true
       },
       'edit-gaps': {
-        component: new GapEditComponent(pollsModel, gapsModel, userModel, this),
-        title: 'Edit Gaps'
+        component: new GapEditComponent(pollsModel, gapsModel, this.userModel, this),
+        title: 'Edit Gaps',
+        private: true
       },
-      // 'add-assignation': {
-      //   component: new AssignationAddComponent(pollsModel, gapsModel, userModel, this),
-      //   title: 'Add Assignation'
-      // },
-      // 'edit-assignation': {
-      //   component: new AssignationEditComponent(pollsModel, gapsModel, userModel, this),
-      //   title: 'Edit Assignation'
-      // },
+      'add-assignation': {
+        component: new AssignationAddComponent(pollsModel, gapsModel, assignationsModel, this.userModel, this),
+        title: 'Add Assignation',
+        private: true
+      },
       login: {
-        component: new LoginComponent(userModel, this),
+        component: new LoginComponent(this.userModel, this),
         title: 'Login'
       },
       defaultRoute: 'login'
-    });
+    };
+
+    this.setRouterConfig(this.routerConfig);
+
     
     Handlebars.registerHelper('currentPage', () => {
           return super.getCurrentPage();
     });
 
     var userService = new UserService();
-    this.addChildComponent(this._createUserBarComponent(userModel, userService));
+    this.addChildComponent(this._createUserBarComponent(this.userModel, userService));
     this.addChildComponent(this._createLanguageComponent());
 
+   
   }
 
+  onStart() {
+    if(
+      this.routerConfig[this.getRouterModel().currentPage].private !== undefined && 
+      this.routerConfig[this.getRouterModel().currentPage].private === true &&
+      !this.userModel.isLogged)
+      {
+        //alert("is private");
+        var redirectOnLogin = window.location.hash.substring(1);
+        this.goToPage('login?redirectUrl='+encodeURI(redirectOnLogin));
+        
+      }
+
+    this.getRouterModel().addObserver( () => {
+      if(
+      this.routerConfig[this.getRouterModel().currentPage].private !== undefined && 
+      this.routerConfig[this.getRouterModel().currentPage].private === true &&
+      !this.userModel.isLogged)
+      {
+        var redirectOnLogin = window.location.hash.substring(1);
+        this.goToPage('login?redirectUrl='+encodeURI(redirectOnLogin));
+        
+      }
+    });
+    super.onStart();
+  } 
+    
+   
+  
   _createUserBarComponent(userModel, userService) {
     var userbar = new Fronty.ModelComponent(Handlebars.templates.user, userModel, 'userbar');
 
     userbar.addEventListener('click', '#logout', () => {
       userModel.logout();
       userService.logout();
+      this.goToPage("login");
       
     });
 

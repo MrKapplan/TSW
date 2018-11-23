@@ -48,28 +48,13 @@
                                     <tr fronty-component="PollViewRowComponent" key="{{gap.id}}" id="gap-item-{{gap.id}}" model="gaps.selectedGap[{{@index}}]"></tr>
                                 {{/each}}
                             </tbody> 
-
-                             {{!-- <tbody>
-                                {{#each gaps.selectedGap as |gap|}}
-                                <tr id="gap-{{gap.id}}">
-                                    <td>
-                                        <div id="gap-date-item-{{gap.id}}" class="ytitle"> </div>
-                                        <div id="gap-time-item-{{gap.id}}" class="ysubtitle">{{gap.timeStart}} - {{gap.timeEnd}} </div>
-                                    </td>
-
-                                    <td fronty-component="PollViewRowComponent" key="{{gap.id}}" id="gap-item-{{gap.id}}" model="gaps.selectedGap[{{@index}}]"></td>
-                                    
-                                </tr> 
-                                   {{/each}}    
-                            </tbody>  --}}
-
                         </table>
                     {{/if_max}}
                 <a href="#polls" class="backButton">{{i18n 'Back'}}</a>
                 {{#if assignations.selectedParticipation }}
-                    <button id="modifyParticipation-button" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Modify Participation"}}</button>
+                    <button id="modifyAssignation" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Modify"}}</button>
                 {{else}}
-                    <button id="addParticipation-button" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Take part"}}</button>
+                    <button id="addAssignation" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Take part"}}</button>
                 {{/if}}
                 
             </div>

@@ -2,11 +2,11 @@ class GapEditComponent extends Fronty.ModelComponent {
     constructor(pollsModel,gapsModel, userModel, router) {
       super(Handlebars.templates.gapedit, gapsModel);
 
-      this.gapsModel = gapsModel; // gaps
+      this.gapsModel = gapsModel;
 
       this.pollsModel = pollsModel;
       this.addModel('polls', pollsModel)
-      this.userModel = userModel; // global
+      this.userModel = userModel;
       this.addModel('user', userModel);
 
       this.router = router;
@@ -14,6 +14,15 @@ class GapEditComponent extends Fronty.ModelComponent {
       this.gapsService = new GapsService();
 
   
+
+
+      this.addEventListener('click', '#addrow-button', () => {
+
+
+      });
+
+
+
       this.addEventListener('click', '#editGap', () => {
         var gaps = $('#gaps').val();
         var link = $('#poll-link').val();

@@ -2,17 +2,13 @@ class PollViewComponent extends Fronty.ModelComponent {
   constructor(pollsModel, gapsModel, assignationsModel, userModel, router) {
     super(Handlebars.templates.pollview, pollsModel);
 
-    this.pollsModel = pollsModel; // posts
-
-    this.userModel = userModel; // global
+    this.pollsModel = pollsModel; 
+    this.userModel = userModel; 
     this.addModel('user', userModel);
-
     this.gapsModel = gapsModel;
     this.addModel('gaps', gapsModel)
-
     this.assignationsModel = assignationsModel;
     this.addModel('assignations', assignationsModel)
-
     this.router = router;
 
     this.pollsService = new PollsService();
@@ -20,17 +16,42 @@ class PollViewComponent extends Fronty.ModelComponent {
     this.assignationsService = new AssignationsService();
 
 
-    this.addEventListener('click', '#addParticipation-button', (event) => {
+    this.addEventListener('click', '#addAssignation', (event) => {
       var pollLink = event.target.getAttribute('item');
       this.router.goToPage('add-assignation?link=' + pollLink);
     });
 
-    this.addEventListener('click', '#modifyParticipation-button', (event) => {
-      var pollLink = event.target.getAttribute('item');
-      this.router.goToPage('modify-assignation?link=' + pollLink);
-    });
 
-  }
+
+    this.addEventListener('click', '#modifyAssignation', (event) => {
+      var pollLink = this.router.getRouteQueryParam('link');
+      var checkboxChecked = [];
+      var checkbox = document.getElementsByName('assignation');
+  
+      for (var i = 0; i < checkbox.length; i++) {
+          if (checkbox[i].checked) {
+              checkboxChecked.push({"gap":checkbox[i].value});
+          }
+      }
+     
+      this.assignationsService.updateAssignation(checkboxChecked, pollLink)
+      .then(() => {
+        this.assignationsModel.set((model) => {
+          model.errors = []
+        });
+        this.router.goToPage('view-poll?link='.concat(pollLink));
+      })
+      .fail((xhr, errorThrown, statusText) => {
+        if (xhr.status == 400) {
+          this.assignationsModel.set((model) => {
+            model.errors = xhr.responseJSON;
+          });
+        } else {
+          alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
+        }
+      });
+    });
+}
 
 
 
@@ -75,6 +96,7 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.findAssignationsPoll(pollLink)
         .then((assignations) => {
           this.assignationsModel.setSelectedAssignation(assignations);
+          //console.log(assignations);
         });
 
     }
@@ -90,7 +112,7 @@ class PollViewComponent extends Fronty.ModelComponent {
 
   // Override
   createChildModelComponent(className, element, id, modelItem) {
-    return new PollViewRowComponent(modelItem, this.assignationsModel, this);
+    return new PollViewRowComponent(modelItem, this.assignationsModel, this.userModel, this);
   }
 
 
@@ -162,11 +184,14 @@ class PollViewComponent extends Fronty.ModelComponent {
 
 
 class PollViewRowComponent extends Fronty.ModelComponent {
-  constructor(gapsModel, assignationsModel, pollViewComponent) {
+  constructor(gapsModel, assignationsModel, userModel, pollViewComponent) {
     super(Handlebars.templates.pollviewrow, gapsModel);
     
     this.assignationsModel = assignationsModel;
     this.addModel('assignations', assignationsModel)
+
+    this.userModel = userModel;
+    this.addModel('user', userModel)
 
   }
 

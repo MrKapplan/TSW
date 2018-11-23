@@ -8,23 +8,23 @@ class AssignationsService {
     }
   
 
-    // updatePoll(poll) {
-    //   return $.ajax({
-    //     url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll/' + poll.link,
-    //     method: 'PUT',
-    //     data: JSON.stringify(poll),
-    //     contentType: 'application/json'
-    //   });
-    // }
+    updateAssignation(assignations, pollLink) {
+      return $.ajax({
+        url: AppConfig.backendServer+'/meetPoll_TSW/rest/assignation/' + pollLink,
+        method: 'PUT',
+        data: JSON.stringify(assignations),
+        contentType: 'application/json'
+      });
+    }
   
-    // addPoll(poll) {
-    //   return $.ajax({
-    //     url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll',
-    //     method: 'POST',
-    //     data: JSON.stringify(poll),
-    //     contentType: 'application/json'
-    //   });
-    // }
+    addAssignation(assignations, pollLink) {
+      return $.ajax({
+        url: AppConfig.backendServer+'/meetPoll_TSW/rest/assignation/'+ pollLink,
+        method: 'POST',
+        data: JSON.stringify(assignations),
+        contentType: 'application/json'
+      });
+    }
   
   
   }

@@ -1,13 +1,14 @@
 class GapAddComponent extends Fronty.ModelComponent {
     constructor(pollsModel, gapsModel, userModel, router) {
       super(Handlebars.templates.gapadd, gapsModel);
-      this.gapsModel = gapsModel; // gaps
-
-      this.pollsModel = pollsModel; // global
+      this.gapsModel = gapsModel; 
+      this.pollsModel = pollsModel;
       this.addModel('poll', pollsModel);
-      this.userModel = userModel; // global
+      this.userModel = userModel;
       this.addModel('user', userModel);
+
       this.router = router;
+
       this.gapsService = new GapsService();
       this.pollsService = new PollsService();
   

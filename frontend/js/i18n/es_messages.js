@@ -36,7 +36,7 @@ I18n.translations = {
 	"SUN" : "DOM",
 	"You" : "Tú",
 	"There are not participations! Be the first to do it!" : "¡No hay participaciones! ¡Sé el primero en participar!",
-	"Modify Participation" : "Modificar Participación",
+	"Modify" : "Modificar",
 	"Take part" : "Participar",
 	"Add Poll" : "Crear Encuesta",
 	"Edit Polls" :"Editar Encuesta",

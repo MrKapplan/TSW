@@ -26,28 +26,35 @@
                             </thead>
                              <tbody>
                                 {{#each gaps.selectedGap as |gap|}}
+
                                     <tr id="gap-item-{{gap.id}}">
                                         <td>
                                             <div id="gap-date-item-{{gap.id}}" class="ytitle"> </div>
                                             <div id="gap-time-item-{{gap.id}}" class="ysubtitle">{{gap.[timeStart]}} - {{gap.[timeEnd]}} </div>
                                         </td>
 
-                                        <td><label class="checkbox">
-                                            <input type="checkbox" />
-                                            <span class="success"></span>
-                                        </label></td>
+                                        <td>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="assignation" value="{{gap.id}}"/>
+                                                <span class="success"></span>
+                                            </label>
+                                        </td>
                                         
                                         {{#each ../assignations.selectedAssignation as |assignation|}}  
-                                                {{#ifIn gap.id gaps}}
-                                                    <td><label class="checkbox">
-                                                        <input type="checkbox" class="success" checked onclick="return false;" />
+                                            {{#ifIn ../id gaps}}
+                                                <td>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" checked disabled>
                                                         <span class="success"></span>
-                                                    </label></td>
-                                                {{else}}
-                                                    <td><label class="checkbox">
-                                                        <input type="checkbox"  onclick="return false;"/>
-                                                    </label></td>
-                                                {{/ifIn}}  
+                                                    </label>
+                                                </td>
+                                            {{else}}
+                                                <td>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox">
+                                                    </label>
+                                                </td>
+                                            {{/ifIn}}
                                         {{/each}}
                                     </tr>
                                    {{/each}}   
@@ -55,11 +62,8 @@
                         </table>
                 <a href="#" class="backButton">{{i18n 'Back'}}</a>
             
-                {{#if assignations.selectedParticipation }}
-                    <button id="modifyParticipation-button" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Modify Participation"}}</button>
-                {{else}}
-                    <button id="addParticipation-button" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Take part"}}</button>
-                {{/if}}
+                <button id="addAssignation" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Take part"}}</button>
+
                 
             </div>
         </div>
