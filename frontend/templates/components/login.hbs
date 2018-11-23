@@ -2,6 +2,12 @@
     {{#if isLogged}}
         {{i18n 'Your are logged. Logout first'}}
     {{else}}
+        {{#if message}}
+            <div class="alert alert-success text-center" id="success-alert" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{message}}
+            </div>
+        {{/if}}
         <div class="container">
             <div class="row center-row">
                 <div class="col-lg-6 center-block-login">
@@ -34,9 +40,9 @@
                                     <input type="password" id="confirmPasswd" placeholder="{{i18n 'Confirm the password'}}">
                                     <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                                 </div>
-                                {{#if loginError.confirmPasswd}}
+                                {{#if loginError.ConfirmPasswd}}
                                     <div class="alert alert-danger text-center" id="success-danger" role="alert">
-                                        {{#i18n}}{{loginError.confirmPasswd}}{{/i18n}}<br>
+                                        {{#i18n}}{{loginError.ConfirmPasswd}}{{/i18n}}<br>
                                     </div>
                                 {{/if}}
                                 <button type="submit" id="registerbutton" class="loginButton btn btn-darkLogin">{{i18n 'Register'}}</button>

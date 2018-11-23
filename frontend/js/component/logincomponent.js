@@ -39,23 +39,33 @@ class LoginComponent extends Fronty.ModelComponent {
 
         })
         .then(() => {
-          alert(I18n.translate('User registered! Please login'));
+         
           this.userModel.set((model) => {
-            model.registerErrors = {};
+            //model.registerErrors = {};
+            model.message = I18n.translate('User registered! Please login');
             model.registerMode = false;
           });
         })
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {
             this.userModel.set((model) => {
-              //console.log( xhr.responseJSON);
               model.loginError = xhr.responseJSON;
+              console.log(model.loginError);
             });
           } else {
             alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
           }
         });
     });
+  }
+
+  afterRender(){
+    
+    setTimeout(function() {
+      $(".alert-success").alert('close');
+  }, 7000);
+
+
   }
 }
 

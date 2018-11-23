@@ -29,7 +29,7 @@ class GapEditComponent extends Fronty.ModelComponent {
 
         this.gapsService.editGaps(link, gaps)
           .then(() => {
-            this.router.goToPage('polls');
+            this.router.goToPage('view-poll?link='.concat(link));
           })
           .fail((xhr, errorThrown, statusText) => {
             if (xhr.status == 400) {

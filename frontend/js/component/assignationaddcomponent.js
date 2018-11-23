@@ -30,9 +30,9 @@ class AssignationAddComponent extends Fronty.ModelComponent {
        
         this.assignationsService.addAssignation(checkboxChecked, pollLink)
         .then(() => {
-          this.assignationsModel.set((model) => {
-            model.errors = []
-          });
+          // this.pollsModel.set((model) => {
+          //   model.message = I18n.translate('Your participation has been successfully registered.');
+          // });
           this.router.goToPage('view-poll?link='.concat(pollLink));
         })
         .fail((xhr, errorThrown, statusText) => {

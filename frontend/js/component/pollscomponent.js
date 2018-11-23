@@ -12,6 +12,15 @@ class PollsComponent extends Fronty.ModelComponent {
 
   }
 
+
+  afterRender() {
+
+    setTimeout(function() {
+      $(".alert").alert('close');
+    }, 5000);
+
+  }
+
   onStart() {
     this.updatePolls();
   }

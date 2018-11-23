@@ -26,7 +26,6 @@
                             </thead>
                              <tbody>
                                 {{#each gaps.selectedGap as |gap|}}
-
                                     <tr id="gap-item-{{gap.id}}">
                                         <td>
                                             <div id="gap-date-item-{{gap.id}}" class="ytitle"> </div>
@@ -61,10 +60,7 @@
                             </tbody> 
                         </table>
                 <a href="#" class="backButton">{{i18n 'Back'}}</a>
-            
                 <button id="addAssignation" item="{{selectedPoll.link}}" type="submit" class="btn btn-dark">{{i18n "Take part"}}</button>
-
-                
             </div>
         </div>
     </div>

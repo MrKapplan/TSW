@@ -15,7 +15,7 @@ class PollEditComponent extends Fronty.ModelComponent {
       this.pollsService.updatePoll(this.pollsModel.selectedPoll)
         .then(() => {
           this.pollsModel.set((model) => {
-            model.errors = []
+            model.addGap = I18n.translate('Poll ').concat(newPoll.title).concat(I18n.translate(' successfully updated.'));
           });
           this.router.goToPage('polls');
         })
@@ -25,7 +25,7 @@ class PollEditComponent extends Fronty.ModelComponent {
               model.errors = xhr.responseJSON;
             });
           } else {
-            alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
+            alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
           }
         });
 

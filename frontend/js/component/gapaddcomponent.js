@@ -18,13 +18,16 @@ class GapAddComponent extends Fronty.ModelComponent {
         var linkPoll = $('#poll').val();
         
         this.gapsService.addGaps(linkPoll, newGaps)
-          .then(() => {
-            this.router.goToPage('polls');
+          .then((xhr) => {
+            this.pollsModel.set((model) => {
+              model.addGaps = I18n.translate('Gaps successfully added.');
+            });
+            this.router.goToPage('view-poll?link='.concat(linkPoll));
           })
           .fail((xhr, errorThrown, statusText) => {
             if (xhr.status == 400) {
               this.gapsModel.set(() => {
-                this.gapsModel.errors = xhr.responseJSON;
+                this.gapsModel.errors =  I18n.translate(xhr.responseJSON);
               });
             } else {
               alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
@@ -36,6 +39,12 @@ class GapAddComponent extends Fronty.ModelComponent {
     
     afterRender() {
 
+
+      setTimeout(function() {
+            $(".alert-success").alert('close');
+        }, 7000);
+
+      
       $('#date-item-0').bootstrapMaterialDatePicker 
       ({
         format: 'DD/MM/YYYY',

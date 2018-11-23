@@ -15,8 +15,8 @@ class PollAddComponent extends Fronty.ModelComponent {
       newPoll.author = this.userModel.currentUser;
       this.pollsService.addPoll(newPoll)
         .then((xhr) => {
-          this.userModel.set((model) => {
-            model.loginError = xhr.responseJSON;
+          this.pollsModel.set((model) => {
+            model.addGap = I18n.translate('Poll ').concat(newPoll.title).concat(I18n.translate(' successfully added.'));
           });
           this.router.goToPage('add-gaps?poll='.concat(xhr.link));
         })

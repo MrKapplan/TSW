@@ -23,7 +23,7 @@ class PollViewComponent extends Fronty.ModelComponent {
 
 
 
-    this.addEventListener('click', '#modifyAssignation', (event) => {
+    this.addEventListener('click', '#modifyAssignation', () => {
       var pollLink = this.router.getRouteQueryParam('link');
       var checkboxChecked = [];
       var checkbox = document.getElementsByName('assignation');
@@ -37,7 +37,9 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.updateAssignation(checkboxChecked, pollLink)
       .then(() => {
         this.assignationsModel.set((model) => {
-          model.errors = []
+          //console.log(model.message);
+          model.modifyAssignation = I18n.translate('Your participation has been successfully edited');
+          console.log(this.assignationsModel);
         });
         this.router.goToPage('view-poll?link='.concat(pollLink));
       })
@@ -56,16 +58,21 @@ class PollViewComponent extends Fronty.ModelComponent {
 
 
   afterRender() {
+
+    setTimeout(function() {
+      $(".alert").alert('close');
+    }, 5000);
+
   
     $.each(this.gapsModel.selectedGap, function(index, gap) {
           var d = new Date(gap.date);
           $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(d.toString().substr(0,3).toUpperCase()).concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
     }); 
 
-         var table = document.getElementById('dataTable');
-         if(table !== null){
-           this.checkboxes(table);
-         }
+    var table = document.getElementById('dataTable');
+    if(table !== null){
+      this.checkboxes(table);
+    }
          
   }
 
