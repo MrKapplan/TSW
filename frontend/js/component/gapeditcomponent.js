@@ -17,7 +17,11 @@ class GapEditComponent extends Fronty.ModelComponent {
 
 
       this.addEventListener('click', '#addrow-button', () => {
-
+        this.gapsModel.set(() => {
+          this.gapsModel.emptyGap += 1;
+          this.gapsModel.emptyGaps.push({"gap":this.gapsModel.emptyGap});
+          console.log(this.gapsModel.emptyGaps);
+        });
 
       });
 
@@ -46,6 +50,7 @@ class GapEditComponent extends Fronty.ModelComponent {
 
     afterRender() {
   
+
       $.each(this.gapsModel.selectedGap, function(index, gap) {
 
           $('#date-item-'.concat(gap.id)).bootstrapMaterialDatePicker 
@@ -74,7 +79,40 @@ class GapEditComponent extends Fronty.ModelComponent {
             shortTime: false,
             format: 'HH:mm'
           });
-      }); 
+      });
+      
+
+      $.each(this.gapsModel.emptyGaps, function(index, gap) {
+
+        $('#date-item-'.concat(gap.gap)).bootstrapMaterialDatePicker 
+        ({
+          format: 'DD/MM/YYYY',
+          lang: 'es',
+          time: false,
+          weekStart: 1, 
+          nowButton : true,
+          switchOnClick : true,
+          minDate : new Date()
+        });
+
+
+        $('#timeStart-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
+        ({
+          date: false,
+          shortTime: false,
+          format: 'HH:mm'
+        });
+
+
+        $('#timeEnd-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
+        ({
+          date: false,
+          shortTime: false,
+          format: 'HH:mm'
+        });
+    }); 
+
+
 
     $.material.init()
     }
@@ -95,5 +133,29 @@ class GapEditComponent extends Fronty.ModelComponent {
 
         }
       }
+
+
+    createChildModelComponent(className, element, id, modelItem) {
+      console.log(modelItem);
+      return new GapRowComponent(modelItem, this.router, this);
+    }
+  }
+
+
+  class GapRowComponent extends Fronty.ModelComponent {
+    constructor(gapModel, router, gapEditComponent) {
+      //console.log(gapModel);
+      super(Handlebars.templates.gaprow, gapModel, null, null);
+      
+      this.gapEditComponent = gapEditComponent;
+      this.router = router;
+  
+      this.addEventListener('click', '.deleteRow', (event) => {
+        // var pollLink = event.target.getAttribute('item');
+        // this.router.goToPage('edit-poll?link=' + pollLink);
+      });
+  
+    }
+  
   }
   

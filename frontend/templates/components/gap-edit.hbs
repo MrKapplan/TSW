@@ -59,9 +59,9 @@
                             {{/each}} 
                         {{/if}}
 
-
-
-
+                        {{#each emptyGaps}}
+                            <tr fronty-component="GapRowComponent" key="{{gap}}" model="gaps[{{@index}}]" id="item-{{gap}}"></tr>
+                        {{/each}}
                         
                     </tbody>
                 </table>

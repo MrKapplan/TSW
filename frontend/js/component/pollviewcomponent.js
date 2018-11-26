@@ -112,13 +112,15 @@ class PollViewComponent extends Fronty.ModelComponent {
 
   onStart() {
     var selectedLink = this.router.getRouteQueryParam('link');
-    this.loadPoll(selectedLink);
-    this.loadGapsPoll(selectedLink);
-    this.loadAssignationsPoll(selectedLink);
+    if (this.userModel.isLogged) {
+      this.loadPoll(selectedLink);
+      this.loadGapsPoll(selectedLink);
+      this.loadAssignationsPoll(selectedLink);
+    }
   }
 
   // Override
-  createChildModelComponent(className, element, id, modelItem) {
+  createChildModelComponent(className, element, id, modelItem) {;
     return new PollViewRowComponent(modelItem, this.assignationsModel, this.userModel, this);
   }
 

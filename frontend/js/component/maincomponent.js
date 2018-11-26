@@ -68,32 +68,37 @@ class MainComponent extends Fronty.RouterComponent {
   }
 
   onStart() {
-    //alert(this.userModel.isLogged);
+   
     if(
       this.routerConfig[this.getRouterModel().currentPage].private !== undefined && 
       this.routerConfig[this.getRouterModel().currentPage].private === true &&
       !this.userModel.isLogged)
       {
-        //alert("is private");
+    
         var redirectOnLogin = window.location.hash.substring(1);
         this.goToPage('login?redirectUrl='+encodeURI(redirectOnLogin));
-        
+        this.userModel.addObserver(() => {
+          if (this.userModel.isLogged) {
+            this.goToPage(redirectOnLogin);
+          }
+        })
+      } else {
+        super.onStart();
       }
 
-    //alert( this.getRouterModel());
     this.getRouterModel().addObserver( () => {
       if(
       this.routerConfig[this.getRouterModel().currentPage].private !== undefined && 
       this.routerConfig[this.getRouterModel().currentPage].private === true &&
       !this.userModel.isLogged)
       {
-        //alert("is private");
+
         var redirectOnLogin = window.location.hash.substring(1);
         this.goToPage('login?redirectUrl='+encodeURI(redirectOnLogin));
         
       }
     });
-    super.onStart();
+   
   } 
     
    

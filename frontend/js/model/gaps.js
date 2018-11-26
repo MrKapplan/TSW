@@ -5,6 +5,8 @@ class GapsModel extends Fronty.Model {
   
       // model attributes
       this.gaps = [];
+      this.emptyGap = 0;
+      this.emptyGaps = [];
     }
   
     setSelectedGap(gap) {

@@ -62,7 +62,6 @@ class UserService {
   }
 
   register(user) {
-
     return $.ajax({
       url: AppConfig.backendServer+'/meetPoll_TSW/rest/user',
       method: 'POST',

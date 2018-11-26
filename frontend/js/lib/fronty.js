@@ -1947,7 +1947,7 @@ var RouterComponent = function (_ModelComponent) {
     _this7.pageHtmlId = routeContentsHtmlId;
 
     window.addEventListener('hashchange', function () {
-      //console.log("Router: page changed");
+     // console.log("Router: page changed");
       _this7._routerModel.set(function () {
         _this7._routerModel.currentPage = _this7._calculateCurrentPage();
       });

@@ -29,13 +29,4 @@ class PollsService {
     });
   }
 
-  // createComment(postid, comment) {
-  //   return $.ajax({
-  //     url: AppConfig.backendServer+'/rest/post/' + postid + '/comment',
-  //     method: 'POST',
-  //     data: JSON.stringify(comment),
-  //     contentType: 'application/json'
-  //   });
-  // }
-
 }
