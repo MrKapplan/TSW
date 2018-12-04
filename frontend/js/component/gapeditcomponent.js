@@ -3,9 +3,11 @@ class GapEditComponent extends Fronty.ModelComponent {
       super(Handlebars.templates.gapedit, gapsModel);
 
       this.gapsModel = gapsModel;
+      this.addModel('gaps', gapsModel);
 
       this.pollsModel = pollsModel;
       this.addModel('polls', pollsModel)
+
       this.userModel = userModel;
       this.addModel('user', userModel);
 
@@ -17,28 +19,48 @@ class GapEditComponent extends Fronty.ModelComponent {
 
 
       this.addEventListener('click', '#addrow-button', () => {
+
         this.gapsModel.set(() => {
           this.gapsModel.emptyGap += 1;
-          this.gapsModel.emptyGaps.push({"gap":this.gapsModel.emptyGap});
-          console.log(this.gapsModel.emptyGaps);
+          this.gapsModel.emptyGaps.push({"gap": this.gapsModel.emptyGap});
         });
 
       });
 
 
+      // $.each(this.gapsModel.selectedGap, function(index, gap) {
+    
+      //   this.addEventListener('click', '#delrow-'.concat(gap.id), () => {
+      //   // var i = row.parentNode.parentNode.rowIndex;
+      //    $('#gap-item-'.concat(gap.id)).remove();
+      //   });
+      // }); 
+    
+
 
       this.addEventListener('click', '#editGap', () => {
-        var gaps = $('#gaps').val();
-        var link = $('#poll-link').val();
 
-        this.gapsService.editGaps(link, gaps)
-          .then(() => {
-            this.router.goToPage('view-poll?link='.concat(link));
-          })
+        var link = $('#poll-link').val();
+        var dataArray = [];
+        var inputsDate = document.getElementsByClassName('date');
+        var inputsTimeStart = document.getElementsByClassName('timeStart');
+        var inputsTimeEnd = document.getElementsByClassName('timeEnd');
+    
+        for (var i = 0; i < inputsDate.length; i++) {
+            dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
+        }
+        
+        this.gapsService.editGaps(link, dataArray)
+        .then((xhr) => {
+          // this.pollsModel.set((model) => {
+          //   model.message = I18n.translate('Gaps successfully updated.');
+          // });
+          this.router.goToPage('view-poll?link='.concat(link));
+        })
           .fail((xhr, errorThrown, statusText) => {
             if (xhr.status == 400) {
               this.gapsModel.set(() => {
-                this.gapsModel.errors = xhr.responseJSON;
+                this.gapsModel.errors = I18n.translate(xhr.responseJSON);
               });
             } else {
               alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
@@ -84,7 +106,7 @@ class GapEditComponent extends Fronty.ModelComponent {
 
       $.each(this.gapsModel.emptyGaps, function(index, gap) {
 
-        $('#date-item-'.concat(gap.gap)).bootstrapMaterialDatePicker 
+        $('#new-date-item-'.concat(gap.gap)).bootstrapMaterialDatePicker 
         ({
           format: 'DD/MM/YYYY',
           lang: 'es',
@@ -96,7 +118,7 @@ class GapEditComponent extends Fronty.ModelComponent {
         });
 
 
-        $('#timeStart-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
+        $('#new-timeStart-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
         ({
           date: false,
           shortTime: false,
@@ -104,7 +126,7 @@ class GapEditComponent extends Fronty.ModelComponent {
         });
 
 
-        $('#timeEnd-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
+        $('#new-timeEnd-item-'.concat(gap.gap)).bootstrapMaterialDatePicker
         ({
           date: false,
           shortTime: false,
@@ -114,7 +136,7 @@ class GapEditComponent extends Fronty.ModelComponent {
 
 
 
-    $.material.init()
+    $.material.init();
     }
 
 
@@ -124,6 +146,9 @@ class GapEditComponent extends Fronty.ModelComponent {
           this.gapsService.findGapsPoll(selectedLink)
             .then((gaps) => {
               this.gapsModel.setSelectedGap(gaps);
+              this.gapsModel.emptyGap = 0;
+              this.gapsModel.emptyGaps = [];
+              this.gapsModel.errors = null;
             });
 
             this.pollsService.findPoll(selectedLink)
@@ -136,7 +161,6 @@ class GapEditComponent extends Fronty.ModelComponent {
 
 
     createChildModelComponent(className, element, id, modelItem) {
-      console.log(modelItem);
       return new GapRowComponent(modelItem, this.router, this);
     }
   }
@@ -144,7 +168,6 @@ class GapEditComponent extends Fronty.ModelComponent {
 
   class GapRowComponent extends Fronty.ModelComponent {
     constructor(gapModel, router, gapEditComponent) {
-      //console.log(gapModel);
       super(Handlebars.templates.gaprow, gapModel, null, null);
       
       this.gapEditComponent = gapEditComponent;

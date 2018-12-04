@@ -30,9 +30,9 @@ class AssignationAddComponent extends Fronty.ModelComponent {
        
         this.assignationsService.addAssignation(checkboxChecked, pollLink)
         .then(() => {
-          // this.pollsModel.set((model) => {
-          //   model.message = I18n.translate('Your participation has been successfully registered.');
-          // });
+          this.assignationsModel.set((model) => {
+            model.message = I18n.translate('Your participation has been successfully registered.');
+          });
           this.router.goToPage('view-poll?link='.concat(pollLink));
         })
         .fail((xhr, errorThrown, statusText) => {
@@ -49,11 +49,17 @@ class AssignationAddComponent extends Fronty.ModelComponent {
   }
     
     afterRender() {
-        $.each(this.gapsModel.selectedGap, function(index, gap) {
-            var d = new Date(gap.date);
-            $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(d.toString().substr(0,3).toUpperCase()).concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
+
+      var table = document.getElementById('dataTable');
+      if(table !== null){
+      $.each(this.gapsModel.selectedGap, function(index, gap) {
+        var formatDate = gap.date.split("/").reverse().join("-");
+        var dateToShow = new Date(formatDate);
+        $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(dateToShow.toString().substr(0,3).toUpperCase()).concat(',').concat(dateToShow.toString().substr(7,3)).concat(dateToShow.toString().substr(3,5))); 
       }); 
     }
+  }
+  
 
     loadPoll(pollLink) {
         if (pollLink != null) {
@@ -80,7 +86,6 @@ class AssignationAddComponent extends Fronty.ModelComponent {
           this.assignationsService.findAssignationsPoll(pollLink)
             .then((assignations) => {
               this.assignationsModel.setSelectedAssignation(assignations);
-              //console.log(assignations);
             });
     
         }

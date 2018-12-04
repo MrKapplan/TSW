@@ -50,7 +50,6 @@ class LoginComponent extends Fronty.ModelComponent {
           if (xhr.status == 400) {
             this.userModel.set((model) => {
               model.loginError = xhr.responseJSON;
-              console.log(model.loginError);
             });
           } else {
             alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);

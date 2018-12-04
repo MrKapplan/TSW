@@ -3,7 +3,7 @@
         <div class="col-lg-12 center-block">
             {{#if errors}}
                <div class="alert alert-danger text-center" id="success-danger" role="alert">
-                    {{errorrs}}
+                    {{errors}}
                 </div>
             {{/if}}
             <div id="subtitle">
@@ -27,7 +27,7 @@
                     <tbody>
                         {{#if selectedGap}}
                             {{#each selectedGap as |gap|}}
-                                    <tr>
+                                    <tr id="gap-item-{{gap.id}}">
                                         <td></td>
                                         <td>
                                             <div class="inputDate">
@@ -55,19 +55,22 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <button type="button" id="delrow-{{gap.id}}" class="btn btn-danger">-</button>
+                                        </td>
                                     </tr>
                             {{/each}} 
                         {{/if}}
 
                         {{#each emptyGaps}}
-                            <tr fronty-component="GapRowComponent" key="{{gap}}" model="gaps[{{@index}}]" id="item-{{gap}}"></tr>
+                            <tr fronty-component="GapRowComponent" key="{{gap}}" model="gaps" id="item-{{gap}}"></tr>
                         {{/each}}
                         
                     </tbody>
                 </table>
                 <input type="hidden" id="gaps"> 
                 <a href="#polls" class="backButton">{{i18n 'Back'}}</a>
-                <button type="submit" id="editGap" class="btn btn-dark" onclick="valueData()">{{i18n 'Continue'}}</button>
+                <button type="submit" id="editGap" class="btn btn-dark">{{i18n 'Continue'}}</button>
             </div>
         </div>
     </div>

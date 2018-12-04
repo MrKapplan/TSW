@@ -35,11 +35,5 @@ class AssignationModel extends Fronty.Model {
       });
     }
   
-    // setLink(link) {
-    //   this.set((self) => {
-    //     self.link = link;
-    //   });
-    // }
-  
   }
   

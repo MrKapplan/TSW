@@ -115,9 +115,10 @@ I18n.translations = {
 	'Poll ' : 'La encuesta ',
 	' successfully added.' : ' ha sido añadida con éxito.',
 	'Gaps successfully added.' : 'Los gaps se han añadido con éxito.',
+	'Gaps successfully updated.' : 'Los gaps se han actualizado con éxito.',
 	' successfully updated.' : ' ha sido actualizada con éxito',
 	'Your participation has been successfully registered.' : 'Su participación se ha registrado correctamente.',
-	'Your participation has been successfully updated' : 'Su participación se ha actualizado correctamente.'
+	'Your participation has been successfully updated.' : 'Su participación se ha actualizado correctamente.'
 
 
 }

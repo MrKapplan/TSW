@@ -30,16 +30,7 @@ Handlebars.registerHelper('ifIn', function(elem, list, options) {
 
 
 
-var participant = {
-  isParticipant: "false"
-};
-
-Handlebars.registerHelper('setGlobal', function(key, value){
-
-  participant[key] = value;
-});
-
-Handlebars.registerHelper('getGlobal', function(key){
-  return participant[key];
+Handlebars.registerHelper("log", function(something) {
+  console.log(something);
 });
 

@@ -37,9 +37,7 @@ class PollViewComponent extends Fronty.ModelComponent {
       this.assignationsService.updateAssignation(checkboxChecked, pollLink)
       .then(() => {
         this.assignationsModel.set((model) => {
-          //console.log(model.message);
-          model.modifyAssignation = I18n.translate('Your participation has been successfully edited');
-          console.log(this.assignationsModel);
+          model.message = I18n.translate('Your participation has been successfully updated.');
         });
         this.router.goToPage('view-poll?link='.concat(pollLink));
       })
@@ -60,22 +58,25 @@ class PollViewComponent extends Fronty.ModelComponent {
   afterRender() {
 
     setTimeout(function() {
-      $(".alert").alert('close');
-    }, 5000);
+      $("#success-alert").alert('close');}, 7000);
 
-  
-    $.each(this.gapsModel.selectedGap, function(index, gap) {
-          var d = new Date(gap.date);
-          $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(d.toString().substr(0,3).toUpperCase()).concat(',').concat(d.toString().substr(7,3)).concat(d.toString().substr(3,5))); 
-    }); 
 
     var table = document.getElementById('dataTable');
     if(table !== null){
+      $.each(this.gapsModel.selectedGap, function(index, gap) {
+        var formatDate = gap.date.split("/").reverse().join("-");
+        var dateToShow = new Date(formatDate);
+        $('#gap-date-item-'.concat(gap.id)).html(I18n.translate(dateToShow.toString().substr(0,3).toUpperCase()).concat(',').concat(dateToShow.toString().substr(7,3)).concat(dateToShow.toString().substr(3,5))); 
+      }); 
+
+
       this.checkboxes(table);
     }
-         
-  }
 
+    
+
+  }
+      
 
 
   loadPoll(pollLink) {
@@ -102,8 +103,8 @@ class PollViewComponent extends Fronty.ModelComponent {
     if (pollLink != null) {
       this.assignationsService.findAssignationsPoll(pollLink)
         .then((assignations) => {
+          this.assignationsModel.message = null;
           this.assignationsModel.setSelectedAssignation(assignations);
-          //console.log(assignations);
         });
 
     }
