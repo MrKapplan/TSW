@@ -34,6 +34,7 @@ class GapAddComponent extends Fronty.ModelComponent {
         for (var i = 0; i < inputsDate.length; i++) {
             dataArray.push({"date":inputsDate[i].value, "start": inputsTimeStart[i].value.toString(), "end": inputsTimeEnd[i].value.toString()});
         }
+        
         this.gapsService.addGaps(link, dataArray)
           .then((xhr) => {
             // this.pollsModel.set((model) => {

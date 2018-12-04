@@ -4,10 +4,8 @@ class GapEditComponent extends Fronty.ModelComponent {
 
       this.gapsModel = gapsModel;
       this.addModel('gaps', gapsModel);
-
       this.pollsModel = pollsModel;
       this.addModel('polls', pollsModel)
-
       this.userModel = userModel;
       this.addModel('user', userModel);
 

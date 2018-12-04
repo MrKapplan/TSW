@@ -99,7 +99,7 @@ I18n.translations = {
 	"Not in session. Editing gaps for poll requires login" : "No estás logueado. Para editar un hueco necesitas estar logueado",
 	"Gaps id is mandatory" : "El id del gap es obligatorio",
 	"Assignations successfully added." : "¡Participación correctamente añadida!",
-	"Title is mandatory" : "El título eso bligatorio",
+	"Title is mandatory" : "El título es obligatorio",
 	"Title can not be that long" : "El título no puede ser tan largo",
 	"Author is mandatory" : "El autor es obligarorio",
 	"Link is mandatory" : "El link es obligatorio",
@@ -118,7 +118,8 @@ I18n.translations = {
 	'Gaps successfully updated.' : 'Los gaps se han actualizado con éxito.',
 	' successfully updated.' : ' ha sido actualizada con éxito',
 	'Your participation has been successfully registered.' : 'Su participación se ha registrado correctamente.',
-	'Your participation has been successfully updated.' : 'Su participación se ha actualizado correctamente.'
+	'Your participation has been successfully updated.' : 'Su participación se ha actualizado correctamente.',
+	'User registered! Please login' : 'Usuario registrado! Loggueate para entrar'
 
 
 }

@@ -23,7 +23,7 @@ class PollAddComponent extends Fronty.ModelComponent {
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {
             this.pollsModel.set(() => {
-              this.pollsModel.errors = xhr.responseJSON;
+              this.pollsModel.errors = I18n.translate(xhr.responseJSON);
             });
           } else {
             alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
