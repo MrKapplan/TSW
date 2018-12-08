@@ -56,19 +56,18 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button type="button" id="delrow-{{gap.id}}" class="btn btn-danger">-</button>
+                                            <button type="button" class="delrow btn btn-danger" item="{{gap.id}}">-</button>
                                         </td>
                                     </tr>
                             {{/each}} 
-                        {{/if}}
+                        {{/if}} 
 
                         {{#each emptyGaps}}
-                            <tr fronty-component="GapRowComponent" key="{{gap}}" model="gaps" id="item-{{gap}}"></tr>
+                            <tr fronty-component="GapRowComponent" key="{{gap}}" model="gaps" id="new-gap-item-{{gap}}"></tr>
                         {{/each}}
                         
                     </tbody>
                 </table>
-                <input type="hidden" id="gaps"> 
                 <a href="#polls" class="backButton">{{i18n 'Back'}}</a>
                 <button type="submit" id="editGap" class="btn btn-dark">{{i18n 'Continue'}}</button>
             </div>

@@ -13,8 +13,6 @@ class GapEditComponent extends Fronty.ModelComponent {
       this.pollsService = new PollsService();
       this.gapsService = new GapsService();
 
-  
-
 
       this.addEventListener('click', '#addrow-button', () => {
 
@@ -26,15 +24,9 @@ class GapEditComponent extends Fronty.ModelComponent {
       });
 
 
-      // $.each(this.gapsModel.selectedGap, function(index, gap) {
-    
-      //   this.addEventListener('click', '#delrow-'.concat(gap.id), () => {
-      //   // var i = row.parentNode.parentNode.rowIndex;
-      //    $('#gap-item-'.concat(gap.id)).remove();
-      //   });
-      // }); 
-    
-
+      this.addEventListener('click', '.delrow', (event)=> {
+        $('#gap-item-'.concat(event.target.getAttribute('item'))).remove();
+      });
 
       this.addEventListener('click', '#editGap', () => {
 
@@ -143,10 +135,10 @@ class GapEditComponent extends Fronty.ModelComponent {
         if (selectedLink != null) {
           this.gapsService.findGapsPoll(selectedLink)
             .then((gaps) => {
-              this.gapsModel.setSelectedGap(gaps);
               this.gapsModel.emptyGap = 0;
               this.gapsModel.emptyGaps = [];
               this.gapsModel.errors = null;
+              this.gapsModel.setSelectedGap(gaps);
             });
 
             this.pollsService.findPoll(selectedLink)
@@ -171,9 +163,8 @@ class GapEditComponent extends Fronty.ModelComponent {
       this.gapEditComponent = gapEditComponent;
       this.router = router;
   
-      this.addEventListener('click', '.deleteRow', (event) => {
-        // var pollLink = event.target.getAttribute('item');
-        // this.router.goToPage('edit-poll?link=' + pollLink);
+      this.addEventListener('click', '.delrow-item', (event)=> {
+        $('#new-gap-item-'.concat(event.target.getAttribute('item'))).remove();
       });
   
     }

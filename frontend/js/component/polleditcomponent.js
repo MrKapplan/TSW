@@ -15,7 +15,7 @@ class PollEditComponent extends Fronty.ModelComponent {
       this.pollsService.updatePoll(this.pollsModel.selectedPoll)
         .then(() => {
           this.pollsModel.set((model) => {
-            model.addGap = I18n.translate('Poll ').concat(newPoll.title).concat(I18n.translate(' successfully updated.'));
+            model.message = I18n.translate('Poll ').concat(this.pollsModel.selectedPoll.title).concat(I18n.translate(' successfully updated.'));
           });
           this.router.goToPage('polls');
         })
