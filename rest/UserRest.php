@@ -49,10 +49,11 @@ class UserRest extends BaseRest {
 	}
 
 
-	public function modify($username, $data) {
+	public function modify($data) {
+		
 		$currentLogged = parent::authenticateUser();
 
-		if ($currentLogged->getUsername() != $username) {
+		if ($currentLogged->getUsername() != $data->username) {
 			header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden');
 			echo("You are not authorized to login as anyone but you");
 		
@@ -60,7 +61,6 @@ class UserRest extends BaseRest {
 			$user = new User($data->username, $data->password);
 			try {
 				$user->checkIsValidForUpdate($data->confirmPassword);
-
 				$this->userMapper->update($user);
 
 				header($_SERVER['SERVER_PROTOCOL'].' 200 OK');
@@ -83,4 +83,4 @@ $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET", "/user/$1", array($userRest,"login"))
 ->map("POST", "/user", array($userRest,"register"))
-->map("PUT", "/user/$1", array($userRest,"modify"));
+->map("PUT", "/user", array($userRest,"modify"));

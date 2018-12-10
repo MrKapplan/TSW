@@ -69,4 +69,13 @@ class UserService {
       contentType: 'application/json'
     });
   }
+
+  updateUser(data) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/meetPoll_TSW/rest/user',
+      method: 'PUT',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    });
+  }
 }

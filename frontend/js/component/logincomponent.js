@@ -36,12 +36,9 @@ class LoginComponent extends Fronty.ModelComponent {
           username: $('#username').val(),
           password: $('#passwd').val(),
           confirmPassword: $('#confirmPasswd').val()
-
         })
         .then(() => {
-         
           this.userModel.set((model) => {
-            //model.registerErrors = {};
             model.message = I18n.translate('User registered! Please login');
             model.registerMode = false;
           });

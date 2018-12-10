@@ -11,7 +11,7 @@ class MainComponent extends Fronty.RouterComponent {
     this.routerConfig = 
     {
       
-      polls: {
+      'polls': {
         component: new PollsComponent(pollsModel, this.userModel, this),
         title: 'Polls',
         private: true
@@ -46,9 +46,13 @@ class MainComponent extends Fronty.RouterComponent {
         title: 'Add Assignation',
         private: true
       },
-      login: {
+      'login': {
         component: new LoginComponent(this.userModel, this),
         title: 'Login'
+      },
+      'profile': {
+        component: new ProfileComponent(this.userModel, this),
+        title: 'Profile'
       },
       defaultRoute: 'login'
     };
@@ -101,8 +105,7 @@ class MainComponent extends Fronty.RouterComponent {
    
   } 
     
-   
-  
+
   _createUserBarComponent(userModel, userService) {
     var userbar = new Fronty.ModelComponent(Handlebars.templates.user, userModel, 'userbar');
 

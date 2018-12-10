@@ -27,10 +27,12 @@ Promise.all([
       Handlebars.templates.main = Handlebars.compile(source)),
     loadTextFile('templates/components/language.hbs').then((source) =>
       Handlebars.templates.language = Handlebars.compile(source)),
-    loadTextFile('templates/components/user.hbs').then((source) =>
+    loadTextFile('templates/components/user-nav.hbs').then((source) =>
       Handlebars.templates.user = Handlebars.compile(source)),
     loadTextFile('templates/components/login.hbs').then((source) =>
       Handlebars.templates.login = Handlebars.compile(source)),
+    loadTextFile('templates/components/user-edit.hbs').then((source) =>
+      Handlebars.templates.profile = Handlebars.compile(source)),
     loadTextFile('templates/components/polls-table.hbs').then((source) =>
       Handlebars.templates.pollstable = Handlebars.compile(source)),
     loadTextFile('templates/components/poll-edit.hbs').then((source) =>

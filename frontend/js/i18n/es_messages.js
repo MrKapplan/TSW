@@ -119,7 +119,12 @@ I18n.translations = {
 	' successfully updated.' : ' ha sido actualizada con éxito',
 	'Your participation has been successfully registered.' : 'Su participación se ha registrado correctamente.',
 	'Your participation has been successfully updated.' : 'Su participación se ha actualizado correctamente.',
-	'User registered! Please login' : 'Usuario registrado! Loggueate para entrar'
+	'User registered! Please login' : 'Usuario registrado! Loggueate para entrar',
+	"New password" : "Nueva contraseña",
+	"Do you want to delete your account?Delete " : "¿Quieres eliminar tu cuenta?Hazlo ",
+	'User updated!' : "Usuario actualizado",
+	
+
 
 
 }
