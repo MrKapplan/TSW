@@ -71,8 +71,8 @@ class User {
 		else if($this->passwd !== $confirmPasswd){
 			$errors["ConfirmPasswd"] = "The passwords do not match";
 		}
-		else if(strlen($this->email) > 5 && !filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-			$errors["email"] = "El formato del email es incorrecto";
+		else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+			$errors["email"] = "The email format is incorrect";
 		}
 
 		if (sizeof($errors)>0){

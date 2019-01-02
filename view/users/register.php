@@ -20,38 +20,55 @@ $view->setVariable("title", "Register");
                 <div class="col-lg-12 center-block2">
                     <form method="POST" action="index.php?controller=users&action=register">
                         <div id="inputLogin">
-                            <div class="inputWithIconRegister inputIconBg">
-                                <?= i18n("Username")?><input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("Username")?>" required>
+                            <div class="inputWithIconLogin inputIconBg">
+                            <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                               <input type="text" name="username" value="<?= $user->getUsername() ?>" placeholder="<?= i18n("Username")?>" required>
                                 <?php if(isset($errors["username"])) { ?> 
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <?=i18n($errors["username"])?>
                                         </div>
                                 <?php } ?>
-                                <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
 
-                            <div class="inputWithIconRegister inputIconBg">
-                                <?= i18n("Password")?><input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
+                            <div class="inputWithIconLogin inputIconBg">
+                                <input type="password" name="passwd" placeholder="<?= i18n("Password")?>" required>
+                                <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                                 <?php if(isset($errors["passwd"])) { ?> 
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <?=i18n($errors["passwd"])?>
                                         </div>
                                 <?php } ?>
-								<i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
 
-                            <div class="inputWithIconRegister inputIconBg">
-                                <?= i18n("Confirm the password")?><input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
+                            <div class="inputWithIconLogin inputIconBg">
+                               <input type="password" name="confirmPasswd" placeholder="<?= i18n("Confirm the password")?>" required>
+                               <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                                 <?php if(isset($errors["ConfirmPasswd"])) { ?> 
                                         <div class="alert alert-danger" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <?=i18n($errors["ConfirmPasswd"])?>
                                         </div>
                                 <?php } ?>
-                                <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                             </div>
+
+                            <div class="inputWithIconLogin inputIconBg">
+                               <input type="text" name="email" placeholder="<?= i18n("Email")?>" required>
+                               <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+                                <?php if(isset($errors["email"])) { ?> 
+                                        <div class="alert alert-danger" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <?=i18n($errors["email"])?>
+                                        </div>
+                                <?php } ?>
+                            </div><br>
+
+                            <div class="inputWithIconLogin inputIconBg">
+                                <input type="checkbox" name="notifications" class="checkbox"/>
+                                <span><?= i18n("Receive notifications")?>&nbsp;</span>
+                            </div><br>
+
                             <button type="submit" class="loginButton btn btn-dark"><?= i18n("Register")?></button>
                         </div>
                     </form>

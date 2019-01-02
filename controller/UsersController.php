@@ -46,6 +46,14 @@ class UsersController extends BaseController {
 			$user->setUsername($_POST["username"]);
 			$user->setPasswd($_POST["passwd"]);
 			$confirmPasswd = $_POST["confirmPasswd"];
+			$user->setEmail($_POST["email"]);
+
+	
+			if(isset($_POST["notifications"])){
+				$user->setNotifications(TRUE);
+			}else {
+				$user->setNotifications(FALSE);
+			}
 			try{
 				$user->checkIsValidForRegister($confirmPasswd); 
 

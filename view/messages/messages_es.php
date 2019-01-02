@@ -113,7 +113,8 @@ array(
 	"Only the polls author can add gaps" => "Sólo el autor de la encuesta puede añadir huecos",
 	"Only the polls author can edit gaps" => "Sólo el autor de la encuesta puede editar huecos",
 	"Not in session. View polls requires login" => "No estás logueado. Para ver una encuesta necesitas estás logueado",
-	"Only the polls author can edit the poll" => "Sólo el autor de la encuesta puede editarla"
+	"Only the polls author can edit the poll" => "Sólo el autor de la encuesta puede editarla",
+	"The email format is incorrect" => "El formato del email es incorrecto"
 
 
 
