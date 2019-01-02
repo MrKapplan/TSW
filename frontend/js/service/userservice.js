@@ -78,4 +78,12 @@ class UserService {
       contentType: 'application/json'
     });
   }
+
+
+  deleteUser(username) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/meetPoll_TSW/rest/user/' + username,
+      method: 'DELETE'
+    });
+  }
 }

@@ -29,4 +29,11 @@ class PollsService {
     });
   }
 
+  deletePoll(link) {
+    return $.ajax({
+      url: AppConfig.backendServer+'/meetPoll_TSW/rest/poll/' + link,
+      method: 'DELETE'
+    });
+  }
+
 }

@@ -33,7 +33,8 @@ class UserRest extends BaseRest {
 	}
 
 	public function register($data) {
-		$user = new User($data->username, $data->password);
+		$user = new User($data->username, $data->password, $data->email, $data->notifications);
+		var_dump($user);
 		try {
 			$user->checkIsValidForRegister($data->confirmPassword);
 
@@ -73,7 +74,11 @@ class UserRest extends BaseRest {
 		}
 	}
 
-
+	public function deleteUser($username) {
+		$currentLogged = parent::authenticateUser();
+		$this->userMapper->deleteUser($username);
+		header($_SERVER['SERVER_PROTOCOL'].' 201 Ok');
+	}
 
 
 }
@@ -83,4 +88,5 @@ $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET", "/user/$1", array($userRest,"login"))
 ->map("POST", "/user", array($userRest,"register"))
-->map("PUT", "/user", array($userRest,"modify"));
+->map("PUT", "/user", array($userRest,"modify"))
+->map("DELETE", "/user/$1", array($userRest,"deleteUser"));

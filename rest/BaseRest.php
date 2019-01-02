@@ -39,10 +39,12 @@ class BaseRest {
 
 				return new User($_SERVER['PHP_AUTH_USER']);
 			} else {
+				$error = array();
+				$error["passwd"] = "The username/password is not valid";
 				header($_SERVER['SERVER_PROTOCOL'].' 401 Unauthorized');
 				//header('WWW-Authenticate: Basic realm="Rest API of MVCBLOG"');
-
-				die('The username/password is not valid');
+				header('Content-Type: application/json');
+				die(json_encode($error));
 			}
 		}
 	}

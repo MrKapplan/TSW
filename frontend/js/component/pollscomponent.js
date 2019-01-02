@@ -61,6 +61,26 @@ class PollRowComponent extends Fronty.ModelComponent {
       var pollLink = event.target.getAttribute('item');
       this.router.goToPage('edit-gaps?link=' + pollLink);
     });
-  }
 
+
+    this.addEventListener('click', '#deletePoll', (event) => {
+      var pollLink = event.target.getAttribute('item');
+      this.pollsService.deletePoll(pollLink)
+      .then((xhr) => {
+        this.pollsModel.set((model) => {
+        });
+        this.router.goToPage('polls');
+      })
+      .fail((xhr, errorThrown, statusText) => {
+        if (xhr.status == 400) {
+          this.pollsModel.set(() => {
+            this.pollsModel.errors = I18n.translate(xhr.responseJSON);
+          });
+        } else {
+          alert('an error has occurred during request: ' + statusText + '.' + xhr.responseText);
+        }
+      });
+  });
+      
+}
 }

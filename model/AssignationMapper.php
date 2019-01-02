@@ -143,7 +143,9 @@ class AssignationMapper {
 			}
 		} else {
 			$stmtDelete->execute(array($user, $pollid));
-		} 
+		}
+		
+		//$this->notification($pollid, $user);
 	}
 
 	public function addAssignation($user, $assignations, $pollid) {
@@ -153,7 +155,25 @@ class AssignationMapper {
 		for($j=0; $j<count($assignations); $j++){
 			$stmtAdd->execute(array($user, $assignations[$j]->gap, $pollid));
 		}
+
+		//$this->notification($pollid, $user);
 	} 
+
+	// public function notification($pollid, $user){
+	// 	$titulo = "Participación actualizada";
+	// 	$mail = "El usuario " + $user + " ha modificado su participación en la encuesta " + $pollid + ".";
+	// 	$headers = "MIME-Version: 1.0\r\n"; 
+	// 	$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
+	// 	//dirección del remitente 
+	// 	$headers .= "From: Geeky Theory < ivanddf1994@hotmail.com >\r\n";
+	// 	//Enviamos el mensaje a tu_dirección_email 
+	// 	$bool = mail("ivanddf1994@gmail.com",$titulo,$mail,$headers);
+	// 	if($bool){
+	// 		echo "Mensaje enviado";
+	// 	}else{
+	// 		echo "Mensaje no enviado";
+	// 	}
+	// }
 
 
 }

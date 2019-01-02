@@ -8,11 +8,15 @@ class User {
 
 	private $username;
 	private $passwd;
+	private $email;
+	private $notifications;
 
 
-	public function __construct($username=NULL, $passwd=NULL) {
+	public function __construct($username=NULL, $passwd=NULL, $email=NULL, $notifications=NULL) {
 		$this->username = $username;
 		$this->passwd = $passwd;
+		$this->email = $email;
+		$this->notifications = $notifications;
 	}
 
 	public function getUsername() {
@@ -32,9 +36,30 @@ class User {
 		$this->passwd = $passwd;
 	}
 
+	public function getEmail() {
+		return $this->email;
+	}
+
+
+	public function setEmail($email) {
+		$this->email = $email;
+	}
+
+	public function getNotifications() {
+		return $this->notifications;
+	}
+
+
+	public function setNotifications($notifications) {
+		$this->notifications = $notifications;
+	}
+
+
+
 	
 	public function checkIsValidForRegister($confirmPasswd) {
 		$errors = array();
+
 		if (strlen($this->username) < 5) {
 			$errors["username"] = "Username must be at least 5 characters length";
 
@@ -46,6 +71,10 @@ class User {
 		else if($this->passwd !== $confirmPasswd){
 			$errors["ConfirmPasswd"] = "The passwords do not match";
 		}
+		else if(strlen($this->email) > 5 && !filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+			$errors["email"] = "El formato del email es incorrecto";
+		}
+
 		if (sizeof($errors)>0){
 			throw new ValidationException($errors, "user is not valid");
 		}
@@ -67,5 +96,6 @@ class User {
 			throw new ValidationException($errors, "user is not valid");
 		}
 	}
+
 
 }

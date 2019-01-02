@@ -71,4 +71,9 @@ class PollMapper {
 			return $link;
 		}
 
+		public function deletePoll(Poll $poll) {
+			$stmt = $this->db->prepare("DELETE FROM poll set where id=?");
+			$stmt->execute(array($poll->getId()));
+		}
+
 	 }

@@ -147,7 +147,24 @@ class PollRest extends BaseRest {
 		}
 	}
 
+
+	public function deletePoll($pollLink) {
+		$currentLogged = parent::authenticateUser();
+		$poll = $this->pollMapper->findPollByLink($pollLink);
+		
+		if ($poll == NULL) {
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
+			echo("Poll with id ".$pollLink." not found");
+			return;
+		} else {
+			$this->pollMapper->deletePoll($poll);
+		}
+
+		header($_SERVER['SERVER_PROTOCOL'].' 201 Ok');
+	}
+
 }
+
 
 // URI-MAPPING for this Rest endpoint
 $pollRest = new PollRest();
@@ -156,7 +173,8 @@ URIDispatcher::getInstance()
 ->map("GET","/poll", array($pollRest,"indexPolls"))
 ->map("GET","/poll/$1", array($pollRest,"viewPoll"))
 ->map("POST", "/poll", array($pollRest,"addPoll"))
-->map("PUT","/poll/$1", array($pollRest,"updatePoll"));
+->map("PUT","/poll/$1", array($pollRest,"updatePoll"))
+->map("DELETE", "/poll/$1", array($pollRest,"deletePoll"));
 
 
 

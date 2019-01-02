@@ -91,18 +91,20 @@ INSERT INTO `poll` (`id`, `title`, `ubication`, `author`, `link`) VALUES
 
 CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(25) NOT NULL,
-  `passwd` varchar(50) NOT NULL
+  `passwd` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `notifications` BOOL NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`username`, `passwd`) VALUES
-('admin', 'admin'),
-('albovy', 'redteamwins'),
-('ivandd', 'ivan'),
-('mpegea', 'pimpam');
+INSERT INTO `user` (`username`, `passwd`, `email`, `notifications`) VALUES
+('admin', 'admin', 'ivanddf1994@hotmail.com', TRUE),
+('albovy', 'redteamwins', 'ivanddf1994@gmail.com', TRUE),
+('ivandd', 'ivan', 'ivan@ivan.es', TRUE),
+('mpegea', 'pimpam', 'martin@tonto.es', TRUE);
 
 -- --------------------------------------------------------
 

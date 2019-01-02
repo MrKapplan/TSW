@@ -1,4 +1,9 @@
 <span>
+    {{#if dropOut}}
+        <div class="alert alert-success text-center" id="success-success" role="alert">
+            {{#i18n}}{{dropOut}}{{/i18n}}<br>
+        </div>
+    {{/if}}
     {{#if isLogged}}
         {{i18n 'Your are logged. Logout first'}}
     {{else}}
@@ -45,6 +50,16 @@
                                         {{#i18n}}{{loginError.ConfirmPasswd}}{{/i18n}}<br>
                                     </div>
                                 {{/if}}
+                                 <div class="inputWithIconLogin inputIconBg">
+                                    <input type="text" id="email" placeholder="{{i18n 'Email'}}">
+                                    <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+                                </div><br>
+
+                                <div class="inputWithIconLogin inputIconBg">
+                                    <input type="checkbox" id="notifications" class="checkbox"/>
+                                    <span>{{i18n 'Receive notifications'}}&nbsp;</span>
+                                </div><br>
+
                                 <button type="submit" id="registerbutton" class="loginButton btn btn-darkLogin">{{i18n 'Register'}}</button>
                             {{else}}
                                 <button type="submit" id="loginbutton" class="loginButton btn btn-darkLogin">{{i18n 'Sign in'}}</button>

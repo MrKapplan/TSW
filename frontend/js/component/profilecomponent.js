@@ -7,11 +7,33 @@ class ProfileComponent extends Fronty.ModelComponent {
       this.router = router;
   
 
+
+
+
       this.addEventListener('click', '#dropOut', () => {
-        this.userModel.set(() => {
-          this.userModel.registerMode = true;
+        var username = $('#username').val()
+
+        this.userService.deleteUser(username)
+        .then(() => {
+          this.userModel.set((model) => {
+            model.dropOut = I18n.translate('User deleted!');
+
+            this.userModel.logout();
+            this.userService.logout();
+            this.router.goToPage("login");
+          });
+        })
+        .fail((xhr, errorThrown, statusText) => {
+          if (xhr.status == 400) {
+            this.userModel.set((model) => {
+              model.error = I18n.translate(xhr.responseJSON);
+            });
+          } else {
+            alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
+          }
         });
       });
+      
   
       this.addEventListener('click', '#modifyprofile', () => {
         this.userService.updateUser({

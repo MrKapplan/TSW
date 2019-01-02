@@ -52,6 +52,8 @@ I18n.translations = {
 	"Do you want to change something?" : "¿Te gustaría cambiar algo?",
 	"Attention" : "¡¡Atención !!",
 	"Are you sure you want to delete this poll?" : "¿Estás seguro de que quieres eliminar esta encuesta?",
+	"Are you sure you want to delete the poll" : "¿Estás seguro de que quieres eliminar la encuesta ",
+	"The information that this poll has will be lost" : "La información que tiene esta encuesta se perderá",
 	"Ok" : "Si",
 	"Cancel" : "Cancelar",
 	"Not in session. Adding participation requires login" : "No estás logueado. Para participar se necesita estar logueado!",
@@ -123,6 +125,7 @@ I18n.translations = {
 	"New password" : "Nueva contraseña",
 	"Do you want to delete your account?Delete " : "¿Quieres eliminar tu cuenta?Hazlo ",
 	'User updated!' : "Usuario actualizado",
+	'User deleted!' : "Usuario eliminado!"
 	
 
 

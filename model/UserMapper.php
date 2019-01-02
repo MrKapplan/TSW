@@ -13,8 +13,8 @@ class UserMapper {
 
 
 	public function save($user) {
-		$stmt = $this->db->prepare("INSERT INTO user values (?,?)");
-		$stmt->execute(array($user->getUsername(), $user->getPasswd()));
+		$stmt = $this->db->prepare("INSERT INTO user values (?,?,?,?)");
+		$stmt->execute(array($user->getUsername(), $user->getPasswd(),$user->getEmail(),$user->getNotifications()));
 	}
 
 	public function usernameExists($username) {
@@ -39,5 +39,12 @@ class UserMapper {
 	public function update(User $user) {
 		$stmt = $this->db->prepare("UPDATE user set passwd=? where username=?");
 		$stmt->execute(array($user->getPasswd(), $user->getUsername()));
+	}
+
+
+
+	public function deleteUser($username) {
+		$stmt = $this->db->prepare("DELETE FROM user WHERE username=?");
+		$stmt->execute(array($username));
 	}
 }

@@ -19,7 +19,7 @@ class LoginComponent extends Fronty.ModelComponent {
         })
         .catch((error) => {
           this.userModel.set((model) => {
-            model.loginError = error.responseText;
+            model.loginError = error.responseJSON;
           });
           this.userModel.logout();
         });
@@ -32,10 +32,15 @@ class LoginComponent extends Fronty.ModelComponent {
     });
 
     this.addEventListener('click', '#registerbutton', () => {
+      if( $('#notifications').is(':checked')){
+        var notificationValue = 1;
+      } 
       this.userService.register({
           username: $('#username').val(),
           password: $('#passwd').val(),
-          confirmPassword: $('#confirmPasswd').val()
+          confirmPassword: $('#confirmPasswd').val(),
+          email: $('#email').val(),
+          notifications : notificationValue
         })
         .then(() => {
           this.userModel.set((model) => {
