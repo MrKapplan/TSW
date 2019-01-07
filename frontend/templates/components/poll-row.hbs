@@ -16,7 +16,7 @@
 
       <i title="{{i18n 'Delete Poll'}}" class="btn btn-danger btn-sm fa fa-trash" data-toggle="modal" data-target="#deleteModal"></i>
         <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                  <h5 class="modal-title" id="deleteModalLabel">{{i18n 'Attention'}}</h5>
@@ -28,7 +28,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n 'Cancel'}}</button>
-                <button type="submit" id="deletePoll" class="btn btn-success success">{{i18n 'OK'}}</button> 
+                <button  id="deletePoll" type="button" class="btn btn-success success">{{i18n 'OK'}}</button> 
                 <!--
                 <a><span class="btn btn-default" data-dismiss="modal">{{i18n 'Cancel'}}</span></a>
                 <a class="deletePoll"><span item="{{link}}" class="btn btn-success success"> {{i18n 'OK'}}</span></a>&nbsp;&nbsp;

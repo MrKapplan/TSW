@@ -114,7 +114,12 @@ array(
 	"Only the polls author can edit gaps" => "Sólo el autor de la encuesta puede editar huecos",
 	"Not in session. View polls requires login" => "No estás logueado. Para ver una encuesta necesitas estás logueado",
 	"Only the polls author can edit the poll" => "Sólo el autor de la encuesta puede editarla",
-	"The email format is incorrect" => "El formato del email es incorrecto"
+	"The email format is incorrect" => "El formato del email es incorrecto",
+
+
+	"Updated participation" => "Participación actualizada",
+	"User \"%s\" has updated his participation in the poll \"%s\"." => "El usuario \"%s\" ha modificado su participación en la encuesta \"%s\"."
+
 
 
 

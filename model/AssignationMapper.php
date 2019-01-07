@@ -1,14 +1,17 @@
 <?php
 // file: model/AssignationMapper.php
+require_once(__DIR__."/../core/I18n.php");
 require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/Assignation.php");
 require_once(__DIR__."/../model/Gap.php");
 
 class AssignationMapper {
 	private $db;
+	// private $i18n;
 
 	public function __construct() {
 		$this->db = PDOConnection::getInstance();
+		// $this->i18n = I18n::getInstance();
 	}
 
 
@@ -113,6 +116,35 @@ class AssignationMapper {
 	}
 
 
+	public function emailsForUser($pollid){
+		$stmt = $this->db->query("SELECT DISTINCT user.email FROM user, user_selects_gap WHERE user_selects_gap.poll_id = '$pollid'");
+		$emails_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$emailsParticipants = array();
+
+		foreach ($emails_db as $email) {
+			array_push($emailsParticipants, $email["email"]);
+		}
+
+		return $emailsParticipants;
+		
+	}
+
+	public function pollTitle($pollid){
+		$stmt = $this->db->query("SELECT title FROM poll WHERE id = '$pollid'");
+		$title_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		
+		$titles = array();
+
+		foreach ($title_db as $title) {
+			array_push($titles, $title["title"]);
+		}
+
+		return $titles;
+		
+	}
+
 	public function findAssignationUsers($pollLink, $currentUser){
 		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
 		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -144,36 +176,40 @@ class AssignationMapper {
 		} else {
 			$stmtDelete->execute(array($user, $pollid));
 		}
-		
-		//$this->notification($pollid, $user);
+
+		$title = $this->pollTitle($pollid);
+		$emailsParticipants = $this->emailsForUser($pollid);
+		for($j=0; $j<count($emailsParticipants); $j++){
+			$this->notification($title[0], $user, $emailsParticipants[$j]);
+		}
 	}
 
 	public function addAssignation($user, $assignations, $pollid) {
  
 		$stmtAdd = $this->db->prepare("INSERT INTO user_selects_gap set username=?, gap_id=?, poll_id=?");
 
+		$title = $this->pollTitle($pollid);
 		for($j=0; $j<count($assignations); $j++){
 			$stmtAdd->execute(array($user, $assignations[$j]->gap, $pollid));
 		}
 
-		//$this->notification($pollid, $user);
+		$this->notification($pollid, $user);
 	} 
 
-	// public function notification($pollid, $user){
-	// 	$titulo = "Participación actualizada";
-	// 	$mail = "El usuario " + $user + " ha modificado su participación en la encuesta " + $pollid + ".";
-	// 	$headers = "MIME-Version: 1.0\r\n"; 
-	// 	$headers .= "Content-type: text/html; charset=iso-8859-1\r\n"; 
-	// 	//dirección del remitente 
-	// 	$headers .= "From: Geeky Theory < ivanddf1994@hotmail.com >\r\n";
-	// 	//Enviamos el mensaje a tu_dirección_email 
-	// 	$bool = mail("ivanddf1994@gmail.com",$titulo,$mail,$headers);
-	// 	if($bool){
-	// 		echo "Mensaje enviado";
-	// 	}else{
-	// 		echo "Mensaje no enviado";
-	// 	}
-	// }
+	public function notification($title, $user, $dest){
+		$titulo = i18n("Participación actualizada");
+		$mail = sprintf(i18n("El usuario %s ha modificado su participación en la encuesta %s."), $user, $title);
+		//$mail .= "\r\n\nAccede a la encuesta para ver los cambios";
+		//$mail = "El usuario  ha modificado su participación en la encuesta "".";
+		$mail = wordwrap($mail, 70, "\r\n");
+		$mensaje ="Hola";
+		$headers = 'From: meetpolltsw@gmail.com' . "\r\n" .
+					 'Reply-To: meetpolltsw@gmail.com' . "\r\n" .
+					 'Content-Type: text/html; charset=UTF-8'. "\r\n".
+					'X-Mailer: PHP/' . phpversion();
+		mail($dest,$titulo,$mail,$headers);
+
+	}
 
 
 }

@@ -7,9 +7,6 @@ class ProfileComponent extends Fronty.ModelComponent {
       this.router = router;
   
 
-
-
-
       this.addEventListener('click', '#dropOut', () => {
         var username = $('#username').val()
 

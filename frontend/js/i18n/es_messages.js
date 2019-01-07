@@ -125,7 +125,8 @@ I18n.translations = {
 	"New password" : "Nueva contraseña",
 	"Do you want to delete your account?Delete " : "¿Quieres eliminar tu cuenta?Hazlo ",
 	'User updated!' : "Usuario actualizado",
-	'User deleted!' : "Usuario eliminado!"
+	'User deleted!' : "Usuario eliminado!",
+	'Receive Notifications' : "Recibir Notificaciones"
 	
 
 
