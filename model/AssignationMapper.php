@@ -116,8 +116,8 @@ class AssignationMapper {
 	}
 
 
-	public function emailsForUser($pollid){
-		$stmt = $this->db->query("SELECT DISTINCT user.email FROM user, user_selects_gap WHERE user_selects_gap.poll_id = '$pollid'");
+	public function emailsForUser($pollid, $username){
+		$stmt = $this->db->query("SELECT DISTINCT user.email FROM user, user_selects_gap WHERE user_selects_gap.poll_id = '$pollid' AND user.username NOT IN ('$username')");
 		$emails_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$emailsParticipants = array();
@@ -134,15 +134,9 @@ class AssignationMapper {
 		$stmt = $this->db->query("SELECT title FROM poll WHERE id = '$pollid'");
 		$title_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		
-		$titles = array();
-
 		foreach ($title_db as $title) {
-			array_push($titles, $title["title"]);
-		}
-
-		return $titles;
-		
+			return $title['title'];
+		}	
 	}
 
 	public function findAssignationUsers($pollLink, $currentUser){
@@ -173,15 +167,18 @@ class AssignationMapper {
 			for($j=0; $j<count($assignations); $j++){
 				$stmtAdd->execute(array($user, $assignations[$j]->gap, $pollid));
 			}
+
+			$title = $this->pollTitle($pollid);
+			$emailsParticipants = $this->emailsForUser($pollid, $user);
+			for($j=0; $j<count($emailsParticipants); $j++){
+				$this->notification($title, $user, $emailsParticipants[$j]);
+			}
+
+
 		} else {
 			$stmtDelete->execute(array($user, $pollid));
 		}
 
-		$title = $this->pollTitle($pollid);
-		$emailsParticipants = $this->emailsForUser($pollid);
-		for($j=0; $j<count($emailsParticipants); $j++){
-			$this->notification($title[0], $user, $emailsParticipants[$j]);
-		}
 	}
 
 	public function addAssignation($user, $assignations, $pollid) {
@@ -193,20 +190,24 @@ class AssignationMapper {
 			$stmtAdd->execute(array($user, $assignations[$j]->gap, $pollid));
 		}
 
-		$this->notification($pollid, $user);
+		$title = $this->pollTitle($pollid);
+		$emailsParticipants = $this->emailsForUser($pollid, $user);
+		for($j=0; $j<count($emailsParticipants); $j++){
+			$this->notification($title, $user, $emailsParticipants[$j]);
+		}
 	} 
+
 
 	public function notification($title, $user, $dest){
 		$titulo = i18n("Participación actualizada");
 		$mail = sprintf(i18n("El usuario %s ha modificado su participación en la encuesta %s."), $user, $title);
-		//$mail .= "\r\n\nAccede a la encuesta para ver los cambios";
-		//$mail = "El usuario  ha modificado su participación en la encuesta "".";
 		$mail = wordwrap($mail, 70, "\r\n");
 		$mensaje ="Hola";
 		$headers = 'From: meetpolltsw@gmail.com' . "\r\n" .
 					 'Reply-To: meetpolltsw@gmail.com' . "\r\n" .
 					 'Content-Type: text/html; charset=UTF-8'. "\r\n".
 					'X-Mailer: PHP/' . phpversion();
+
 		mail($dest,$titulo,$mail,$headers);
 
 	}

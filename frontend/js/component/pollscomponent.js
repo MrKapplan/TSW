@@ -47,9 +47,11 @@ class PollRowComponent extends Fronty.ModelComponent {
     super(Handlebars.templates.pollrow, pollModel, null, null);
     
     this.pollsComponent = pollsComponent;
+    this.pollsModel = pollModel;
     this.userModel = userModel;
     this.addModel('user', userModel); // a secondary model
     this.router = router;
+    this.pollsService = new PollsService();
 
 
     this.addEventListener('click', '.editPoll', (event) => {
@@ -67,8 +69,7 @@ class PollRowComponent extends Fronty.ModelComponent {
       var pollLink = event.target.getAttribute('item');
       this.pollsService.deletePoll(pollLink)
       .then((xhr) => {
-        this.pollsModel.set((model) => {
-        });
+        this.router.goToPage('login');
         this.router.goToPage('polls');
       })
       .fail((xhr, errorThrown, statusText) => {

@@ -8,7 +8,7 @@ require_once(__DIR__."/BaseRest.php");
 /**
 * ClassAssignationRest
 *
-* It contains operations for adding and check users credentials.
+* It contains operations for adding and check assignations.
 * Methods gives responses following Restful standards. Methods of this class
 * are intended to be mapped as callbacks using the URIDispatcher class.
 *
@@ -79,6 +79,8 @@ class AssignationRest extends BaseRest {
 					"user"=>$currentUser->getUsername(),
 					"newAssignations"=>$data
 				)));
+
+				
 			} catch (ValidationException $e) {
 				header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 				header('Content-Type: application/json');
@@ -92,30 +94,20 @@ class AssignationRest extends BaseRest {
 		$currentLogged = parent::authenticateUser();
 
 		try{
-			//$assignations = $this->assignationMapper->findAssignationsByLinkPoll($pollLink, $currentLogged->getUsername());
 			$isParticipant = $this->assignationMapper->isParticipantByPollLink($currentLogged, $pollLink);
 			$participants = $this->assignationMapper->findUsersParticipansInPollByLink($pollLink, $currentLogged->getUsername());
 
 			$assignations = $this->assignationMapper->findAssignationUsers($pollLink,$currentLogged->getUsername());
 			$assignations_array['assignations'] = array();
 
-
 			foreach($assignations as $assignation){
 				array_push($assignations_array['assignations'], $assignation);
 			}
-			
-
 			$assignations_array['isParticipant'] = $isParticipant;
-			//array_push($assignations_array['isParticipant'], $isParticipant);
-
 
 			header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
 			header('Content-Type: application/json');
 			echo(json_encode($assignations_array));
-			// $as = array();
-			// array_push($as, $assignations_array);
-			// array_push($as, $participations_array);
-			// echo(json_encode($as));
 		}catch(ValidationException $e){
 			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad request');
 			header('Content-Type: application/json');

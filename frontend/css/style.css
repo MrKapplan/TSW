@@ -481,3 +481,6 @@ ul.social-network li a {
 } 
 
 
+.modal-backdrop {
+    z-index: 0;
+}
