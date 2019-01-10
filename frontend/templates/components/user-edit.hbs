@@ -43,6 +43,11 @@
                             <input type="text" id="email" value="{{selectedUser.email}}" placeholder="{{i18n 'Email'}}">
                             <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
                         </div><br>
+                        {{#if loginError.email}}
+                            <div class="alert alert-danger text-center" id="success-danger" role="alert">
+                                {{#i18n}}{{loginError.email}}{{/i18n}}<br>
+                            </div>
+                        {{/if}}
 
                         <div class="inputWithIconLogin inputIconBg">
                             {{#if_eq selectedUser.notification 1}}
