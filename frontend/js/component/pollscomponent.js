@@ -23,6 +23,10 @@ class PollsComponent extends Fronty.ModelComponent {
 
   onStart() {
     this.updatePolls();
+
+    this.userModel.set((model) => {
+      model.message = null;
+    });
   }
 
   updatePolls() {

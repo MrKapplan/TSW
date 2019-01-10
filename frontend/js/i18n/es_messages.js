@@ -126,7 +126,8 @@ I18n.translations = {
 	"Do you want to delete your account?Delete " : "¿Quieres eliminar tu cuenta?Hazlo ",
 	'User updated!' : "Usuario actualizado",
 	'User deleted!' : "Usuario eliminado!",
-	'Receive Notifications' : "Recibir Notificaciones"
+	'Receive Notifications' : "Recibir Notificaciones",
+	"The email format is incorrect" : "El formato del email es incorrecto"
 	
 
 

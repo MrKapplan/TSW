@@ -34,7 +34,9 @@ class LoginComponent extends Fronty.ModelComponent {
     this.addEventListener('click', '#registerbutton', () => {
       if( $('#notifications').is(':checked')){
         var notificationValue = 1;
-      } 
+      } else {
+        notificationValue = 0;
+      }
       this.userService.register({
           username: $('#username').val(),
           password: $('#passwd').val(),
@@ -51,6 +53,7 @@ class LoginComponent extends Fronty.ModelComponent {
         .fail((xhr, errorThrown, statusText) => {
           if (xhr.status == 400) {
             this.userModel.set((model) => {
+              console.log(xhr);
               model.loginError = I18n.translate(xhr.responseJSON);
             });
           } else {

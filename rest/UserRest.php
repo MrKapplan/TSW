@@ -34,7 +34,6 @@ class UserRest extends BaseRest {
 
 	public function register($data) {
 		$user = new User($data->username, $data->password, $data->email, $data->notifications);
-		var_dump($user);
 		try {
 			$user->checkIsValidForRegister($data->confirmPassword);
 
