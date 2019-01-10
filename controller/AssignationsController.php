@@ -61,7 +61,7 @@ class AssignationsController extends BaseController {
 
 				$this->assignationMapper->addAssignation($user->getUsername(), $assignations, $poll->getId());
 				$this->view->setFlash(i18n("Assignations successfully added."));
-				$this->view->redirect("polls", "view&poll=$pollLink");
+				//$this->view->redirect("polls", "view&poll=$pollLink");
 			}catch(ValidationException $ex) {
 				$errors = $ex->getErrors();
 				$this->view->setVariable("errors", $errors);

@@ -50,9 +50,9 @@ $view->setVariable("title", "Add Assignation");
                                 <?php foreach ($gaps as $gap){ 
                                 ?>
                                     <tr id="<?= $gap->getId() ?>">
-                                        <td>
-                                            <div id="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
-                                            <div id="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
+                                    <td>
+                                            <div class="ytitle"><?= i18n(strtoupper(substr(date('l,', strtotime($gap->getDate())), 0, 3))), date(', d', strtotime($gap->getDate())), date(' M', strtotime($gap->getDate()))?></div>
+                                            <div class="ysubtitle"><?= substr($gap->getTimeStart(), 0, 5);?> - <?= substr($gap->getTimeEnd(), 0, 5);?></div>
                                         </td>
 
                                         <td><label class="checkbox">

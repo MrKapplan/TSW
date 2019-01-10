@@ -117,7 +117,7 @@ class AssignationMapper {
 
 
 	public function emailsForUser($pollid, $username){
-		$stmt = $this->db->query("SELECT DISTINCT user.email FROM user, user_selects_gap WHERE user_selects_gap.poll_id = '$pollid' AND user.username NOT IN ('$username')");
+		$stmt = $this->db->query("SELECT DISTINCT user.email FROM user, user_selects_gap WHERE user_selects_gap.poll_id = '$pollid' AND user_selects_gap.username = user.username  AND user_selects_gap.username <> '$username'");
 		$emails_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		$emailsParticipants = array();
@@ -139,10 +139,10 @@ class AssignationMapper {
 		}	
 	}
 
+
 	public function findAssignationUsers($pollLink, $currentUser){
 		$stmt = $this->db->query("SELECT DISTINCT user_selects_gap.username FROM user_selects_gap, poll WHERE user_selects_gap.poll_id = poll.id AND poll.link = '$pollLink' ORDER BY username <> '$currentUser'");
 		$participants_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 		$participants = array();
 		
 		foreach ($participants_db as $participant) {
@@ -170,10 +170,11 @@ class AssignationMapper {
 
 			$title = $this->pollTitle($pollid);
 			$emailsParticipants = $this->emailsForUser($pollid, $user);
-			for($j=0; $j<count($emailsParticipants); $j++){
-				$this->notification($title, $user, $emailsParticipants[$j]);
+			if(count($emailsParticipants) > 0){
+				for($j=0; $j<count($emailsParticipants); $j++){
+					$this->notification($title, $user, $emailsParticipants[$j]);
+				}
 			}
-
 
 		} else {
 			$stmtDelete->execute(array($user, $pollid));
@@ -192,9 +193,11 @@ class AssignationMapper {
 
 		$title = $this->pollTitle($pollid);
 		$emailsParticipants = $this->emailsForUser($pollid, $user);
-		for($j=0; $j<count($emailsParticipants); $j++){
-			$this->notification($title, $user, $emailsParticipants[$j]);
-		}
+		if(count($emailsParticipants) > 0){
+			for($j=0; $j<count($emailsParticipants); $j++){
+				$this->notification($title, $user, $emailsParticipants[$j]);
+			}
+		}	
 	} 
 
 
@@ -204,8 +207,8 @@ class AssignationMapper {
 		$mail = wordwrap($mail, 70, "\r\n");
 		$mensaje ="Hola";
 		$headers = 'From: meetpolltsw@gmail.com' . "\r\n" .
-					 'Reply-To: meetpolltsw@gmail.com' . "\r\n" .
-					 'Content-Type: text/html; charset=UTF-8'. "\r\n".
+					'Reply-To: meetpolltsw@gmail.com' . "\r\n" .
+					'Content-Type: text/html; charset=UTF-8'. "\r\n".
 					'X-Mailer: PHP/' . phpversion();
 
 		mail($dest,$titulo,$mail,$headers);
