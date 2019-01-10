@@ -59,7 +59,7 @@ class UserRest extends BaseRest {
 			echo("You are not authorized to login as anyone but you");
 		
 		} else {
-			$user = new User($data->username, $data->password);
+			$user = new User($data->username, $data->password, $data->email, $data->notifications);
 			try {
 				$user->checkIsValidForUpdate($data->confirmPassword);
 				$this->userMapper->update($user);
@@ -80,6 +80,23 @@ class UserRest extends BaseRest {
 		header($_SERVER['SERVER_PROTOCOL'].' 201 Ok');
 	}
 
+	public function userLogged() {
+		$currentLogged = parent::authenticateUser();
+		$user_selected = $this->userMapper->getUserLogged($currentLogged->getUsername());
+
+		$user_array = array(
+			"username" => $user_selected->getUsername(),
+			"passwd" => $user_selected->getPasswd(),
+			"email" => $user_selected->getEmail(),
+			"notification" => $user_selected->getNotifications()
+		);
+
+		header($_SERVER['SERVER_PROTOCOL'].' 200 Ok');
+		header('Content-Type: application/json');
+		echo(json_encode($user_array));
+	}
+	
+
 
 }
 
@@ -87,6 +104,7 @@ class UserRest extends BaseRest {
 $userRest = new UserRest();
 URIDispatcher::getInstance()
 ->map("GET", "/user/$1", array($userRest,"login"))
+->map("GET", "/user", array($userRest,"userLogged"))
 ->map("POST", "/user", array($userRest,"register"))
 ->map("PUT", "/user", array($userRest,"modify"))
 ->map("DELETE", "/user/$1", array($userRest,"deleteUser"));

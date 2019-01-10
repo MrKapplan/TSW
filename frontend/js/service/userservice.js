@@ -86,4 +86,11 @@ class UserService {
       method: 'DELETE'
     });
   }
+
+
+  findUser() {
+    return $.get(AppConfig.backendServer+'/meetPoll_TSW/rest/user');
+  }
+
+
 }

@@ -37,8 +37,8 @@ class UserMapper {
 
 
 	public function update(User $user) {
-		$stmt = $this->db->prepare("UPDATE user set passwd=? where username=?");
-		$stmt->execute(array($user->getPasswd(), $user->getUsername()));
+		$stmt = $this->db->prepare("UPDATE user set passwd=?, email=?, notifications=? where username=?");
+		$stmt->execute(array($user->getPasswd(), $user->getEmail(), $user->getNotifications(), $user->getUsername()));
 	}
 
 
@@ -47,4 +47,20 @@ class UserMapper {
 		$stmt = $this->db->prepare("DELETE FROM user WHERE username=?");
 		$stmt->execute(array($username));
 	}
-}
+
+	public function getUserLogged($username){
+		$stmt = $this->db->query("SELECT * FROM user WHERE username = '$username'");
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		if($user != null) {
+			return new User(
+			$user["username"],
+			$user["passwd"],
+			$user["email"],
+			$user["notifications"]
+		);
+		} else {
+			return NULL;
+		}
+	}
+	}

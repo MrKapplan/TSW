@@ -39,6 +39,20 @@
                             </div>
                         {{/if}}
 
+                        <div class="inputWithIconLogin inputIconBg">
+                            <input type="text" id="email" value="{{selectedUser.email}}" placeholder="{{i18n 'Email'}}">
+                            <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+                        </div><br>
+
+                        <div class="inputWithIconLogin inputIconBg">
+                            {{#if_eq selectedUser.notification 1}}
+                                <input type="checkbox" id="notifications" class="checkbox" checked/>
+                            {{else}}
+                                <input type="checkbox" id="notifications" class="checkbox"/>
+                            {{/if_eq}}
+                            <span>{{i18n 'Receive Notifications'}}&nbsp;</span>
+                        </div><br>
+
                         <button type="submit" id="modifyprofile" class="loginButton btn btn-darkLogin">{{i18n 'Edit'}}</button>
                         {{i18n 'Do you want to delete your account?Delete '}}<a id="dropOut" class="font-weight-light" href="">{{i18n 'here'}}</a>
                         </div>

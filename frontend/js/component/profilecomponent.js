@@ -33,10 +33,17 @@ class ProfileComponent extends Fronty.ModelComponent {
       
   
       this.addEventListener('click', '#modifyprofile', () => {
+        if( $('#notifications').is(':checked')){
+          var notificationValue = 1;
+        } else {
+          notificationValue = 0;
+        }
         this.userService.updateUser({
             username: $('#username').val(),
             password: $('#passwd').val(),
-            confirmPassword: $('#confirmPasswd').val()
+            confirmPassword: $('#confirmPasswd').val(),
+            email: $('#email').val(),
+            notifications: notificationValue
           })
           .then(() => {
             this.userModel.set((model) => {
@@ -48,6 +55,7 @@ class ProfileComponent extends Fronty.ModelComponent {
             if (xhr.status == 400) {
               this.userModel.set((model) => {
                 model.error = I18n.translate(xhr.responseJSON);
+               // console.log(xhr);
               });
             } else {
               alert('An error has occurred during request: ' + statusText + '.' + xhr.responseText);
@@ -65,8 +73,16 @@ class ProfileComponent extends Fronty.ModelComponent {
     }
 
     onStart() {
-  
-      }
+
+        this.userService.findUser()
+          .then((user) => {
+            this.userModel.set((model) => {
+              this.userModel.message = null;
+              this.userModel.setSelectedUser(user);
+            });
+          });
+    }
+
   }
   
   
