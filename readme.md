@@ -1,4 +1,4 @@
-# Movies and other Drugs
+# Meet Poll
 
 Web application based on Model-View-Controller written in PHP.The application was developed to schedule appointments or meetings, proposing schedules, inviting participants and allowing to select the best schedule for most of the participants.
 
