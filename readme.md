@@ -4,7 +4,7 @@ Web application based on Model-View-Controller written in PHP.The application wa
 
 ### Versioning
 
-This project has an extension using JavaScript and AJAX and interactions with the backend via its REST API. [Link](https://github.com/meetPoll-front)
+This project has an extension using JavaScript and AJAX and interactions with the backend via its REST API. [Link](https://github.com/ivanddios/meetPoll-front)
 
 ### Prerequisites
 
